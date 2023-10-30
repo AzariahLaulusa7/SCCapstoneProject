@@ -12,13 +12,19 @@ It provides several options that target different approaches for dealing with ne
     * [**Architecture:**](https://github.com/SCCapstone/Garp/wiki/Architecture) This is the architecture of our app, including the app's code structure and the app's views.
 
 ## External Requirements
+For this small game code, you need to have [Android Studio](https://developer.android.com/studio) and a [Java JDK](https://www.oracle.com/java/technologies/downloads/#java8-windows) installed (the latest versions are recommended).
 
 ## Setup
+To make the cloning, pulling, and pushing process easier, [GitHub Desktop](https://desktop.github.com/) is recommended but not required.
 
 ## Running
-
-# Deployment
-
+After cloning the repository onto Android Studio, the project will take a while to load.
+Once the project is finished loading, there will be a side bar on the right of the screen. One of the tabs will say "**Device Manager**".\
+On this screen, follow these steps:
+1. Click on on the "**Device Manager**" tab and pick a device.
+2. Choose a device or create a Device. (_Pixel API 34_ was used to test the game)
+3. The device will pop-up, connected to the "**Running Devices**" tab. The "**Device Manager**" tab can be minimized.
+4. Now, press the "**Run**" button, which is a green play button at the top of the screen, to run the code.
 
 # Authors
 **Adrian Luedicke:** 803-445-6457\
