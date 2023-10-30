@@ -1,7 +1,7 @@
 # Garp's Meditation App (Template)
 * **Description:** The Meditation app's main goal is to help users with their mental health by providing them with an easy-to-use resource in states of heightened emotion.
 It provides several options that target different approaches for dealing with negative feelings like anxiety and panic.
-* **For more details,** please visit our wiki page:
+* **For more details,** please visit our wiki pages:
     *  [**Project Description:**](https://github.com/SCCapstone/Garp/wiki/Project-Description) Provides a general description of our app and its features.
     *  [**User Stories:**](https://github.com/SCCapstone/Garp/wiki/User-Stories) The user stories for our 3 personas that covers common use cases for our app.
         * [**Persona 1:**](https://github.com/SCCapstone/Garp/wiki/Persona-1:-Adam-Quin) How our app can be a safe place for a college student.
