@@ -36,7 +36,7 @@ _(In charge of issues [#19](https://github.com/SCCapstone/Garp/issues/19), [#20]
 **Azariah Laulusa:** 808-978-2557\
 _(In charge of issues [#14](https://github.com/SCCapstone/Garp/issues/14) and [#17](https://github.com/SCCapstone/Garp/issues/17))_\
 \
-**James Thurlow:** 803-460-7907\
+**James MM Thurlow:** 803-460-7907\
 _(In charge of issues [#12](https://github.com/SCCapstone/Garp/issues/12) and [#18](https://github.com/SCCapstone/Garp/issues/18))_\
 \
 **Joseph Brancker:** 864-910-0921\
