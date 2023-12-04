@@ -39,8 +39,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
+        android:layout_marginStart="132dp"
         android:text="Move"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageButton"
         tools:layout_editor_absoluteY="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
