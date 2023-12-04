@@ -17,7 +17,6 @@ import androidx.core.content.res.ResourcesCompat;
 
 
 public class Movement extends AppCompatActivity {
-    public int counter;
     TextView timer;
     Button start;
     Drawable d;
@@ -32,21 +31,22 @@ public class Movement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         start = (Button) findViewById(R.id.start);
         timer = (TextView) findViewById(R.id.timer);
         pose = (ImageView) findViewById(R.id.pose);
-        final TextView counttime=findViewById(R.id.timer);
-        new CountDownTimer(50000,1000) {
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTick(long millisUntilFinished) {
-                counttime.setText(String.valueOf(counter));
-                counter++;
+            public void onClick(View v) {
+                new CountDownTimer(4*1000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        timer.setText(""+millisUntilFinished/1000);
+                    }
+                    public void onFinish() {
+
+                    }
+                }.start();
             }
-            @Override
-            public void onFinish() {
-                counttime.setText("Finished");
-            }
-        }.start();
+        });
     }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.content.Intent;
 
 public class MoveMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +15,6 @@ public class MoveMain extends AppCompatActivity {
     }
 
     public void startMovement(View view) {
-        Movement movement = new Movement();
-        setContentView(R.layout.movement);
+        startActivity(new Intent(MoveMain.this, Movement.class));
     }
 }
