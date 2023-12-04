@@ -1,0 +1,20 @@
+package com.example.guarden;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+
+public class MoveMain extends AppCompatActivity {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.move_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    public void startMovement(View view) {
+        Movement movement = new Movement();
+        setContentView(R.layout.movement);
+    }
+}
