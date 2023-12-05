@@ -17,20 +17,31 @@ import java.util.*;
 
 public class Movement extends AppCompatActivity {
     TextView timer;
+    TextView name;
     Button start;
     ImageView pose;
-    private List<Integer> yogaPoses;
+    private ArrayList<Pose> yogaPoses;
     private int poseCounter;
-
+    Pose pose2;
+    Pose pose3;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        yogaPoses=new ArrayList<Pose>();
         setContentView(R.layout.movement);
+        Pose pose1 = new Pose("yoga","Lunge",R.drawable.pose1);
+        yogaPoses.add(pose1);
+        pose2 = new Pose("yoga","Triangle",R.drawable.pose2);
+        yogaPoses.add(pose2);
+        pose3 = new Pose("yoga","Forward Fold",R.drawable.pose3);
+        yogaPoses.add(pose3);
         start = (Button) findViewById(R.id.start);
         timer = (TextView) findViewById(R.id.timer);
+        name = (TextView) findViewById(R.id.poseName);
         pose = (ImageView) findViewById(R.id.pose);
         poseCounter=0;
+        name.setText(yogaPoses.get(poseCounter).getName());
+        pose.setImageResource(yogaPoses.get(poseCounter).getImageRes());
         timer.setVisibility(INVISIBLE);
-        yogaPoses = new Poses("yoga");
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -44,12 +55,12 @@ public class Movement extends AppCompatActivity {
                         }
 
                         public void onFinish() {
-                            pose.setImageResource(yogaPoses.get(poseCounter));
                             if(poseCounter==yogaPoses.size()-1) poseCounter=0;
                             else poseCounter++;
+                            pose.setImageResource(yogaPoses.get(poseCounter).getImageRes());
+                            name.setText(yogaPoses.get(poseCounter).getName());
                             timer.setVisibility(INVISIBLE);
                             start.setVisibility(VISIBLE);
-
                         }
                     }.start();
                 }

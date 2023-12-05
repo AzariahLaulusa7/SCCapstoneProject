@@ -5,6 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="436dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/baseline_thumb_up_off_alt_24"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="436dp"
+        android:layout_marginEnd="64dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_thumb_down_off_alt_24" />
+
     <ImageView
         android:id="@+id/pose"
         android:layout_width="281dp"
@@ -13,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498"
+        app:layout_constraintVertical_bias="0.303"
         app:srcCompat="@drawable/pose1" />
 
     <Button
@@ -43,8 +73,8 @@
         android:id="@+id/poseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:text="TextView"
+        android:layout_marginTop="124dp"
+        android:text="Pose Name"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
