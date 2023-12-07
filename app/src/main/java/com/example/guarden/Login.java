@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null && user.password.equals(enteredPassword)) {
                             Toast.makeText(Login.this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Login.this, MoveMain.class);
+                            Intent intent = new Intent(Login.this, HomeScreen.class);
                             startActivity(intent);
                             finish();
                         } else {
