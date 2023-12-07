@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "689560025108",
+    "project_id": "garp-7b188",
+    "storage_bucket": "garp-7b188.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689560025108:android:2750ac399ce095f8a08f01",
+        "android_client_info": {
+          "package_name": "com.example.guarden"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr-TMAaseEGK80oveq0PwTleGwIRDZrE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
