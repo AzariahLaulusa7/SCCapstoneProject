@@ -43,8 +43,11 @@ public class GameOver extends AppCompatActivity {
         tvHighest.setText(String.valueOf(highest));
     }
 
-
     public void restart(View view) {
+        /**
+        Initializes intent which is used by startActivity to jump to the MainActivity class and activity_main.xml layout
+         so that the user can start again.
+         */
         Intent intent = new Intent(GameOver.this, MainActivity.class);
         startActivity(intent);
         finish();
