@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c6f5b1e-0fc9-4868-b89e-659028cb2d1c" name="Changes" comment="workspace.xml changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/guarden/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/guarden/Login.java" afterDir="false" />
-    </list>
+    <list default="true" id="6c6f5b1e-0fc9-4868-b89e-659028cb2d1c" name="Changes" comment="workspace.xml changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
