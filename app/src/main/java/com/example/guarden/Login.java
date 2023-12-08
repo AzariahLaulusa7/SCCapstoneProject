@@ -41,7 +41,6 @@ public class Login extends AppCompatActivity {
         });
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
-
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
