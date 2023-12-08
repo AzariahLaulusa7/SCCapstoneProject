@@ -28,7 +28,8 @@ public class Movement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         poseList=new ArrayList<Pose>();
         Bundle extras = getIntent().getExtras();
-        if(extras!=null) mode=extras.getString("mode");
+        if(extras!=null)
+            mode=extras.getString("mode");
         setContentView(R.layout.movement);
         addPoses(poseList,mode);
         start = (Button) findViewById(R.id.start);
