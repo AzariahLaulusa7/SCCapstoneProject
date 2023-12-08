@@ -29,6 +29,16 @@ public class Login extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.password);
         Button loginbtn = findViewById(R.id.loginbtn);
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
+        TextView tvSkip = findViewById(R.id.tvSkip);
+
+        tvSkip.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Login.this, HomeScreen.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         loginbtn.setOnClickListener(new View.OnClickListener() {

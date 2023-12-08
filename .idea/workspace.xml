@@ -11,6 +11,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="6c6f5b1e-0fc9-4868-b89e-659028cb2d1c" name="Changes" comment="">
     <list default="true" id="6c6f5b1e-0fc9-4868-b89e-659028cb2d1c" name="Changes" comment="Working on Home">
       <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/guarden/Settings.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_article_24.xml" afterDir="false" />
@@ -36,6 +37,7 @@
     <list default="true" id="6c6f5b1e-0fc9-4868-b89e-659028cb2d1c" name="Changes" comment="add internet permission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/guarden/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/guarden/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/login.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +108,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/joe/AndroidStudioProjects/Garp/app/src/main/res/drawable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.notifications&quot;
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -121,7 +131,7 @@
     "last_opened_file_path": "/Users/joe/AndroidStudioProjects/Garp/app/src/main/res/drawable",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications"
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
