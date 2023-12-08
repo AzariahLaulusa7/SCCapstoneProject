@@ -41,7 +41,7 @@ public class HomeScreen extends AppCompatActivity {
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
         Intent MoveMain = new Intent(this, MoveMain.class);
-        //Intent name_of_journal_class = new Intent(this, name_of_journal_class.class);
+        Intent BreatheMainActivity = new Intent(this, BreatheMainActivity.class);
         //Intent name_of_games_class = new Intent(this, name_of_games_class.class);
         //Intent name_of_breath_class = new Intent(this, name_of_breath_class.class);
         //Intent name_of_forums_class = new Intent(this, name_of_forums_class.class);
@@ -56,6 +56,11 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        breath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { startActivity(BreatheMainActivity); }
+        });
+
         /*journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,13 +72,6 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(name_of_games_class);
-            }
-        });
-
-        breath.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(name_of_breath_class);
             }
         });
 
