@@ -30,7 +30,6 @@ public class Login extends AppCompatActivity {
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
-
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
