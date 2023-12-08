@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.TextView;
+import android.text.TextUtils;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,14 +29,29 @@ public class Login extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.password);
         Button loginbtn = findViewById(R.id.loginbtn);
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
+        TextView tvSkip = findViewById(R.id.tvSkip);
+
+        tvSkip.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Login.this, HomeScreen.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
-
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String enteredEmail = emailEditText.getText().toString().trim();
                 String enteredPassword = passwordEditText.getText().toString().trim();
+
+                if (TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)) {
+                    Toast.makeText(Login.this, "Email and password must not be empty", Toast.LENGTH_SHORT).show();
+                    return; // Exit the OnClickListener if fields are empty
+                }
+
                 String emailKey = enteredEmail.replace(".", ",");
 
                 databaseReference.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -69,14 +85,15 @@ public class Login extends AppCompatActivity {
     }
 
     private static class User {
-        public String email;
-        public String password;
+        public String email, password, firstName, lastName;
 
         public User() {}
 
-        public User(String email, String password) {
+        public User(String email, String password, String firstName, String lastName) {
             this.email = email;
             this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
         }
     }
 }
