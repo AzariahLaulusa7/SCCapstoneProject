@@ -8,4 +8,5 @@
     <color name="colorPrimaryLight">#484848</color>
     <color name="light_black">#A0000000</color>
     <color name="light_white">#90FFFFFF</color>
+    <color name="light_blue">#ADD8E6</color>
 </resources>

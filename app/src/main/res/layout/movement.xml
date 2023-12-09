@@ -91,6 +91,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
+        app:layout_constraintTop_toBottomOf="@+id/start_breathing" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
