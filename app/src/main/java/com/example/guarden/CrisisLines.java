@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class CrisisLines extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crisis_lines);
+        ImageView backIcon = findViewById(R.id.backIcon);
+        backIcon.setOnClickListener(v -> finish());
 
         Button suicideCrisisButton = findViewById(R.id.button_suicide_crisis);
         Button emergencyServicesButton = findViewById(R.id.button_emergency_services);
