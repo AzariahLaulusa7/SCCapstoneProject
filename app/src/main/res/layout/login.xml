@@ -81,17 +81,44 @@
         android:backgroundTint="@color/white"
         android:text="LOGIN" />
 
-    <TextView
-        android:id="@+id/tvCreateAccount"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/loginbtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Create Account"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:clickable="true"
-        android:focusable="true"/>
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvCreateAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/spacer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   | "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:clickable="false"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/tvSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Skip"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
 
 </RelativeLayout>
