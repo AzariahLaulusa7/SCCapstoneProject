@@ -6,11 +6,6 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
-    <ImageView
-        android:id="@+id/breathingAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible" />
     <Button
         android:id="@+id/btnStartBreathing"
         android:layout_width="wrap_content"
@@ -32,5 +27,14 @@
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:text="Instructions will appear here" />
+
+    <ImageView
+        android:id="@+id/breathingAnimation"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="170dp"
+        android:src="@drawable/blue_circle"
+        android:visibility="invisible" />
 
 </LinearLayout>

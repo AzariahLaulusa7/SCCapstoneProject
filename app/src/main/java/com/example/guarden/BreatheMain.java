@@ -18,8 +18,8 @@ public class BreatheMain extends AppCompatActivity {
     private ImageView breathingAnimation;
     private Button btnStartBreathing;
     private Animation animation;
-    private CountDownTimer breatheTimer;
     private TextView breatheText;
+    private CountDownTimer breatheTimer;
     private boolean isInhaling = false;
     private int totalTime = 0;
 
@@ -42,7 +42,8 @@ public class BreatheMain extends AppCompatActivity {
 
         breathingAnimation = findViewById(R.id.breathingAnimation);
         btnStartBreathing = findViewById(R.id.btnStartBreathing);
-        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.breathing_animation);
+        breatheText = findViewById(R.id.breatheText);
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_scale_animation);
 
         btnStartBreathing.setOnClickListener(new View.OnClickListener() {
             @Override
