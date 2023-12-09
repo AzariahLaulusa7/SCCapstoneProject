@@ -12,11 +12,13 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.*;
+import android.content.Intent;
 public class Movement extends AppCompatActivity {
     TextView timer;
     TextView name;
     Button start;
     Button next;
+    ImageButton back;
     String mode;
     ImageButton thumbsUp;
     ImageButton thumbsDown;
@@ -24,6 +26,7 @@ public class Movement extends AppCompatActivity {
     ImageView pose;
     private ArrayList<Pose> poseList;
     private int poseCounter;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         poseList=new ArrayList<Pose>();
@@ -36,10 +39,12 @@ public class Movement extends AppCompatActivity {
         name = (TextView) findViewById(R.id.pose_name);
         pose = (ImageView) findViewById(R.id.pose);
         next = (Button) findViewById(R.id.next);
+        back = (ImageButton) findViewById(R.id.movement_back);
         thumbsUp = (ImageButton) findViewById(R.id.thumbs_up);
         thumbsDown = (ImageButton) findViewById(R.id.thumbs_down);
         thumbsUp.setImageResource(R.drawable.baseline_thumb_up_off_alt_24);
         thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
+        Intent myIntent = new Intent(this, MoveMain.class);
         poseCounter=0;
         name.setText(poseList.get(poseCounter).getName());
         pose.setImageResource(poseList.get(poseCounter).getImageRes());
@@ -91,6 +96,12 @@ public class Movement extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeLike(poseList.get(poseCounter).getLike(),2);
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(myIntent);
             }
         });
     }
