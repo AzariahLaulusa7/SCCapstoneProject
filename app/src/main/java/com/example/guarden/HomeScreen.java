@@ -59,6 +59,14 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent EditProfile = new Intent(HomeScreen.this, EditProfile.class);
+                startActivity(EditProfile);
+            }
+        });
+
         /*journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,13 +99,6 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(name_of_add_class);
-            }
-        });
-
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(MoveMain);
             }
         });
 
