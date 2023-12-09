@@ -57,5 +57,15 @@
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".NewJournalEntry"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ViewJournalEntries"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>

@@ -56,7 +56,9 @@ public class HomeScreen extends AppCompatActivity {
 
         breath.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { startActivity(BreatheMainActivity);
+            public void onClick(View view) {
+                Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheMainActivity.class);
+                startActivity(BreatheMainActivity);
             }});
           
         settings.setOnClickListener(new View.OnClickListener() {

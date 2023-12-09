@@ -35,7 +35,6 @@ public class BreatheMainActivity extends AppCompatActivity implements SettingsDi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.breathe_activity_main);
-
         contentLayout = findViewById(R.id.lt_content);
         contentLayout.setOnTouchListener(contentTouchListener);
 
