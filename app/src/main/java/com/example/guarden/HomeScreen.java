@@ -1,5 +1,6 @@
 package com.example.guarden;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,7 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -36,6 +41,9 @@ public class HomeScreen extends AppCompatActivity {
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         ImageButton settings = (ImageButton) findViewById(R.id.Settings);
+        Intent MoveMain = new Intent(this, MoveMain.class);
+        Intent BreatheMainActivity = new Intent(this, BreatheMainActivity.class);
+        settings = (ImageButton) findViewById(R.id.Settings);
         //Intent name_of_journal_class = new Intent(this, name_of_journal_class.class);
         //Intent name_of_games_class = new Intent(this, name_of_games_class.class);
         //Intent name_of_breath_class = new Intent(this, name_of_breath_class.class);
@@ -50,6 +58,14 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+
+        breath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheMainActivity.class);
+                startActivity(BreatheMainActivity);
+            }});
+          
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -58,12 +74,22 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(Settings);
             }
         });
-
+      
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent EditProfile = new Intent(HomeScreen.this, EditProfile.class);
                 startActivity(EditProfile);
+            }
+        });
+
+        
+        breath.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent BreatheMain = new Intent(HomeScreen.this, BreatheMain.class);
+                startActivity(BreatheMain);
             }
         });
 
@@ -78,13 +104,6 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(name_of_games_class);
-            }
-        });
-
-        breath.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(name_of_breath_class);
             }
         });
 
@@ -105,9 +124,10 @@ public class HomeScreen extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_call_class);
+                Intent intent = new Intent(HomeScreen.this, CrisisLines.class);
+                startActivity(intent);
             }
-        });*/
+        });
     }
 
 
