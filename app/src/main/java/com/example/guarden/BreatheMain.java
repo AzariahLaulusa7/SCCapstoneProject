@@ -1,11 +1,14 @@
 package com.example.guarden;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +24,16 @@ public class BreatheMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.breathe_main);
+
+        ImageButton back_button = (ImageButton) findViewById(R.id.backIcon);
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent MoveMain = new Intent(BreatheMain.this, HomeScreen.class);
+                startActivity(MoveMain);
+            }
+        });
 
         breathingAnimation = findViewById(R.id.breathingAnimation);
         btnStartBreathing = findViewById(R.id.btnStartBreathing);

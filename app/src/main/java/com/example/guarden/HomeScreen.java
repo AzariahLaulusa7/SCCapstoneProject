@@ -1,5 +1,6 @@
 package com.example.guarden;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,7 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -67,6 +72,14 @@ public class HomeScreen extends AppCompatActivity {
             {
                 Intent Settings = new Intent(HomeScreen.this, Settings.class);
                 startActivity(Settings);
+            }
+        });
+
+        breath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent BreatheMain = new Intent(HomeScreen.this, BreatheMain.class);
+                startActivity(BreatheMain);
             }
         });
 
