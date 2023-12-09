@@ -120,7 +120,7 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(name_of_add_class);
             }
         });
-
+*/
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
