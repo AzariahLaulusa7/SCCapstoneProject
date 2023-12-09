@@ -27,13 +27,14 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton profile;
 
     ImageButton call;
+    ImageButton move;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_home);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        ImageButton move = (ImageButton) findViewById(R.id.Move);
+        move = (ImageButton) findViewById(R.id.Move);
         journal = (ImageButton) findViewById(R.id.Journal);
         games = (ImageButton) findViewById(R.id.Games);
         breath = (ImageButton) findViewById(R.id.Breath);
@@ -42,8 +43,6 @@ public class HomeScreen extends AppCompatActivity {
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         ImageButton settings = (ImageButton) findViewById(R.id.Settings);
-        Intent MoveMain = new Intent(this, MoveMain.class);
-        Intent BreatheMainActivity = new Intent(this, BreatheMainActivity.class);
         settings = (ImageButton) findViewById(R.id.Settings);
         //Intent name_of_journal_class = new Intent(this, name_of_journal_class.class);
         //Intent name_of_games_class = new Intent(this, name_of_games_class.class);
@@ -63,7 +62,7 @@ public class HomeScreen extends AppCompatActivity {
         breath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheMainActivity.class);
+                Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheBackup.class);
                 startActivity(BreatheMainActivity);
             }});
           
@@ -84,15 +83,6 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        
-        breath.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent BreatheMain = new Intent(HomeScreen.this, BreatheMain.class);
-                startActivity(BreatheMain);
-            }
-        });
 
         /*journal.setOnClickListener(new View.OnClickListener() {
             @Override
