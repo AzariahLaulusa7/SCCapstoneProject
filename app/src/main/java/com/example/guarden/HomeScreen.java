@@ -16,7 +16,8 @@ import android.widget.ImageView;
 
 public class HomeScreen extends AppCompatActivity {
 
-
+//Commenting to commit and be a contributor
+//Worked on home page and settings
     ImageButton journal;
     ImageButton games;
     ImageButton breath;
