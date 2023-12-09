@@ -99,14 +99,17 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(name_of_journal_class);
             }
         });
+        */
+
 
         games.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_games_class);
+                Intent intent = new Intent(HomeScreen.this, ReactionGame.class);
+                startActivity(intent);
             }
         });
-
+/*
         forums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
