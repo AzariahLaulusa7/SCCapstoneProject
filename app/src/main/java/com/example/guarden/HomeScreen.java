@@ -74,8 +74,18 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(Settings);
             }
         });
+      
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent EditProfile = new Intent(HomeScreen.this, EditProfile.class);
+                startActivity(EditProfile);
+            }
+        });
 
+        
         breath.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent BreatheMain = new Intent(HomeScreen.this, BreatheMain.class);
@@ -111,13 +121,6 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(MoveMain);
-            }
-        });
-*/
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
