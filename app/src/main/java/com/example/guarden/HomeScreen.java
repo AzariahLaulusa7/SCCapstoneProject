@@ -104,13 +104,14 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(MoveMain);
             }
         });
-
+*/
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_call_class);
+                Intent intent = new Intent(HomeScreen.this, CrisisLines.class);
+                startActivity(intent);
             }
-        });*/
+        });
     }
 
 
