@@ -21,12 +21,5 @@
         android:layout_centerInParent="true"
         android:text="Start Breathing" />
 
-    <ImageView
-        android:id="@+id/breathingAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_centerInParent="true"
-        android:src="@drawable/inner_breathe_circle" />
 </RelativeLayout>
 
