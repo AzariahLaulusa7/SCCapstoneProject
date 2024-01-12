@@ -25,6 +25,8 @@ public class EditProfile extends AppCompatActivity {
     private Button editButton;
     private DatabaseReference userRef;
 
+    ImageButton back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +36,13 @@ public class EditProfile extends AppCompatActivity {
         firstNameEditText = findViewById(R.id.firstname);
         lastNameEditText = findViewById(R.id.lastname);
         editButton = findViewById(R.id.editbtn);
+        back = (ImageButton) findViewById(R.id.backIcon);
+        Intent myIntent = new Intent(this, HomeScreen.class);
 
-        ImageButton back_button = (ImageButton) findViewById(R.id.backIcon);
-
-        back_button.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent MoveMain = new Intent(EditProfile.this, HomeScreen.class);
-                startActivity(MoveMain);
+            public void onClick(View v) {
+                startActivity(myIntent);
             }
         });
 
