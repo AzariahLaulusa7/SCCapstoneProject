@@ -31,6 +31,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".EditProfile"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".GameOver"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -51,12 +56,12 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".BreatheMainActivity"
+            android:name=".BreatheBackup"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".BreatheBackup"
+            android:name=".BreatheMain"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
