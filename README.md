@@ -27,17 +27,12 @@ On this screen, follow these steps:
 4. Now, press the "**Run**" button, which is a green play button at the top of the screen, to run the code.
 
 # Authors
-**Adrian Luedicke:** 803-445-6457\
-_(In charge of issues [#15](https://github.com/SCCapstone/Garp/issues/15) and [#16](https://github.com/SCCapstone/Garp/issues/16))_\
-\
-**Joe Comiskey:** 843-353-8357\
-_(In charge of issues [#19](https://github.com/SCCapstone/Garp/issues/19), [#20](https://github.com/SCCapstone/Garp/issues/20), and [#21](https://github.com/SCCapstone/Garp/issues/21))_\
-\
-**Azariah Laulusa:** 808-978-2557\
-_(In charge of issues [#14](https://github.com/SCCapstone/Garp/issues/14) and [#17](https://github.com/SCCapstone/Garp/issues/17))_\
-\
-**James MM Thurlow:** 803-460-7907\
-_(In charge of issues [#12](https://github.com/SCCapstone/Garp/issues/12) and [#18](https://github.com/SCCapstone/Garp/issues/18))_\
-\
-**Joseph Brancker:** 864-910-0921\
-_(In charge of issues [#13](https://github.com/SCCapstone/Garp/issues/13) and [#24](https://github.com/SCCapstone/Garp/issues/24))_
+**Adrian Luedicke:** 803-445-6457
+
+**Joe Comiskey:** 843-353-8357
+
+**Azariah Laulusa:** 808-978-2557
+
+**James MM Thurlow:** 803-460-7907
+
+**Joseph Brancker:** 864-910-0921
