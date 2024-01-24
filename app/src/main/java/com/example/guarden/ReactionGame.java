@@ -11,40 +11,43 @@ import java.util.Random;
 
 public class ReactionGame extends AppCompatActivity {
 
-    private Button reactionButton;
+    private Button reactionButton, startButton;
     private TextView textViewPrompt, textViewScore;
-    private long startTime;
     private Handler handler = new Handler();
-    private boolean isWaitingForClick = false;
-    private Random random = new Random();
+    private ReactionGameLogic gameLogic = new ReactionGameLogic();
+
+    private boolean gameStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reaction_game);
-        ImageView backIcon = findViewById(R.id.backIcon);
-        backIcon.setOnClickListener(v -> finish());
 
         reactionButton = findViewById(R.id.reactionButton);
         textViewPrompt = findViewById(R.id.textViewPrompt);
         textViewScore = findViewById(R.id.textViewScore);
+        startButton = findViewById(R.id.startButton);
+        ImageView backIcon = findViewById(R.id.backIcon);
+        backIcon.setOnClickListener(v -> finish());
 
-        reactionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isWaitingForClick) {
-                    long reactionTime = System.currentTimeMillis() - startTime;
-                    textViewScore.setText("Your Time: " + reactionTime / 1000.0 + "s\nTap square to play again!");
-                    reactionButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    isWaitingForClick = false;
-                } else {
-                    textViewScore.setText("");
-                    prepareGame();
-                }
+        startButton.setOnClickListener(v -> {
+            if (!gameStarted) {
+                prepareGame();
+                gameStarted = true;
+                startButton.setVisibility(View.GONE);
             }
         });
 
-        prepareGame();
+        reactionButton.setOnClickListener(v -> {
+            if (gameLogic.isWaitingForClick()) {
+                long reactionTime = gameLogic.stopGame();
+                textViewScore.setText("Your Time: " + reactionTime / 1000.0 + "s\nTap square to play again!");
+                reactionButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            } else {
+                textViewScore.setText("");
+                prepareGame();
+            }
+        });
     }
 
     private void prepareGame() {
@@ -54,16 +57,10 @@ public class ReactionGame extends AppCompatActivity {
             @Override
             public void run() {
                 reactionButton.setEnabled(true);
-                textViewPrompt.setVisibility(View.VISIBLE);
-                reactionButton.setBackgroundColor(randomColor());
-                startTime = System.currentTimeMillis();
-                isWaitingForClick = true;
+                textViewPrompt.setVisibility(View.VISIBLE); // Make the text visible here
+                reactionButton.setBackgroundColor(gameLogic.randomColor());
+                gameLogic.startGame();
             }
-        }, random.nextInt(2000) + 1000);
-    }
-
-    private int randomColor() {
-        return 0xFF000000 | random.nextInt(0xFFFFFF);
+        }, new Random().nextInt(4000) + 1000); // Random delay between 1 and 5 seconds
     }
 }
-
