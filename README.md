@@ -16,17 +16,62 @@ For this small game code, you need to have [Android Studio](https://developer.an
 
 ## Setup
 To make the cloning, pulling, and pushing process easier, [GitHub Desktop](https://desktop.github.com/) is recommended but not required.
+To use clone the Garp repository in the command line, follow these steps:
 
 ## Running
 After cloning the repository onto Android Studio, the project will take a while to load.
-Once the project is finished loading, there will be a side bar on the right of the screen. One of the tabs will say "**Device Manager**".\
+Once the project is finished loading, make sure to gradle the project first using the elephant icon on the top right corner.\
+Then, there will be a side bar on the right of the screen. One of the tabs will say "**Device Manager**".\
 On this screen, follow these steps:
 1. Click on on the "**Device Manager**" tab and pick a device.
 2. Choose a device or create a Device. (_Pixel API 34_ was used to test the game)
 3. The device will pop-up, connected to the "**Running Devices**" tab. The "**Device Manager**" tab can be minimized.
 4. Now, press the "**Run**" button, which is a green play button at the top of the screen, to run the code.
 
-# Authors
+## Testing
+
+### Test Directories
+   * Behavioral Test directory: **Garp\app\src\androidTest\java\com\example\guarden\ReactionGameBehaviorTest.java**
+   * Unit Test directory: **Garp\app\src\test\java\com\example\guarden\ReactionGameLogicTest.java**
+
+### Testing Using Configurations
+1. First, make sure the Garp Android Studio project is open and the play button is green (refer to Setup and Running).
+3. On the left of the play button, you will see configurations and devices.
+4. Press on the configuration button. Then, press edit configurations.
+5. Add new configuration using the add button on the top left of the configurations window.
+6. Press Android Instrumented Tests.
+   * Name: "All Instrumented Tests"
+   * Module: "Guarden.app.androidTest"
+   * Test: "All in Module"
+7. Next, add another new configuration. This time press Gradle.
+   * Name: "All Unit Tests"
+   * Run: "testDebugUnitTest"
+   * Gradle Project: "Garp"
+8. Press ok. Now, you can select "All Unit Tests" or "All Instrumented Tests" in the configuration options.
+9. Press the green play button to build and run the tests.
+
+### Testing Using Command line
+1. You can open the terminal in the Garp Android Studio project or your desktop terminal.
+
+>[!NOTE]
+>If you are using your desktop terminal, make sure you are in the correct directory. This should be "**<path_to_project>\Garp**".
+
+2. Type the command "**_./gradlew test_**" and press enter. This will build and run all the unit tests.
+3. After the unit tests are finished running, type the command "**_./gradlew cAT_**" and press enter. This will build and run all the instrumented/behavioral tests.
+
+### Test Results
+   * Once you are finished running all the tests, you can find your test results as an HTML or XML in your project file.
+   * To find the Unit Test results, go to either of these paths:
+      * HTML: "**<path_to_project>\Garp\app\build\reports\tests\testDebugUnitTest\index.html**"
+      * XML: "**<path_to_project>\Garp\app\build\test-results\testDebugUnitTest\TEST-com.example.guarden.ReactionGameLogicTest.xml**"
+   * To find the Behavioral Test results, go to either of these paths:
+      * HTML: "**...\Garp\app\build\reports\androidTests\connected\debug\com.example.guarden.ReactionGameBehaviorTest.html**"
+      * XML: "**<path_to_project>\Garp\app\build\outputs\androidTest-results\connected\debug\TEST-<device_value>-<project_value>-.xml**"
+
+>[!TIP]
+> For more information on running tests in Android Studio, use this [link](https://developer.android.com/studio/test).
+
+## Authors
 **Adrian Luedicke:** 803-445-6457
 
 **Joe Comiskey:** 843-353-8357
