@@ -31,8 +31,8 @@ On this screen, follow these steps:
 ## Testing
 
 ### Test Directories
-   * Behavioral Test directory: **Garp\app\src\androidTest\java\com\example\guarden\ReactionGameBehaviorTest.java**
-   * Unit Test directory: **Garp\app\src\test\java\com\example\guarden\ReactionGameLogicTest.java**
+   * Behavioral Test directory:<br /> **Garp\app\src\androidTest\java\com\example\guarden\ReactionGameBehaviorTest.java**
+   * Unit Test directory:<br /> **Garp\app\src\test\java\com\example\guarden\ReactionGameLogicTest.java**
 
 ### Testing Using Configurations
 1. First, make sure the Garp Android Studio project is open and the play button is green (refer to Setup and Running).
@@ -62,11 +62,11 @@ On this screen, follow these steps:
 ### Test Results
    * Once you are finished running all the tests, you can find your test results as an HTML or XML in your project file.
    * To find the Unit Test results, go to either of these paths:
-      * HTML: "**<path_to_project>\Garp\app\build\reports\tests\testDebugUnitTest\index.html**"
-      * XML: "**<path_to_project>\Garp\app\build\test-results\testDebugUnitTest\TEST-com.example.guarden.ReactionGameLogicTest.xml**"
+      * HTML:<br /> "**<path_to_project>\Garp\app\build\reports\tests\testDebugUnitTest\index.html**"
+      * XML:<br /> "**<path_to_project>\Garp\app\build\test-results\testDebugUnitTest\TEST-com.example.guarden.ReactionGameLogicTest.xml**"
    * To find the Behavioral Test results, go to either of these paths:
-      * HTML: "**...\Garp\app\build\reports\androidTests\connected\debug\com.example.guarden.ReactionGameBehaviorTest.html**"
-      * XML: "**<path_to_project>\Garp\app\build\outputs\androidTest-results\connected\debug\TEST-<device_value>-<project_value>-.xml**"
+      * HTML:<br /> "**...\Garp\app\build\reports\androidTests\connected\debug\com.example.guarden.ReactionGameBehaviorTest.html**"
+      * XML:<br /> "**<path_to_project>\Garp\app\build\outputs\androidTest-results\connected\debug\TEST-<device_value>-<project_value>-.xml**"
 
 >[!TIP]
 > For more information on running tests in Android Studio, use this [link](https://developer.android.com/studio/test).
