@@ -12,11 +12,20 @@ It provides several options that target different approaches for dealing with ne
     * [**Architecture:**](https://github.com/SCCapstone/Garp/wiki/Architecture) This is the architecture of our app, including the app's code structure and the app's views.
 
 ## External Requirements
-For this small game code, you need to have [Android Studio](https://developer.android.com/studio) and a [Java JDK](https://www.oracle.com/java/technologies/downloads/#java8-windows) installed (the latest versions are recommended).
+For running the app's code, you need to have [Android Studio](https://developer.android.com/studio) and a [Java JDK](https://www.oracle.com/java/technologies/downloads/#java8-windows) installed (the latest versions are recommended).
 
 ## Setup
 To make the cloning, pulling, and pushing process easier, [GitHub Desktop](https://desktop.github.com/) is recommended but not required.
-To use clone the Garp repository in the command line, follow these steps:
+To clone the Garp repository in Android Studio follow these steps:
+1. Open Android Studio
+2. Open the **File** tab at the top left of the window. Press new and choose **Project from Version Control**.
+3. Select **GitHub**, then login.
+4. Copy the clone link from your repository, and paste it.
+5. Select an appropriate folder location, and press **Clone**.
+6. Open the Project. Finally, make sure to Gradle the project before building and running.
+To clone a repository in a terminal, go to the folder you want to clone the repository to and follow these steps:
+1. Type **Git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY**. Change the URL to the clone link from your repository.
+2. Press enter to create a local clone. Make sure to Gradle the project before building and running.
 
 ## Running
 After cloning the repository onto Android Studio, the project will take a while to load.
