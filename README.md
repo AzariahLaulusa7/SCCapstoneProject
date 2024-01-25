@@ -24,7 +24,7 @@ To clone the Garp repository in Android Studio follow these steps:
 5. Select an appropriate folder location, and press **Clone**.
 6. Open the Project. Finally, make sure to Gradle the project before building and running.
 To clone a repository in a terminal, go to the folder you want to clone the repository to and follow these steps:
-1. Type **Git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY**. Change the URL to the clone link from your repository.
+1. Type **Git clone <URL>**. Change the URL to the clone link from your repository.
 2. Press enter to create a local clone. Make sure to Gradle the project before building and running.
 
 ## Running
