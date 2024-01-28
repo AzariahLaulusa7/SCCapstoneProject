@@ -54,9 +54,9 @@ On this screen, follow these steps:
    * Test: "All in Module"
 7. Next, add another new configuration. This time press Gradle.
    * Name: "All Unit Tests"
-   * Run: "testDebugUnitTest"
+   * Run: Select all Unit tests
    * Gradle Project: "Garp"
-8. Press ok. Now, you can select "All Unit Tests" or "All Instrumented Tests" in the configuration options.
+8. Press ok. Now, you can select "All Unit Tests" or "All Instrumented Tests" in the configuration options. If you select the "All Instrumented Tests", you must also select a device to run the program on.
 9. Press the green play button to build and run the tests.
 
 ### Testing Using Command line
@@ -77,6 +77,10 @@ On this screen, follow these steps:
    * To find the Behavioral Test results, go to either of these paths:
       * HTML:<br /> "**...\Garp\app\build\reports\androidTests\connected\debug\com.example.guarden.ReactionGameBehaviorTest.html**"
       * XML:<br /> "**<path_to_project>\Garp\app\build\outputs\androidTest-results\connected\debug\TEST-<device_value>-<project_value>-.xml**"
+   * If you want to open the HTML files in a browser from Android Studio, then follow these steps:
+      * Right click on the HTML file you wish to open.
+      * Select "Open In".
+      * Select "Open In Browser". Then, select the browser you wish to open the HTML file in.
 
 >[!TIP]
 > For more information on running tests in Android Studio, use this [link](https://developer.android.com/studio/test).
