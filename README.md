@@ -44,7 +44,7 @@ On this screen, follow these steps:
    * Unit Test directory:<br /> **Garp\app\src\test\java\com\example\guarden\ReactionGameLogicTest.java**
 
 ### Testing Using Configurations
-1. First, make sure the Garp Android Studio project is open and the play button is green (refer to Setup and Running).
+1. First, make sure the Garp Android Studio project is open. Then, Gradle the project.
 3. On the left of the play button, you will see configurations and devices.
 4. Press on the configuration button. Then, press edit configurations.
 5. Add new configuration using the add button on the top left of the configurations window.
@@ -60,13 +60,14 @@ On this screen, follow these steps:
 9. Press the green play button to build and run the tests.
 
 ### Testing Using Command line
-1. You can open the terminal in the Garp Android Studio project or your desktop terminal.
+1. Before running your tests, you need to Gradle, build, and run the Garp Android Studio project on a device via a USB or virtually.
+2. You can open the terminal in the Garp Android Studio project or on your desktop terminal.
 
 >[!NOTE]
 >If you are using your desktop terminal, make sure you are in the correct directory. This should be "**<path_to_project>\Garp**".
 
-2. Type the command "**_./gradlew test_**" and press enter. This will build and run all the unit tests.
-3. After the unit tests are finished running, type the command "**_./gradlew cAT_**" and press enter. This will build and run all the instrumented/behavioral tests.
+3. Type the command "**_./gradlew test_**" and press enter. This will build and run all the unit tests.
+4. After the unit tests are finished running, type the command "**_./gradlew cAT_**" and press enter. This will build and run all the instrumented/behavioral tests.
 
 ### Test Results
    * Once you are finished running all the tests, you can find your test results as an HTML or XML in your project file.
