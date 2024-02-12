@@ -5,4 +5,21 @@
     <string name="pose2">Triangle</string>
     <string name="pose3">Forward Fold</string>
     <string name="back_button">Back</string>
+    <string name="circle_start">START</string>
+    <string name="breathe_in">BREATHE IN</string>
+    <string name="breathe_out">BREATHE OUT</string>
+    <string name="breathe_hold">HOLD</string>
+    <string name="breathe_nose">(through nose)</string>
+    <string name="breathe_mouth">(through mouth)</string>
+    <string name="breathe_heart">Breathe Heart</string>
+    <string name="edit_profile_title">Profile</string>
+    <string name="edit_profile_image">Profile Image</string>
+    <string name="edit_image">Edit Image Button</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="edit_profile_update">UPDATE</string>
+    <string name="breathe_circle">Breathe Circle</string>
 </resources>
