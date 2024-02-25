@@ -52,6 +52,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".MovementViewAll"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".HomeScreen"
             android:exported="true"
             android:screenOrientation="portrait">
