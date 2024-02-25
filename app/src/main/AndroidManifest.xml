@@ -52,7 +52,12 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".MovementViewAll"
+            android:name=".MovementAdapter"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".MovementViewList"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+
 public class MoveMain extends AppCompatActivity {
     Button yoga;
     Button exercise;
@@ -23,7 +24,7 @@ public class MoveMain extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Intent myIntent = new Intent(this, Movement.class);
         Intent myIntent2 = new Intent(this, HomeScreen.class);
-        Intent viewMoveList = new Intent(this, MovementViewAll.class);
+        Intent viewMoveList = new Intent(this, MovementViewList.class);
         yoga.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
