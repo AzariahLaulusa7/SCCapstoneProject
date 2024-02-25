@@ -96,13 +96,13 @@
             android:id="@+id/buttonMemory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="25dp"
-            android:background="@color/white">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
 
             <ImageView
@@ -110,17 +110,17 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:src="@drawable/baseline_memory_24"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:adjustViewBounds="true" />
+                android:src="@drawable/baseline_memory_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Memory Test"
-                android:textSize="40sp"
-                android:gravity="center" />
+                android:textSize="40sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -101,5 +101,15 @@
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".AddWidget"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".Forums"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>
