@@ -96,7 +96,7 @@ public class HomeScreen extends AppCompatActivity {
         games.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, ReactionGame.class);
+                Intent intent = new Intent(HomeScreen.this, GameHome.class);
                 startActivity(intent);
             }
         });
