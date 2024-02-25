@@ -150,10 +150,10 @@ public class BreatheMain extends AppCompatActivity {
 
     // Circle animation
     public void circleAnim() {
-        circleGrow = ObjectAnimator.ofPropertyValuesHolder(circle, PropertyValuesHolder.ofFloat("scaleX", 3f),
-                PropertyValuesHolder.ofFloat("scaleY", 3f));
-        heartGrow = ObjectAnimator.ofPropertyValuesHolder(heart, PropertyValuesHolder.ofFloat("scaleX", 3f),
-                PropertyValuesHolder.ofFloat("scaleY", 3f));
+        circleGrow = ObjectAnimator.ofPropertyValuesHolder(circle, PropertyValuesHolder.ofFloat("scaleX", 4f),
+                PropertyValuesHolder.ofFloat("scaleY", 4f));
+        heartGrow = ObjectAnimator.ofPropertyValuesHolder(heart, PropertyValuesHolder.ofFloat("scaleX", 4f),
+                PropertyValuesHolder.ofFloat("scaleY", 4f));
         circleGrow.setDuration(2500);
         heartGrow.setDuration(2500);
         circleGrow.setRepeatCount(0);

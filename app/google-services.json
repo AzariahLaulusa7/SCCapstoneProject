@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "689560025108",
-    "project_id": "garp-7b188",
-    "storage_bucket": "garp-7b188.appspot.com"
+    "project_number": "276637421929",
+    "project_id": "breathe-easy-4b07a",
+    "storage_bucket": "breathe-easy-4b07a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:689560025108:android:2750ac399ce095f8a08f01",
+        "mobilesdk_app_id": "1:276637421929:android:ca01fec4adb1a304dcadf8",
         "android_client_info": {
           "package_name": "com.example.guarden"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAr-TMAaseEGK80oveq0PwTleGwIRDZrE4"
+          "current_key": "AIzaSyCQTa-zPMfJpwKTH-k2SaVT09eSr2biq1I"
         }
       ],
       "services": {

@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context=".EditProfile">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1008dp"
+        android:background="@drawable/background_light"
+        android:alpha="1" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,8 +24,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/profile_bubble">
+            android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/backIcon"
@@ -30,13 +39,15 @@
 
             <TextView
                 android:id="@+id/title"
-                android:textSize="30sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:textColor="@color/black"
-                android:layout_marginTop="90dp"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="80dp"
                 android:text="@string/edit_profile_title" />
 
         </RelativeLayout>
@@ -46,7 +57,7 @@
             android:layout_height="185dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/background_light"
+            android:background="@drawable/profile_bubble"
             android:padding="20dp">
 
             <ImageView
@@ -58,6 +69,7 @@
                 android:background="@drawable/profile_border_background"
                 android:padding="4dp"
                 app:srcCompat="@drawable/user_blue_circle_128"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/edit_profile_image" />
 
             <ImageButton
@@ -91,6 +103,9 @@
                 android:layout_marginBottom="5dp"
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                 android:hint="@string/first_name"
                 android:inputType="text"
                 android:drawableStart="@drawable/id"
@@ -116,7 +131,10 @@
                 android:layout_marginBottom="5dp"
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"
                 android:hint="@string/last_name"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                 android:inputType="text"
                 android:drawableStart="@drawable/id"
                 android:drawablePadding="10dp"
@@ -141,34 +159,12 @@
                 android:layout_marginBottom="5dp"
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"
                 android:hint="@string/email"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                 android:inputType="textEmailAddress"
                 android:drawableStart="@drawable/mail"
-                android:drawablePadding="10dp"
-                android:autofillHints="" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/profile_bubble"
-            android:padding="10dp">
-
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
-                android:drawableStart="@drawable/telephone"
                 android:drawablePadding="10dp"
                 android:autofillHints="" />
 
@@ -192,7 +188,10 @@
                 android:layout_alignParentStart="true"
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"
                 android:hint="@string/password"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                 android:inputType="textPassword"
                 android:drawableStart="@drawable/padlock"
                 android:drawablePadding="10dp"
@@ -205,7 +204,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:padding="10dp">
 
             <Button
@@ -213,12 +212,14 @@
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:background="@drawable/basic_button_background"
+                android:background="@drawable/custom_button"
                 android:text="@string/edit_profile_update"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif" />
 
         </RelativeLayout>
 
     </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

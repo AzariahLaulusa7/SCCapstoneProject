@@ -21,8 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +44,7 @@ public class EditProfile extends AppCompatActivity {
     private ImageView profileImage;
     private EditText usernameEditText, firstNameEditText, lastNameEditText, passwordEditText;
     private DatabaseReference userRef;
+    static String key;
 
     ImageButton back, editImage;
 
@@ -105,30 +104,38 @@ public class EditProfile extends AppCompatActivity {
 
         });
 
-        // Get profile data from firebase
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            userRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.getUid());
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        User user = dataSnapshot.getValue(User.class);
-                        if (user != null) {
-                            usernameEditText.setText(user.getEmail());
-                            firstNameEditText.setText(user.getFirstName());
-                            lastNameEditText.setText(user.getLastName());
-                            passwordEditText.setText(user.getPassword());
-                        }
-                    }
-                }
+        userRef = FirebaseDatabase.getInstance().getReference("users");
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Handle onCancelled
+        if(Login.emailKey != null)
+            key = Login.emailKey;
+        if(key == null)
+            key = " ";
+        userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (user != null) {
+                    firstNameEditText.setText(user.firstName);
+                    lastNameEditText.setText(user.lastName);
+                    usernameEditText.setText(user.email);
+                    passwordEditText.setText(user.password);
+                    if(user.image != null) {
+                        Toast.makeText(EditProfile.this, "Image PASS", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(EditProfile.this, "Image FAIL", Toast.LENGTH_SHORT).show();
+                    }
+
+                    Toast.makeText(EditProfile.this, "LOADING CREDENTIALS SUCCESSFUL", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
                 }
-            });
-        }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle onCancelled
+            }
+        });
 
         // Update data if requirements are met
         editButton.setOnClickListener(v -> {
@@ -139,12 +146,24 @@ public class EditProfile extends AppCompatActivity {
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
                 User updatedUser = new User(email, password, firstName, lastName);
-                userRef.setValue(updatedUser)
-                        .addOnSuccessListener(aVoid ->
-                                Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e ->
-                                Toast.makeText(EditProfile.this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                finish();
+                if(key == " ") {
+                    key = email.replace(".",",");
+                    userRef.child(email.replace(".",",")).setValue(updatedUser)
+                            .addOnSuccessListener(aVoid ->
+                                    Toast.makeText(EditProfile.this, "Account Created", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+                    finish();
+                } else {
+                    userRef.child("users").child(Login.emailKey).removeValue();
+                    userRef.child(Login.emailKey).setValue(updatedUser)
+                            .addOnSuccessListener(aVoid ->
+                                    Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(EditProfile.this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    finish();
+                }
             } else {
                 Toast.makeText(EditProfile.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             }
@@ -153,30 +172,24 @@ public class EditProfile extends AppCompatActivity {
 
     // User class
     //TODO: add image to firebase
-    private static class User extends CreateAccount{
-        public String email, password, firstName, lastName;
+    private static class User {
+        public String email, password, firstName, lastName, image;
+
+        public User() {}
 
         public User(String email, String password, String firstName, String lastName) {
-            this.password = password;
             this.email = email;
+            this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
         }
 
-        public String getEmail() {
-            return email;
-        }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public String getPassword() {
-            return password;
+        public User(String email, String password, String firstName, String lastName, String image) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.image = image;
         }
     }
 }

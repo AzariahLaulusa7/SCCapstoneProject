@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateAccount">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +15,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="880dp"
         android:background="@drawable/background_light"
         android:alpha="1" />
 
@@ -34,14 +41,40 @@
         android:gravity="center"
         android:text="Sign up"
         android:textColor="@color/white"
+        android:fontFamily="sans-serif"
         android:textSize="35dp"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/add_profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/signup"
+        android:layout_centerHorizontal="true"
+
+        android:background="@drawable/profile_border_background"
+        android:padding="4dp"
+        app:srcCompat="@drawable/user_blue_circle_128"
+        android:contentDescription="@string/edit_profile_image" />
+
+    <ImageButton
+        android:id="@+id/new_edit_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignBaseline="@id/add_profile_image"
+        android:layout_above="@id/add_profile_image"
+        android:layout_toEndOf="@id/add_profile_image"
+        android:layout_marginLeft="-40dp"
+        android:layout_marginBottom="-110dp"
+        android:background="@drawable/profile_border_background"
+        android:contentDescription="@string/edit_image"
+        app:srcCompat="@drawable/edit_pen" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="390dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/signup"
+        android:layout_below="@id/add_profile_image"
         android:layout_marginStart="10dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
@@ -52,7 +85,8 @@
         android:hint="Email"
         android:padding="20dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/black"
+        android:fontFamily="sans-serif"/>
 
     <EditText
         android:id="@+id/password"
@@ -70,7 +104,8 @@
         android:inputType="textPassword"
         android:padding="20dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/black"
+        android:fontFamily="sans-serif"/>
 
     <EditText
         android:id="@+id/confirmpass"
@@ -88,7 +123,8 @@
         android:inputType="textPassword"
         android:padding="20dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/black"
+        android:fontFamily="sans-serif"/>
 
     <EditText
         android:id="@+id/firstname"
@@ -105,7 +141,8 @@
         android:hint="First Name"
         android:padding="20dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/black"
+        android:fontFamily="sans-serif"/>
 
     <EditText
         android:id="@+id/lastname"
@@ -122,7 +159,8 @@
         android:hint="Last Name"
         android:padding="20dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/black"
+        android:fontFamily="sans-serif"/>
 
     <Button
         android:id="@+id/signupbtn"
@@ -135,8 +173,10 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
+        android:fontFamily="sans-serif"
         android:minHeight="48dp"
         android:text="Confirm" />
 
 
 </RelativeLayout>
+</ScrollView>

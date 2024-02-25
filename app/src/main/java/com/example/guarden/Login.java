@@ -1,14 +1,15 @@
 package com.example.guarden;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-import android.widget.Button;
-import android.widget.TextView;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,17 +20,20 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
+    static String emailKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        Button loginbtn = findViewById(R.id.loginbtn);
         EditText emailEditText = findViewById(R.id.email);
         EditText passwordEditText = findViewById(R.id.password);
-        Button loginbtn = findViewById(R.id.loginbtn);
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
         TextView tvSkip = findViewById(R.id.tvSkip);
+
+        //setListeners();
 
         tvSkip.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,7 +56,7 @@ public class Login extends AppCompatActivity {
                     return; // Exit the OnClickListener if fields are empty
                 }
 
-                String emailKey = enteredEmail.replace(".", ",");
+                emailKey = enteredEmail.replace(".", ",");
 
                 databaseReference.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -85,7 +89,7 @@ public class Login extends AppCompatActivity {
     }
 
     private static class User {
-        public String email, password, firstName, lastName;
+        public String email, password, firstName, lastName, image;
 
         public User() {}
 
@@ -94,6 +98,14 @@ public class Login extends AppCompatActivity {
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
+        }
+
+        public User(String email, String password, String firstName, String lastName, String image) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.image = image;
         }
     }
 }
