@@ -22,4 +22,6 @@
     <string name="phone_number">Phone Number</string>
     <string name="edit_profile_update">UPDATE</string>
     <string name="breathe_circle">Breathe Circle</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Not Yet Implemented</string>
 </resources>

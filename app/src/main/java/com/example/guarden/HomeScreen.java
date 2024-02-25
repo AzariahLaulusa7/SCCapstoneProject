@@ -44,13 +44,7 @@ public class HomeScreen extends AppCompatActivity {
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
-        //Intent name_of_journal_class = new Intent(this, name_of_journal_class.class);
-        //Intent name_of_games_class = new Intent(this, name_of_games_class.class);
-        //Intent name_of_breath_class = new Intent(this, name_of_breath_class.class);
-        //Intent name_of_forums_class = new Intent(this, name_of_forums_class.class);
-        //Intent name_of_add_class = new Intent(this, name_of_add_class.class);
-        //Intent name_of_profile_class = new Intent(this, name_of_profile_class.class);
-        //Intent name_of_call_class = new Intent(this, name_of_call_class.class);
+
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent MoveMain = new Intent(HomeScreen.this, MoveMain.class);
@@ -83,15 +77,13 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-
-        /*journal.setOnClickListener(new View.OnClickListener() {
+        journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_journal_class);
+                Intent NewJournalEntry = new Intent(HomeScreen.this, NewJournalEntry.class);
+                startActivity(NewJournalEntry);
             }
         });
-        */
-
 
         games.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,21 +92,23 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-/*
+
         forums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_forums_class);
+                Intent Forums = new Intent(HomeScreen.this, Forums.class);
+                startActivity(Forums);
             }
         });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_add_class);
+                Intent intent = new Intent(HomeScreen.this, AddWidget.class);
+                startActivity(intent);
             }
         });
-*/
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
