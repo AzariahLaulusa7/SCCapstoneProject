@@ -92,6 +92,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".BalloonGame"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".GameHome"
             android:exported="true"
             android:screenOrientation="portrait">
