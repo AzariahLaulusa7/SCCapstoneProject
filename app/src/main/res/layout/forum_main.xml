@@ -169,21 +169,51 @@
                         android:text="I had a great day today!"
                         android:padding="5dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="25sp"
-                        android:textColor="@color/white"
-                        android:text="add a comment" />
+                        android:background="@color/white">
+
+                        <TextView
+                            android:id="@+id/comment_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textSize="25sp"
+                            android:textColor="@color/black"
+                            android:text="add a comment" />
+
+                        <EditText
+                            android:id="@+id/comment_box_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="20dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            android:hint="Type comment..."
+                            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
+
+                        <ImageButton
+                            android:id="@+id/send_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="20dp"
+                            android:background="@android:color/transparent"
+                            app:srcCompat = "@drawable/paper_plane"/>
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/profile_bubble"
@@ -242,14 +272,44 @@
                         android:text="Who are you the most greatful for?"
                         android:padding="5dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="25sp"
-                        android:textColor="@color/white"
-                        android:text="add a comment" />
+                        android:background="@color/white">
+
+                        <TextView
+                            android:id="@+id/comment_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textSize="25sp"
+                            android:textColor="@color/black"
+                            android:text="add a comment" />
+
+                        <EditText
+                            android:id="@+id/comment_box_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="20dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            android:hint="Type comment..."
+                            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
+
+                        <ImageButton
+                            android:id="@+id/send_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="20dp"
+                            android:background="@android:color/transparent"
+                            app:srcCompat = "@drawable/paper_plane"/>
+
+                    </RelativeLayout>
 
 
                 </RelativeLayout>
@@ -316,14 +376,44 @@
                         android:text="I am too tired to work >:("
                         android:padding="5dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="25sp"
-                        android:textColor="@color/white"
-                        android:text="add a comment" />
+                        android:background="@color/white">
+
+                        <TextView
+                            android:id="@+id/comment_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textSize="25sp"
+                            android:textColor="@color/black"
+                            android:text="add a comment" />
+
+                        <EditText
+                            android:id="@+id/comment_box_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="20dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            android:hint="Type comment..."
+                            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
+
+                        <ImageButton
+                            android:id="@+id/send_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="20dp"
+                            android:background="@android:color/transparent"
+                            app:srcCompat = "@drawable/paper_plane"/>
+
+                    </RelativeLayout>
 
 
                 </RelativeLayout>
