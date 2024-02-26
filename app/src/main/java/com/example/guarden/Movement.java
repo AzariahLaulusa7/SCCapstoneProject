@@ -24,7 +24,7 @@ public class Movement extends AppCompatActivity {
     ImageButton thumbsDown;
 
     ImageView pose;
-    private ArrayList<Pose> poseList;
+    private static ArrayList<Pose> poseList;
     private int poseCounter;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,20 +155,17 @@ public class Movement extends AppCompatActivity {
     }
     public void addPoses(ArrayList<Pose> poseList, String mode){
         if(mode.equals("yoga")){
-            Pose pose1 = new Pose("yoga","Lunge",R.drawable.pose1);
-            poseList.add(pose1);
-            Pose pose2 = new Pose("yoga","Triangle",R.drawable.pose2);
-            poseList.add(pose2);
-            Pose pose3 = new Pose("yoga","Forward Fold",R.drawable.pose3);
-            poseList.add(pose3);
+            poseList.add(new Pose("yoga","Lunge",R.drawable.pose1));
+            poseList.add(new Pose("yoga","Triangle",R.drawable.pose2));
+            poseList.add(new Pose("yoga","Forward Fold",R.drawable.pose3));
         }
         if(mode.equals("exercise")){
-            Pose exercise1 = new Pose("exercise","Push Up",R.drawable.exercise1);
-            poseList.add(exercise1);
-            Pose exercise2 = new Pose("exercise","Sit Up",R.drawable.exercise2);
-            poseList.add(exercise2);
-            Pose exercise3 = new Pose("exercise","Squat",R.drawable.exercise3);
-            poseList.add(exercise3);
+            poseList.add(new Pose("exercise","Push Up",R.drawable.exercise1));
+            poseList.add(new Pose("exercise","Sit Up",R.drawable.exercise2));
+            poseList.add(new Pose("exercise","Squat",R.drawable.exercise3));
         }
+    }
+    public static ArrayList<Pose> getPoseList(){
+        return poseList;
     }
 }
