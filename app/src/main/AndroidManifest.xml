@@ -57,6 +57,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".MovementNewCustom"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".MovementViewList"
             android:exported="true"
             android:screenOrientation="portrait">
