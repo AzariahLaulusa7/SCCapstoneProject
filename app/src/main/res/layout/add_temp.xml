@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_light">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/add_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back_button"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:padding="15dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="?attr/homeAsUpIndicator" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="80dp"
+            android:text="Add" />
+
+    </RelativeLayout>
+
+
+    <ImageButton
+        android:id="@+id/Move"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/Breath"
+        android:layout_toLeftOf="@id/Games"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_button"
+        android:onClick="Move"
+        android:src="@drawable/baseline_monitor_heart_24"/>
+
+    <ImageButton
+        android:id="@+id/Journal"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/Breath"
+        android:layout_toRightOf="@id/Games"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_button"
+        android:onClick="Journal"
+        android:src="@drawable/baseline_book_24" />
+
+    <ImageButton
+        android:id="@+id/Games"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/Breath"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_button"
+        android:onClick="Games"
+        android:src="@drawable/baseline_videogame_asset_24" />
+
+    <ImageButton
+        android:id="@+id/Breath"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_toLeftOf="@id/Forums"
+        android:layout_centerVertical="true"
+        android:background="@drawable/round_button"
+        android:onClick="Breath"
+        android:src="@drawable/baseline_air_24" />
+
+    <ImageButton
+        android:id="@+id/Forums"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/round_button"
+        android:layout_above="@id/Games"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30dp"
+        android:onClick="Forums"
+        android:src="@drawable/baseline_people_24" />
+
+</RelativeLayout>

@@ -62,8 +62,14 @@ public class ForumMain extends AppCompatActivity {
         });
 
         // When sort is clicked
+        sort.setOnClickListener(v -> {
+
+        });
 
         // When filter is clicked
+        filter.setOnClickListener(v -> {
+
+        });
 
         // When a comment button is clicked
         comment1.setOnClickListener(v -> {
