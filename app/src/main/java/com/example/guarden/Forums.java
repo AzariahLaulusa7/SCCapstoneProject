@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,14 +23,12 @@ public class Forums extends AppCompatActivity {
     // Variables
     ImageButton back;
     Button post;
-    TextView vent, positive, question, userName;
+    TextView vent, positive, question, userName, date;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_post);
-
-
 
         // Initialize variables
         back = findViewById(R.id.post_back);
@@ -37,6 +37,10 @@ public class Forums extends AppCompatActivity {
         question = findViewById(R.id.forum_tag_two);
         positive = findViewById(R.id.forum_tag);
         userName = findViewById(R.id.post_user_name);
+        date = findViewById(R.id.post_date);
+
+        //Date
+        date.setText("Feb 26, 2024");
 
         vent.setBackground(getDrawable(R.drawable.grey_tag_background));
         question.setBackground(getDrawable(R.drawable.grey_tag_background));
