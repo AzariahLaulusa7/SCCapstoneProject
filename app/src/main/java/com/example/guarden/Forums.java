@@ -81,12 +81,8 @@ public class Forums extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if (user != null) {
+                if (user != null)
                     userName.setText(user.firstName.toUpperCase());
-                    Toast.makeText(Forums.this, "LOADING USER PASSED", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Forums.this, "LOADING USER FAILED", Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override
