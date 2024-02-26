@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="175dp"
         android:text="Score: 0"
         android:textSize="24sp"/>
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="175dp"
         android:layout_marginEnd="24dp"
         android:text="Best: 0"
         android:textSize="24sp"/>
@@ -41,8 +41,19 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:text="TIME REMAINING\n     30 SECONDS"
+        android:text="TIME REMAINING\n10 SECONDS"
         android:textSize="36sp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/directionslbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="125dp"
+        android:text="Tap the heart as many times as you can in 10 seconds"
+        android:textSize="18sp"
+        android:gravity="center"
         android:textStyle="bold"/>
 
     <ImageView

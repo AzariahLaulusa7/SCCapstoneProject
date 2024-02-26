@@ -37,6 +37,16 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
         android:layout_marginBottom="32dp"/>
+    <TextView
+        android:id="@+id/directions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="After watching the sequence of flashing squares, repeat the order by tapping the correct squares."
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="60dp"
+        android:layout_marginBottom="32dp"/>
 
     <Button
         android:id="@+id/playAgainButton"

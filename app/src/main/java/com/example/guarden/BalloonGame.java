@@ -22,13 +22,43 @@ public class BalloonGame extends Activity {
     private TextView txtGameOver;
     private Button btnPlayAgain;
     private Button startButton;
-
+    private boolean isGameActive = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.balloon_game);
 
+        // Initialize all the view components
+        initializeViews();
+
+        // Setup shared preferences
+        preferences = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+        bestScore = preferences.getInt("BEST_SCORE", 0);
+        txtBestScore.setText("Best: " + bestScore);
+
+        // Listener for the balloon image click
+        imageBalloon.setOnClickListener(v -> {
+            if (isGameActive) { // Only increase score if the game is active
+                currentScore++;
+                txtCurrentScore.setText("Score: " + currentScore);
+            }
+        });
+
+        // Listener for the Play Again button click
+        btnPlayAgain.setOnClickListener(v -> startGame());
+
+        // Listener for the Start Game button click
+        startButton.setOnClickListener(v -> {
+            startGame();
+            v.setVisibility(View.GONE);
+        });
+
+        // Listener for the back button click
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
+    }
+
+    private void initializeViews() {
         txtCurrentScore = findViewById(R.id.txtCurrentScore);
         txtBestScore = findViewById(R.id.txtBestScore);
         txtTimer = findViewById(R.id.txtTimer);
@@ -36,33 +66,6 @@ public class BalloonGame extends Activity {
         txtGameOver = findViewById(R.id.txtGameOver);
         btnPlayAgain = findViewById(R.id.btnPlayAgain);
         startButton = findViewById(R.id.startButton);
-
-        preferences = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
-        bestScore = preferences.getInt("BEST_SCORE", 0);
-        txtBestScore.setText("Best: " + bestScore);
-
-        imageBalloon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentScore++;
-                txtCurrentScore.setText("Score: " + currentScore);
-            }
-        });
-
-        btnPlayAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startGame();
-            }
-        });
-
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startGame();
-                v.setVisibility(View.GONE); // Hide the start button when the game starts
-            }
-        });
     }
 
     private void startGame() {
@@ -72,34 +75,33 @@ public class BalloonGame extends Activity {
         btnPlayAgain.setVisibility(View.GONE);
         startButton.setVisibility(View.GONE);
         imageBalloon.setEnabled(true);
+        isGameActive = true; // Mark game as active
 
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtTimer.setText("TIME REMAINING\n     " + millisUntilFinished / 1000 + " SECONDS");
             }
 
             public void onFinish() {
-                txtTimer.setText("TIME REMAINING\n     0 SECONDS");
-                txtGameOver.setVisibility(View.VISIBLE);
-                btnPlayAgain.setVisibility(View.VISIBLE);
-                imageBalloon.setEnabled(false);
-
-                if(currentScore > bestScore) {
-                    bestScore = currentScore;
-                    txtBestScore.setText("Best: " + bestScore);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("BEST_SCORE", bestScore);
-                    editor.apply();
-                }
+                gameFinished();
             }
         }.start();
+    }
 
-        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    private void gameFinished() {
+        txtTimer.setText("TIME REMAINING\n     0 SECONDS");
+        txtGameOver.setVisibility(View.VISIBLE);
+        btnPlayAgain.setVisibility(View.VISIBLE);
+        imageBalloon.setEnabled(false);
+        isGameActive = false;
+
+        if(currentScore > bestScore) {
+            bestScore = currentScore;
+            txtBestScore.setText("Best: " + bestScore);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("BEST_SCORE", bestScore);
+            editor.apply();
+        }
     }
 }
