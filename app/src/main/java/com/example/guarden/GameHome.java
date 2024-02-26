@@ -11,6 +11,7 @@ public class GameHome extends Activity {
     private LinearLayout buttonReaction;
     private LinearLayout buttonBalloons;
     private LinearLayout buttonMemory;
+    private LinearLayout buttonLeaderboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class GameHome extends Activity {
         buttonReaction = findViewById(R.id.buttonReaction);
         buttonBalloons = findViewById(R.id.buttonBalloons);
         buttonMemory = findViewById(R.id.buttonMemory);
+        buttonLeaderboard = findViewById(R.id.buttonLeaderboard);
 
         // Set up the listeners for the buttons
         buttonReaction.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +47,14 @@ public class GameHome extends Activity {
             public void onClick(View v) {
                 // Start the Coloring game activity
                 Intent intent = new Intent(GameHome.this, MemoryGame.class);
+                startActivity(intent);
+            }
+        });
+        buttonLeaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the Coloring game activity
+                Intent intent = new Intent(GameHome.this, LeaderBoard.class);
                 startActivity(intent);
             }
         });

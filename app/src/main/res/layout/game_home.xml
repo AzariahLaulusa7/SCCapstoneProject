@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:src="@drawable/balloonsicon"
+                android:src="@drawable/baseline_ads_click_24"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
@@ -112,7 +112,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/baseline_memory_24" />
+                android:src="@drawable/baseline_smart_toy_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,6 +120,36 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Memory Test"
+                android:textSize="40sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/buttonLeaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+
+            <ImageView
+                android:id="@+id/leaderboardicon"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/baseline_leaderboard_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Leaderboard"
                 android:textSize="40sp" />
         </LinearLayout>
 

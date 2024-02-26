@@ -38,32 +38,19 @@ public class MemoryGame extends Activity {
 
         initializeButtons();
 
-        startGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the game logic here
-                startGame();
-                // Make the start button disappear
-                v.setVisibility(View.GONE);
-            }
+        startGameButton.setOnClickListener(v -> {
+            startGame();
+            startGameButton.setVisibility(View.GONE);
         });
-        playAgainButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Reset game state and start a new game
-                startGame();
-                playAgainButton.setVisibility(View.GONE); // Hide play again button
-                startGameButton.setVisibility(View.VISIBLE); // Show start game button
-            }
+
+        playAgainButton.setOnClickListener(v -> {
+            startGame();
+            playAgainButton.setVisibility(View.GONE); // Hide play again button
+            startGameButton.setVisibility(View.VISIBLE); // Optionally show start game button
         });
+
         ImageView backButton = findViewById(R.id.backIcon);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Close the current activity and return to the previous one
-                finish();
-            }
-        });
+        backButton.setOnClickListener(v -> finish());
     }
 
     private void initializeButtons() {
@@ -71,8 +58,8 @@ public class MemoryGame extends Activity {
             final Button button = new Button(this);
             button.setId(View.generateViewId());
             buttonIds.add(button.getId());
-            button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_background));
-            button.setText(String.valueOf(i + 1));
+            button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_background)); // Ensure you have this drawable
+            button.setText(""); // Set text to empty for now
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -82,45 +69,25 @@ public class MemoryGame extends Activity {
             button.setLayoutParams(params);
             gridLayout.addView(button);
 
-            // Set the button click listener
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Check if the button clicked is the correct one in the sequence
-                    if (v.getId() == sequence.get(sequenceIndex)) {
-                        sequenceIndex++;
-                        if (sequenceIndex == sequence.size()) {
-                            // User has successfully completed the sequence
-                            Toast.makeText(MemoryGame.this, "Sequence completed!", Toast.LENGTH_SHORT).show();
-                            difficultyLevel++; // Increase difficulty for the next round
-
-                            // Clear the current sequence and prepare for the next round
+            button.setOnClickListener(v -> {
+                if (sequenceIndex < sequence.size() && v.getId() == sequence.get(sequenceIndex)) {
+                    sequenceIndex++;
+                    if (sequenceIndex == sequence.size()) {
+                        Toast.makeText(MemoryGame.this, "Sequence completed!", Toast.LENGTH_SHORT).show();
+                        difficultyLevel++;
+                        handler.postDelayed(() -> {
                             sequence.clear();
                             sequenceIndex = 0;
-
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    generateSequence(difficultyLevel);
-                                    flashSequence();
-                                }
-                            }, 1500);
-                        }
-                    } else {
-                        // User clicked the wrong button
-                        Toast.makeText(MemoryGame.this, "Wrong button! Game Over.", Toast.LENGTH_SHORT).show();
-
-                        // Disable all buttons to prevent further input
-                        for (int id : buttonIds) {
-                            Button button = findViewById(id);
-                            if (button != null) {
-                                button.setEnabled(false);
-                            }
-                        }
-                        playAgainButton.setVisibility(View.VISIBLE);
+                            generateSequence(difficultyLevel);
+                            flashSequence();
+                        }, 1500);
                     }
+                } else {
+                    Toast.makeText(MemoryGame.this, "Wrong button! Game Over.", Toast.LENGTH_SHORT).show();
+                    difficultyLevel = 1;
+                    disableButtons();
+                    playAgainButton.setVisibility(View.VISIBLE);
                 }
-
             });
         }
     }
@@ -130,7 +97,8 @@ public class MemoryGame extends Activity {
         generateSequence(difficultyLevel);
         flashSequence();
         for (int id : buttonIds) {
-            findViewById(id).setEnabled(true);
+            Button button = findViewById(id);
+            button.setEnabled(true);
         }
     }
 
@@ -175,5 +143,13 @@ public class MemoryGame extends Activity {
                 button.setBackground(originalDrawable);
             }
         }, 500);
+    }
+    private void disableButtons() {
+        for (int id : buttonIds) {
+            Button button = findViewById(id);
+            if (button != null) {
+                button.setEnabled(false);
+            }
+        }
     }
 }
