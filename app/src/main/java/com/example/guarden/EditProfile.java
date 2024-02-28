@@ -27,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.checkerframework.checker.units.qual.C;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -63,6 +65,10 @@ public class EditProfile extends AppCompatActivity {
         editImage = findViewById(R.id.edit_image);
         back = findViewById(R.id.backIcon);
         Intent myIntent = new Intent(this, HomeScreen.class);
+
+        // Set an image if profileImage is not null
+        if(CreateAccount.image != null)
+            profileImage.setImageDrawable(CreateAccount.image.getDrawable());
 
         // Retrieving image from gallery
         ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -143,6 +149,8 @@ public class EditProfile extends AppCompatActivity {
             final String password = passwordEditText.getText().toString().trim();
             final String firstName = firstNameEditText.getText().toString().trim();
             final String lastName = lastNameEditText.getText().toString().trim();
+
+            CreateAccount.image.setImageDrawable(profileImage.getDrawable());
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
                 User updatedUser = new User(email, password, firstName, lastName);

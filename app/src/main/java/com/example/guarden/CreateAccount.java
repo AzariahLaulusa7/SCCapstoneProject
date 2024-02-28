@@ -35,7 +35,7 @@ public class CreateAccount extends AppCompatActivity {
     private Button signUpButton;
     private ImageButton editPen;
     private DatabaseReference databaseReference;
-    private ImageView image;
+    static ImageView image;
     private RoundedBitmapDrawable roundedImage;
     private String imageUrl;
 
