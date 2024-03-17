@@ -33,7 +33,6 @@ public class Movement extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras!=null) mode=extras.getString("mode");
         setContentView(R.layout.movement);
-        addPoses(poseList,mode);
         start = (Button) findViewById(R.id.start);
         timer = (TextView) findViewById(R.id.timer);
         name = (TextView) findViewById(R.id.pose_name);
@@ -153,17 +152,8 @@ public class Movement extends AppCompatActivity {
     public void setMode(String mode){
         this.mode=mode;
     }
-    public void addPoses(ArrayList<Pose> poseList, String mode){
-        if(mode.equals("yoga")){
-            poseList.add(new Pose("yoga","Lunge",R.drawable.pose1));
-            poseList.add(new Pose("yoga","Triangle",R.drawable.pose2));
-            poseList.add(new Pose("yoga","Forward Fold",R.drawable.pose3));
-        }
-        if(mode.equals("exercise")){
-            poseList.add(new Pose("exercise","Push Up",R.drawable.exercise1));
-            poseList.add(new Pose("exercise","Sit Up",R.drawable.exercise2));
-            poseList.add(new Pose("exercise","Squat",R.drawable.exercise3));
-        }
+    public static void addPose(Pose pose){
+        poseList.add(pose);
     }
     public static ArrayList<Pose> getPoseList(){
         return poseList;

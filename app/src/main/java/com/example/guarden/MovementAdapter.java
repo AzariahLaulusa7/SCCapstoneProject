@@ -31,8 +31,9 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         // to set data to textview and imageview of each card layout
         Pose pose = poseArrayList.get(position);
         holder.name.setText(pose.getName());
-        holder.category.setText(pose.getType());
+        holder.category.setText(pose.getCategory());
         holder.thumbnail.setImageResource(pose.getImageRes());
+        holder.description.setText(pose.getDescription());
     }
 
     @Override
@@ -45,12 +46,14 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         private final ImageView thumbnail;
         private final TextView name;
         private final TextView category;
+        private final TextView description;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.thumbnail);
             name = itemView.findViewById(R.id.name);
             category = itemView.findViewById(R.id.category);
+            description = itemView.findViewById(R.id.description);
         }
     }
 }

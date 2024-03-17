@@ -10,11 +10,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import android.text.TextUtils;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class CreateAccount extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText, confirmPasswordEditText, firstNameEditText, lastNameEditText;
     private Button signUpButton;
     private DatabaseReference databaseReference;
+    public static String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class CreateAccount extends AppCompatActivity {
             String confirmPassword = confirmPasswordEditText.getText().toString().trim();
             final String firstName = firstNameEditText.getText().toString().trim();
             final String lastName = lastNameEditText.getText().toString().trim();
+            ArrayList<Pose> customPoses = new ArrayList<Pose>();
+            customPoses.add(new Pose("test1","test1",0,"test1"));
 
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
                     || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
@@ -50,7 +55,8 @@ public class CreateAccount extends AppCompatActivity {
                 return;
             }
 
-            User newUser = new User(email, password, firstName, lastName);
+            User newUser = new User(email, password, firstName, lastName, customPoses);
+            UserID = email;
 
             databaseReference.child("users").child(email.replace(".",",")).setValue(newUser)
                     .addOnSuccessListener(aVoid ->
@@ -62,14 +68,20 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
-    private static class User {
+    public class User {
         public String email, password, firstName, lastName;
+        public ArrayList<Pose> customPoses;
 
-        public User(String email, String password, String firstName, String lastName) {
+        public User(String email, String password, String firstName, String lastName, ArrayList<Pose> customPoses) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
+            this.customPoses = customPoses;
         }
+        public ArrayList<Pose> getCustomPoses(){
+            return this.customPoses;
+        }
+
     }
 }
