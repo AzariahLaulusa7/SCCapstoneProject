@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -21,10 +22,10 @@ import java.util.Map;
 public class MovementNewCustom extends AppCompatActivity {
     Button save;
     Button cancel;
-
+    Spinner categorySelect = (Spinner) findViewById(R.id.spinnerExerciseCategory);
     private EditText editTextExerciseName;
     private EditText editTextExerciseDescription;
-    String category;
+    private String category;
     private DatabaseReference databaseReference;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +41,12 @@ public class MovementNewCustom extends AppCompatActivity {
             public void onClick(View v) {
                 String name = editTextExerciseName.getText().toString().trim();
                 String description = editTextExerciseDescription.getText().toString().trim();
+                String category = categorySelect.getSelectedItem().toString();
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(MovementNewCustom.this, "Please add a name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Pose pose = new Pose("custom",name,0,description);
+                Pose pose = new Pose(category,name,0,description);
                 //Movement.addPose(pose);
                 databaseReference.child("users").child(CreateAccount.UserID).child("customPoses").child(name).setValue(pose)
                         .addOnSuccessListener(aVoid ->
