@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,6 +40,8 @@ public class CreateAccount extends AppCompatActivity {
     private RoundedBitmapDrawable roundedImage;
     private String imageUrl;
 
+    private Uri imageUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +62,7 @@ public class CreateAccount extends AppCompatActivity {
         ImageView backIcon = findViewById(R.id.backIcon);
         backIcon.setOnClickListener(v -> finish());
 
-        StorageReference storageRef = storage.getReference();
+        StorageReference storageRef = storage.getInstance().getReference();
 
         // Retrieving image from gallery
         ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -67,27 +70,24 @@ public class CreateAccount extends AppCompatActivity {
 
                 Intent data = result.getData();
 
-                Uri uri = data.getData();
-                StorageReference filepath = storageRef.child("Images").child(uri.getLastPathSegment());
-                filepath.putFile(uri).addOnSuccessListener(taskSnapshot -> {
-                    imageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-                    databaseReference.child("users").setValue(imageUrl);
-
-                });
+                //Uri uri = data.getData();
+                //StorageReference filepath = storageRef.child("Images").child(uri.getLastPathSegment());
+                //filepath.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+                //    imageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                //    //databaseReference.child("users").setValue(imageUrl);
+                //});
 
                 try {
 
-                    final Uri imageUri = data != null ? data.getData() : null;
+                    imageUri = data != null ? data.getData() : null;
                     assert imageUri != null;
                     final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                     final Bitmap newImage = BitmapFactory.decodeStream(imageStream);
 
-                    Bitmap resizedImage = Bitmap.createScaledBitmap(newImage, 150, 150, true);
-                    roundedImage = RoundedBitmapDrawableFactory.create(getResources(), resizedImage);
-                    roundedImage.setCircular(true);
+                    Bitmap resizedImageBitmap = Bitmap.createScaledBitmap(newImage, 150, 150, true);
+                    Drawable resizedImage = new BitmapDrawable(getResources(), resizedImageBitmap);
 
-                    image.setImageDrawable(roundedImage);
-
+                    image.setImageDrawable(resizedImage);
 
                 } catch (FileNotFoundException e) {// handle exception
                     e.printStackTrace();
@@ -113,10 +113,9 @@ public class CreateAccount extends AppCompatActivity {
             String confirmPassword = confirmPasswordEditText.getText().toString().trim();
             final String firstName = firstNameEditText.getText().toString().trim();
             final String lastName = lastNameEditText.getText().toString().trim();
-            final Drawable importImage = image.getDrawable();
 
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
-                    || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
+                    || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || image == null) {
                 Toast.makeText(CreateAccount.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -126,16 +125,21 @@ public class CreateAccount extends AppCompatActivity {
             }
 
             User newUser = new User();
-            if(imageUrl != null)
-                newUser = new User(email, password, firstName, lastName, imageUrl);
-            else
-                newUser = new User(email, password, firstName, lastName);
+            newUser = new User(email, password, firstName, lastName);
 
             databaseReference.child("users").child(email.replace(".",",")).setValue(newUser)
                     .addOnSuccessListener(aVoid ->
                             Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_SHORT).show())
                     .addOnFailureListener(e ->
                             Toast.makeText(CreateAccount.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+            if (imageUri != null) {
+                storageRef.child("users").child(email.replace(".", ",")).putFile(imageUri)
+                        .addOnSuccessListener(aVoid ->
+                                Toast.makeText(CreateAccount.this, "Storage Created", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e ->
+                                Toast.makeText(CreateAccount.this, "Failed to create storage: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }
 
             finish();
         });
