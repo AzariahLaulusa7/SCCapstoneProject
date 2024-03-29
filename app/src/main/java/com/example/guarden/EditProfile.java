@@ -80,6 +80,7 @@ public class EditProfile extends AppCompatActivity {
         editImage = findViewById(R.id.edit_image);
         back = findViewById(R.id.backIcon);
         Intent myIntent = new Intent(this, HomeScreen.class);
+        Intent restartIntent = new Intent(this, Login.class);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference("users");
@@ -180,15 +181,15 @@ public class EditProfile extends AppCompatActivity {
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
                 User updatedUser = new User(email, password, firstName, lastName);
-                if(key == " ") {
+                if (key == " ") {
                     key = email.replace(".",",");
                     userRef.child(email.replace(".",",")).setValue(updatedUser)
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(EditProfile.this, "Account Created", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->
                                     Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                    if(imageUri != null) {
-                        storageRef.child("users").child(Login.emailKey).putFile(imageUri)
+                    if (imageUri != null) {
+                        storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(EditProfile.this, "Storage Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
@@ -196,8 +197,30 @@ public class EditProfile extends AppCompatActivity {
                     }
 
                     finish();
+                } else if (!key.equals(email.replace(".",","))) {
+                    key = email.replace(".",",");
+                    if (imageUri != null) {
+                        storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
+                                .addOnSuccessListener(aVoid ->
+                                        Toast.makeText(EditProfile.this, "Storage Created", Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this,  e.getMessage(), Toast.LENGTH_LONG).show());
+//                        storageRef.child("/users/"+Login.emailKey).delete()
+//                                .addOnSuccessListener(aVoid ->
+//                                        Toast.makeText(EditProfile.this, "Storage Deleted", Toast.LENGTH_SHORT).show())
+//                                .addOnFailureListener(e ->
+//                                        Toast.makeText(EditProfile.this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    }
+                    userRef.child(Login.emailKey).removeValue();
+                    userRef.child(email.replace(".",",")).setValue(updatedUser)
+                            .addOnSuccessListener(aVoid ->
+                                    Toast.makeText(EditProfile.this, email.replace(".",",") + " " + key, Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    startActivity(restartIntent);
+                    finish();
                 } else {
-                    userRef.child("users").child(Login.emailKey).removeValue();
+                    //userRef.child("users").child(Login.emailKey).removeValue();
 
                     userRef.child(Login.emailKey).setValue(updatedUser)
                             .addOnSuccessListener(aVoid ->
