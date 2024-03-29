@@ -130,42 +130,39 @@ public class EditProfile extends AppCompatActivity {
 
         if(Login.emailKey != null)
             key = Login.emailKey;
-        if(key == null)
+        if(key == null) {
             key = " ";
-        userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                if (user != null) {
-                    firstNameEditText.setText(user.firstName);
-                    lastNameEditText.setText(user.lastName);
-                    usernameEditText.setText(user.email);
-                    passwordEditText.setText(user.password);
-                } else {
-                    Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
+        } else {
+            userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        firstNameEditText.setText(user.firstName);
+                        lastNameEditText.setText(user.lastName);
+                        usernameEditText.setText(user.email);
+                        passwordEditText.setText(user.password);
+                    } else {
+                        Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
+                    }
+
+                    storageRef = storage.getReference();
+                    imageRef = storageRef.child("/users/" + key);
+
+                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        if (uri != null) {
+                            String imageUrl = uri.toString();
+                            Picasso.get().load(imageUrl).resize(150, 150).into(profileImage);
+                        }
+                    });
                 }
 
-                storageRef = storage.getReference();
-                imageRef = storageRef.child("/users/"+key);
-
-                imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                    if (uri != null) {
-                        String imageUrl = uri.toString();
-                        Picasso.get().load(imageUrl).resize(150, 150).into(profileImage);
-                    }
-                }).addOnFailureListener(e ->
-                        startActivity(myIntent)
-                );
-
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle onCancelled
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle onCancelled
+                }
+            });
+        }
 
         // Update data if requirements are met
         editButton.setOnClickListener(v -> {
@@ -189,6 +186,7 @@ public class EditProfile extends AppCompatActivity {
                                         Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
                     finish();
+                    startActivity(restartIntent);
                 } else if (!key.equals(email.replace(".",","))) {
                     if (imageUri != null) {
                         key = email.replace(".",",");
@@ -231,9 +229,6 @@ public class EditProfile extends AppCompatActivity {
             }
         });
     }
-
-    // User class
-    //TODO: add image to firebase
     private static class User {
         public String email, password, firstName, lastName, image;
 
