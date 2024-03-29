@@ -141,7 +141,6 @@ public class EditProfile extends AppCompatActivity {
                     lastNameEditText.setText(user.lastName);
                     usernameEditText.setText(user.email);
                     passwordEditText.setText(user.password);
-                    Toast.makeText(EditProfile.this, "LOADING CREDENTIALS SUCCESSFUL", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
                 }
@@ -153,14 +152,10 @@ public class EditProfile extends AppCompatActivity {
                     if (uri != null) {
                         String imageUrl = uri.toString();
                         Picasso.get().load(imageUrl).resize(150, 150).into(profileImage);
-//                    Bitmap src = BitmapFactory.decodeResource(profileImage.getResources(), profileImage.getId());
-//                    Bitmap resizedImage = Bitmap.createScaledBitmap(src, 150, 150, true);
-//                    RoundedBitmapDrawable roundedImage = RoundedBitmapDrawableFactory.create(getResources(), resizedImage);
-//                    roundedImage.setCircular(true);
-//                    profileImage.setImageDrawable(roundedImage);
                     }
-
-                }).addOnFailureListener(e -> Toast.makeText(EditProfile.this, "Failed", Toast.LENGTH_LONG).show());
+                }).addOnFailureListener(e ->
+                        startActivity(myIntent)
+                );
 
 
 
@@ -187,35 +182,28 @@ public class EditProfile extends AppCompatActivity {
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(EditProfile.this, "Account Created", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->
-                                    Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    Toast.makeText(EditProfile.this, "Failed To Create Account", Toast.LENGTH_SHORT).show());
                     if (imageUri != null) {
                         storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
-                                .addOnSuccessListener(aVoid ->
-                                        Toast.makeText(EditProfile.this, "Storage Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
-                                        Toast.makeText(EditProfile.this, "Failed to create storage: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                        Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
                     finish();
                 } else if (!key.equals(email.replace(".",","))) {
                     if (imageUri != null) {
                         key = email.replace(".",",");
                         storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
-                                .addOnSuccessListener(aVoid ->
-                                        Toast.makeText(EditProfile.this, "Storage Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
-                                        Toast.makeText(EditProfile.this,  e.getMessage(), Toast.LENGTH_LONG).show());
+                                        Toast.makeText(EditProfile.this,  "Failed To Save Image", Toast.LENGTH_LONG).show());
                         storageRef.child("/users/"+Login.emailKey).delete()
-                                .addOnSuccessListener(aVoid ->
-                                        Toast.makeText(EditProfile.this, "Storage Deleted", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
-                                        Toast.makeText(EditProfile.this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-
+                                        Toast.makeText(EditProfile.this, "Failed To Delete Old Image", Toast.LENGTH_SHORT).show());
                         userRef.child(Login.emailKey).removeValue();
                         userRef.child(email.replace(".",",")).setValue(updatedUser)
                                 .addOnSuccessListener(aVoid ->
-                                        Toast.makeText(EditProfile.this, email.replace(".",",") + " " + key, Toast.LENGTH_SHORT).show())
+                                        Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
-                                        Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                        Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
                         finish();
                         startActivity(restartIntent);
                     } else {
@@ -229,19 +217,17 @@ public class EditProfile extends AppCompatActivity {
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->
-                                    Toast.makeText(EditProfile.this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
                     if(imageUri != null) {
-                        imageRef.delete();
+                        //storageRef.child("/users/"+Login.emailKey).delete();
                         storageRef.child("users").child(Login.emailKey).putFile(imageUri)
-                                .addOnSuccessListener(aVoid ->
-                                        Toast.makeText(EditProfile.this, "Storage Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
-                                        Toast.makeText(EditProfile.this, "Failed to create storage: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                        Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
                     finish();
                 }
             } else {
-                Toast.makeText(EditProfile.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfile.this, "Please FILL all fields", Toast.LENGTH_SHORT).show();
             }
         });
     }
