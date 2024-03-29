@@ -195,30 +195,33 @@ public class EditProfile extends AppCompatActivity {
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed to create storage: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                     }
-
                     finish();
                 } else if (!key.equals(email.replace(".",","))) {
-                    key = email.replace(".",",");
                     if (imageUri != null) {
+                        key = email.replace(".",",");
                         storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(EditProfile.this, "Storage Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this,  e.getMessage(), Toast.LENGTH_LONG).show());
-//                        storageRef.child("/users/"+Login.emailKey).delete()
-//                                .addOnSuccessListener(aVoid ->
-//                                        Toast.makeText(EditProfile.this, "Storage Deleted", Toast.LENGTH_SHORT).show())
-//                                .addOnFailureListener(e ->
-//                                        Toast.makeText(EditProfile.this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        storageRef.child("/users/"+Login.emailKey).delete()
+                                .addOnSuccessListener(aVoid ->
+                                        Toast.makeText(EditProfile.this, "Storage Deleted", Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+                        userRef.child(Login.emailKey).removeValue();
+                        userRef.child(email.replace(".",",")).setValue(updatedUser)
+                                .addOnSuccessListener(aVoid ->
+                                        Toast.makeText(EditProfile.this, email.replace(".",",") + " " + key, Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        finish();
+                        startActivity(restartIntent);
+                    } else {
+                        profileImage.setImageDrawable(getDrawable(R.drawable.user_blue_circle_128));
+                        Toast.makeText(EditProfile.this, "Please Choose A New Image", Toast.LENGTH_SHORT).show();
                     }
-                    userRef.child(Login.emailKey).removeValue();
-                    userRef.child(email.replace(".",",")).setValue(updatedUser)
-                            .addOnSuccessListener(aVoid ->
-                                    Toast.makeText(EditProfile.this, email.replace(".",",") + " " + key, Toast.LENGTH_SHORT).show())
-                            .addOnFailureListener(e ->
-                                    Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                    startActivity(restartIntent);
-                    finish();
                 } else {
                     //userRef.child("users").child(Login.emailKey).removeValue();
 
