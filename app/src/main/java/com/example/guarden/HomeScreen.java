@@ -33,7 +33,6 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton games;
     ImageButton breath;
     ImageButton forums;
-    ImageButton add;
 
     ImageButton profile;
 
@@ -52,7 +51,6 @@ public class HomeScreen extends AppCompatActivity {
         games = (ImageButton) findViewById(R.id.Games);
         breath = (ImageButton) findViewById(R.id.Breath);
         forums = (ImageButton) findViewById(R.id.Forums);
-        add = (ImageButton) findViewById(R.id.Add);
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
@@ -113,13 +111,6 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, AddWidget.class);
-                startActivity(intent);
-            }
-        });
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
