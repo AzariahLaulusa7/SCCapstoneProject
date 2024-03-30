@@ -29,7 +29,6 @@ public class Movement extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        poseList=new ArrayList<Pose>();
         Bundle extras = getIntent().getExtras();
         if(extras!=null) mode=extras.getString("mode");
         setContentView(R.layout.movement);
@@ -43,11 +42,12 @@ public class Movement extends AppCompatActivity {
         thumbsDown = (ImageButton) findViewById(R.id.thumbs_down);
         thumbsUp.setImageResource(R.drawable.baseline_thumb_up_off_alt_24);
         thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
+        poseList = MoveMain.getPoseList();
         Intent myIntent = new Intent(this, MoveMain.class);
         poseCounter=0;
-        //name.setText(poseList.get(poseCounter).getName());
-        //pose.setImageResource(poseList.get(poseCounter).getImageRes());
-        //setThumbs(poseList.get(poseCounter).getLike());
+        name.setText(poseList.get(poseCounter).getName());
+        pose.setImageResource(poseList.get(poseCounter).getImageRes());
+        setThumbs(poseList.get(poseCounter).getLike());
         timer.setVisibility(INVISIBLE);
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -152,10 +152,7 @@ public class Movement extends AppCompatActivity {
     public void setMode(String mode){
         this.mode=mode;
     }
-    public static void addPose(Pose pose){
-        poseList.add(pose);
-    }
-    public static ArrayList<Pose> getPoseList(){
-        return poseList;
-    }
+    //public static void addPose(Pose pose){
+    //    poseList.add(pose);
+    //}
 }
