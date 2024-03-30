@@ -46,8 +46,8 @@ public class MemoryGame extends Activity {
 
         playAgainButton.setOnClickListener(v -> {
             startGame();
-            playAgainButton.setVisibility(View.GONE); // Hide play again button
-            startGameButton.setVisibility(View.VISIBLE); // Optionally show start game button
+            playAgainButton.setVisibility(View.GONE);
+            startGameButton.setVisibility(View.VISIBLE);
         });
 
         ImageView backButton = findViewById(R.id.backIcon);
@@ -59,7 +59,7 @@ public class MemoryGame extends Activity {
             final Button button = new Button(this);
             button.setId(View.generateViewId());
             buttonIds.add(button.getId());
-            button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_background)); // Ensure you have this drawable
+            button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_background));
             button.setText(""); // Set text to empty for now
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -71,6 +71,12 @@ public class MemoryGame extends Activity {
             gridLayout.addView(button);
 
             button.setOnClickListener(v -> {
+                button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_flash));
+
+                new Handler().postDelayed(() -> {
+                    button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_background));
+                }, 250);
+
                 if (sequenceIndex < sequence.size() && v.getId() == sequence.get(sequenceIndex)) {
                     sequenceIndex++;
                     if (sequenceIndex == sequence.size()) {
@@ -134,7 +140,6 @@ public class MemoryGame extends Activity {
                     sequenceIndex++;
                     handler.postDelayed(this, 1000);
                 } else {
-                    // End of sequence, allow user interaction
                     sequenceIndex = 0;
                     for (int id : sequence) {
                         Button button = findViewById(id);
