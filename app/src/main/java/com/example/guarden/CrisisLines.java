@@ -17,6 +17,12 @@ public class CrisisLines extends AppCompatActivity {
         Button suicideCrisisButton = findViewById(R.id.button_suicide_crisis);
         Button emergencyServicesButton = findViewById(R.id.button_emergency_services);
         Button crisisTextLineButton = findViewById(R.id.button_crisis_text_line);
+        Button viewTherapistsButton = findViewById(R.id.button_view_therapists);
+
+        viewTherapistsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CrisisLines.this, TherapistsActivity.class);
+            startActivity(intent);
+        });
 
         suicideCrisisButton.setOnClickListener(v -> {
             // Intent to dial Suicide & Crisis Lifeline number

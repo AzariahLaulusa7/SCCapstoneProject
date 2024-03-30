@@ -118,11 +118,6 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".AddWidget"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".ForumMain"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -139,6 +134,11 @@
         </activity>
         <activity
             android:name=".LeaderBoard"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".TherapistsActivity"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
