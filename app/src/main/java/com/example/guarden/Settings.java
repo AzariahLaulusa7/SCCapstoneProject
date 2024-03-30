@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -18,7 +19,7 @@ public class Settings extends AppCompatActivity {
     private static final String DARK_MODE_KEY = "dark_mode";
     private static final String NOTIF_KEY = "notif";
     ImageButton arrows;
-    ImageButton log_out;
+    TextView log_out;
     ImageButton back_button;
     SharedPreferences prefs;
     androidx.appcompat.widget.SwitchCompat dark_mode;
@@ -37,7 +38,7 @@ public class Settings extends AppCompatActivity {
         dark_mode = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.Dark_Mode_Switch);
         notifications = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.NotificationSwitch);
         sound_bar = (SeekBar) findViewById(R.id.seekBar);
-        log_out = (ImageButton) findViewById((R.id.LogOut));
+        log_out = (TextView) findViewById((R.id.Logout));
         back_button = (ImageButton) findViewById(R.id.Back_Button);
 
         //initialize sp
