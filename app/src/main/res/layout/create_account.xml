@@ -66,7 +66,7 @@
         android:layout_toEndOf="@id/add_profile_image"
         android:layout_marginLeft="-40dp"
         android:layout_marginBottom="-110dp"
-        android:background="@drawable/profile_border_background"
+        android:background="@drawable/edit_profile_button_background"
         android:contentDescription="@string/edit_image"
         app:srcCompat="@drawable/edit_pen" />
 

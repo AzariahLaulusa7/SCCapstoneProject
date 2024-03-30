@@ -80,7 +80,7 @@
                 android:layout_marginStart="-35dp"
                 android:layout_marginTop="80dp"
                 android:layout_toEndOf="@id/profile_image"
-                android:background="@drawable/profile_border_background"
+                android:background="@drawable/edit_profile_button_background"
                 android:contentDescription="@string/edit_image"
                 app:srcCompat="@drawable/edit_pen" />
 

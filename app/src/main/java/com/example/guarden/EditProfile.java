@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,14 +24,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.net.URL;
+import androidx.fragment.app.Fragment;
 
 public class EditProfile extends AppCompatActivity {
 
@@ -41,9 +54,13 @@ public class EditProfile extends AppCompatActivity {
     // mail - "https://www.flaticon.com/free-icon/mail_9068642?term=email&page=1&position=15&origin=search&related_id=9068642"
     // lock - "https://www.flaticon.com/free-icon/padlock_10542551?term=password&page=1&position=26&origin=search&related_id=10542551"
 
-    private ImageView profileImage;
+    private ImageView profileImage, databaseImage;
     private EditText usernameEditText, firstNameEditText, lastNameEditText, passwordEditText;
     private DatabaseReference userRef;
+    private String imageUrl;
+    private StorageReference storageRef;
+    private StorageReference imageRef;
+    private Uri imageUri;
     static String key;
 
     ImageButton back, editImage;
@@ -63,6 +80,14 @@ public class EditProfile extends AppCompatActivity {
         editImage = findViewById(R.id.edit_image);
         back = findViewById(R.id.backIcon);
         Intent myIntent = new Intent(this, HomeScreen.class);
+        Intent restartIntent = new Intent(this, Login.class);
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        userRef = FirebaseDatabase.getInstance().getReference("users");
+
+        // Set an image if profileImage is not null
+        //if(CreateAccount.image != null)
+        //    profileImage.setImageDrawable(CreateAccount.image.getDrawable());
 
         // Retrieving image from gallery
         ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -72,16 +97,15 @@ public class EditProfile extends AppCompatActivity {
 
                 try {
 
-                    final Uri imageUri = data != null ? data.getData() : null;
+                    imageUri = data != null ? data.getData() : null;
                     assert imageUri != null;
                     final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                     final Bitmap newImage = BitmapFactory.decodeStream(imageStream);
 
-                    Bitmap resizedImage = Bitmap.createScaledBitmap(newImage, 150, 150, true);
-                    RoundedBitmapDrawable roundedImage = RoundedBitmapDrawableFactory.create(getResources(), resizedImage);
-                    roundedImage.setCircular(true);
+                    Bitmap resizedImageBitmap = Bitmap.createScaledBitmap(newImage, 150, 150, true);
+                    Drawable resizedImage = new BitmapDrawable(getResources(), resizedImageBitmap);
 
-                    profileImage.setImageDrawable(roundedImage);
+                    profileImage.setImageDrawable(resizedImage);
 
                 } catch (FileNotFoundException e) {// handle exception
                     e.printStackTrace();
@@ -104,38 +128,41 @@ public class EditProfile extends AppCompatActivity {
 
         });
 
-        userRef = FirebaseDatabase.getInstance().getReference("users");
-
         if(Login.emailKey != null)
             key = Login.emailKey;
-        if(key == null)
+        if(key == null) {
             key = " ";
-        userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                if (user != null) {
-                    firstNameEditText.setText(user.firstName);
-                    lastNameEditText.setText(user.lastName);
-                    usernameEditText.setText(user.email);
-                    passwordEditText.setText(user.password);
-                    if(user.image != null) {
-                        Toast.makeText(EditProfile.this, "Image PASS", Toast.LENGTH_SHORT).show();
+        } else {
+            userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        firstNameEditText.setText(user.firstName);
+                        lastNameEditText.setText(user.lastName);
+                        usernameEditText.setText(user.email);
+                        passwordEditText.setText(user.password);
                     } else {
-                        Toast.makeText(EditProfile.this, "Image FAIL", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
                     }
 
-                    Toast.makeText(EditProfile.this, "LOADING CREDENTIALS SUCCESSFUL", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
-                }
-            }
+                    storageRef = storage.getReference();
+                    imageRef = storageRef.child("/users/" + key);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle onCancelled
-            }
-        });
+                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        if (uri != null) {
+                            String imageUrl = uri.toString();
+                            Picasso.get().load(imageUrl).resize(150, 150).into(profileImage);
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle onCancelled
+                }
+            });
+        }
 
         // Update data if requirements are met
         editButton.setOnClickListener(v -> {
@@ -146,32 +173,62 @@ public class EditProfile extends AppCompatActivity {
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
                 User updatedUser = new User(email, password, firstName, lastName);
-                if(key == " ") {
+                if (key == " ") {
                     key = email.replace(".",",");
                     userRef.child(email.replace(".",",")).setValue(updatedUser)
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(EditProfile.this, "Account Created", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->
-                                    Toast.makeText(EditProfile.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-
+                                    Toast.makeText(EditProfile.this, "Failed To Create Account", Toast.LENGTH_SHORT).show());
+                    if (imageUri != null) {
+                        storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
+                    }
                     finish();
+                    startActivity(restartIntent);
+                } else if (!key.equals(email.replace(".",","))) {
+                    if (imageUri != null) {
+                        key = email.replace(".",",");
+                        storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this,  "Failed To Save Image", Toast.LENGTH_LONG).show());
+                        storageRef.child("/users/"+Login.emailKey).delete()
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this, "Failed To Delete Old Image", Toast.LENGTH_SHORT).show());
+                        userRef.child(Login.emailKey).removeValue();
+                        userRef.child(email.replace(".",",")).setValue(updatedUser)
+                                .addOnSuccessListener(aVoid ->
+                                        Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
+                        finish();
+                        startActivity(restartIntent);
+                    } else {
+                        profileImage.setImageDrawable(getDrawable(R.drawable.user_blue_circle_128));
+                        Toast.makeText(EditProfile.this, "Please Choose A New Image", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    userRef.child("users").child(Login.emailKey).removeValue();
+                    //userRef.child("users").child(Login.emailKey).removeValue();
+
                     userRef.child(Login.emailKey).setValue(updatedUser)
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->
-                                    Toast.makeText(EditProfile.this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
+                    if(imageUri != null) {
+                        //storageRef.child("/users/"+Login.emailKey).delete();
+                        storageRef.child("users").child(Login.emailKey).putFile(imageUri)
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
+                    }
                     finish();
                 }
             } else {
-                Toast.makeText(EditProfile.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfile.this, "Please FILL all fields", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    // User class
-    //TODO: add image to firebase
     private static class User {
         public String email, password, firstName, lastName, image;
 
