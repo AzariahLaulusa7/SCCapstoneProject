@@ -15,8 +15,18 @@
         android:padding="16dp"
         android:background="@android:color/white"
         android:layout_margin="16dp">
-        <!-- Buttons added dynamically -->
     </GridLayout>
+
+    <TextView
+        android:id="@+id/feedbackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:text="" />
 
     <Button
         android:id="@+id/startGameButton"

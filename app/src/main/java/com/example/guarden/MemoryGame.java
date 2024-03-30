@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
@@ -73,7 +74,7 @@ public class MemoryGame extends Activity {
                 if (sequenceIndex < sequence.size() && v.getId() == sequence.get(sequenceIndex)) {
                     sequenceIndex++;
                     if (sequenceIndex == sequence.size()) {
-                        Toast.makeText(MemoryGame.this, "Sequence completed!", Toast.LENGTH_SHORT).show();
+                        showFeedbackForAShortTime("Correct!", true);
                         difficultyLevel++;
                         handler.postDelayed(() -> {
                             sequence.clear();
@@ -83,7 +84,7 @@ public class MemoryGame extends Activity {
                         }, 1500);
                     }
                 } else {
-                    Toast.makeText(MemoryGame.this, "Wrong button! Game Over.", Toast.LENGTH_SHORT).show();
+                    showFeedbackForAShortTime("Wrong button! Game over!", false);
                     difficultyLevel = 1;
                     disableButtons();
                     playAgainButton.setVisibility(View.VISIBLE);
@@ -100,6 +101,19 @@ public class MemoryGame extends Activity {
             Button button = findViewById(id);
             button.setEnabled(true);
         }
+    }
+    private void showFeedbackForAShortTime(String feedback, boolean isCorrect) {
+        TextView feedbackText = findViewById(R.id.feedbackText);
+        feedbackText.setText(feedback);
+        if (isCorrect) {
+            feedbackText.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+        } else {
+            feedbackText.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+        }
+
+        feedbackText.setVisibility(View.VISIBLE);
+
+        new Handler().postDelayed(() -> feedbackText.setVisibility(View.GONE), 1500);
     }
 
     private void generateSequence(int length) {
