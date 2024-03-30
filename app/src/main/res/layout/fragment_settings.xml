@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,245 +8,194 @@
     tools:context=".Settings">
 
     <ImageView
+        android:id="@+id/blackBar1"
+        android:layout_width="0dp"
+        android:layout_height="11dp"
+        android:src="@drawable/rectangle_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SettingsText" />
+
+    <TextView
+        android:id="@+id/SettingsText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Settings"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Sound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Sound"
+        android:textAlignment="viewStart"
+        android:paddingStart="85dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackBar1" />
+
+    <ImageView
         android:id="@+id/blackBar2"
-        android:layout_width="417dp"
+        android:layout_width="0dp"
         android:layout_height="11dp"
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Sound" />
 
+    <TextView
+        android:id="@+id/Dark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Dark mode"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackBar2" />
+
     <ImageView
         android:id="@+id/blackBar3"
-        android:layout_width="417dp"
+        android:layout_width="0dp"
         android:layout_height="11dp"
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Dark" />
 
-    <ImageView
-        android:id="@+id/blackBar6"
-        android:layout_width="417dp"
-        android:layout_height="11dp"
-        android:src="@drawable/rectangle_black"
+    <TextView
+        android:id="@+id/Notifications"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Notifications"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AdditionalSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/blackBar3" />
 
     <ImageView
         android:id="@+id/blackBar4"
-        android:layout_width="417dp"
+        android:layout_width="0dp"
         android:layout_height="11dp"
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Notifications" />
 
+    <TextView
+        android:id="@+id/AdditionalSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Additional\nSettings"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
+
+    <ImageView
+        android:id="@+id/blackBar6"
+        android:layout_width="0dp"
+        android:layout_height="11dp"
+        android:src="@drawable/rectangle_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AdditionalSettings" />
+
+    <TextView
+        android:id="@+id/About"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="About"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackBar6" />
+
     <ImageView
         android:id="@+id/blackBar7"
-        android:layout_width="417dp"
+        android:layout_width="0dp"
         android:layout_height="11dp"
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/About" />
 
-    <ImageView
-        android:id="@+id/blackBar8"
-        android:layout_width="412dp"
-        android:layout_height="369dp"
-        android:src="@drawable/rectangle_black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Logout" />
-
-    <TextView
-        android:id="@+id/SettingsText"
-        android:layout_width="479dp"
-        android:layout_height="87dp"
-        android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Settings"
-        android:textAlignment="center"
-        android:textSize="60sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Sound"
-        android:layout_width="550dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:background="@drawable/rectangle_white"
-        android:text="     Sound"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar1" />
-
-    <TextView
-        android:id="@+id/Dark"
-        android:layout_width="425dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Dark mode"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar2" />
-
-    <TextView
-        android:id="@+id/Notifications"
-        android:layout_width="430dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:background="@drawable/rectangle_white"
-        android:text="      Notifications"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar3" />
-
-    <TextView
-        android:id="@+id/AdditionalSettings"
-        android:layout_width="418dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Additional\nSettings"
-        android:background="@drawable/rectangle_white"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
-
-    <TextView
-        android:id="@+id/About"
-        android:layout_width="495dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:background="@drawable/rectangle_white"
-        android:text="About"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar6" />
-
     <TextView
         android:id="@+id/Logout"
-        android:layout_width="415dp"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
         android:fontFamily="@font/bowlby_one_sc"
-        android:text="             Logout"
+        android:text="Logout"
+        android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar7" />
-
-    <ImageView
-        android:id="@+id/blackBar1"
-        android:layout_width="417dp"
-        android:layout_height="11dp"
-        android:src="@drawable/rectangle_black"
-        app:layout_constraintBottom_toTopOf="@+id/Sound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SettingsText" />
-
-    <ImageView
-        android:id="@+id/MusicNote"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:src="@drawable/baseline_music_note_24"
-        app:layout_constraintBottom_toBottomOf="@+id/Sound"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Sound" />
-
-    <ImageView
-        android:id="@+id/Moon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:src="@drawable/baseline_dark_mode_24"
-        app:layout_constraintBottom_toBottomOf="@+id/Dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Dark" />
-
-    <ImageView
-        android:id="@+id/Bell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:src="@drawable/baseline_notifications_24"
-        app:layout_constraintBottom_toBottomOf="@+id/Notifications"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Notifications" />
-
-    <ImageView
-        android:id="@+id/Settings"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="32dp"
-        android:src="@drawable/baseline_settings_24"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar6"
-        app:layout_constraintStart_toStartOf="@+id/AdditionalSettings"
-        app:layout_constraintTop_toTopOf="@+id/AdditionalSettings"
-        app:layout_constraintVertical_bias="0.545"
-        app:tint="#a0000000" />
-
-    <ImageView
-        android:id="@+id/AboutImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:src="@drawable/baseline_article_24"
-        app:layout_constraintBottom_toBottomOf="@+id/About"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/About" />
-
-    <ImageButton
-        android:id="@+id/LogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:background="#00000000"
-        android:src="@drawable/baseline_logout_24"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Logout" />
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="170dp"
-        android:layout_height="0dp"
-        android:progressBackgroundTint="#60000000"
-        android:progressTint="#a0000000"
-        android:thumbTint="#a0000000"
-        android:max = "100"
-        app:layout_constraintBottom_toBottomOf="@+id/Sound"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:max="100"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Sound" />
+        app:layout_constraintTop_toTopOf="@+id/Sound"
+        app:layout_constraintBottom_toBottomOf="@+id/Sound"
+        android:paddingEnd="50dp"
+        />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/Dark_Mode_Switch"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+
         app:layout_constraintBottom_toBottomOf="@+id/Dark"
-        app:layout_constraintEnd_toEndOf="@+id/Dark"
-        app:layout_constraintTop_toTopOf="@+id/Dark"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Dark" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/NotificationSwitch"
-        android:layout_height="0dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/Notifications"
-        app:layout_constraintEnd_toEndOf="@+id/Notifications"
-        app:layout_constraintTop_toTopOf="@+id/Notifications"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Notifications" />
+
+    <ImageButton
+        android:id="@+id/Back_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SettingsText"
+        app:layout_constraintBottom_toBottomOf="@+id/SettingsText" />
 
     <ImageButton
         android:id="@+id/Arrows"
@@ -259,16 +207,5 @@
         app:layout_constraintBottom_toTopOf="@+id/blackBar6"
         app:layout_constraintEnd_toEndOf="@+id/AdditionalSettings"
         app:layout_constraintTop_toTopOf="@+id/AdditionalSettings" />
-
-    <ImageButton
-        android:id="@+id/Back_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/SettingsText"
-        app:layout_constraintStart_toStartOf="@+id/SettingsText"
-        app:layout_constraintTop_toTopOf="@+id/SettingsText"
-        android:src="@drawable/baseline_arrow_back_ios_24" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
