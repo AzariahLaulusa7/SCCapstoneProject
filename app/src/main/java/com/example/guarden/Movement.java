@@ -45,9 +45,9 @@ public class Movement extends AppCompatActivity {
         thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
         Intent myIntent = new Intent(this, MoveMain.class);
         poseCounter=0;
-        name.setText(poseList.get(poseCounter).getName());
-        pose.setImageResource(poseList.get(poseCounter).getImageRes());
-        setThumbs(poseList.get(poseCounter).getLike());
+        //name.setText(poseList.get(poseCounter).getName());
+        //pose.setImageResource(poseList.get(poseCounter).getImageRes());
+        //setThumbs(poseList.get(poseCounter).getLike());
         timer.setVisibility(INVISIBLE);
             start.setOnClickListener(new View.OnClickListener() {
                 @Override

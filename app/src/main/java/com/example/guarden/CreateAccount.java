@@ -17,7 +17,7 @@ public class CreateAccount extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText, confirmPasswordEditText, firstNameEditText, lastNameEditText;
     private Button signUpButton;
     private DatabaseReference databaseReference;
-    public static String UserID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,6 @@ public class CreateAccount extends AppCompatActivity {
             final String firstName = firstNameEditText.getText().toString().trim();
             final String lastName = lastNameEditText.getText().toString().trim();
             ArrayList<Pose> customPoses = new ArrayList<Pose>();
-            customPoses.add(new Pose("test1","test1",0,"test1"));
 
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
                     || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
@@ -56,7 +55,7 @@ public class CreateAccount extends AppCompatActivity {
             }
 
             User newUser = new User(email, password, firstName, lastName, customPoses);
-            UserID = email;
+
 
             databaseReference.child("users").child(email.replace(".",",")).setValue(newUser)
                     .addOnSuccessListener(aVoid ->

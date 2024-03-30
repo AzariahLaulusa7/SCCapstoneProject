@@ -22,7 +22,7 @@ import java.util.Map;
 public class MovementNewCustom extends AppCompatActivity {
     Button save;
     Button cancel;
-    Spinner categorySelect = (Spinner) findViewById(R.id.spinnerExerciseCategory);
+    Spinner categorySelect;
     private EditText editTextExerciseName;
     private EditText editTextExerciseDescription;
     private String category;
@@ -32,6 +32,7 @@ public class MovementNewCustom extends AppCompatActivity {
         setContentView(R.layout.movement_add_custom);
         editTextExerciseName = (EditText) findViewById(R.id.editTextExerciseName);
         editTextExerciseDescription = (EditText) findViewById(R.id.editTextExerciseDescription);
+        categorySelect = (Spinner) findViewById(R.id.spinnerExerciseCategory);
         save = (Button) findViewById(R.id.save);
         cancel = (Button) findViewById(R.id.cancel);
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -47,8 +48,7 @@ public class MovementNewCustom extends AppCompatActivity {
                     return;
                 }
                 Pose pose = new Pose(category,name,0,description);
-                //Movement.addPose(pose);
-                databaseReference.child("users").child(CreateAccount.UserID).child("customPoses").child(name).setValue(pose)
+                databaseReference.child("users").child(Login.UserID).child("customPoses").child(name).setValue(pose)
                         .addOnSuccessListener(aVoid ->
                                 Toast.makeText(MovementNewCustom.this, "Pose Created", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e ->

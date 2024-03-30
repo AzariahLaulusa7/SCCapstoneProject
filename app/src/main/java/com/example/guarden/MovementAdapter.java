@@ -28,7 +28,6 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MovementAdapter.ViewHolder holder, int position) {
-        // to set data to textview and imageview of each card layout
         Pose pose = poseArrayList.get(position);
         holder.name.setText(pose.getName());
         holder.category.setText(pose.getCategory());
@@ -38,7 +37,6 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        // this method is used for showing number of card items in recycler view
         return poseArrayList.size();
     }
 
