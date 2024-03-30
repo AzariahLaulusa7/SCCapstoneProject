@@ -6,7 +6,7 @@ public class Pose {
     private int imageRes;
     private String description;
     private int like; //0=neutral,1=like,2=dislike
-    public Pose(String category, String name, int imageRes, String description){
+    public Pose(String category, String name, Integer imageRes, String description){
         this.category = category;
         this.name = name;
         this.imageRes = imageRes;
