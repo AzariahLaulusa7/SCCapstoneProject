@@ -26,6 +26,7 @@ public class Movement extends AppCompatActivity {
     ImageView pose;
     private static ArrayList<Pose> poseList;
     private int poseCounter;
+    private int firstPoseIndex;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +46,18 @@ public class Movement extends AppCompatActivity {
         poseList = MoveMain.getPoseList();
         Intent myIntent = new Intent(this, MoveMain.class);
         poseCounter=0;
-        name.setText(poseList.get(poseCounter).getName());
-        pose.setImageResource(poseList.get(poseCounter).getImageRes());
-        setThumbs(poseList.get(poseCounter).getLike());
+        while (poseCounter < poseList.size()) {
+            if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
+                pose.setImageResource(poseList.get(poseCounter).getImageRes());
+                name.setText(poseList.get(poseCounter).getName());
+                setThumbs(poseList.get(poseCounter).getLike());
+                firstPoseIndex=poseCounter;
+                start.setVisibility(VISIBLE);
+                break;
+            }
+            else poseCounter++;
+        }
+        poseCounter++;
         timer.setVisibility(INVISIBLE);
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,19 +81,21 @@ public class Movement extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (poseCounter+1 >= poseList.size()) poseCounter = 0;
-                else poseCounter++;
-                if(poseList.get(poseCounter).getLike()==2) poseCounter++;
-                while(poseList.get(poseCounter).getLike()==0||poseList.get(poseCounter).getLike()==1){
-                    pose.setImageResource(poseList.get(poseCounter).getImageRes());
-                    name.setText(poseList.get(poseCounter).getName());
-                    setThumbs(poseList.get(poseCounter).getLike());
-                    start.setVisibility(VISIBLE);
-                    break;
+                boolean foundValidPose = false;
+                while (!foundValidPose) {
+                    if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
+                        pose.setImageResource(poseList.get(poseCounter).getImageRes());
+                        name.setText(poseList.get(poseCounter).getName());
+                        setThumbs(poseList.get(poseCounter).getLike());
+                        start.setVisibility(View.VISIBLE);
+                        foundValidPose = true;
+                    }
+                    poseCounter++;
+                    if (poseCounter >= poseList.size()) {
+                        poseCounter = firstPoseIndex;
+                    }
                 }
-
             }
-
         });
         thumbsUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +164,5 @@ public class Movement extends AppCompatActivity {
     public void setMode(String mode){
         this.mode=mode;
     }
-    //public static void addPose(Pose pose){
-    //    poseList.add(pose);
-    //}
+
 }

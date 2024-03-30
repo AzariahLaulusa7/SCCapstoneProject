@@ -62,6 +62,7 @@ public class MoveMain extends AppCompatActivity {
                 poseList.add(new Pose("yoga","Forward Fold",R.drawable.pose3,""));
                 poseList.add(new Pose("exercise","Push Up",R.drawable.exercise1,""));
                 poseList.add(new Pose("exercise","Sit Up",R.drawable.exercise2,""));
+                poseList.add(new Pose("exercise","Squat",R.drawable.exercise3,""));
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String tempName = snapshot.child("name").getValue(String.class);
                     String tempCategory = snapshot.child("category").getValue(String.class);
