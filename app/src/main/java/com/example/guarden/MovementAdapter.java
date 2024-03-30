@@ -4,6 +4,7 @@
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ImageView;
+        import android.widget.Switch;
         import android.widget.TextView;
         import androidx.annotation.NonNull;
         import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +22,6 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
     @NonNull
     @Override
     public MovementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movement_card, parent, false);
         return new ViewHolder(view);
     }
@@ -32,6 +32,11 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         holder.name.setText(pose.getName());
         holder.category.setText(pose.getCategory());
         holder.thumbnail.setImageResource(pose.getImageRes());
+        if(pose.getLike()==2)
+            holder.sw.setChecked(false);
+        else
+            holder.sw.setChecked(true);
+
     }
 
     @Override
@@ -43,12 +48,14 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         private final ImageView thumbnail;
         private final TextView name;
         private final TextView category;
+        Switch sw;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.thumbnail);
             name = itemView.findViewById(R.id.name);
             category = itemView.findViewById(R.id.category);
+            sw = itemView.findViewById(R.id.switch1);
         }
     }
 }
