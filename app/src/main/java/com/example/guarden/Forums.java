@@ -30,7 +30,7 @@ public class Forums extends AppCompatActivity {
     // Variables
     private StorageReference storageRef;
     private StorageReference imageRef;
-    private DatabaseReference forumRef;
+    private DatabaseReference forumRef, posRef, ventRef, qRef;
     private DatabaseReference listRef;
     String tagText = "";
     int tagBackground, image;
@@ -90,7 +90,9 @@ public class Forums extends AppCompatActivity {
             }
         });
 
-
+        posRef = FirebaseDatabase.getInstance().getReference("positiveForum");
+        qRef = FirebaseDatabase.getInstance().getReference("questionForum");
+        ventRef = FirebaseDatabase.getInstance().getReference("ventForum");
         forumRef = FirebaseDatabase.getInstance().getReference("forum");
 
         myIntent = new Intent(Forums.this, ForumMain.class);
@@ -202,6 +204,13 @@ public class Forums extends AppCompatActivity {
                                         Toast.makeText(Forums.this, "Post Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
                                         Toast.makeText(Forums.this, "Failed To Create Post", Toast.LENGTH_SHORT).show());
+                        if (tag.equals("positivity")) {
+                            posRef.child(uniqueKey).setValue(newChat);
+                        } else if (tag.equals("vent")) {
+                            ventRef.child(uniqueKey).setValue(newChat);
+                        } else {
+                            qRef.child(uniqueKey).setValue(newChat);
+                        }
                     }
                     startActivity(myIntent);
                     finish();
@@ -216,6 +225,12 @@ public class Forums extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        startActivity(myIntent);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
         startActivity(myIntent);
     }
 
