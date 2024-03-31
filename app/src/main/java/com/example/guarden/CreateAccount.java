@@ -24,8 +24,8 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+//import com.google.firebase.storage.FirebaseStorage;
+//import com.google.firebase.storage.StorageReference;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -59,13 +59,13 @@ public class CreateAccount extends AppCompatActivity {
         signUpButton = findViewById(R.id.signupbtn);
         editPen = findViewById(R.id.new_edit_image);
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
+        //FirebaseStorage storage = FirebaseStorage.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         ImageView backIcon = findViewById(R.id.backIcon);
         backIcon.setOnClickListener(v -> finish());
 
-        StorageReference storageRef = storage.getInstance().getReference();
+        //StorageReference storageRef = storage.getInstance().getReference();
 
         // Retrieving image from gallery
         ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -128,7 +128,7 @@ public class CreateAccount extends AppCompatActivity {
                 return;
             }
 
-            User newUser = new User(email, password, firstName, lastName, customPoses);
+            User newUser = new User(email, password, firstName, lastName,"test", customPoses);
 
             databaseReference.child("users").child(email.replace(".",",")).setValue(newUser)
                     .addOnSuccessListener(aVoid ->
@@ -137,11 +137,11 @@ public class CreateAccount extends AppCompatActivity {
                             Toast.makeText(CreateAccount.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
 
             if (imageUri != null) {
-                storageRef.child("users").child(email.replace(".", ",")).putFile(imageUri)
-                        .addOnSuccessListener(aVoid ->
-                                Toast.makeText(CreateAccount.this, "Storage Created", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e ->
-                                Toast.makeText(CreateAccount.this, "Failed to create storage: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                //databaseReference.child("users").child(email.replace(".", ",")).putFile(imageUri)
+                //        .addOnSuccessListener(aVoid ->
+                //                Toast.makeText(CreateAccount.this, "Storage Created", Toast.LENGTH_SHORT).show())
+                //        .addOnFailureListener(e ->
+                //                Toast.makeText(CreateAccount.this, "Failed to create storage: " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }
 
             finish();
@@ -164,6 +164,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     public class User {
+        private final ArrayList<Pose> customPoses;
         public String email, password, firstName, lastName, image;
 
 
@@ -172,7 +173,7 @@ public class CreateAccount extends AppCompatActivity {
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.image = image
+            this.image = image;
             this.customPoses = customPoses;
         }
         public ArrayList<Pose> getCustomPoses(){
