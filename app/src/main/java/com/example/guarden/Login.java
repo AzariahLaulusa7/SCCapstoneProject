@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
+    public static String UserID;
     static String emailKey;
 
     @Override
@@ -65,6 +66,7 @@ public class Login extends AppCompatActivity {
                         if (user != null && user.password.equals(enteredPassword)) {
                             Toast.makeText(Login.this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Login.this, HomeScreen.class);
+                            UserID=user.email;
                             startActivity(intent);
                             finish();
                         } else {
