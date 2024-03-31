@@ -172,7 +172,7 @@ public class CreateAccount extends AppCompatActivity {
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.image = image
+            this.image = image;
             this.customPoses = customPoses;
         }
         public ArrayList<Pose> getCustomPoses(){
