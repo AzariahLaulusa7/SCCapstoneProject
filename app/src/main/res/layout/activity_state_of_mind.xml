@@ -124,7 +124,7 @@
         android:layout_alignBottom="@id/graph_background"/>
 
     <TextView
-        android:id="@+id/usageTimeText"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mood_graph_view"
@@ -132,4 +132,12 @@
         android:layout_marginTop="100dp"
         android:textSize="24sp"
         android:text="Weekly App Usage:"/>
+
+    <TextView
+        android:id="@+id/usageTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"/>
 </RelativeLayout>
