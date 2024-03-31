@@ -2,7 +2,10 @@ package com.example.guarden;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +17,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.guarden.R;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 public class ForumMain extends AppCompatActivity {
 
     // Variables
     ImageButton back, newPost;
-    TextView filter, sort;
+    TextView filter, sort, tag_title, vent, question, positive, all;
     PostAdapter adapter;
     Intent myIntent;
-    private DatabaseReference forumRef;
+    ImageView forum_view;
+    String tagText = " ";
+    Boolean filterActive = false;
+    Intent restart;
+    private DatabaseReference forumRef, posForumRef, ventForumRef, questionForumRef;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,17 +47,71 @@ public class ForumMain extends AppCompatActivity {
         sort = findViewById(R.id.sort);
         filter = findViewById(R.id.filter);
 
+        forum_view = findViewById(R.id.filter_view);
+        tag_title = findViewById(R.id.tag_title);
+        vent = findViewById(R.id.forum_tag_three);
+        question = findViewById(R.id.forum_tag_two);
+        positive = findViewById(R.id.forum_tag);
+        all = findViewById(R.id.forum_tag_four);
+
+        forum_view.setVisibility(View.GONE);
+        tag_title.setVisibility(View.GONE);
+        vent.setVisibility(View.GONE);
+        question.setVisibility(View.GONE);
+        positive.setVisibility(View.GONE);
+        all.setVisibility(View.GONE);
+
         myIntent = new Intent(ForumMain.this, HomeScreen.class);
         Intent postPage = new Intent(ForumMain.this, Forums.class);
+        restart = new Intent(ForumMain.this, ForumMain.class);
 
         forumRef = FirebaseDatabase.getInstance().getReference().child("forum");
+        posForumRef = FirebaseDatabase.getInstance().getReference().child("positiveForum");
+        ventForumRef = FirebaseDatabase.getInstance().getReference().child("ventForum");
+        questionForumRef = FirebaseDatabase.getInstance().getReference().child("questionForum");
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                .setQuery(forumRef, Post.class)
-                .build();
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+//                .setQuery(forumRef, Post.class)
+//                .build();
+//        adapter = new PostAdapter(options);
 
-        adapter = new PostAdapter(options);
+        if (tagText.equals("positivity") && filterActive == true) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(posForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+
+        } else if (tagText.equals("vent") && filterActive == true) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(ventForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+
+        } else if (tagText.equals("question") && filterActive == true) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(questionForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(forumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+        }
 
         recyclerView.setAdapter(adapter);
 
@@ -68,7 +132,90 @@ public class ForumMain extends AppCompatActivity {
 
         // When filter is clicked
         filter.setOnClickListener(v -> {
+            if (filterActive == true) {
+                forum_view.setVisibility(View.GONE);
+                tag_title.setVisibility(View.GONE);
+                vent.setVisibility(View.GONE);
+                question.setVisibility(View.GONE);
+                positive.setVisibility(View.GONE);
+                all.setVisibility(View.GONE);
+                filterActive = false;
+            } else {
+                forum_view.setVisibility(View.VISIBLE);
+                tag_title.setVisibility(View.VISIBLE);
+                vent.setVisibility(View.VISIBLE);
+                question.setVisibility(View.VISIBLE);
+                positive.setVisibility(View.VISIBLE);
+                all.setVisibility(View.VISIBLE);
+                filterActive = true;
+            }
+        });
 
+        vent.setOnClickListener(v -> {
+            tagText = "vent";
+            vent.setBackground(getDrawable(R.drawable.vent_forum_tag));
+            question.setBackground(getDrawable(R.drawable.grey_tag_background));
+            positive.setBackground(getDrawable(R.drawable.grey_tag_background));
+            all.setBackground(getDrawable(R.drawable.grey_tag_background));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(ventForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
+        });
+
+        question.setOnClickListener(v -> {
+            tagText = "question";
+            vent.setBackground(getDrawable(R.drawable.grey_tag_background));
+            question.setBackground(getDrawable(R.drawable.question_forum_tag));
+            positive.setBackground(getDrawable(R.drawable.grey_tag_background));
+            all.setBackground(getDrawable(R.drawable.grey_tag_background));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(questionForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
+        });
+
+        positive.setOnClickListener(v -> {
+            tagText = "positivity";
+            vent.setBackground(getDrawable(R.drawable.grey_tag_background));
+            question.setBackground(getDrawable(R.drawable.grey_tag_background));
+            positive.setBackground(getDrawable(R.drawable.positive_forum_tag));
+            all.setBackground(getDrawable(R.drawable.grey_tag_background));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(posForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
+        });
+
+        all.setOnClickListener(v -> {
+
+            vent.setBackground(getDrawable(R.drawable.grey_tag_background));
+            question.setBackground(getDrawable(R.drawable.grey_tag_background));
+            positive.setBackground(getDrawable(R.drawable.grey_tag_background));
+            all.setBackground(getDrawable(R.drawable.picked_image_background));
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(forumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
         });
 
     }
