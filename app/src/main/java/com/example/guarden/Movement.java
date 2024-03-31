@@ -104,13 +104,14 @@ public class Movement extends AppCompatActivity {
         thumbsUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeLike(poseList.get(poseCounter).getLike(),1);
+                changeLike(poseList.get(poseCounter-1).getLike(),1);
             }
         });
         thumbsDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeLike(poseList.get(poseCounter).getLike(),2);
+
+                changeLike(poseList.get(poseCounter-1).getLike(),2);
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
