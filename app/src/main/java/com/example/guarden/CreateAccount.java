@@ -20,7 +20,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -164,10 +163,11 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     public class User {
+        private final ArrayList<Pose> customPoses;
         public String email, password, firstName, lastName, image;
 
 
-        public User(String email, String password, String firstName, String lastName, String image, ArrayList<Pose> customPoses) {
+        public User(String email, String password, String firstName, String lastName, ArrayList<Pose> customPoses) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;

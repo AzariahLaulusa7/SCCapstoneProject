@@ -25,7 +25,7 @@ public class CrisisLines extends AppCompatActivity {
             startActivity(intent);
         });
 
-        viewTherapistsButton.setOnClickListener(v -> {
+        viewChatbot.setOnClickListener(v -> {
             Intent chatbot = new Intent(CrisisLines.this, ChatbotUI.class);
             startActivity(chatbot);
         });
