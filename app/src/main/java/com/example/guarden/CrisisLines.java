@@ -18,11 +18,18 @@ public class CrisisLines extends AppCompatActivity {
         Button emergencyServicesButton = findViewById(R.id.button_emergency_services);
         Button crisisTextLineButton = findViewById(R.id.button_crisis_text_line);
         Button viewTherapistsButton = findViewById(R.id.button_view_therapists);
+        Button viewChatbot = findViewById(R.id.button_chatbot);
 
         viewTherapistsButton.setOnClickListener(v -> {
             Intent intent = new Intent(CrisisLines.this, TherapistsActivity.class);
             startActivity(intent);
         });
+
+        viewChatbot.setOnClickListener(v -> {
+            Intent chatbot = new Intent(CrisisLines.this, ChatbotUI.class);
+            startActivity(chatbot);
+        });
+
 
         suicideCrisisButton.setOnClickListener(v -> {
             // Intent to dial Suicide & Crisis Lifeline number
