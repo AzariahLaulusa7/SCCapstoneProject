@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.guarden"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -60,5 +60,6 @@ dependencies {
 
 
     implementation("com.squareup.picasso:picasso:2.8")
+
 
 }

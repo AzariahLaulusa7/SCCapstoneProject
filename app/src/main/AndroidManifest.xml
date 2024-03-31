@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -27,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".MidnightResetReceiver" android:exported="false"></receiver>
         <activity
             android:name=".CreateAccount"
             android:exported="true"
@@ -139,6 +142,11 @@
         </activity>
         <activity
             android:name=".TherapistsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ChartsActivity"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
