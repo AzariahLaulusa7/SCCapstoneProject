@@ -33,6 +33,7 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton games;
     ImageButton breath;
     ImageButton forums;
+    ImageButton add;
 
     ImageButton profile;
 
@@ -110,7 +111,6 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(Forums);
             }
         });
-
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override

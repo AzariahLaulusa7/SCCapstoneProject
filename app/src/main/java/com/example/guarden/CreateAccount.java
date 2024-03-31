@@ -30,6 +30,8 @@ import com.google.firebase.storage.StorageReference;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import java.util.ArrayList;
+
 public class CreateAccount extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText, confirmPasswordEditText, firstNameEditText, lastNameEditText;
@@ -41,6 +43,7 @@ public class CreateAccount extends AppCompatActivity {
     private String imageUrl;
 
     private Uri imageUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,7 @@ public class CreateAccount extends AppCompatActivity {
             String confirmPassword = confirmPasswordEditText.getText().toString().trim();
             final String firstName = firstNameEditText.getText().toString().trim();
             final String lastName = lastNameEditText.getText().toString().trim();
+            ArrayList<Pose> customPoses = new ArrayList<Pose>();
 
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
                     || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || image == null) {
@@ -124,8 +128,7 @@ public class CreateAccount extends AppCompatActivity {
                 return;
             }
 
-            User newUser = new User();
-            newUser = new User(email, password, firstName, lastName);
+            User newUser = new User(email, password, firstName, lastName);
 
             databaseReference.child("users").child(email.replace(".",",")).setValue(newUser)
                     .addOnSuccessListener(aVoid ->
@@ -145,24 +148,16 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
-    private static class User {
-        public String email, password, firstName, lastName, image;
 
-        public User() {}
+    public class User {
+        public String email, password, firstName, lastName;
+
 
         public User(String email, String password, String firstName, String lastName) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
-        }
-
-        public User(String email, String password, String firstName, String lastName, String image) {
-            this.email = email;
-            this.password = password;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.image = image;
         }
     }
 }
