@@ -1,60 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/backIcon"
+    <Button
+        android:id="@+id/back_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/baseline_arrow_back_ios_24"
-        android:contentDescription="Back Icon"
-        android:background="?attr/selectableItemBackground"
-        android:padding="10dp" />
+        android:text="Back" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="16dp"
         android:text="Crisis Lines"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:paddingBottom="16dp"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button_suicide_crisis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Suicide &amp; Crisis Lifeline\n988"
         android:drawableStart="@drawable/phone"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10dp"
+        android:text="Suicide &amp; Crisis Lifeline\n988" />
 
     <Button
         android:id="@+id/button_emergency_services"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Emergency Services\n911"
         android:drawableStart="@drawable/phone"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10dp"
+        android:text="Emergency Services\n911" />
 
     <Button
         android:id="@+id/button_crisis_text_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crisis Text Line\n741741"
         android:drawableStart="@drawable/phone"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10dp"
+        android:text="Crisis Text Line\n741741" />
 
     <Button
         android:id="@+id/button_view_therapists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Therapists"
         android:drawableStart="@drawable/baseline_wc_24"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10dp"
+        android:text="View Therapists" />
+
+    <Button
+        android:id="@+id/button_chatbot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chatbot Therapist" />
+
 </LinearLayout>

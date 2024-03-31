@@ -2,6 +2,7 @@ package com.example.guarden;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -31,6 +32,8 @@ public class BreatheMain extends AppCompatActivity {
     Handler handler;
     Runnable runnable;
     Vibrator vibrate;
+    private SharedPreferences sharedPreferences;
+
     boolean ignore;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class BreatheMain extends AppCompatActivity {
         breatheOutText = findViewById(R.id.breathe_out);
         holdText = findViewById(R.id.hold);
         mouthText = findViewById(R.id.mouth);
+        sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
         noseText = findViewById(R.id.nose);
         handler = new Handler();
         vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -146,6 +150,7 @@ public class BreatheMain extends AppCompatActivity {
     // End animation and sleep
     public void animEnd() {
         handler.postDelayed(() -> holdText.setVisibility(View.GONE), 11500);
+        markChallengeAsCompleted();
     }
 
     // Circle animation
@@ -175,6 +180,13 @@ public class BreatheMain extends AppCompatActivity {
     // Used to ignore vibrations if necessary
     public void ignore() {
         ignore = true;
+    }
+
+    private void markChallengeAsCompleted() {
+        SharedPreferences sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("BreatheCompleted", true);
+        editor.apply();
     }
 
 }
