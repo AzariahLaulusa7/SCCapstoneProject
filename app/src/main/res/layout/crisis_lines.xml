@@ -62,5 +62,5 @@
         android:id="@+id/button_chatbot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Chatbot Therapist" />
 </LinearLayout>
