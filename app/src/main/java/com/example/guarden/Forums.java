@@ -199,9 +199,9 @@ public class Forums extends AppCompatActivity {
                         Chat newChat = new Chat(name, tag, message, image, tagBackground);
                         forumRef.child(uniqueKey).setValue(newChat)
                                 .addOnSuccessListener(aVoid ->
-                                        Toast.makeText(Forums.this, "Account Created", Toast.LENGTH_SHORT).show())
+                                        Toast.makeText(Forums.this, "Post Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
-                                        Toast.makeText(Forums.this, "Failed To Create Account", Toast.LENGTH_SHORT).show());
+                                        Toast.makeText(Forums.this, "Failed To Create Post", Toast.LENGTH_SHORT).show());
                     }
                     startActivity(myIntent);
                     finish();

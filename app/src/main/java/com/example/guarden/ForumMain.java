@@ -18,7 +18,6 @@ public class ForumMain extends AppCompatActivity {
 
     // Variables
     ImageButton back, newPost;
-    String name, message, tag;
     TextView filter, sort;
     PostAdapter adapter;
     Intent myIntent;
