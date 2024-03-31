@@ -29,6 +29,7 @@ public class MemoryGame extends Activity {
     Handler handler = new Handler();
     private Button startGameButton;
     private Button playAgainButton;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MemoryGame extends Activity {
         gridLayout = findViewById(R.id.gridLayout);
         startGameButton = findViewById(R.id.startGameButton);
         playAgainButton = findViewById(R.id.playAgainButton);
+        sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
 
         initializeButtons();
 

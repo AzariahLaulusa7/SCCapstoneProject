@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import androidx.core.content.ContextCompat;
 
-public class DailyChallenges extends ChartsActivity {
+public class DailyChallenges extends Activity {
 
     private ImageView gameChallengeIconEmpty;
     private ImageView gameChallengeIconCheck;
