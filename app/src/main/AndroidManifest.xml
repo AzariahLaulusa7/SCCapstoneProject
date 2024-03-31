@@ -133,6 +133,21 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".Post"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".PostAdapter"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".PostViewHolder"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".LeaderBoard"
             android:exported="true"
             android:screenOrientation="portrait">

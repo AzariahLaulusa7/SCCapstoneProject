@@ -28,6 +28,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
@@ -45,6 +46,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.firebase:firebase-storage:20.3.0")
 
+    implementation("com.firebaseui:firebase-ui-database:8.0.2")
+
     implementation("com.google.code.gson:gson:2.8.8")
 
     testImplementation("junit:junit:4.13.2")
@@ -57,6 +60,9 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:24.10.2")
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation("com.google.firebase:firebase-auth:22.3.1")
+
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
 
     implementation("com.squareup.picasso:picasso:2.8")
