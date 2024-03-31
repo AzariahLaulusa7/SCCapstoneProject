@@ -85,29 +85,31 @@ import java.io.InputStream;import java.util.ArrayList;public class CreateAccount
             //                Toast.makeText(CreateAccount.this, “Failed to create storage: ” + e.getMessage(), Toast.LENGTH_SHORT).show());
         }            finish();
     });
-}    public void addDefaultPosesToList(){
-    Pose lunge = new Pose(“yoga”,“Lunge”,R.drawable.pose1,“”, 0);
-    databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Lunge”).setValue(lunge);
-    Pose triangle = new Pose(“yoga”,“Triangle”,R.drawable.pose2,“”, 0);
-    databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Triangle”).setValue(triangle);
-    Pose forwardFold = new Pose(“yoga”,“Forward Fold”,R.drawable.pose3,“”, 0);
-    databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Forward Fold”).setValue(forwardFold);
-    Pose pushUp = new Pose(“exercise”,“Push Up”,R.drawable.exercise1,“”, 0);
-    databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Push Up”).setValue(pushUp);
-    Pose sitUp = new Pose(“exercise”,“Sit Up”,R.drawable.exercise2,“”, 0);
-    databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Sit Up”).setValue(sitUp);
-    Pose squat = new Pose(“exercise”,“Squat”,R.drawable.exercise3,“”, 0);
-    databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Squat”).setValue(squat);
-}    public class User {
-    private final ArrayList<Pose> customPoses;
-    public String email, password, firstName, lastName, image;        public User(String email, String password, String firstName, String lastName, String image, ArrayList<Pose> customPoses) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.image = image;
-        this.customPoses = customPoses;
+}
+    public void addDefaultPosesToList(){
+        Pose lunge = new Pose(“yoga”,“Lunge”,R.drawable.pose1,“”, 0);
+        databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Lunge”).setValue(lunge);
+        Pose triangle = new Pose(“yoga”,“Triangle”,R.drawable.pose2,“”, 0);
+        databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Triangle”).setValue(triangle);
+        Pose forwardFold = new Pose(“yoga”,“Forward Fold”,R.drawable.pose3,“”, 0);
+        databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Forward Fold”).setValue(forwardFold);
+        Pose pushUp = new Pose(“exercise”,“Push Up”,R.drawable.exercise1,“”, 0);
+        databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Push Up”).setValue(pushUp);
+        Pose sitUp = new Pose(“exercise”,“Sit Up”,R.drawable.exercise2,“”, 0);
+        databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Sit Up”).setValue(sitUp);
+        Pose squat = new Pose(“exercise”,“Squat”,R.drawable.exercise3,“”, 0);
+        databaseReference.child(“users”).child(Login.UserID).child(“customPoses”).child(“Squat”).setValue(squat);
     }
+    public class User {
+        private final ArrayList<Pose> customPoses;
+        public String email, password, firstName, lastName, image;        public User(String email, String password, String firstName, String lastName, String image, ArrayList<Pose> customPoses) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.image = image;
+            this.customPoses = customPoses;
+        }
     public ArrayList<Pose> getCustomPoses(){
         return this.customPoses;
     }
