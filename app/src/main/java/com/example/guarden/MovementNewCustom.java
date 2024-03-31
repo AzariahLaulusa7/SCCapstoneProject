@@ -47,7 +47,7 @@ public class MovementNewCustom extends AppCompatActivity {
                     Toast.makeText(MovementNewCustom.this, "Please add a name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Pose pose = new Pose(category,name,0,description);
+                Pose pose = new Pose(category,name,0,description,0);
                 databaseReference.child("users").child(Login.UserID).child("customPoses").child(name).setValue(pose)
                         .addOnSuccessListener(aVoid ->
                                 Toast.makeText(MovementNewCustom.this, "Pose Created", Toast.LENGTH_SHORT).show())

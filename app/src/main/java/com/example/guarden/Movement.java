@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.*;
 import android.content.Intent;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Movement extends AppCompatActivity {
     TextView timer;
     TextView name;
@@ -27,7 +31,7 @@ public class Movement extends AppCompatActivity {
     private static ArrayList<Pose> poseList;
     private int poseCounter;
     private int firstPoseIndex;
-
+    private DatabaseReference databaseReference;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
@@ -44,6 +48,7 @@ public class Movement extends AppCompatActivity {
         thumbsUp.setImageResource(R.drawable.baseline_thumb_up_off_alt_24);
         thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
         poseList = MoveMain.getPoseList();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         Intent myIntent = new Intent(this, MoveMain.class);
         poseCounter=0;
         while (poseCounter < poseList.size()) {
@@ -119,32 +124,44 @@ public class Movement extends AppCompatActivity {
     public void changeLike(int oldRating, int click){
         if(oldRating==0&&click==1) {
             setThumbs(1);
-            poseList.get(poseCounter).setLike(1);
+            poseList.get(poseCounter-1).setLike(1);
+            databaseReference.child("users").child(Login.UserID).child("customPoses")
+                    .child(poseList.get(poseCounter-1).getName()).child("like").setValue(1);
             return;
         }
         if(oldRating==0&&click==2) {
             setThumbs(2);
-            poseList.get(poseCounter).setLike(2);
+            poseList.get(poseCounter-1).setLike(2);
+            databaseReference.child("users").child(Login.UserID).child("customPoses")
+                    .child(poseList.get(poseCounter-1).getName()).child("like").setValue(2);
             return;
         }
         if(oldRating==1&&click==1) {
             setThumbs(0);
-            poseList.get(poseCounter).setLike(0);
+            poseList.get(poseCounter-1).setLike(0);
+            databaseReference.child("users").child(Login.UserID).child("customPoses")
+                    .child(poseList.get(poseCounter-1).getName()).child("like").setValue(0);
             return;
         }
         if(oldRating==1&&click==2) {
             setThumbs(2);
-            poseList.get(poseCounter).setLike(2);
+            poseList.get(poseCounter-1).setLike(2);
+            databaseReference.child("users").child(Login.UserID).child("customPoses")
+                    .child(poseList.get(poseCounter-1).getName()).child("like").setValue(2);
             return;
         }
         if(oldRating==2&&click==2) {
             setThumbs(0);
-            poseList.get(poseCounter).setLike(0);
+            poseList.get(poseCounter-1).setLike(0);
+            databaseReference.child("users").child(Login.UserID).child("customPoses")
+                    .child(poseList.get(poseCounter-1).getName()).child("like").setValue(0);
             return;
         }
         if(oldRating==2&&click==1) {
             setThumbs(1);
-            poseList.get(poseCounter).setLike(1);
+            poseList.get(poseCounter-1).setLike(1);
+            databaseReference.child("users").child(Login.UserID).child("customPoses")
+                    .child(poseList.get(poseCounter-1).getName()).child("like").setValue(1);
         }
     }
     public void setThumbs(int rating){

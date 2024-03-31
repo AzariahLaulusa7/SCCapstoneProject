@@ -22,11 +22,6 @@ import java.util.ArrayList;
 public class MovementViewList extends AppCompatActivity {
     Button add;
     ImageButton back;
-    long customPoseCount;
-    String tempCategory;
-    String tempName;
-    int tempImage;
-    String tempDescription;
     static MovementAdapter movementAdapter;
 
 
