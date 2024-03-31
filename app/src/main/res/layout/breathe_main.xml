@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_light"
+        android:alpha="1" />
+
     <ImageButton
         android:id="@+id/breathe_back"
         android:layout_width="wrap_content"
@@ -12,7 +18,7 @@
         android:minWidth="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,8 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="552dp"
-        android:text="START"
-        android:textColor="@color/white"
+        android:text="@string/circle_start"
+        android:textColor="#112A46"
         android:fontFamily="@font/fondness_eapae"
         android:textSize="30sp"
         android:background="@drawable/custom_button"
@@ -33,113 +39,80 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
-        android:id="@+id/circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/start_circle" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/yoga_pose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yoga_pose" />
+        <ImageView
+            android:id="@+id/heart"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/heart"
+            android:contentDescription="@string/breathe_heart" />
 
-    <TextView
-        android:id="@+id/breathe_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|right"
-        android:layout_marginTop="308dp"
-        android:fontFamily="@font/fondness_eapae"
-        android:text="BREATHE IN"
-        android:textColor="@color/white"
-        android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:alpha="0.7"
+            app:srcCompat="@drawable/start_circle"
+            android:contentDescription="@string/breathe_circle" />
 
-    <TextView
-        android:id="@+id/breathe_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|right"
-        android:layout_marginTop="308dp"
-        android:fontFamily="@font/fondness_eapae"
-        android:text="BREATHE OUT"
-        android:textColor="@color/white"
-        android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/breathe_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/fondness_eapae"
+            android:text="@string/breathe_in"
+            android:textColor="#112A46"
+            android:textSize="45sp" />
 
-    <TextView
-        android:id="@+id/hold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|right"
-        android:layout_marginTop="308dp"
-        android:fontFamily="@font/fondness_eapae"
-        android:text="HOLD"
-        android:textColor="@color/white"
-        android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/breathe_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/fondness_eapae"
+            android:text="@string/breathe_out"
+            android:textColor="#112A46"
+            android:textSize="45sp" />
 
-    <TextView
-        android:id="@+id/nose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|right"
-        android:layout_marginTop="356dp"
-        android:fontFamily="@font/fondness_eapae"
-        android:text="(through nose)"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/hold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/fondness_eapae"
+            android:text="@string/breathe_hold"
+            android:textColor="#112A46"
+            android:textSize="45sp" />
 
-    <TextView
-        android:id="@+id/mouth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|right"
-        android:layout_marginTop="356dp"
-        android:fontFamily="@font/fondness_eapae"
-        android:text="(through mouth)"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/nose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/breathe_in"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/fondness_eapae"
+            android:text="@string/breathe_nose"
+            android:textColor="#112A46"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/relax"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|right"
-        android:layout_marginTop="308dp"
-        android:fontFamily="@font/fondness_eapae"
-        android:text="RELAX"
-        android:textColor="@color/white"
-        android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/mouth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/breathe_out"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/fondness_eapae"
+            android:text="@string/breathe_mouth"
+            android:textColor="#112A46"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

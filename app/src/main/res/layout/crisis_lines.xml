@@ -49,4 +49,12 @@
         android:text="Crisis Text Line\n741741"
         android:drawableStart="@drawable/phone"
         android:drawablePadding="10dp"/>
+
+    <Button
+        android:id="@+id/button_view_therapists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Therapists"
+        android:drawableStart="@drawable/baseline_wc_24"
+        android:drawablePadding="10dp"/>
 </LinearLayout>

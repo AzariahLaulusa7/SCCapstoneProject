@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Jane Doe",
+    "specialty": "Clinical Psychology",
+    "address": "123 Main Street, Columbia, SC, 29201",
+    "phone": "803-555-1234",
+    "email": "jane.doe@gmail.com"
+  },
+  {
+    "id": 2,
+    "name": "John Smith",
+    "specialty": "Counseling",
+    "address": "456 Tree Street, Columbia, SC, 29201",
+    "phone": "803-547-2348",
+    "email": "john.smith@gmail.com"
+  },
+  {
+    "id": 3,
+    "name": "Ryan Jefferson",
+    "specialty": "EDMR",
+    "address": "12 Governor Way, Columbia, SC, 29201",
+    "phone": "803-937-6748",
+    "email": "ryan.jefferson@aol.com"
+  },
+  {
+    "id": 4,
+    "name": "Steve Dollar",
+    "specialty": "PTSD",
+    "address": "76 Elm Street, Columbia, SC, 29201",
+    "phone": "803-295-3957",
+    "email": "steve.dollar@yahoo.com"
+  },
+  {
+    "id": 5,
+    "name": "Melissa Turkey",
+    "specialty": "Counseling",
+    "address": "6784 Jefferson Avenue, Columbia, SC, 29201",
+    "phone": "803-883-7841",
+    "email": "melissa.turkey@outlook.com"
+  }
+]

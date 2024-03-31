@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -13,6 +14,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.FileNotFoundException;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -22,13 +33,13 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton games;
     ImageButton breath;
     ImageButton forums;
-    ImageButton add;
 
     ImageButton profile;
 
     ImageButton call;
     ImageButton move;
     ImageButton settings;
+    TextView helloText;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +51,10 @@ public class HomeScreen extends AppCompatActivity {
         games = (ImageButton) findViewById(R.id.Games);
         breath = (ImageButton) findViewById(R.id.Breath);
         forums = (ImageButton) findViewById(R.id.Forums);
-        add = (ImageButton) findViewById(R.id.Add);
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
-        //Intent name_of_journal_class = new Intent(this, name_of_journal_class.class);
-        //Intent name_of_games_class = new Intent(this, name_of_games_class.class);
-        //Intent name_of_breath_class = new Intent(this, name_of_breath_class.class);
-        //Intent name_of_forums_class = new Intent(this, name_of_forums_class.class);
-        //Intent name_of_add_class = new Intent(this, name_of_add_class.class);
-        //Intent name_of_profile_class = new Intent(this, name_of_profile_class.class);
-        //Intent name_of_call_class = new Intent(this, name_of_call_class.class);
+
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent MoveMain = new Intent(HomeScreen.this, MoveMain.class);
@@ -83,38 +87,31 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-
-        /*journal.setOnClickListener(new View.OnClickListener() {
+        journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_journal_class);
+                Intent NewJournalEntry = new Intent(HomeScreen.this, NewJournalEntry.class);
+                startActivity(NewJournalEntry);
             }
         });
-        */
-
 
         games.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, ReactionGame.class);
+                Intent intent = new Intent(HomeScreen.this, GameHome.class);
                 startActivity(intent);
             }
         });
-/*
+
         forums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(name_of_forums_class);
+                Intent Forums = new Intent(HomeScreen.this, ForumMain.class);
+                startActivity(Forums);
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(name_of_add_class);
-            }
-        });
-*/
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +119,48 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Edit hello
+        helloText = findViewById(R.id.textView2);
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
+        String key = Login.emailKey;
+
+        if(key == null)
+            key = " ";
+        userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (user != null)
+                    helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle onCancelled
+            }
+        });
+    }
+
+    private static class User {
+        public String email, password, firstName, lastName, image;
+
+        public User() {}
+
+        public User(String email, String password, String firstName, String lastName) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public User(String email, String password, String firstName, String lastName, String image) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.image = image;
+        }
     }
 
 
