@@ -43,8 +43,6 @@ public class ForumMain extends AppCompatActivity {
         // Initialize variables
         back = findViewById(R.id.forum_back_icon);
         newPost = findViewById(R.id.new_message);
-
-        sort = findViewById(R.id.sort);
         filter = findViewById(R.id.filter);
 
         forum_view = findViewById(R.id.filter_view);
@@ -123,11 +121,6 @@ public class ForumMain extends AppCompatActivity {
         // When new post is clicked
         newPost.setOnClickListener(v -> {
             startActivity(postPage);
-        });
-
-        // When sort is clicked
-        sort.setOnClickListener(v -> {
-
         });
 
         // When filter is clicked
