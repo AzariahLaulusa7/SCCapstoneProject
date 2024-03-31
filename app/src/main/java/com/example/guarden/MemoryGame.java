@@ -1,9 +1,11 @@
 package com.example.guarden;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -27,6 +29,7 @@ public class MemoryGame extends Activity {
     Handler handler = new Handler();
     private Button startGameButton;
     private Button playAgainButton;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class MemoryGame extends Activity {
         gridLayout = findViewById(R.id.gridLayout);
         startGameButton = findViewById(R.id.startGameButton);
         playAgainButton = findViewById(R.id.playAgainButton);
+        sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
 
         initializeButtons();
 
@@ -94,6 +98,7 @@ public class MemoryGame extends Activity {
                     difficultyLevel = 1;
                     disableButtons();
                     playAgainButton.setVisibility(View.VISIBLE);
+                    markChallengeAsCompleted();
                 }
             });
         }
@@ -107,6 +112,12 @@ public class MemoryGame extends Activity {
             Button button = findViewById(id);
             button.setEnabled(true);
         }
+    }
+    private void markChallengeAsCompleted() {
+        SharedPreferences sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("MemoryGameCompleted", true);
+        editor.apply();
     }
     private void showFeedbackForAShortTime(String feedback, boolean isCorrect) {
         TextView feedbackText = findViewById(R.id.feedbackText);

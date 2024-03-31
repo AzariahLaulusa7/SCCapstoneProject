@@ -40,6 +40,7 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton move;
     ImageButton settings;
     TextView helloText;
+    ImageButton charts;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class HomeScreen extends AppCompatActivity {
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
+        charts = (ImageButton) findViewById(R.id.charts);
+
 
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -69,6 +72,14 @@ public class HomeScreen extends AppCompatActivity {
                 Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheMain.class);
                 startActivity(BreatheMainActivity);
             }});
+
+        charts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this, ChartsActivity.class);
+                startActivity(intent);
+            }
+        });
           
         settings.setOnClickListener(new View.OnClickListener() {
             @Override

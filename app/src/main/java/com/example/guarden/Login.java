@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class Login extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
@@ -91,6 +93,7 @@ public class Login extends AppCompatActivity {
     }
 
     private static class User {
+        public ArrayList<Pose> poseList;
         public String email, password, firstName, lastName, image;
 
         public User() {}
@@ -102,12 +105,13 @@ public class Login extends AppCompatActivity {
             this.lastName = lastName;
         }
 
-        public User(String email, String password, String firstName, String lastName, String image) {
+        public User(String email, String password, String firstName, String lastName, String image, ArrayList<Pose> poseList) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
             this.image = image;
+            this.poseList = poseList;
         }
     }
 }

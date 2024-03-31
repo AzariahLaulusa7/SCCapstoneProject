@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.guarden"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -78,13 +78,15 @@ dependencies {
     // Firebase
     implementation("com.google.firebase:firebase-messaging:23.4.1")
     implementation("com.google.firebase:firebase-firestore:24.10.2")
-    implementation("com.google.firebase:firebase-database:20.3.0")
-    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-database:20.3.1")
+    implementation("com.google.firebase:firebase-auth:22.3.1")
+
 
     implementation("com.squareup.picasso:picasso:2.8")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
 
 }
