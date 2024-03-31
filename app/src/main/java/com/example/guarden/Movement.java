@@ -26,7 +26,6 @@ public class Movement extends AppCompatActivity {
     String mode;
     ImageButton thumbsUp;
     ImageButton thumbsDown;
-
     ImageView pose;
     private static ArrayList<Pose> poseList;
     private int poseCounter;
