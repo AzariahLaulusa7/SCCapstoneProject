@@ -83,7 +83,7 @@ public class Movement extends AppCompatActivity {
             public void onClick(View v) {
                 boolean foundValidPose = false;
                 while (!foundValidPose) {
-                    if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
+                    if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equalsIgnoreCase(mode)) {
                         pose.setImageResource(poseList.get(poseCounter).getImageRes());
                         name.setText(poseList.get(poseCounter).getName());
                         setThumbs(poseList.get(poseCounter).getLike());
