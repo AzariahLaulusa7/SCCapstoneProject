@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-feature android:name="android.hardware.telephony" android:required="false" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <application
+        android:name=".Apptivity"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,8 +19,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-        tools:targetApi="31"
+        tools:targetApi="34"
         tools:ignore="ExtraText">
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="true"

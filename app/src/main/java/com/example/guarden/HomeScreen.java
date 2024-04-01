@@ -1,21 +1,26 @@
 package com.example.guarden;
 
-import android.annotation.SuppressLint;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+import static android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM;
+
+import android.app.AlarmManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.os.PowerManager;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,12 +28,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.FileNotFoundException;
-
 public class HomeScreen extends AppCompatActivity {
 
 //Commenting to commit and be a contributor
 //Worked on home page and settings
+    private static final int NOTIF_REQUEST_CODE = 123;
+    private SharedPreferences prefs;
     ImageButton journal;
     ImageButton games;
     ImageButton breath;
@@ -40,6 +45,7 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton move;
     ImageButton settings;
     TextView helloText;
+    public boolean isAppInForeground;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +60,14 @@ public class HomeScreen extends AppCompatActivity {
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
-
+        prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        checkNotifPermission();
+        checkAlarm();
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent MoveMain = new Intent(HomeScreen.this, MoveMain.class);
                 startActivity(MoveMain);
+                finish();
             }
         });
 
@@ -68,6 +77,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheMain.class);
                 startActivity(BreatheMainActivity);
+                finish();
             }});
           
         settings.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +86,7 @@ public class HomeScreen extends AppCompatActivity {
             {
                 Intent Settings = new Intent(HomeScreen.this, Settings.class);
                 startActivity(Settings);
+                finish();
             }
         });
       
@@ -84,6 +95,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent EditProfile = new Intent(HomeScreen.this, EditProfile.class);
                 startActivity(EditProfile);
+                finish();
             }
         });
 
@@ -92,6 +104,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent NewJournalEntry = new Intent(HomeScreen.this, NewJournalEntry.class);
                 startActivity(NewJournalEntry);
+                finish();
             }
         });
 
@@ -100,6 +113,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomeScreen.this, GameHome.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -108,6 +122,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent Forums = new Intent(HomeScreen.this, ForumMain.class);
                 startActivity(Forums);
+                finish();
             }
         });
 
@@ -117,6 +132,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomeScreen.this, CrisisLines.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -162,6 +178,39 @@ public class HomeScreen extends AppCompatActivity {
             this.image = image;
         }
     }
+    public void checkNotifPermission() {
+        if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, NOTIF_REQUEST_CODE);
+            Settings s = new Settings();
+            s.notifButton = prefs.getBoolean(Settings.NOTIF_KEY, true);
+        } else {
+            prefs.edit().putBoolean("notif_enabled", true).apply();
+        }
+    }
 
+    public void checkAlarm() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager.canScheduleExactAlarms()) {
+                return;
+            }
+        } else
+        if (ContextCompat.checkSelfPermission(this, ACTION_REQUEST_SCHEDULE_EXACT_ALARM) != PackageManager.PERMISSION_GRANTED) {
+            Intent settings = new Intent(ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+            settings.setData(Uri.parse("package:" + this.getPackageName()));
+            settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            this.startActivity(settings);
+            prefs.getBoolean(Settings.ALARM_KEY, true);
+        } else {
+            prefs.edit().putBoolean("alarm_enabled", true).apply();
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIF_REQUEST_CODE) {
+            prefs.edit().putBoolean("notif_enabled", grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED).apply();
+        }
+    }
 }

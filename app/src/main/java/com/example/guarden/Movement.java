@@ -101,7 +101,9 @@ public class Movement extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(myIntent);
+                finish();
             }
         });
     }

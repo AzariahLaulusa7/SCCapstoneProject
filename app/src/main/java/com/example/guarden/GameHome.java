@@ -17,7 +17,7 @@ public class GameHome extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_home);
-
+        NotificationService.setRecentView("game_home");
         buttonReaction = findViewById(R.id.buttonReaction);
         buttonBalloons = findViewById(R.id.buttonBalloons);
         buttonMemory = findViewById(R.id.buttonMemory);
@@ -63,6 +63,8 @@ public class GameHome extends Activity {
         findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(GameHome.this, HomeScreen.class);
+                startActivity(intent);
                 finish();
             }
         });

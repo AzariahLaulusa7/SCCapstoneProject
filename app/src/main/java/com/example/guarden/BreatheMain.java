@@ -38,6 +38,7 @@ public class BreatheMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.breathe_main);
 
+        NotificationService.setRecentView("breathe_main");
         // Initialize variables
         start = findViewById(R.id.start_breathing);
         circle = findViewById(R.id.circle);
@@ -73,6 +74,7 @@ public class BreatheMain extends AppCompatActivity {
             handler.removeCallbacks(runnable);
             vibrate.cancel();
             startActivity(myIntent);
+            finish();
         });
     }
 

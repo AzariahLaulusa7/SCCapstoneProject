@@ -21,6 +21,7 @@ public class ForumMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_main);
 
+        NotificationService.setRecentView("forum_main");
         // Initialize variables
         back = findViewById(R.id.forum_back_icon);
         newPost = findViewById(R.id.new_message);
@@ -54,6 +55,7 @@ public class ForumMain extends AppCompatActivity {
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
             startActivity(myIntent);
+            finish();
         });
 
         // When new post is clicked
