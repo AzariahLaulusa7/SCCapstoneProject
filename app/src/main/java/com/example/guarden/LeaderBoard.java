@@ -32,10 +32,8 @@ public class LeaderBoard extends AppCompatActivity {
         SharedPreferences gamePrefs = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
         int memoryScore = gamePrefs.getInt("MemoryGameBestScore", 0);
         long reactionScore = gamePrefs.getLong("ReactionGameBestTime", 0);
-        int balloonScore = gamePrefs.getInt("BEST_SCORE", 0); // Reuse BalloonGame's existing preference
+        int balloonScore = gamePrefs.getInt("BEST_SCORE", 0);
 
-        // Assuming higher scores are better for memory and balloon games,
-        // and lower times (faster reactions) are better for the reaction game.
         memoryGameScore.setText("Memory Game Best Level: " + memoryScore);
         reactionGameScore.setText("Reaction Game Best Time: " + (reactionScore / 1000.0) + "s");
         balloonGameScore.setText("Balloon Game Best Score: " + balloonScore);
