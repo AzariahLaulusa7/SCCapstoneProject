@@ -65,25 +65,11 @@ public class NewJournalEntry extends AppCompatActivity {
 
         back.setOnClickListener(v -> finish());
         done.setOnClickListener(v -> {
-            JournalEntry entry = new JournalEntry();
-            final String name = journalName.getText().toString().trim();
-            final String content = journalContent.getText().toString().trim();
+            String name = journalName.getText().toString().trim();
+            String content = journalContent.getText().toString().trim();
+            JournalEntry entry = new JournalEntry(name, content);
 
-            if(name.length() != 0){
-                entry.setEntryName(name);
-            }
-
-            if(content.length() != 0){
-                entry.setEntryContent(content);
-            }
-
-            //Write the data to internal storage
-            if((doesFileExist(getApplicationContext(), "journals.csv") == true)) {
-                appendToInternalStorage(getApplicationContext(), "journals.csv", entry.getString());
-            }
-            else{
-                writeToInternalStorage(getApplicationContext(), "journals.csv", entry.getString());
-            }
+            appendToInternalStorage(getApplicationContext(), "journals.csv", entry.getString() + "\n");
 
             Intent home = new Intent(this, HomeScreen.class);
             startActivity(home);

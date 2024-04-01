@@ -16,24 +16,19 @@ public class JournalEntry {
         this.entryContent = entryContent;
     }
 
-    public void setFromString(String csvString){
-        String[] stringArray = csvString.split(",");
-        entryName = stringArray[0].toString();
-
-        for(int i=1;i<stringArray.length; i++ ){
-            entryContent = entryContent + stringArray[i].toString();
+    public void setFromString(String csvString) {
+        String[] parts = csvString.split("\\|", 2);
+        if (parts.length == 2) {
+            entryName = parts[0].trim();
+            entryContent = parts[1].trim();
+        } else {
+            entryName = "New Journal Entry";
+            entryContent = "Content not available.";
         }
-        /*if(entryName == null){
-            entryName = "New Entry";
-        }
-        if(entryContent == null){
-            entryContent = "No Content";
-        }*/
     }
 
-    public String getString(){
-        String csvString = entryName + " , " + entryContent;
-        return csvString;
+    public String getString() {
+        return entryName + "|" + entryContent;
     }
 
     public void setEntryName(String name){
