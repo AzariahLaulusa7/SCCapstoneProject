@@ -111,8 +111,6 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }
 
-        recyclerView.setAdapter(adapter);
-
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
             startActivity(myIntent);
