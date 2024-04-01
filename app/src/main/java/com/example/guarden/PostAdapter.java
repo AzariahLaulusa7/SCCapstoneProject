@@ -26,11 +26,14 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> {
     onBindViewHolder(@NonNull PostViewHolder holder,
                      int position, @NonNull Post model)
     {
-        holder.nameView.setText(model.getName());
-        holder.messageView.setText(model.getMessage());
-        holder.tagView.setText(model.getTag());
-        holder.imageView.setImageResource(model.getImage());
-        holder.tagBackgroundView.setImageResource(model.getTagBackground());
+        try {
+            holder.nameView.setText(model.getName());
+            holder.messageView.setText(model.getMessage());
+            holder.tagView.setText(model.getTag());
+            holder.imageView.setImageResource(model.getImage());
+            holder.tagBackgroundView.setImageResource(model.getTagBackground());
+        } catch (Exception e) {
+        }
     }
 
 
