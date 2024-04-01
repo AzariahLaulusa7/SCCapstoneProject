@@ -151,10 +151,18 @@ public class ForumMain extends AppCompatActivity {
             if (sortActive == true) {
                 forum_view.setVisibility(View.GONE);
                 tag_title.setVisibility(View.GONE);
+                vent.setVisibility(View.GONE);
+                question.setVisibility(View.GONE);
+                positive.setVisibility(View.GONE);
+                all.setVisibility(View.GONE);
                 sortActive = false;
             } else {
                 forum_view.setVisibility(View.VISIBLE);
                 tag_title.setVisibility(View.VISIBLE);
+                vent.setVisibility(View.GONE);
+                question.setVisibility(View.GONE);
+                positive.setVisibility(View.GONE);
+                all.setVisibility(View.GONE);
                 sortActive = true;
             }
         });
