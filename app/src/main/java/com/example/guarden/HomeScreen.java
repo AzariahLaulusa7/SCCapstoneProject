@@ -101,8 +101,8 @@ public class HomeScreen extends AppCompatActivity {
         journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent NewJournalEntry = new Intent(HomeScreen.this, NewJournalEntry.class);
-                startActivity(NewJournalEntry);
+                Intent ViewJournalEntries = new Intent(HomeScreen.this, ViewJournalEntries.class);
+                startActivity(ViewJournalEntries);
             }
         });
 
