@@ -95,6 +95,14 @@ public class MemoryGame extends Activity {
                     }
                 } else {
                     showFeedbackForAShortTime("Wrong button! Game over!", false);
+                    SharedPreferences gamePrefs = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = gamePrefs.edit();
+                    int currentBestCycle = gamePrefs.getInt("MemoryGameBestScore", Integer.MAX_VALUE);
+                    if (difficultyLevel < currentBestCycle) {
+                        editor.putInt("MemoryGameBestScore", difficultyLevel - 1);
+                        editor.apply();
+                    }
+
                     difficultyLevel = 1;
                     disableButtons();
                     playAgainButton.setVisibility(View.VISIBLE);

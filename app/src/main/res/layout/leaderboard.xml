@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/backButton"
@@ -15,14 +17,27 @@
         android:src="@drawable/baseline_arrow_back_ios_24" />
 
     <TextView
-        android:id="@+id/textViewLeaderBoard"
+        android:id="@+id/memoryGameScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="20dp"
-        android:text="Leaderboard"
-        android:textSize="24sp" />
-</RelativeLayout>
+        android:textSize="18sp"
+        android:text="Memory Game Best Score: 0"/>
+
+    <TextView
+        android:id="@+id/reactionGameScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Reaction Game Best Time: 0s"/>
+
+    <TextView
+        android:id="@+id/balloonGameScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Balloon Game Best Score: 0"/>
+
+</LinearLayout>
 
 
 

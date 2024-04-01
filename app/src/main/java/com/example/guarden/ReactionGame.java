@@ -1,4 +1,5 @@
 package com.example.guarden;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -41,6 +42,13 @@ public class ReactionGame extends AppCompatActivity {
         reactionButton.setOnClickListener(v -> {
             if (gameLogic.isWaitingForClick()) {
                 long reactionTime = gameLogic.stopGame();
+                SharedPreferences gamePrefs = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+                SharedPreferences.Editor editor = gamePrefs.edit();
+                long currentBestTime = gamePrefs.getLong("ReactionGameBestTime", Long.MAX_VALUE);
+                if (reactionTime < currentBestTime) {
+                    editor.putLong("ReactionGameBestTime", reactionTime);
+                    editor.apply();
+                }
                 textViewScore.setText("Your Time: " + reactionTime / 1000.0 + "s\nTap square to play again!");
                 reactionButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             } else {
