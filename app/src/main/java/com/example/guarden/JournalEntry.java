@@ -1,13 +1,34 @@
 package com.example.guarden;//This class impliments the journal entry object
-import  java.util.Date;
+
 public class JournalEntry {
     private String entryName;
     private String entryContent;
 
     public JournalEntry(){
-        Date date = new Date();
-        entryName = "New Journal Entry: " + date.toString();
+
+        entryName = "New Journal Entry: ";
         entryContent = "Nothin here, boss";
+    }
+
+    public JournalEntry(String entryName, String entryContent){
+
+        this.entryName = entryName;
+        this.entryContent = entryContent;
+    }
+
+    public void setFromString(String csvString) {
+        String[] parts = csvString.split("\\|", 2);
+        if (parts.length == 2) {
+            entryName = parts[0].trim();
+            entryContent = parts[1].trim();
+        } else {
+            entryName = "New Journal Entry";
+            entryContent = "Content not available.";
+        }
+    }
+
+    public String getString() {
+        return entryName + "|" + entryContent;
     }
 
     public void setEntryName(String name){
