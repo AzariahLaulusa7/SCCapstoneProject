@@ -3,6 +3,7 @@
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.ImageButton;
         import android.widget.ImageView;
         import android.widget.Switch;
         import android.widget.TextView;
@@ -71,21 +72,16 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         private final TextView name;
         private final TextView category;
         Switch sw;
+        ImageButton edit;
+        ImageButton delete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.thumbnail);
             name = itemView.findViewById(R.id.name);
             category = itemView.findViewById(R.id.category);
             sw = itemView.findViewById(R.id.switch1);
-            /*sw.setOnClickListener(new View.OnClickListener(){
-                int position = getAdapterPosition();
-                Pose pose = poseArrayList.get(position);
-                @Override
-                public void onClick(View v) {
-                    databaseReference.child("users").child(Login.UserID).child("customPoses")
-                            .child("Sit Up").child("like").setValue(1);
-                }
-            });*/
+            edit = itemView.findViewById(R.id.edit);
+            delete = itemView.findViewById(R.id.delete);
         }
     }
 }
