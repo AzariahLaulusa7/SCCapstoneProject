@@ -36,6 +36,7 @@ public class MovementViewList extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recycler.setLayoutManager(linearLayoutManager);
         movementAdapter = new MovementAdapter(this, MoveMain.poseList);
+        movementAdapter.setHasStableIds(true);
         recycler.setAdapter(movementAdapter);
 
         add.setOnClickListener(new View.OnClickListener() {

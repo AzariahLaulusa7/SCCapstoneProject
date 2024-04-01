@@ -1,5 +1,7 @@
         package com.example.guarden;
+        import android.app.AlertDialog;
         import android.content.Context;
+        import android.content.DialogInterface;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -34,7 +36,6 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
     @Override
     public MovementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movement_card, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -58,6 +59,39 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
                 // Handle switch unchecked
                 databaseReference.child("users").child(Login.UserID).child("customPoses")
                         .child(pose.getName()).child("like").setValue(2);
+            }
+        });
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        databaseReference.child("users").child(Login.UserID).child("customPoses").child(pose.getName()).setValue(null);
+                        poseArrayList.remove(poseArrayList.get(position));
+                        notifyItemRemoved(position);
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }
