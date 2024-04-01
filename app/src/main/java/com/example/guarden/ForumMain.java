@@ -1,5 +1,7 @@
 package com.example.guarden;
 
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,7 @@ public class ForumMain extends AppCompatActivity {
     ImageView forum_view;
     String tagText = " ";
     Boolean filterActive = false;
+    Boolean sortActive = false;
     Intent restart;
     private DatabaseReference forumRef, posForumRef, ventForumRef, questionForumRef;
 
@@ -44,6 +47,7 @@ public class ForumMain extends AppCompatActivity {
         back = findViewById(R.id.forum_back_icon);
         newPost = findViewById(R.id.new_message);
         filter = findViewById(R.id.filter);
+        sort = findViewById(R.id.sort);
 
         forum_view = findViewById(R.id.filter_view);
         tag_title = findViewById(R.id.tag_title);
@@ -80,7 +84,6 @@ public class ForumMain extends AppCompatActivity {
                     .setQuery(posForumRef, Post.class)
                     .build();
             adapter = new PostAdapter(options);
-
             recyclerView.setAdapter(adapter);
 
         } else if (tagText.equals("vent") && filterActive == true) {
@@ -107,8 +110,8 @@ public class ForumMain extends AppCompatActivity {
                     .setQuery(forumRef, Post.class)
                     .build();
             adapter = new PostAdapter(options);
-
             recyclerView.setAdapter(adapter);
+
         }
 
         // When back button is pressed, go to previous screen -> home
@@ -123,6 +126,7 @@ public class ForumMain extends AppCompatActivity {
 
         // When filter is clicked
         filter.setOnClickListener(v -> {
+            tag_title.setText("Filter:");
             if (filterActive == true) {
                 forum_view.setVisibility(View.GONE);
                 tag_title.setVisibility(View.GONE);
@@ -139,6 +143,19 @@ public class ForumMain extends AppCompatActivity {
                 positive.setVisibility(View.VISIBLE);
                 all.setVisibility(View.VISIBLE);
                 filterActive = true;
+            }
+        });
+
+        sort.setOnClickListener(v -> {
+            tag_title.setText("Sort:");
+            if (sortActive == true) {
+                forum_view.setVisibility(View.GONE);
+                tag_title.setVisibility(View.GONE);
+                sortActive = false;
+            } else {
+                forum_view.setVisibility(View.VISIBLE);
+                tag_title.setVisibility(View.VISIBLE);
+                sortActive = true;
             }
         });
 

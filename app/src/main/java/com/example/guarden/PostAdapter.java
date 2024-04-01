@@ -46,4 +46,9 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> {
         return new PostViewHolder(view);
     }
 
+    @Override
+    public Post getItem(int position) {
+        return super.getItem(getItemCount() - 1 - position);
+    }
+
 }
