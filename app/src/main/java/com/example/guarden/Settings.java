@@ -99,6 +99,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
+                SaveUser.clearUserName(Settings.this);
                 Intent LogIn = new Intent(Settings.this, Login.class);
                 startActivity(LogIn);
             }

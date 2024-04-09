@@ -128,8 +128,8 @@ public class EditProfile extends AppCompatActivity {
 
         });
 
-        if(Login.emailKey != null)
-            key = Login.emailKey;
+        if(SaveUser.getUserName(EditProfile.this).length() != 0)
+            key = SaveUser.getUserName(EditProfile.this);
         if(key == null) {
             key = " ";
         } else {
@@ -193,15 +193,16 @@ public class EditProfile extends AppCompatActivity {
                         storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this,  "Failed To Save Image", Toast.LENGTH_LONG).show());
-                        storageRef.child("/users/"+Login.emailKey).delete()
+                        storageRef.child("/users/"+SaveUser.getUserName(EditProfile.this)).delete()
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Delete Old Image", Toast.LENGTH_SHORT).show());
-                        userRef.child(Login.emailKey).removeValue();
+                        userRef.child(SaveUser.getUserName(EditProfile.this)).removeValue();
                         userRef.child(email.replace(".",",")).setValue(updatedUser)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
+                        SaveUser.setUserName(EditProfile.this, key);
                         finish();
                         startActivity(restartIntent);
                     } else {
@@ -211,14 +212,14 @@ public class EditProfile extends AppCompatActivity {
                 } else {
                     //userRef.child("users").child(Login.emailKey).removeValue();
 
-                    userRef.child(Login.emailKey).setValue(updatedUser)
+                    userRef.child(SaveUser.getUserName(EditProfile.this)).setValue(updatedUser)
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->
                                     Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
                     if(imageUri != null) {
                         //storageRef.child("/users/"+Login.emailKey).delete();
-                        storageRef.child("users").child(Login.emailKey).putFile(imageUri)
+                        storageRef.child("users").child(SaveUser.getUserName(EditProfile.this)).putFile(imageUri)
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
