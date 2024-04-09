@@ -72,7 +72,7 @@ public class Forums extends AppCompatActivity {
 
         // Edit user name
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
-        key = Login.emailKey;
+        key = SaveUser.getUserName(Forums.this);
 
         if(key == null)
             key = " ";
@@ -80,7 +80,7 @@ public class Forums extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if (user != null)
+                if (user != null && user.firstName != null)
                     userName.setText(user.firstName.toUpperCase());
             }
 
@@ -193,7 +193,7 @@ public class Forums extends AppCompatActivity {
             //final String background = tagBackground.toString().trim();
 
             if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(tag) && !TextUtils.isEmpty(message)) {
-                if (key.equals(" ")) {
+                if (key.equals(" ") || key.isEmpty() || userName.getText().equals("GUEST")) {
                     Toast.makeText(Forums.this, "You NEED an account to post.", Toast.LENGTH_LONG).show();
                 } else {
                     if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) {

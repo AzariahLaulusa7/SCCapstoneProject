@@ -56,7 +56,21 @@ public class HomeScreen extends AppCompatActivity {
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
         charts = (ImageButton) findViewById(R.id.charts);
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
 
+        if(SaveUser.getUserName(HomeScreen.this).length() == 0 && !Login.skipFlag)
+        {
+            Intent intent = new Intent(HomeScreen.this, Login.class);
+            startActivity(intent);
+        }
+
+        if (Login.skipFlag) {
+            String uniqueKey = userRef.push().getKey();
+            String name = "GUEST";
+            User newUser = new User("", "", name, "");
+            userRef.child(uniqueKey).setValue(newUser);
+            SaveUser.setUserName(HomeScreen.this, uniqueKey);
+        }
 
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -133,8 +147,7 @@ public class HomeScreen extends AppCompatActivity {
 
         // Edit hello
         helloText = findViewById(R.id.textView2);
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
-        String key = Login.emailKey;
+        String key = SaveUser.getUserName(HomeScreen.this);
 
         if(key == null)
             key = " ";
@@ -142,7 +155,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if (user != null)
+                if (user != null && user.firstName != null)
                     helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
             }
 
