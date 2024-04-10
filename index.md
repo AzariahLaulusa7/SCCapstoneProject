@@ -13,9 +13,9 @@ Video here
 
 ## Sneak peek!
 <div style="display:flex; justify-content:space-between;">
-  <img src="homepage.png" alt="Screenshot 1" style="width: 32%; margin-right: 2%;">
-  <img src="homepage.png" alt="Screenshot 2" style="width: 32%; margin-right: 2%;">
-  <img src="homepage.png" alt="Screenshot 3" style="width: 32%;">
+  <img src="breathess.jpg" alt="Screenshot 1" style="width: 32%; margin-right: 2%;">
+  <img src="forumss.jpg" alt="Screenshot 2" style="width: 32%; margin-right: 2%;">
+  <img src="leaderboardss.png" alt="Screenshot 3" style="width: 32%;">
 </div>
 
 ## Authors
