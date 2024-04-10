@@ -1,7 +1,7 @@
 # BreatheEasy
 
 <h2>
-  <img src="logo icon.png" alt="BreatheEasy Logo" style="height:50px;"> BreatheEasy
+  <img src="logo icon.png" alt="BreatheEasy Logo" style="height:50px;">
 </h2>
 
 
