@@ -1,10 +1,5 @@
 # BreatheEasy
 
-<h2>
-  <img src="logo icon.png" alt="BreatheEasy Logo" style="height:50px;">
-</h2>
-
-
 * **Description:** The Meditation app's main goal is to help users with their mental health by providing them with an easy-to-use resource in states of heightened emotion.
 It provides several options that target different approaches for dealing with negative feelings like anxiety and panic.
 * **For more details,** please visit our wiki pages:
