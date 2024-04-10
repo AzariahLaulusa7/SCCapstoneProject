@@ -1,5 +1,5 @@
 theme: jekyll-theme-cayman
-description: <img src="logo icon.png" alt="BreatheEasy Logo" style="height:50px;">
+description: <img src="logo_icon_nobackgroundpng.png" alt="BreatheEasy Logo" style="height:200px;">
 sass:
   style: compressed
 
