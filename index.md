@@ -6,7 +6,7 @@ It provides several options that target different approaches for dealing with ne
 
 ## A glance into what BreatheEasy offers
 Video here
-[![Demo Video](comingsoon.jpeg)](https://www.youtube.com/watch?v=mfhBM_Yay6w)
+[![Demo Video](comingsoon.jpeg)]([https://www.youtube.com/watch?v=mfhBM_Yay6w](https://www.youtube.com/watch?v=dQw4w9WgXcQ))
 
 ## Begin your journey to peace of mind 
 (Directions to use the app here)
