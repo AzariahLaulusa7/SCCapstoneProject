@@ -7,10 +7,8 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 public class Apptivity extends Application implements Application.ActivityLifecycleCallbacks {
@@ -51,9 +49,8 @@ public class Apptivity extends Application implements Application.ActivityLifecy
         if(activeActivityCount == 0){
             isAppClosed = true;
             if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                Intent intent = new Intent(this, NotificationService.class);
-                intent.setAction("SCHEDULE_NOTIFICATIONS");
-                startService(intent);
+                NotificationScheduler scheduler = new NotificationScheduler(this);
+                scheduler.scheduleNotification();
             }
         }
     }
@@ -65,11 +62,7 @@ public class Apptivity extends Application implements Application.ActivityLifecy
 
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
-        if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(this, NotificationService.class);
-            intent.setAction("SCHEDULE_NOTIFICATIONS");
-            startService(intent);
-        }
+
     }
 
     // Other lifecycle callback methods...

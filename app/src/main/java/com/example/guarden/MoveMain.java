@@ -17,7 +17,7 @@ public class MoveMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.move_main);
-        NotificationService.setRecentView("move_main");
+        NotificationScheduler.setRecentView("move_main");
         yoga = (Button) findViewById(R.id.yoga);
         exercise = (Button) findViewById(R.id.exercise);
         back = (ImageButton) findViewById(R.id.move_back);

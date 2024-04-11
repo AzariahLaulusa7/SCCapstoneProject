@@ -3,7 +3,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class GameHome extends Activity {
@@ -17,7 +16,7 @@ public class GameHome extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_home);
-        NotificationService.setRecentView("game_home");
+        NotificationScheduler.setRecentView("game_home");
         buttonReaction = findViewById(R.id.buttonReaction);
         buttonBalloons = findViewById(R.id.buttonBalloons);
         buttonMemory = findViewById(R.id.buttonMemory);

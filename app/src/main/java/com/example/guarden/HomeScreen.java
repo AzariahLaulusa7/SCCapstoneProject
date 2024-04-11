@@ -32,6 +32,9 @@ public class HomeScreen extends AppCompatActivity {
 
 //Commenting to commit and be a contributor
 //Worked on home page and settings
+private static final String PREF_NAME = "PermissionPrefs";
+    private static final String PREF_ALARM_PERMISSION_REQUESTED = "alarm_permission_requested";
+
     private static final int NOTIF_REQUEST_CODE = 123;
     private SharedPreferences prefs;
     ImageButton journal;
@@ -62,7 +65,6 @@ public class HomeScreen extends AppCompatActivity {
         settings = (ImageButton) findViewById(R.id.Settings);
         prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         checkNotifPermission();
-        checkAlarm();
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent MoveMain = new Intent(HomeScreen.this, MoveMain.class);
@@ -185,24 +187,6 @@ public class HomeScreen extends AppCompatActivity {
             s.notifButton = prefs.getBoolean(Settings.NOTIF_KEY, true);
         } else {
             prefs.edit().putBoolean("notif_enabled", true).apply();
-        }
-    }
-
-    public void checkAlarm() {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (alarmManager.canScheduleExactAlarms()) {
-                return;
-            }
-        } else
-        if (ContextCompat.checkSelfPermission(this, ACTION_REQUEST_SCHEDULE_EXACT_ALARM) != PackageManager.PERMISSION_GRANTED) {
-            Intent settings = new Intent(ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-            settings.setData(Uri.parse("package:" + this.getPackageName()));
-            settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            this.startActivity(settings);
-            prefs.getBoolean(Settings.ALARM_KEY, true);
-        } else {
-            prefs.edit().putBoolean("alarm_enabled", true).apply();
         }
     }
 

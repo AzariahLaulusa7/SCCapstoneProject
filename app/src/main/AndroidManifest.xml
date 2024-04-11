@@ -26,7 +26,7 @@
             android:enabled="true"
             android:exported="false" />
         <service
-            android:name=".NotificationService"
+            android:name=".NotificationScheduler"
             android:enabled="true"
             android:exported="false" />
         <activity

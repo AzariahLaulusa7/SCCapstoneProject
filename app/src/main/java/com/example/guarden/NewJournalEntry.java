@@ -8,10 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class NewJournalEntry extends AppCompatActivity {
 
@@ -23,7 +19,7 @@ public class NewJournalEntry extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_new_journal_entry);
 
-        NotificationService.setRecentView("content_new_journal_entry");
+        NotificationScheduler.setRecentView("content_new_journal_entry");
         back = findViewById(R.id.BackToEntries);
         done = findViewById(R.id.nextPage);
 
