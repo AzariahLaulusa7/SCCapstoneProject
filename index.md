@@ -27,7 +27,7 @@ How to install BreatheEasy on your Android device:
 ## Meet the Creators!
 **Adrian Luedicke:** LUEDICKA@email.sc.edu
 
-**Joe Comiskey:** COMISKEJ@email.sc.edu | [Github](https://github.com/joecomisk11) | [LinkedIn](https://www.linkedin.com/in/joe-comiskey/)
+**Joe Comiskey:** COMISKEJ@email.sc.edu \| [Github](https://github.com/joecomisk11) \| [LinkedIn](https://www.linkedin.com/in/joe-comiskey/)
 
 **Azariah Laulusa:** LAULUSA@email.sc.edu
 
