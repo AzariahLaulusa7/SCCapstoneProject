@@ -5,7 +5,7 @@ The Meditation app's main goal is to help users with their mental health by prov
 It provides several options that target different approaches for dealing with negative feelings like anxiety and panic.
 
 ## A Glance Into What BreatheEasy Offers
-[Demo Video](comingsoon.jpeg)
+![Demo Video](comingsoon.jpeg)
 
 ## Begin your journey to peace of mind 
 How to install BreatheEasy on your Android device:
