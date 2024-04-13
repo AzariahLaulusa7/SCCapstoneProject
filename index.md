@@ -7,7 +7,7 @@ It provides several options that target different approaches for dealing with ne
 ## A Glance Into What BreatheEasy Offers
 ![Demo Video](comingsoon.jpeg)
 
-## Begin your journey to peace of mind 
+## Begin Your Journey to Peace of Mind 
 How to install BreatheEasy on your Android device:
 1. Click the APK file download link below.
 2. You’ll receive a warning at the bottom of the phone letting you know that you must give that app permission to install the file. Tap the Settings button to proceed.
@@ -15,7 +15,7 @@ How to install BreatheEasy on your Android device:
 4. A prompt should pop up, giving you the option to Install the app. Go ahead and follow the instructions to complete the install.
 **Note** — Sometimes, you may need to begin installation again after giving the app permission to download.
 
-**Download Link:** [Download BreatheEasy](https://github.com/SCCapstone/Garp/releases/download/v0.9/app-debug.apk)
+**Download Link:** [Download BreatheEasy v0.9](https://github.com/SCCapstone/Garp/releases/download/v0.9/app-debug.apk)
 
 ## Sneak Peek!
 <div style="display:flex; justify-content:space-between;">
