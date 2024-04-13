@@ -9,10 +9,10 @@ It provides several options that target different approaches for dealing with ne
 
 ## Begin your journey to peace of mind 
 How to install BreatheEasy on your Android device:
-1) Click the APK file download link below.
-2) You’ll receive a warning at the bottom of the phone letting you know that you must give that app permission to install the file. Tap the Settings button to proceed.
-3) On the next page, you’ll be asked to allow the app to make APK installs.
-4) A prompt should pop up, giving you the option to Install the app. Go ahead and follow the instructions to complete the install.
+1. Click the APK file download link below.
+2. You’ll receive a warning at the bottom of the phone letting you know that you must give that app permission to install the file. Tap the Settings button to proceed.
+3. On the next page, you’ll be asked to allow the app to make APK installs.
+4. A prompt should pop up, giving you the option to Install the app. Go ahead and follow the instructions to complete the install.
 **Note** — Sometimes, you may need to begin installation again after giving the app permission to download.
 
 **Download Link:** Link here
