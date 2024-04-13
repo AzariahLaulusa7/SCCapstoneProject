@@ -5,7 +5,7 @@ The Meditation app's main goal is to help users with their mental health by prov
 It provides several options that target different approaches for dealing with negative feelings like anxiety and panic.
 
 ## A Glance Into What BreatheEasy Offers
-[![Demo Video](comingsoon.jpeg)]
+[Demo Video](comingsoon.jpeg)
 
 ## Begin your journey to peace of mind 
 How to install BreatheEasy on your Android device:
@@ -15,7 +15,7 @@ How to install BreatheEasy on your Android device:
 4. A prompt should pop up, giving you the option to Install the app. Go ahead and follow the instructions to complete the install.
 **Note** — Sometimes, you may need to begin installation again after giving the app permission to download.
 
-**Download Link:** [Download BreatheEasy](app-debug.apk)
+**Download Link:** [Download BreatheEasy](https://github.com/SCCapstone/Garp/releases/download/v0.9/app-debug.apk)
 
 ## Sneak Peek!
 <div style="display:flex; justify-content:space-between;">
