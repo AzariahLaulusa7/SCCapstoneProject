@@ -67,14 +67,16 @@ public class HomeScreen extends AppCompatActivity {
         }
 
         if (Login.skipFlag) {
-            String uniqueKey = userRef.push().getKey();
-            String name = "GUEST";
-            User newUser = new User("", "", name, "", new ArrayList<>());
-            userRef.child(uniqueKey).setValue(newUser)
-                            .addOnSuccessListener(aVoid -> {
-                                addDefaultPosesToList(uniqueKey);
-                            });
-            SaveUser.setUserName(HomeScreen.this, uniqueKey);
+            if (SaveUser.getUserName(HomeScreen.this).length() == 0) {
+                String uniqueKey = userRef.push().getKey();
+                String name = "GUEST";
+                User newUser = new User("", "", name, "", new ArrayList<>());
+                userRef.child(uniqueKey).setValue(newUser)
+                        .addOnSuccessListener(aVoid -> {
+                            addDefaultPosesToList(uniqueKey);
+                        });
+                SaveUser.setUserName(HomeScreen.this, uniqueKey);
+            }
         }
 
         move.setOnClickListener(new View.OnClickListener() {
