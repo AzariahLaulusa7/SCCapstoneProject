@@ -51,7 +51,6 @@ public class MemoryGame extends Activity {
         playAgainButton.setOnClickListener(v -> {
             startGame();
             playAgainButton.setVisibility(View.GONE);
-            startGameButton.setVisibility(View.VISIBLE);
         });
 
         ImageView backButton = findViewById(R.id.backIcon);
