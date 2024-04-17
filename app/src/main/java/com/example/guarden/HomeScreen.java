@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton settings;
     TextView helloText;
     ImageButton charts;
+    DatabaseReference userRef;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class HomeScreen extends AppCompatActivity {
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
         charts = (ImageButton) findViewById(R.id.charts);
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
+        userRef = FirebaseDatabase.getInstance().getReference("users");
 
         if(SaveUser.getUserName(HomeScreen.this).length() == 0 && !Login.skipFlag)
         {
@@ -67,8 +69,11 @@ public class HomeScreen extends AppCompatActivity {
         if (Login.skipFlag) {
             String uniqueKey = userRef.push().getKey();
             String name = "GUEST";
-            User newUser = new User("", "", name, "");
-            userRef.child(uniqueKey).setValue(newUser);
+            User newUser = new User("", "", name, "", new ArrayList<>());
+            userRef.child(uniqueKey).setValue(newUser)
+                            .addOnSuccessListener(aVoid -> {
+                                addDefaultPosesToList(uniqueKey);
+                            });
             SaveUser.setUserName(HomeScreen.this, uniqueKey);
         }
 
@@ -154,9 +159,9 @@ public class HomeScreen extends AppCompatActivity {
         userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                if (user != null && user.firstName != null)
-                    helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null && user.firstName != null)
+                        helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
             }
 
             @Override
@@ -166,8 +171,24 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
+    public void addDefaultPosesToList(String email){
+        Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
+        userRef.child(email).child("customPoses").child("Lunge").setValue(lunge);
+        Pose triangle = new Pose("yoga","Triangle",R.drawable.pose2,"", 0);
+        userRef.child(email).child("customPoses").child("Triangle").setValue(triangle);
+        Pose forwardFold = new Pose("yoga","Forward Fold",R.drawable.pose3,"", 0);
+        userRef.child(email).child("customPoses").child("Forward Fold").setValue(forwardFold);
+        Pose pushUp = new Pose("exercise","Push Up",R.drawable.exercise1,"", 0);
+        userRef.child(email).child("customPoses").child("Push Up").setValue(pushUp);
+        Pose sitUp = new Pose("exercise","Sit Up",R.drawable.exercise2,"", 0);
+        userRef.child(email).child("customPoses").child("Sit Up").setValue(sitUp);
+        Pose squat = new Pose("exercise","Squat",R.drawable.exercise3,"", 0);
+        userRef.child(email).child("customPoses").child("Squat").setValue(squat);
+    }
+
     private static class User {
-        public String email, password, firstName, lastName, image;
+        public String email, password, firstName, lastName;
+        private ArrayList<Pose> customPoses;
 
         public User() {}
 
@@ -178,12 +199,12 @@ public class HomeScreen extends AppCompatActivity {
             this.lastName = lastName;
         }
 
-        public User(String email, String password, String firstName, String lastName, String image) {
+        public User(String email, String password, String firstName, String lastName, ArrayList<Pose> customPoses) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.image = image;
+            this.customPoses = customPoses;
         }
     }
 

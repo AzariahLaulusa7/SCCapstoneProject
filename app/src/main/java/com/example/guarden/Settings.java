@@ -13,6 +13,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Settings extends AppCompatActivity {
     private static final String PROGRESS_KEY =  "progress";
@@ -24,6 +26,7 @@ public class Settings extends AppCompatActivity {
     SharedPreferences prefs;
     androidx.appcompat.widget.SwitchCompat dark_mode;
     androidx.appcompat.widget.SwitchCompat notifications;
+    private DatabaseReference userRef;
 
     SeekBar sound_bar;
     public Settings() {
@@ -40,6 +43,7 @@ public class Settings extends AppCompatActivity {
         sound_bar = (SeekBar) findViewById(R.id.seekBar);
         log_out = (TextView) findViewById((R.id.Logout));
         back_button = (ImageButton) findViewById(R.id.Back_Button);
+        userRef = FirebaseDatabase.getInstance().getReference("users");
 
         //initialize sp
         prefs = getPreferences(Context.MODE_PRIVATE);
@@ -100,6 +104,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 SaveUser.clearUserName(Settings.this);
+                Login.skipFlag = false;
                 Intent LogIn = new Intent(Settings.this, Login.class);
                 startActivity(LogIn);
             }

@@ -27,6 +27,7 @@ public class MovementNewCustom extends AppCompatActivity {
     private EditText editTextExerciseDescription;
     private String category;
     private DatabaseReference databaseReference;
+    static String key;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement_add_custom);
@@ -37,6 +38,10 @@ public class MovementNewCustom extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.cancel);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         Intent goBack = new Intent(this, MovementViewList.class);
+
+        if(SaveUser.getUserName(MovementNewCustom.this).length() != 0)
+            key = SaveUser.getUserName(MovementNewCustom.this);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,12 +53,16 @@ public class MovementNewCustom extends AppCompatActivity {
                     return;
                 }
                 Pose pose = new Pose(category,name,0,description,0);
-                databaseReference.child("users").child(Login.UserID).child("customPoses").child(name).setValue(pose)
-                        .addOnSuccessListener(aVoid ->
-                                Toast.makeText(MovementNewCustom.this, "Pose Created", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e ->
-                                Toast.makeText(MovementNewCustom.this, "Failed to create pose" + e.getMessage(), Toast.LENGTH_SHORT).show());
-                finish();
+                if (key != null) {
+                    databaseReference.child("users").child(key).child("customPoses").child(name).setValue(pose)
+                            .addOnSuccessListener(aVoid ->
+                                    Toast.makeText(MovementNewCustom.this, "Pose Created", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(MovementNewCustom.this, "Failed to create pose" + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    finish();
+                } else {
+                    Toast.makeText(MovementNewCustom.this, "Failed to create pose", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
