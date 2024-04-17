@@ -88,14 +88,34 @@
             android:text="S" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/choosemoodtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How are you feeling today?"
+        android:textSize="26sp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:layout_below="@+id/day_labels"
+        android:layout_marginTop="45dp"/>
+
+    <TextView
+        android:id="@+id/choosemoodprompttxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tap an icon below to log mood for the day."
+        android:textSize="12sp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:layout_below="@+id/choosemoodtxt"/>
+
     <!-- Mood selection buttons -->
     <LinearLayout
         android:id="@+id/mood_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
-        android:layout_below="@id/day_labels"
+        android:layout_below="@id/choosemoodprompttxt"
         android:gravity="center">
 
         <ImageButton
