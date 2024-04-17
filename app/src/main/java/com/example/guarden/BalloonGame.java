@@ -80,7 +80,7 @@ public class BalloonGame extends Activity {
         new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtTimer.setText("TIME REMAINING\n     " + millisUntilFinished / 1000 + " SECONDS");
+                txtTimer.setText("TIME REMAINING\n" + (millisUntilFinished / 1000 + 1) + " SECONDS");
             }
 
             public void onFinish() {
@@ -90,7 +90,7 @@ public class BalloonGame extends Activity {
     }
 
     private void gameFinished() {
-        txtTimer.setText("TIME REMAINING\n     0 SECONDS");
+        txtTimer.setText("TIME REMAINING\n0 SECONDS");
         txtGameOver.setVisibility(View.VISIBLE);
         btnPlayAgain.setVisibility(View.VISIBLE);
         imageBalloon.setEnabled(false);
