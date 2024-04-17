@@ -41,6 +41,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.ArrayList;
+
 import androidx.fragment.app.Fragment;
 
 public class EditProfile extends AppCompatActivity {
@@ -62,6 +64,7 @@ public class EditProfile extends AppCompatActivity {
     private StorageReference imageRef;
     private Uri imageUri;
     static String key;
+    static ArrayList<Pose> getCustomPoses;
 
     ImageButton back, editImage;
 
@@ -142,6 +145,7 @@ public class EditProfile extends AppCompatActivity {
                         lastNameEditText.setText(user.lastName);
                         usernameEditText.setText(user.email);
                         passwordEditText.setText(user.password);
+                        getCustomPoses = user.customPoses;
                     } else {
                         Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
                     }
@@ -164,6 +168,8 @@ public class EditProfile extends AppCompatActivity {
             });
         }
 
+        //TODO: Save user's custom poses when the profile is updated
+
         // Update data if requirements are met
         editButton.setOnClickListener(v -> {
             final String email = usernameEditText.getText().toString().trim();
@@ -172,7 +178,7 @@ public class EditProfile extends AppCompatActivity {
             final String lastName = lastNameEditText.getText().toString().trim();
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
-                User updatedUser = new User(email, password, firstName, lastName);
+                User updatedUser = new User(email, password, firstName, lastName, getCustomPoses);
                 if (key == " ") {
                     key = email.replace(".",",");
                     userRef.child(email.replace(".",",")).setValue(updatedUser)
@@ -185,6 +191,8 @@ public class EditProfile extends AppCompatActivity {
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
+                    SaveUser.setUserName(EditProfile.this, key);
+                    addDefaultPosesToList(key);
                     finish();
                     startActivity(restartIntent);
                 } else if (!key.equals(email.replace(".",","))) {
@@ -203,6 +211,7 @@ public class EditProfile extends AppCompatActivity {
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
                         SaveUser.setUserName(EditProfile.this, key);
+                        addDefaultPosesToList(key);
                         finish();
                         startActivity(restartIntent);
                     } else {
@@ -223,6 +232,7 @@ public class EditProfile extends AppCompatActivity {
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
+                    addDefaultPosesToList(SaveUser.getUserName(EditProfile.this));
                     finish();
                 }
             } else {
@@ -230,8 +240,25 @@ public class EditProfile extends AppCompatActivity {
             }
         });
     }
+
+    public void addDefaultPosesToList(String email){
+        Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
+        userRef.child(email).child("customPoses").child("Lunge").setValue(lunge);
+        Pose triangle = new Pose("yoga","Triangle",R.drawable.pose2,"", 0);
+        userRef.child(email).child("customPoses").child("Triangle").setValue(triangle);
+        Pose forwardFold = new Pose("yoga","Forward Fold",R.drawable.pose3,"", 0);
+        userRef.child(email).child("customPoses").child("Forward Fold").setValue(forwardFold);
+        Pose pushUp = new Pose("exercise","Push Up",R.drawable.exercise1,"", 0);
+        userRef.child(email).child("customPoses").child("Push Up").setValue(pushUp);
+        Pose sitUp = new Pose("exercise","Sit Up",R.drawable.exercise2,"", 0);
+        userRef.child(email).child("customPoses").child("Sit Up").setValue(sitUp);
+        Pose squat = new Pose("exercise","Squat",R.drawable.exercise3,"", 0);
+        userRef.child(email).child("customPoses").child("Squat").setValue(squat);
+    }
+
     private static class User {
         public String email, password, firstName, lastName, image;
+        private ArrayList<Pose> customPoses;
 
         public User() {}
 
@@ -248,6 +275,14 @@ public class EditProfile extends AppCompatActivity {
             this.firstName = firstName;
             this.lastName = lastName;
             this.image = image;
+        }
+
+        public User(String email, String password, String firstName, String lastName, ArrayList<Pose> customPoses) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.customPoses = customPoses;
         }
     }
 }

@@ -213,8 +213,5 @@ public class CreateAccount extends AppCompatActivity {
             this.lastName = lastName;
             this.customPoses = customPoses;
         }
-        public ArrayList<Pose> getCustomPoses(){
-            return this.customPoses;
-        }
     }
 }

@@ -27,6 +27,7 @@ public class Login extends AppCompatActivity {
     public static String UserID;
     static String emailKey;
     static Boolean skipFlag = false;
+    Intent stayIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class Login extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.password);
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
         TextView tvSkip = findViewById(R.id.tvSkip);
+
+        stayIntent = new Intent(Login.this, Login.class);
 
         //setListeners();
 
@@ -95,6 +98,12 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(stayIntent);
     }
 
     private static class User {
