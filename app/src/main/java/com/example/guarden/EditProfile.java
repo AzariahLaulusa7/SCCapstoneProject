@@ -178,6 +178,19 @@ public class EditProfile extends AppCompatActivity {
             final String lastName = lastNameEditText.getText().toString().trim();
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
+                // Password and Email check from Joe in Create Account class
+                // Validate email
+                if (!isValidEmail(email)) {
+                    Toast.makeText(EditProfile.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate password
+                if (!isValidPassword(password)) {
+                    Toast.makeText(EditProfile.this, "Password must contain a capital letter, number and be at least 7 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 User updatedUser = new User(email, password, firstName, lastName, getCustomPoses);
                 if (key == " ") {
                     key = email.replace(".",",");
@@ -241,6 +254,32 @@ public class EditProfile extends AppCompatActivity {
         });
     }
 
+    // Password and Email check from Joe in Create Account class
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        if (TextUtils.isEmpty(password) || password.length() < 7) {
+            return false;
+        }
+        boolean foundNumber = false;
+        boolean foundCapital = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                foundNumber = true;
+            }
+            if (Character.isUpperCase(c)) {
+                foundCapital = true;
+            }
+            if (foundNumber && foundCapital) {
+                return true;  // Return early if both conditions are met
+            }
+        }
+        return false;  // Return false if either digit or uppercase letter is not found
+    }
+
+    // Poses from Adrian
     public void addDefaultPosesToList(String email){
         Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
         userRef.child(email).child("customPoses").child("Lunge").setValue(lunge);
