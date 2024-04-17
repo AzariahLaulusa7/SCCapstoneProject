@@ -69,7 +69,7 @@ public class CreateAccount extends AppCompatActivity {
 
         // Retrieving image from gallery
         ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if(result.getResultCode() == Activity.RESULT_OK) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
 
                 Intent data = result.getData();
 
@@ -87,7 +87,7 @@ public class CreateAccount extends AppCompatActivity {
 
                 } catch (FileNotFoundException e) {// handle exception
                     e.printStackTrace();
-                    Toast.makeText(CreateAccount.this, "Something went wrong: **"+e+"**", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateAccount.this, "Something went wrong: **" + e + "**", Toast.LENGTH_LONG).show();
                 }
             } else {// didn't pick an image
                 Toast.makeText(CreateAccount.this, "Failed to replace image. Please pick an image", Toast.LENGTH_LONG).show();
@@ -112,34 +112,55 @@ public class CreateAccount extends AppCompatActivity {
             ArrayList<Pose> customPoses = new ArrayList<Pose>();
 
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
-                    || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || image == null) {
+                    || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
                 Toast.makeText(CreateAccount.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            // Validate email
+            if (!isValidEmail(email)) {
+                Toast.makeText(CreateAccount.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validate password
+            if (!isValidPassword(password)) {
+                Toast.makeText(CreateAccount.this, "Password must contain a capital letter, number and be at least 7 characters", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Check if passwords match
             if (!password.equals(confirmPassword)) {
                 Toast.makeText(CreateAccount.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            User newUser = new User(email, password, firstName, lastName, customPoses);
-
-            databaseReference.child("users").child(email.replace(".",",")).setValue(newUser)
-                    .addOnSuccessListener(aVoid ->
-                            Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(e ->
-                            Toast.makeText(CreateAccount.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-
-            if (imageUri != null) {
-                storageRef.child("users").child(email.replace(".", ",")).putFile(imageUri)
-                        .addOnSuccessListener(aVoid ->
-                                Toast.makeText(CreateAccount.this, "Storage Created", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e ->
-                                Toast.makeText(CreateAccount.this, "Failed to create storage: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-            }
-            addDefaultPosesToList(email);
-            finish();
+            DatabaseReference userRef = databaseReference.child("users").child(email.replace(".", ","));
+            userRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult().exists()) {
+                    Toast.makeText(CreateAccount.this, "An account with this email already exists.", Toast.LENGTH_SHORT).show();
+                } else if (task.isSuccessful()) {
+                    // Proceed with creating the user account and default poses
+                    User newUser = new User(email, password, firstName, lastName, new ArrayList<>());
+                    userRef.setValue(newUser)
+                            .addOnSuccessListener(aVoid -> {
+                                Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
+                                if (imageUri != null) {
+                                    StorageReference filePath = storageRef.child("users").child(email.replace(".", ",")).child("profileImage");
+                                    filePath.putFile(imageUri)
+                                            .addOnSuccessListener(taskSnapshot -> Toast.makeText(CreateAccount.this, "Profile image uploaded successfully", Toast.LENGTH_SHORT).show())
+                                            .addOnFailureListener(e -> Toast.makeText(CreateAccount.this, "Failed to upload profile image: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                }
+                                addDefaultPosesToList(email.replace(".", ","));
+                                finish();
+                            })
+                            .addOnFailureListener(e -> Toast.makeText(CreateAccount.this, "Failed to create account: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                } else {
+                    Toast.makeText(CreateAccount.this, "Failed to check existing accounts: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
-    }
+    };
 
     public void addDefaultPosesToList(String email){
         Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
@@ -154,6 +175,30 @@ public class CreateAccount extends AppCompatActivity {
         databaseReference.child("users").child(email).child("customPoses").child("Sit Up").setValue(sitUp);
         Pose squat = new Pose("exercise","Squat",R.drawable.exercise3,"", 0);
         databaseReference.child("users").child(email).child("customPoses").child("Squat").setValue(squat);
+    }
+
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        if (TextUtils.isEmpty(password) || password.length() < 7) {
+            return false;
+        }
+        boolean foundNumber = false;
+        boolean foundCapital = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                foundNumber = true;
+            }
+            if (Character.isUpperCase(c)) {
+                foundCapital = true;
+            }
+            if (foundNumber && foundCapital) {
+                return true;  // Return early if both conditions are met
+            }
+        }
+        return false;  // Return false if either digit or uppercase letter is not found
     }
 
     public class User {
