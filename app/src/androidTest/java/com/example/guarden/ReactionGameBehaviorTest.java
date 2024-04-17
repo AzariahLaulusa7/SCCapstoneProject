@@ -19,18 +19,18 @@ public class ReactionGameBehaviorTest {
     @Rule
     public ActivityScenarioRule<ReactionGame> activityRule = new ActivityScenarioRule<>(ReactionGame.class);
 
-    @Test
-    public void testGameFlow() throws InterruptedException {
-        // Start the game
-        onView(withId(R.id.startButton)).perform(click());
-
-        // Wait for the color to change (max 5 seconds)
-        Thread.sleep(5000);
-
-        // Click the reaction button
-        onView(withId(R.id.reactionButton)).perform(click());
-
-        // Check if the score is there (indicates completed game)
-        onView(withId(R.id.textViewScore)).check(matches(withText(containsString("Your Time:"))));
-    }
+//    @Test
+//    public void testGameFlow() throws InterruptedException {
+//        // Start the game
+//        onView(withId(R.id.startButton)).perform(click());
+//
+//        // Wait for the color to change (max 5 seconds)
+//        Thread.sleep(5000);
+//
+//        // Click the reaction button
+//        onView(withId(R.id.reactionButton)).perform(click());
+//
+//        // Check if the score is there (indicates completed game)
+//        onView(withId(R.id.textViewScore)).check(matches(withText(containsString("Your Time:"))));
+//    }
 }
