@@ -22,8 +22,8 @@ public class ReactionGame extends AppCompatActivity {
     private Handler handler = new Handler();
     private Runnable colorChangeRunnable;
     private boolean readyForReaction = false;
-    private boolean gameIsActive = false;  // Controls game active state
-    private long startTime;  // Time at which the color changes
+    private boolean gameIsActive = false;
+    private long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +44,9 @@ public class ReactionGame extends AppCompatActivity {
         mainLayout.setOnClickListener(v -> {
             if (gameIsActive) {
                 if (!readyForReaction) {
-                    gameLostPrematurely();  // Handle premature click
+                    gameLostPrematurely();
                 } else {
-                    gameWon(SystemClock.elapsedRealtime());  // Pass the current time to gameWon
+                    gameWon(SystemClock.elapsedRealtime());
                 }
             }
         });
@@ -56,13 +56,13 @@ public class ReactionGame extends AppCompatActivity {
         startButton.setVisibility(View.GONE);
         instructions.setVisibility(View.GONE);
         textViewScore.setVisibility(View.INVISIBLE);
-        mainLayout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));  // Reset to initial color
+        mainLayout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
         gameIsActive = true;
         prepareGame();
     }
 
     private void gameWon(long reactionEndTime) {
-        long reactionTime = reactionEndTime - startTime;  // Calculate reaction time in milliseconds
+        long reactionTime = reactionEndTime - startTime;
         textViewScore.setText(String.format("Reaction time: %.3f s", reactionTime / 1000.0));
         textViewScore.setVisibility(View.VISIBLE);
 
@@ -79,7 +79,7 @@ public class ReactionGame extends AppCompatActivity {
     }
 
     private void gameLostPrematurely() {
-        handler.removeCallbacks(colorChangeRunnable);  // Cancel the scheduled color change
+        handler.removeCallbacks(colorChangeRunnable);
         gameLost();
     }
 
@@ -90,19 +90,19 @@ public class ReactionGame extends AppCompatActivity {
     }
 
     private void endGame() {
-        mainLayout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));  // Reset background color to white
+        mainLayout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
         startButton.setText("Play Again");
         startButton.setVisibility(View.VISIBLE);
         readyForReaction = false;
-        gameIsActive = false;  // Ensure no further reactions until restarted
+        gameIsActive = false;
     }
 
     private void prepareGame() {
         colorChangeRunnable = new Runnable() {
             @Override
             public void run() {
-                mainLayout.setBackgroundColor(ContextCompat.getColor(ReactionGame.this, android.R.color.holo_blue_bright));  // Change to desired color
-                startTime = SystemClock.elapsedRealtime();  // Record the time of color change
+                mainLayout.setBackgroundColor(ContextCompat.getColor(ReactionGame.this, android.R.color.holo_blue_bright));
+                startTime = SystemClock.elapsedRealtime();
                 readyForReaction = true;
             }
         };
