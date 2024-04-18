@@ -30,6 +30,8 @@ public class HomeScreen extends AppCompatActivity {
 
 //Commenting to commit and be a contributor
 //Worked on home page and settings
+
+    static String key;
     ImageButton journal;
     ImageButton games;
     ImageButton breath;
@@ -154,7 +156,7 @@ public class HomeScreen extends AppCompatActivity {
 
         // Edit hello
         helloText = findViewById(R.id.textView2);
-        String key = SaveUser.getUserName(HomeScreen.this);
+        key = SaveUser.getUserName(HomeScreen.this);
 
         if(key == null)
             key = " ";
