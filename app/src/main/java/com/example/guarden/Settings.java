@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -22,6 +23,8 @@ public class Settings extends AppCompatActivity {
     private static final String NOTIF_KEY = "notif";
     ImageButton arrows;
     TextView log_out;
+    TextView aboutText, privacyPolicyText, termsOfUseText;
+
     ImageButton back_button;
     SharedPreferences prefs;
     androidx.appcompat.widget.SwitchCompat dark_mode;
@@ -37,12 +40,15 @@ public class Settings extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //initialize buttons
-        arrows = (ImageButton) findViewById(R.id.Arrows);
         dark_mode = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.Dark_Mode_Switch);
         notifications = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.NotificationSwitch);
         sound_bar = (SeekBar) findViewById(R.id.seekBar);
         log_out = (TextView) findViewById((R.id.Logout));
         back_button = (ImageButton) findViewById(R.id.Back_Button);
+        aboutText = findViewById(R.id.About);
+        privacyPolicyText = findViewById(R.id.PrivacyPolicy);
+        termsOfUseText = findViewById(R.id.TermsOfUse);
+
         userRef = FirebaseDatabase.getInstance().getReference("users");
 
         //initialize sp
@@ -59,6 +65,10 @@ public class Settings extends AppCompatActivity {
         //get sp for notifications
         boolean notifButton = prefs.getBoolean(NOTIF_KEY, true);
         notifications.setChecked(notifButton);
+
+        aboutText.setOnClickListener(v -> startActivity(new Intent(this, About.class)));
+        privacyPolicyText.setOnClickListener(v -> startActivity(new Intent(this, PrivacyPolicy.class)));
+        termsOfUseText.setOnClickListener(v -> startActivity(new Intent(this, TermsOfUse.class)));
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override

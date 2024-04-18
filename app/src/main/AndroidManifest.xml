@@ -34,6 +34,18 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".About"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PrivacyPolicy"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TermsOfUse"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".EditProfile"
             android:exported="true"
             android:screenOrientation="portrait" />

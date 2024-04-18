@@ -68,4 +68,56 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="terms_of_use_content">
+        <![CDATA[
+        Terms of Use \n\n
+        Last updated: (04/17/2024)\n\n
+        Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the BreatheEasy application (the "Service") operated by BreatheEasy ("us", "we", or "our").\n\n
+        1. Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.\n\n
+        2. By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.\n\n
+        Content\n
+        Our Service allows you to post text under a screen name, which is the only user interaction allowed. You are responsible for the text that you post on the Service, including its legality, reliability, and appropriateness.\n\n
+    By posting text on or through the Service, you represent and warrant that:\n
+    - The text is yours (you own it) or you have the right to use it and grant us the rights and license as provided in these Terms.\n
+    - The posting of your text on or through the Service does not violate the privacy rights, publicity rights, copyrights, contract rights, or any other rights of any person or entity.\n\n
+    You retain any and all of your rights to any text you submit, post or display on or through the Service and you are responsible for protecting those rights. However, by submitting, posting or displaying text using the Service you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such text on and through the Service. This license shall apply to the distribution and the storage of your text in any form, medium, or technology now known or later developed.\n\n
+    You can remove your text posts from the Service at any time. However, you acknowledge that in certain instances, some of your text (such as text that has been responded to or quoted by others) may not be completely removable and copies of your text may continue to exist on the Service.\n\n
+    We have the right but not the obligation to monitor and edit or remove any text or activity. We can also remove text if we reasonably believe that it violates any of the provisions of these Terms or we are required to do so by law.\n\n
+    Please remember that the Service is a platform where users can interact, and where cultural sensitivities must be respected. We ask that you do not upload, post, or otherwise transmit any text that is offensive, obscene, or otherwise objectionable. In line with this policy, we may remove any text that we determine to be offensive, harmful, illegal, or in violation of community norms and our policies.\n\n
+        Contact Us\n
+        If you have any questions about these Terms, please contact us on our website. \n\n https://sccapstone.github.io/Garp/
+        ]]>
+    </string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        Privacy Policy\n\n
+        Last updated: (04/17/2024)\n\n
+        BreatheEasy ("us", "we", or "our") operates the BreatheEasy mobile application (the "Service").\n\n
+        This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.\n\n
+        1. Information Collection And Use\n
+        We collect several different types of information for various purposes to provide and improve our Service to you.\n\n
+        Types of Data Collected\n
+        Personal Data\n
+        While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:\n
+        - Email address\n
+        - First name and last name\n
+        - Password\n
+        - Access to photos\n
+        - Usage Data\n\n
+        2. Use of Data\n
+        BreatheEasy uses the collected data for various purposes:\n
+        - To provide and maintain the Service\n
+        - To notify you about changes to our Service\n
+        - To allow you to participate in interactive features of our Service when you choose to do so\n
+        - To provide analysis or valuable information so that we can improve the Service\n
+        - To monitor the usage of the Service\n
+        - To detect, prevent and address technical issues\n\n
+        3. Changes To This Privacy Policy\n
+        We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.\n\n
+        We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "last updated" date at the top of this Privacy Policy.\n\n
+        You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.\n\n
+        Contact Us\n
+        If you have any questions about this Privacy Policy, please contact us on our website. \n\n https://sccapstone.github.io/Garp/
+        ]]>
+    </string>
 </resources>
