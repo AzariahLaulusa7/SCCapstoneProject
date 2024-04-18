@@ -34,6 +34,7 @@
         android:fontFamily="@font/fondness_eapae"
         android:textSize="30sp"
         android:background="@drawable/custom_button"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

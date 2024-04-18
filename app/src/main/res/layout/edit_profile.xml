@@ -213,6 +213,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:background="@drawable/custom_button"
+                app:backgroundTint="@null"
                 android:text="@string/edit_profile_update"
                 android:textColor="@color/black"
                 android:textSize="20sp"
