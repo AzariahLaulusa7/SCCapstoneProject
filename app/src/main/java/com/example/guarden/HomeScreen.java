@@ -1,21 +1,26 @@
 package com.example.guarden;
 
-import android.annotation.SuppressLint;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+import static android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM;
+
+import android.app.AlarmManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.os.PowerManager;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,10 +33,12 @@ import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
-//Commenting to commit and be a contributor
-//Worked on home page and settings
-
     static String key;
+    private static final String PREF_NAME = "PermissionPrefs";
+    private static final String PREF_ALARM_PERMISSION_REQUESTED = "alarm_permission_requested";
+
+    private static final int NOTIF_REQUEST_CODE = 123;
+    private SharedPreferences prefs;
     ImageButton journal;
     ImageButton games;
     ImageButton breath;
@@ -43,9 +50,10 @@ public class HomeScreen extends AppCompatActivity {
     ImageButton move;
     ImageButton settings;
     TextView helloText;
+
+    public boolean isAppInForeground;
     ImageButton charts;
     DatabaseReference userRef;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,8 @@ public class HomeScreen extends AppCompatActivity {
         profile = (ImageButton) findViewById(R.id.Profile);
         call = (ImageButton) findViewById(R.id.Call);
         settings = (ImageButton) findViewById(R.id.Settings);
+        prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        checkNotifPermission();
         charts = (ImageButton) findViewById(R.id.charts);
         userRef = FirebaseDatabase.getInstance().getReference("users");
 
@@ -83,8 +93,10 @@ public class HomeScreen extends AppCompatActivity {
 
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("move");
                 Intent MoveMain = new Intent(HomeScreen.this, MoveMain.class);
                 startActivity(MoveMain);
+                finish();
             }
         });
 
@@ -92,8 +104,10 @@ public class HomeScreen extends AppCompatActivity {
         breath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("breath");
                 Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheMain.class);
                 startActivity(BreatheMainActivity);
+                finish();
             }});
 
         charts.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +124,7 @@ public class HomeScreen extends AppCompatActivity {
             {
                 Intent Settings = new Intent(HomeScreen.this, Settings.class);
                 startActivity(Settings);
+                finish();
             }
         });
       
@@ -118,12 +133,17 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent EditProfile = new Intent(HomeScreen.this, EditProfile.class);
                 startActivity(EditProfile);
+                finish();
             }
         });
 
         journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("journal");
+                Intent NewJournalEntry = new Intent(HomeScreen.this, NewJournalEntry.class);
+                startActivity(NewJournalEntry);
+                finish();
                 Intent ViewJournalEntries = new Intent(HomeScreen.this, ViewJournalEntries.class);
                 startActivity(ViewJournalEntries);
             }
@@ -132,16 +152,20 @@ public class HomeScreen extends AppCompatActivity {
         games.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("games");
                 Intent intent = new Intent(HomeScreen.this, GameHome.class);
                 startActivity(intent);
+                finish();
             }
         });
 
         forums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("forums");
                 Intent Forums = new Intent(HomeScreen.this, ForumMain.class);
                 startActivity(Forums);
+                finish();
             }
         });
 
@@ -151,6 +175,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomeScreen.this, CrisisLines.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -211,6 +236,23 @@ public class HomeScreen extends AppCompatActivity {
             this.customPoses = customPoses;
         }
     }
+    public void checkNotifPermission() {
+        if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, NOTIF_REQUEST_CODE);
+            Settings s = new Settings();
+            s.notifButton = prefs.getBoolean(Settings.NOTIF_KEY, true);
+        } else {
+            prefs.edit().putBoolean("notif_enabled", true).apply();
+            NotificationScheduler ns = new NotificationScheduler(this);
+            ns.scheduleRepeatNotif();
+        }
+    }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIF_REQUEST_CODE) {
+            prefs.edit().putBoolean("notif_enabled", grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED).apply();
+        }
+    }
 }

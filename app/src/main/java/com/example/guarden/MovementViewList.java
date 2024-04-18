@@ -42,6 +42,7 @@ public class MovementViewList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(addNewMove);
+                finish();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

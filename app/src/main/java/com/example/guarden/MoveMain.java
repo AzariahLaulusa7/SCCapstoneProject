@@ -94,6 +94,7 @@ public class MoveMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(myIntent2);
+                finish();
             }
         });
     }
