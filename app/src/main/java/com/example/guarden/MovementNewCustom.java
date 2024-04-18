@@ -28,16 +28,17 @@ public class MovementNewCustom extends AppCompatActivity {
     private String category;
     private DatabaseReference databaseReference;
     static String key;
+    Intent goBack;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement_add_custom);
-        editTextExerciseName = (EditText) findViewById(R.id.editTextExerciseName);
-        editTextExerciseDescription = (EditText) findViewById(R.id.editTextExerciseDescription);
-        categorySelect = (Spinner) findViewById(R.id.spinnerExerciseCategory);
-        save = (Button) findViewById(R.id.save);
-        cancel = (Button) findViewById(R.id.cancel);
+        editTextExerciseName = findViewById(R.id.editTextExerciseName);
+        editTextExerciseDescription = findViewById(R.id.editTextExerciseDescription);
+        categorySelect = findViewById(R.id.spinnerExerciseCategory);
+        save = findViewById(R.id.save);
+        cancel = findViewById(R.id.cancel);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        Intent goBack = new Intent(this, MovementViewList.class);
+        goBack = new Intent(this, MovementViewList.class);
 
         if(SaveUser.getUserName(MovementNewCustom.this).length() != 0)
             key = SaveUser.getUserName(MovementNewCustom.this);
@@ -72,5 +73,11 @@ public class MovementNewCustom extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(goBack);
+    }
+
 }
 

@@ -27,6 +27,7 @@ public class Movement extends AppCompatActivity {
     ImageButton thumbsUp;
     ImageButton thumbsDown;
     ImageView pose;
+    Intent myIntent;
     private static ArrayList<Pose> poseList;
     private int poseCounter;
     private int firstPoseIndex;
@@ -48,7 +49,7 @@ public class Movement extends AppCompatActivity {
         thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
         poseList = MoveMain.getPoseList();
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        Intent myIntent = new Intent(this, MoveMain.class);
+        myIntent = new Intent(this, MoveMain.class);
         poseCounter=0;
         while (poseCounter < poseList.size()) {
             if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
@@ -128,6 +129,12 @@ public class Movement extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(myIntent);
+    }
+
     public void changeLike(int oldRating, int click){
         if(oldRating==0&&click==1) {
             setThumbs(1);
