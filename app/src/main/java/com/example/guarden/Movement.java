@@ -36,14 +36,14 @@ public class Movement extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras!=null) mode=extras.getString("mode");
         setContentView(R.layout.movement);
-        start = (Button) findViewById(R.id.start);
-        timer = (TextView) findViewById(R.id.timer);
-        name = (TextView) findViewById(R.id.pose_name);
-        pose = (ImageView) findViewById(R.id.pose);
-        next = (Button) findViewById(R.id.next);
-        back = (ImageButton) findViewById(R.id.movement_back);
-        thumbsUp = (ImageButton) findViewById(R.id.thumbs_up);
-        thumbsDown = (ImageButton) findViewById(R.id.thumbs_down);
+        start = findViewById(R.id.start);
+        timer = findViewById(R.id.timer);
+        name = findViewById(R.id.pose_name);
+        pose = findViewById(R.id.pose);
+        next = findViewById(R.id.next);
+        back = findViewById(R.id.movement_back);
+        thumbsUp = findViewById(R.id.thumbs_up);
+        thumbsDown = findViewById(R.id.thumbs_down);
         thumbsUp.setImageResource(R.drawable.baseline_thumb_up_off_alt_24);
         thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
         poseList = MoveMain.getPoseList();
@@ -63,25 +63,30 @@ public class Movement extends AppCompatActivity {
         }
         poseCounter++;
         timer.setVisibility(INVISIBLE);
-            start.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    timer.setVisibility(VISIBLE);
-                    start.setVisibility(INVISIBLE);
-                    next.setVisibility(INVISIBLE);
-                    new CountDownTimer(4 * 1000, 1000) {
+        if (poseCounter > poseList.size()-1) {
+            name.setText("No Poses Activated");
+            start.setVisibility(View.GONE);
+            next.setVisibility(View.GONE);
+            thumbsDown.setVisibility(View.GONE);
+            thumbsUp.setVisibility(View.GONE);
+            pose.setVisibility(View.GONE);
+        }
+        start.setOnClickListener(v -> {
+            timer.setVisibility(VISIBLE);
+            start.setVisibility(INVISIBLE);
+            next.setVisibility(INVISIBLE);
+            new CountDownTimer(4 * 1000, 1000) {
 
-                        public void onTick(long millisUntilFinished) {
-                            timer.setText("" + millisUntilFinished / 1000);
-                        }
-                        public void onFinish() {
-                            timer.setVisibility(INVISIBLE);
-                            start.setVisibility(VISIBLE);
-                            next.setVisibility(VISIBLE);
-                        }
-                    }.start();
+                public void onTick(long millisUntilFinished) {
+                    timer.setText("" + millisUntilFinished / 1000);
                 }
-            });
+                public void onFinish() {
+                    timer.setVisibility(INVISIBLE);
+                    start.setVisibility(VISIBLE);
+                    next.setVisibility(VISIBLE);
+                }
+            }.start();
+        });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,42 +132,42 @@ public class Movement extends AppCompatActivity {
         if(oldRating==0&&click==1) {
             setThumbs(1);
             poseList.get(poseCounter-1).setLike(1);
-            databaseReference.child("users").child(Login.UserID).child("customPoses")
+            databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(1);
             return;
         }
         if(oldRating==0&&click==2) {
             setThumbs(2);
             poseList.get(poseCounter-1).setLike(2);
-            databaseReference.child("users").child(Login.UserID).child("customPoses")
+            databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(2);
             return;
         }
         if(oldRating==1&&click==1) {
             setThumbs(0);
             poseList.get(poseCounter-1).setLike(0);
-            databaseReference.child("users").child(Login.UserID).child("customPoses")
+            databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(0);
             return;
         }
         if(oldRating==1&&click==2) {
             setThumbs(2);
             poseList.get(poseCounter-1).setLike(2);
-            databaseReference.child("users").child(Login.UserID).child("customPoses")
+            databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(2);
             return;
         }
         if(oldRating==2&&click==2) {
             setThumbs(0);
             poseList.get(poseCounter-1).setLike(0);
-            databaseReference.child("users").child(Login.UserID).child("customPoses")
+            databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(0);
             return;
         }
         if(oldRating==2&&click==1) {
             setThumbs(1);
             poseList.get(poseCounter-1).setLike(1);
-            databaseReference.child("users").child(Login.UserID).child("customPoses")
+            databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(1);
         }
     }

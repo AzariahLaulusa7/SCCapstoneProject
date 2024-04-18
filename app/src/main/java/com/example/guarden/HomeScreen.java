@@ -33,9 +33,8 @@ import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
-//Commenting to commit and be a contributor
-//Worked on home page and settings
-private static final String PREF_NAME = "PermissionPrefs";
+    static String key;
+    private static final String PREF_NAME = "PermissionPrefs";
     private static final String PREF_ALARM_PERMISSION_REQUESTED = "alarm_permission_requested";
 
     private static final int NOTIF_REQUEST_CODE = 123;
@@ -182,7 +181,7 @@ private static final String PREF_NAME = "PermissionPrefs";
 
         // Edit hello
         helloText = findViewById(R.id.textView2);
-        String key = SaveUser.getUserName(HomeScreen.this);
+        key = SaveUser.getUserName(HomeScreen.this);
 
         if(key == null)
             key = " ";
