@@ -7,8 +7,13 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".Apptivity"
         android:allowBackup="true"
@@ -32,6 +37,58 @@
         <activity
             android:name=".Login"
             android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateAccount"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".About"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PrivacyPolicy"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TermsOfUse"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditProfile"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GameOver"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChatbotUI"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Movement"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MoveMain"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MovementAdapter"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MovementNewCustom"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MovementViewList"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeScreen"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,119 +96,80 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateAccount"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".EditProfile"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".GameOver"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".Movement"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".MoveMain"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".MovementAdapter"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".MovementNewCustom"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".MovementViewList"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".HomeScreen"
-            android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".BreatheBackup"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BreatheMain"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Settings"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NewJournalEntry"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ViewJournalEntries"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CrisisLines"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ReactionGame"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BalloonGame"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".GameHome"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ForumMain"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MemoryGame"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Forums"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Post"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".Forums"
+            android:name=".PostAdapter"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".PostViewHolder"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".LeaderBoard"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TherapistsActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChartsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
+
 </manifest>

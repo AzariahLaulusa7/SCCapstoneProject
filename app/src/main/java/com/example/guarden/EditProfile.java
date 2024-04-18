@@ -41,6 +41,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.ArrayList;
+
 import androidx.fragment.app.Fragment;
 
 public class EditProfile extends AppCompatActivity {
@@ -62,6 +64,7 @@ public class EditProfile extends AppCompatActivity {
     private StorageReference imageRef;
     private Uri imageUri;
     static String key;
+    static ArrayList<Pose> getCustomPoses;
 
     ImageButton back, editImage;
 
@@ -131,8 +134,8 @@ public class EditProfile extends AppCompatActivity {
 
         });
 
-        if(Login.emailKey != null)
-            key = Login.emailKey;
+        if(SaveUser.getUserName(EditProfile.this).length() != 0)
+            key = SaveUser.getUserName(EditProfile.this);
         if(key == null) {
             key = " ";
         } else {
@@ -145,6 +148,7 @@ public class EditProfile extends AppCompatActivity {
                         lastNameEditText.setText(user.lastName);
                         usernameEditText.setText(user.email);
                         passwordEditText.setText(user.password);
+                        getCustomPoses = user.customPoses;
                     } else {
                         Toast.makeText(EditProfile.this, "LOADING CREDENTIALS FAILED", Toast.LENGTH_SHORT).show();
                     }
@@ -167,6 +171,8 @@ public class EditProfile extends AppCompatActivity {
             });
         }
 
+        //TODO: Save user's custom poses when the profile is updated
+
         // Update data if requirements are met
         editButton.setOnClickListener(v -> {
             final String email = usernameEditText.getText().toString().trim();
@@ -175,7 +181,20 @@ public class EditProfile extends AppCompatActivity {
             final String lastName = lastNameEditText.getText().toString().trim();
 
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(password)) {
-                User updatedUser = new User(email, password, firstName, lastName);
+                // Password and Email check from Joe in Create Account class
+                // Validate email
+                if (!isValidEmail(email)) {
+                    Toast.makeText(EditProfile.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate password
+                if (!isValidPassword(password)) {
+                    Toast.makeText(EditProfile.this, "Password must contain a capital letter, number and be at least 7 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                User updatedUser = new User(email, password, firstName, lastName, getCustomPoses);
                 if (key == " ") {
                     key = email.replace(".",",");
                     userRef.child(email.replace(".",",")).setValue(updatedUser)
@@ -188,6 +207,8 @@ public class EditProfile extends AppCompatActivity {
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
+                    SaveUser.setUserName(EditProfile.this, key);
+                    addDefaultPosesToList(key);
                     finish();
                     startActivity(restartIntent);
                 } else if (!key.equals(email.replace(".",","))) {
@@ -196,15 +217,17 @@ public class EditProfile extends AppCompatActivity {
                         storageRef.child("users").child(email.replace(".",",")).putFile(imageUri)
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this,  "Failed To Save Image", Toast.LENGTH_LONG).show());
-                        storageRef.child("/users/"+Login.emailKey).delete()
+                        storageRef.child("/users/"+SaveUser.getUserName(EditProfile.this)).delete()
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Delete Old Image", Toast.LENGTH_SHORT).show());
-                        userRef.child(Login.emailKey).removeValue();
+                        userRef.child(SaveUser.getUserName(EditProfile.this)).removeValue();
                         userRef.child(email.replace(".",",")).setValue(updatedUser)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
+                        SaveUser.setUserName(EditProfile.this, key);
+                        addDefaultPosesToList(key);
                         finish();
                         startActivity(restartIntent);
                     } else {
@@ -214,17 +237,18 @@ public class EditProfile extends AppCompatActivity {
                 } else {
                     //userRef.child("users").child(Login.emailKey).removeValue();
 
-                    userRef.child(Login.emailKey).setValue(updatedUser)
+                    userRef.child(SaveUser.getUserName(EditProfile.this)).setValue(updatedUser)
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->
                                     Toast.makeText(EditProfile.this, "Failed To Update", Toast.LENGTH_SHORT).show());
                     if(imageUri != null) {
                         //storageRef.child("/users/"+Login.emailKey).delete();
-                        storageRef.child("users").child(Login.emailKey).putFile(imageUri)
+                        storageRef.child("users").child(SaveUser.getUserName(EditProfile.this)).putFile(imageUri)
                                 .addOnFailureListener(e ->
                                         Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
+                    addDefaultPosesToList(SaveUser.getUserName(EditProfile.this));
                     finish();
                 }
             } else {
@@ -232,8 +256,51 @@ public class EditProfile extends AppCompatActivity {
             }
         });
     }
+
+    // Password and Email check from Joe in Create Account class
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        if (TextUtils.isEmpty(password) || password.length() < 7) {
+            return false;
+        }
+        boolean foundNumber = false;
+        boolean foundCapital = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                foundNumber = true;
+            }
+            if (Character.isUpperCase(c)) {
+                foundCapital = true;
+            }
+            if (foundNumber && foundCapital) {
+                return true;  // Return early if both conditions are met
+            }
+        }
+        return false;  // Return false if either digit or uppercase letter is not found
+    }
+
+    // Poses from Adrian
+    public void addDefaultPosesToList(String email){
+        Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
+        userRef.child(email).child("customPoses").child("Lunge").setValue(lunge);
+        Pose triangle = new Pose("yoga","Triangle",R.drawable.pose2,"", 0);
+        userRef.child(email).child("customPoses").child("Triangle").setValue(triangle);
+        Pose forwardFold = new Pose("yoga","Forward Fold",R.drawable.pose3,"", 0);
+        userRef.child(email).child("customPoses").child("Forward Fold").setValue(forwardFold);
+        Pose pushUp = new Pose("exercise","Push Up",R.drawable.exercise1,"", 0);
+        userRef.child(email).child("customPoses").child("Push Up").setValue(pushUp);
+        Pose sitUp = new Pose("exercise","Sit Up",R.drawable.exercise2,"", 0);
+        userRef.child(email).child("customPoses").child("Sit Up").setValue(sitUp);
+        Pose squat = new Pose("exercise","Squat",R.drawable.exercise3,"", 0);
+        userRef.child(email).child("customPoses").child("Squat").setValue(squat);
+    }
+
     private static class User {
         public String email, password, firstName, lastName, image;
+        private ArrayList<Pose> customPoses;
 
         public User() {}
 
@@ -250,6 +317,14 @@ public class EditProfile extends AppCompatActivity {
             this.firstName = firstName;
             this.lastName = lastName;
             this.image = image;
+        }
+
+        public User(String email, String password, String firstName, String lastName, ArrayList<Pose> customPoses) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.customPoses = customPoses;
         }
     }
 }

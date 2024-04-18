@@ -1,7 +1,9 @@
 package com.example.guarden;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,10 +19,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class Login extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
+    public static String UserID;
     static String emailKey;
+    static Boolean skipFlag = false;
+    Intent stayIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +40,14 @@ public class Login extends AppCompatActivity {
         TextView tvCreateAccount = findViewById(R.id.tvCreateAccount);
         TextView tvSkip = findViewById(R.id.tvSkip);
 
+        stayIntent = new Intent(Login.this, Login.class);
+
         //setListeners();
 
         tvSkip.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                skipFlag = true;
                 Intent intent = new Intent(Login.this, HomeScreen.class);
                 startActivity(intent);
                 finish();
@@ -65,6 +75,8 @@ public class Login extends AppCompatActivity {
                         if (user != null && user.password.equals(enteredPassword)) {
                             Toast.makeText(Login.this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Login.this, HomeScreen.class);
+                            UserID=user.email;
+                            SaveUser.setUserName(Login.this, emailKey);
                             startActivity(intent);
                             finish();
                         } else {
@@ -88,7 +100,14 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(stayIntent);
+    }
+
     private static class User {
+        public ArrayList<Pose> poseList;
         public String email, password, firstName, lastName, image;
 
         public User() {}
@@ -100,12 +119,13 @@ public class Login extends AppCompatActivity {
             this.lastName = lastName;
         }
 
-        public User(String email, String password, String firstName, String lastName, String image) {
+        public User(String email, String password, String firstName, String lastName, String image, ArrayList<Pose> poseList) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
             this.image = image;
+            this.poseList = poseList;
         }
     }
 }

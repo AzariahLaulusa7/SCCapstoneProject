@@ -15,11 +15,14 @@ import androidx.core.content.ContextCompat;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Settings extends AppCompatActivity {
     public static final String ALARM_KEY = "alarm";
@@ -29,12 +32,14 @@ public class Settings extends AppCompatActivity {
     public static final String NOTIF_KEY = "notif";
     ImageButton arrows;
     TextView log_out;
+    TextView aboutText, privacyPolicyText, termsOfUseText;
+
     ImageButton back_button;
     SharedPreferences prefs;
     androidx.appcompat.widget.SwitchCompat dark_mode;
     androidx.appcompat.widget.SwitchCompat notifications;
     boolean notifButton;
-
+    private DatabaseReference userRef;
     SeekBar sound_bar;
     public Settings() {
     }
@@ -44,12 +49,16 @@ public class Settings extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //initialize buttons
-        arrows = (ImageButton) findViewById(R.id.Arrows);
         dark_mode = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.Dark_Mode_Switch);
         notifications = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.NotificationSwitch);
         sound_bar = (SeekBar) findViewById(R.id.seekBar);
         log_out = (TextView) findViewById((R.id.Logout));
         back_button = (ImageButton) findViewById(R.id.Back_Button);
+        aboutText = findViewById(R.id.About);
+        privacyPolicyText = findViewById(R.id.PrivacyPolicy);
+        termsOfUseText = findViewById(R.id.TermsOfUse);
+
+        userRef = FirebaseDatabase.getInstance().getReference("users");
 
         //initialize sp
         prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
@@ -69,6 +78,10 @@ public class Settings extends AppCompatActivity {
             notifButton = prefs.getBoolean(NOTIF_KEY, false);
         }
         notifications.setChecked(notifButton);
+
+        aboutText.setOnClickListener(v -> startActivity(new Intent(this, About.class)));
+        privacyPolicyText.setOnClickListener(v -> startActivity(new Intent(this, PrivacyPolicy.class)));
+        termsOfUseText.setOnClickListener(v -> startActivity(new Intent(this, TermsOfUse.class)));
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +132,8 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
+                SaveUser.clearUserName(Settings.this);
+                Login.skipFlag = false;
                 Intent LogIn = new Intent(Settings.this, Login.class);
                 startActivity(LogIn);
                 finish();

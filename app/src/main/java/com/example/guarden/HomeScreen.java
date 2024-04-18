@@ -28,6 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 public class HomeScreen extends AppCompatActivity {
 
 //Commenting to commit and be a contributor
@@ -48,8 +51,10 @@ private static final String PREF_NAME = "PermissionPrefs";
     ImageButton move;
     ImageButton settings;
     TextView helloText;
-    public boolean isAppInForeground;
 
+    public boolean isAppInForeground;
+    ImageButton charts;
+    DatabaseReference userRef;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,28 @@ private static final String PREF_NAME = "PermissionPrefs";
         settings = (ImageButton) findViewById(R.id.Settings);
         prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         checkNotifPermission();
+        charts = (ImageButton) findViewById(R.id.charts);
+        userRef = FirebaseDatabase.getInstance().getReference("users");
+
+        if(SaveUser.getUserName(HomeScreen.this).length() == 0 && !Login.skipFlag)
+        {
+            Intent intent = new Intent(HomeScreen.this, Login.class);
+            startActivity(intent);
+        }
+
+        if (Login.skipFlag) {
+            if (SaveUser.getUserName(HomeScreen.this).length() == 0) {
+                String uniqueKey = userRef.push().getKey();
+                String name = "GUEST";
+                User newUser = new User("", "", name, "", new ArrayList<>());
+                userRef.child(uniqueKey).setValue(newUser)
+                        .addOnSuccessListener(aVoid -> {
+                            addDefaultPosesToList(uniqueKey);
+                        });
+                SaveUser.setUserName(HomeScreen.this, uniqueKey);
+            }
+        }
+
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 NotificationScheduler.setRecentView("move");
@@ -83,6 +110,14 @@ private static final String PREF_NAME = "PermissionPrefs";
                 startActivity(BreatheMainActivity);
                 finish();
             }});
+
+        charts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this, ChartsActivity.class);
+                startActivity(intent);
+            }
+        });
           
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +145,8 @@ private static final String PREF_NAME = "PermissionPrefs";
                 Intent NewJournalEntry = new Intent(HomeScreen.this, NewJournalEntry.class);
                 startActivity(NewJournalEntry);
                 finish();
+                Intent ViewJournalEntries = new Intent(HomeScreen.this, ViewJournalEntries.class);
+                startActivity(ViewJournalEntries);
             }
         });
 
@@ -145,17 +182,16 @@ private static final String PREF_NAME = "PermissionPrefs";
 
         // Edit hello
         helloText = findViewById(R.id.textView2);
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
-        String key = Login.emailKey;
+        String key = SaveUser.getUserName(HomeScreen.this);
 
         if(key == null)
             key = " ";
         userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                if (user != null)
-                    helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null && user.firstName != null)
+                        helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
             }
 
             @Override
@@ -165,8 +201,24 @@ private static final String PREF_NAME = "PermissionPrefs";
         });
     }
 
+    public void addDefaultPosesToList(String email){
+        Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
+        userRef.child(email).child("customPoses").child("Lunge").setValue(lunge);
+        Pose triangle = new Pose("yoga","Triangle",R.drawable.pose2,"", 0);
+        userRef.child(email).child("customPoses").child("Triangle").setValue(triangle);
+        Pose forwardFold = new Pose("yoga","Forward Fold",R.drawable.pose3,"", 0);
+        userRef.child(email).child("customPoses").child("Forward Fold").setValue(forwardFold);
+        Pose pushUp = new Pose("exercise","Push Up",R.drawable.exercise1,"", 0);
+        userRef.child(email).child("customPoses").child("Push Up").setValue(pushUp);
+        Pose sitUp = new Pose("exercise","Sit Up",R.drawable.exercise2,"", 0);
+        userRef.child(email).child("customPoses").child("Sit Up").setValue(sitUp);
+        Pose squat = new Pose("exercise","Squat",R.drawable.exercise3,"", 0);
+        userRef.child(email).child("customPoses").child("Squat").setValue(squat);
+    }
+
     private static class User {
-        public String email, password, firstName, lastName, image;
+        public String email, password, firstName, lastName;
+        private ArrayList<Pose> customPoses;
 
         public User() {}
 
@@ -177,12 +229,12 @@ private static final String PREF_NAME = "PermissionPrefs";
             this.lastName = lastName;
         }
 
-        public User(String email, String password, String firstName, String lastName, String image) {
+        public User(String email, String password, String firstName, String lastName, ArrayList<Pose> customPoses) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.image = image;
+            this.customPoses = customPoses;
         }
     }
     public void checkNotifPermission() {

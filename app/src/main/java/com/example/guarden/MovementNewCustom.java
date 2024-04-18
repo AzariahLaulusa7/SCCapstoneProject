@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -21,40 +22,47 @@ import java.util.Map;
 public class MovementNewCustom extends AppCompatActivity {
     Button save;
     Button cancel;
-
+    Spinner categorySelect;
     private EditText editTextExerciseName;
     private EditText editTextExerciseDescription;
-    String category;
+    private String category;
     private DatabaseReference databaseReference;
+    static String key;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement_add_custom);
         editTextExerciseName = (EditText) findViewById(R.id.editTextExerciseName);
         editTextExerciseDescription = (EditText) findViewById(R.id.editTextExerciseDescription);
+        categorySelect = (Spinner) findViewById(R.id.spinnerExerciseCategory);
         save = (Button) findViewById(R.id.save);
         cancel = (Button) findViewById(R.id.cancel);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         Intent goBack = new Intent(this, MovementViewList.class);
+
+        if(SaveUser.getUserName(MovementNewCustom.this).length() != 0)
+            key = SaveUser.getUserName(MovementNewCustom.this);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = editTextExerciseName.getText().toString().trim();
                 String description = editTextExerciseDescription.getText().toString().trim();
+                String category = categorySelect.getSelectedItem().toString();
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(MovementNewCustom.this, "Please add a name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Pose pose = new Pose("n/a",name,0);
-                /*databaseReference.child("poses");
-                Map<String, Pose> poses = new HashMap<>();
-                poses.put(name,pose);
-                databaseReference.setValueAsync(poses);*/
-                databaseReference.child("poses").child(name).setValue(pose)
-                        .addOnSuccessListener(aVoid ->
-                                Toast.makeText(MovementNewCustom.this, "Pose Created", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e ->
-                                Toast.makeText(MovementNewCustom.this, "Failed to create pose" + e.getMessage(), Toast.LENGTH_SHORT).show());
-                finish();
+                Pose pose = new Pose(category,name,0,description,0);
+                if (key != null) {
+                    databaseReference.child("users").child(key).child("customPoses").child(name).setValue(pose)
+                            .addOnSuccessListener(aVoid ->
+                                    Toast.makeText(MovementNewCustom.this, "Pose Created", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(MovementNewCustom.this, "Failed to create pose" + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    finish();
+                } else {
+                    Toast.makeText(MovementNewCustom.this, "Failed to create pose", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
