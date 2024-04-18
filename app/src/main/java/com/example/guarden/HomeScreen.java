@@ -67,6 +67,7 @@ private static final String PREF_NAME = "PermissionPrefs";
         checkNotifPermission();
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("move");
                 Intent MoveMain = new Intent(HomeScreen.this, MoveMain.class);
                 startActivity(MoveMain);
                 finish();
@@ -77,6 +78,7 @@ private static final String PREF_NAME = "PermissionPrefs";
         breath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("breath");
                 Intent BreatheMainActivity = new Intent(HomeScreen.this, BreatheMain.class);
                 startActivity(BreatheMainActivity);
                 finish();
@@ -104,6 +106,7 @@ private static final String PREF_NAME = "PermissionPrefs";
         journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("journal");
                 Intent NewJournalEntry = new Intent(HomeScreen.this, NewJournalEntry.class);
                 startActivity(NewJournalEntry);
                 finish();
@@ -113,6 +116,7 @@ private static final String PREF_NAME = "PermissionPrefs";
         games.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("games");
                 Intent intent = new Intent(HomeScreen.this, GameHome.class);
                 startActivity(intent);
                 finish();
@@ -122,6 +126,7 @@ private static final String PREF_NAME = "PermissionPrefs";
         forums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NotificationScheduler.setRecentView("forums");
                 Intent Forums = new Intent(HomeScreen.this, ForumMain.class);
                 startActivity(Forums);
                 finish();
@@ -187,6 +192,8 @@ private static final String PREF_NAME = "PermissionPrefs";
             s.notifButton = prefs.getBoolean(Settings.NOTIF_KEY, true);
         } else {
             prefs.edit().putBoolean("notif_enabled", true).apply();
+            NotificationScheduler ns = new NotificationScheduler(this);
+            ns.scheduleRepeatNotif();
         }
     }
 

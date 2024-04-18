@@ -18,8 +18,6 @@ public class NewJournalEntry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_new_journal_entry);
-
-        NotificationScheduler.setRecentView("content_new_journal_entry");
         back = findViewById(R.id.BackToEntries);
         done = findViewById(R.id.nextPage);
 

@@ -16,7 +16,6 @@ public class GameHome extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_home);
-        NotificationScheduler.setRecentView("game_home");
         buttonReaction = findViewById(R.id.buttonReaction);
         buttonBalloons = findViewById(R.id.buttonBalloons);
         buttonMemory = findViewById(R.id.buttonMemory);

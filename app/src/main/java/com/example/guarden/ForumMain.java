@@ -21,7 +21,6 @@ public class ForumMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_main);
 
-        NotificationScheduler.setRecentView("forum_main");
         // Initialize variables
         back = findViewById(R.id.forum_back_icon);
         newPost = findViewById(R.id.new_message);

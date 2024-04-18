@@ -38,7 +38,6 @@ public class BreatheMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.breathe_main);
 
-        NotificationScheduler.setRecentView("breathe_main");
         // Initialize variables
         start = findViewById(R.id.start_breathing);
         circle = findViewById(R.id.circle);
