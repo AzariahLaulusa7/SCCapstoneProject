@@ -117,6 +117,7 @@ public class ForumMain extends AppCompatActivity {
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
             startActivity(myIntent);
+            finish();
         });
 
         // When new post is clicked

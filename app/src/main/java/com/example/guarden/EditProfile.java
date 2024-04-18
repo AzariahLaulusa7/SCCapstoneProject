@@ -120,7 +120,10 @@ public class EditProfile extends AppCompatActivity {
         });
 
         // Go back to home
-        back.setOnClickListener(v -> startActivity(myIntent));
+        back.setOnClickListener(v ->{
+            startActivity(myIntent);
+            finish();
+        });
 
         // Send user to gallery -> activity launcher
         editImage.setOnClickListener(v -> {

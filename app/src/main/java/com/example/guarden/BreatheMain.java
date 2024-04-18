@@ -77,6 +77,7 @@ public class BreatheMain extends AppCompatActivity {
             handler.removeCallbacks(runnable);
             vibrate.cancel();
             startActivity(myIntent);
+            finish();
         });
     }
 

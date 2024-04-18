@@ -1,10 +1,17 @@
 package com.example.guarden;
 
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.content.SharedPreferences;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.view.View;
 import android.view.WindowManager;
@@ -18,9 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Settings extends AppCompatActivity {
+    public static final String ALARM_KEY = "alarm";
+    private static final int NOTIF_REQUEST_CODE = 123;
     private static final String PROGRESS_KEY =  "progress";
     private static final String DARK_MODE_KEY = "dark_mode";
-    private static final String NOTIF_KEY = "notif";
+    public static final String NOTIF_KEY = "notif";
     ImageButton arrows;
     TextView log_out;
     TextView aboutText, privacyPolicyText, termsOfUseText;
@@ -29,8 +38,8 @@ public class Settings extends AppCompatActivity {
     SharedPreferences prefs;
     androidx.appcompat.widget.SwitchCompat dark_mode;
     androidx.appcompat.widget.SwitchCompat notifications;
+    boolean notifButton;
     private DatabaseReference userRef;
-
     SeekBar sound_bar;
     public Settings() {
     }
@@ -52,18 +61,22 @@ public class Settings extends AppCompatActivity {
         userRef = FirebaseDatabase.getInstance().getReference("users");
 
         //initialize sp
-        prefs = getPreferences(Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
 
         //get sp for sound_bar
         int newProgress = prefs.getInt(PROGRESS_KEY, 0);
         sound_bar.setProgress(newProgress);
 
         //get sp for dark_mode
-        boolean darkModeButton = prefs.getBoolean(DARK_MODE_KEY, true);
+        boolean darkModeButton = prefs.getBoolean(DARK_MODE_KEY, false);
         dark_mode.setChecked(darkModeButton);
 
         //get sp for notifications
-        boolean notifButton = prefs.getBoolean(NOTIF_KEY, true);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notifButton = prefs.getBoolean(NOTIF_KEY, true);
+        } else {
+            notifButton = prefs.getBoolean(NOTIF_KEY, false);
+        }
         notifications.setChecked(notifButton);
 
         aboutText.setOnClickListener(v -> startActivity(new Intent(this, About.class)));
@@ -73,8 +86,9 @@ public class Settings extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent MoveMain = new Intent(Settings.this, HomeScreen.class);
-                startActivity(MoveMain);
+                Intent Home = new Intent(Settings.this, HomeScreen.class);
+                startActivity(Home);
+                finish();
             }
         });
 
@@ -85,8 +99,13 @@ public class Settings extends AppCompatActivity {
         });
 
         notifications.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            checkNotifPermission();
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean(NOTIF_KEY, isChecked);
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                editor.putBoolean(NOTIF_KEY, isChecked);
+            } else {
+                editor.putBoolean(NOTIF_KEY, false);
+            }
             editor.apply();
         });
 
@@ -117,7 +136,23 @@ public class Settings extends AppCompatActivity {
                 Login.skipFlag = false;
                 Intent LogIn = new Intent(Settings.this, Login.class);
                 startActivity(LogIn);
+                finish();
             }
         });
+    }
+    public void checkNotifPermission() {
+        if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, NOTIF_REQUEST_CODE);
+        } else {
+            prefs.edit().putBoolean("notif_enabled", true).apply();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIF_REQUEST_CODE) {
+            prefs.edit().putBoolean("notif_enabled", grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED).apply();
+        }
     }
 }

@@ -25,6 +25,8 @@
     <string name="forum_title">Forum</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Not Yet Implemented</string>
+    <string name="channel_name" />
+    <string name="channel_description" />
     <string name="title_activity_chatbot_ui">ChatbotUI</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
