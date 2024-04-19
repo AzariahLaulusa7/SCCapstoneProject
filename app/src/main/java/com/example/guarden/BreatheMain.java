@@ -35,6 +35,7 @@ public class BreatheMain extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     boolean ignore;
+    Intent myIntent;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,7 +57,7 @@ public class BreatheMain extends AppCompatActivity {
         vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         ignore = false;
 
-        Intent myIntent = new Intent(this, HomeScreen.class);
+        myIntent = new Intent(this, HomeScreen.class);
 
         breatheInText.setVisibility(View.GONE);
         breatheOutText.setVisibility(View.GONE);
@@ -77,6 +78,7 @@ public class BreatheMain extends AppCompatActivity {
             handler.removeCallbacks(runnable);
             vibrate.cancel();
             startActivity(myIntent);
+            finish();
         });
     }
 
@@ -187,6 +189,11 @@ public class BreatheMain extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("BreatheCompleted", true);
         editor.apply();
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(myIntent);
     }
 
 }

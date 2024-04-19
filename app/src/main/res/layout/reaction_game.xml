@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,45 +23,38 @@
         android:text="Reaction Time Game"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/textViewPrompt"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginTop="100dp"/>
 
     <TextView
-        android:id="@+id/textViewPrompt"
+        android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click Now!"
+        android:text="Wait for the screen to change color, then tap anywhere!"
         android:textSize="24sp"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/reactionButton"
-        android:layout_marginBottom="32dp"
-        android:visibility="invisible"/>
+        android:layout_below="@+id/title"
+        android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/reactionButton"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:background="@color/colorPrimary"
-        android:contentDescription="react_button" />
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Game"
+        app:backgroundTint="@null"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:layout_centerInParent="true"/>
 
     <TextView
         android:id="@+id/textViewScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:textColor="@android:color/black"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/reactionButton"
-        android:layout_marginTop="32dp"/>
-
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:text="Start Game"
-        android:padding="10dp" />
+        android:layout_below="@+id/startButton"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

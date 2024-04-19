@@ -5,11 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_light"
+        android:alpha="1" />
+
     <ImageButton
         android:id="@+id/move_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/back_button"
+        android:background="@android:color/transparent"
+        android:padding="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator" />
@@ -20,6 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
         android:text="Exercise"
+        android:textColor="@color/white"
+        android:background="@drawable/move_button"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/yoga"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,6 +45,9 @@
         android:layout_marginTop="60dp"
         android:layout_marginBottom="250dp"
         android:text="Yoga"
+        android:textColor="@color/white"
+        android:background="@drawable/move_button"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -46,12 +60,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="60dp"
         android:text="Move"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/move_back"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -60,6 +76,9 @@
         android:layout_height="43dp"
         android:layout_marginBottom="24dp"
         android:text="View All Workouts"
+        android:textColor="@color/white"
+        android:background="@drawable/move_button"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
