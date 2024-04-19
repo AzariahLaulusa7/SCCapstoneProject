@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -68,357 +69,155 @@
                 android:padding="5dp">
 
                 <RelativeLayout
-                    android:layout_width="200dp"
+                    android:id="@+id/filter"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:background="@drawable/forum_top_buttons">
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/move_button">
 
                     <TextView
-                        android:id="@+id/filter"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:contentDescription="filter"
-                        android:drawableStart="@drawable/settings"
-                        android:drawablePadding="10dp"
                         android:fontFamily="sans-serif"
                         android:text="Filter"
-                        android:textColor="@color/black"
-                        android:textSize="35sp" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
                 </RelativeLayout>
+
                 <RelativeLayout
-                    android:layout_width="200dp"
+                    android:id="@+id/sort"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:background="@drawable/forum_top_buttons">
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/move_button">
 
                     <TextView
-                        android:id="@+id/sort"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:contentDescription="sort"
-                        android:drawableStart="@drawable/sort"
-                        android:drawablePadding="10dp"
                         android:fontFamily="sans-serif"
                         android:text="Sort"
-                        android:textColor="@color/black"
-                        android:textSize="35sp" />
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
                 </RelativeLayout>
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/profile_bubble"
-                android:padding="20dp">
+                android:orientation="vertical">
 
-                <RelativeLayout
+                <ImageView
+                    android:id="@+id/filter_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="130dp"
+                    android:background="@drawable/profile_bubble"/>
 
-                    <ImageView
-                        android:id="@+id/user_image"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_alignParentStart="true"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/user_blue_circle_128"/>
+                <TextView
+                    android:id="@+id/tag_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:text="Filter:"
+                    android:drawablePadding="10dp"/>
 
-                    <TextView
-                        android:id="@+id/user_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/user_image"
-                        android:fontFamily="sans-serif"
-                        android:text="John Smith"
-                        android:textColor="@color/black"
-                        android:textSize="35sp"/>
+                <TextView
+                    android:id="@+id/forum_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Positivity"
+                    android:background="@drawable/positive_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_alignParentLeft="true"/>
 
-                    <TextView
-                        android:id="@+id/user_post_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/user_id"
-                        android:layout_toRightOf="@id/user_image"
-                        android:fontFamily="sans-serif"
-                        android:text="Oct 1, 2023"
-                        android:textColor="@color/black"
-                        android:textSize="25sp"/>
+                <TextView
+                    android:id="@+id/oldest_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Oldest-Newest"
+                    android:background="@drawable/picked_image_background"
+                    android:layout_below="@id/tag_title"
+                    android:layout_alignParentLeft="true"/>
 
-                    <TextView
-                        android:id="@+id/forum_tag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Positivity"
-                        android:background="@drawable/positive_forum_tag"
-                        android:layout_below="@id/user_image"/>
+                <TextView
+                    android:id="@+id/newest_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/oldest_tag"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/picked_image_background"
+                    android:padding="10dp"
+                    android:text="Newest-Oldest"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/forum_tag"
-                        android:textColor="@color/black"
-                        android:textSize="25sp"
-                        android:text="I had a great day today!"
-                        android:padding="5dp" />
+                <TextView
+                    android:id="@+id/forum_tag_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/question_forum_tag"
+                    android:padding="10dp"
+                    android:text="Question"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/white">
+                <TextView
+                    android:id="@+id/forum_tag_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Vent"
+                    android:background="@drawable/vent_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag_two"/>
 
-                        <TextView
-                            android:id="@+id/comment_one"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:textSize="25sp"
-                            android:textColor="@color/black"
-                            android:text="add a comment" />
+                <TextView
+                    android:id="@+id/forum_tag_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="All"
+                    android:background="@drawable/picked_image_background"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag_three"/>
 
-                        <EditText
-                            android:id="@+id/comment_box_one"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="20dp"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"
-                            android:hint="Type comment..."
-                            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
-
-                        <ImageButton
-                            android:id="@+id/send_one"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="20dp"
-                            android:background="@android:color/transparent"
-                            app:srcCompat = "@drawable/paper_plane"/>
-
-                    </RelativeLayout>
-
-                </RelativeLayout>
             </RelativeLayout>
 
-            <RelativeLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/profile_bubble"
-                android:padding="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/user_image_two"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_alignParentStart="true"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/user_blue_circle_128"/>
-
-                    <TextView
-                        android:id="@+id/user_id_two"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/user_image_two"
-                        android:fontFamily="sans-serif"
-                        android:text="Sarah Porter"
-                        android:textColor="@color/black"
-                        android:textSize="35sp"/>
-
-                    <TextView
-                        android:id="@+id/user_post_date_two"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/user_id_two"
-                        android:layout_toRightOf="@id/user_image_two"
-                        android:fontFamily="sans-serif"
-                        android:text="Oct 1, 2023"
-                        android:textColor="@color/black"
-                        android:textSize="25sp"/>
-
-                    <TextView
-                        android:id="@+id/forum_tag_two"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Question"
-                        android:background="@drawable/question_forum_tag"
-                        android:layout_below="@id/user_image_two"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/forum_tag_two"
-                        android:textColor="@color/black"
-                        android:textSize="25sp"
-                        android:text="Who are you the most greatful for?"
-                        android:padding="5dp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/white">
-
-                        <TextView
-                            android:id="@+id/comment_two"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:textSize="25sp"
-                            android:textColor="@color/black"
-                            android:text="add a comment" />
-
-                        <EditText
-                            android:id="@+id/comment_box_two"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="20dp"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"
-                            android:hint="Type comment..."
-                            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
-
-                        <ImageButton
-                            android:id="@+id/send_two"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="20dp"
-                            android:background="@android:color/transparent"
-                            app:srcCompat = "@drawable/paper_plane"/>
-
-                    </RelativeLayout>
-
-
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="290dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/profile_bubble"
-                android:padding="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/user_image_three"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_alignParentStart="true"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/user_blue_circle_128"/>
-
-                    <TextView
-                        android:id="@+id/user_id_three"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/user_image_three"
-                        android:fontFamily="sans-serif"
-                        android:text="Jamie White"
-                        android:textColor="@color/black"
-                        android:textSize="35sp"/>
-
-                    <TextView
-                        android:id="@+id/user_post_date_three"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/user_id_three"
-                        android:layout_toRightOf="@id/user_image_three"
-                        android:fontFamily="sans-serif"
-                        android:text="Oct 1, 2023"
-                        android:textColor="@color/black"
-                        android:textSize="25sp"/>
-
-                    <TextView
-                        android:id="@+id/forum_tag_three"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Vent"
-                        android:background="@drawable/vent_forum_tag"
-                        android:layout_below="@id/user_image_three"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/forum_tag_three"
-                        android:textColor="@color/black"
-                        android:textSize="25sp"
-                        android:text="I am too tired to work >:("
-                        android:padding="5dp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/white">
-
-                        <TextView
-                            android:id="@+id/comment_three"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:textSize="25sp"
-                            android:textColor="@color/black"
-                            android:text="add a comment" />
-
-                        <EditText
-                            android:id="@+id/comment_box_three"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="20dp"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"
-                            android:hint="Type comment..."
-                            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"/>
-
-                        <ImageButton
-                            android:id="@+id/send_three"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="20dp"
-                            android:background="@android:color/transparent"
-                            app:srcCompat = "@drawable/paper_plane"/>
-
-                    </RelativeLayout>
-
-
-                </RelativeLayout>
-            </RelativeLayout>
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerview"
+                android:paddingTop="20dp"/>
 
         </LinearLayout>
     </RelativeLayout>
-</ScrollView>
+</RelativeLayout>

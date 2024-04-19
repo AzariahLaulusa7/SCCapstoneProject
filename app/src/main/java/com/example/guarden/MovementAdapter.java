@@ -51,12 +51,16 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         holder.sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Handle switch checked
-                databaseReference.child("users").child(Login.UserID).child("customPoses")
-                        .child(pose.getName()).child("like").setValue(0);
+                if (HomeScreen.key != null) {
+                    databaseReference.child("users").child(HomeScreen.key).child("customPoses")
+                            .child(pose.getName()).child("like").setValue(0);
+                }
             } else {
                 // Handle switch unchecked
-                databaseReference.child("users").child(Login.UserID).child("customPoses")
-                        .child(pose.getName()).child("like").setValue(2);
+                if (HomeScreen.key != null) {
+                    databaseReference.child("users").child(HomeScreen.key).child("customPoses")
+                            .child(pose.getName()).child("like").setValue(2);
+                }
             }
         });
     }
@@ -82,7 +86,7 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
                 Pose pose = poseArrayList.get(position);
                 @Override
                 public void onClick(View v) {
-                    databaseReference.child("users").child(Login.UserID).child("customPoses")
+                    databaseReference.child("users").child(HomeScreen.key).child("customPoses")
                             .child("Sit Up").child("like").setValue(1);
                 }
             });*/

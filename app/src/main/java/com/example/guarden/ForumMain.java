@@ -1,59 +1,130 @@
 package com.example.guarden;
 
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.example.guarden.R;
+
+import java.util.Collections;
+import java.util.Comparator;
+
 public class ForumMain extends AppCompatActivity {
 
     // Variables
     ImageButton back, newPost;
-    TextView filter, sort, comment1, comment2, comment3;
-    EditText commentBox1, commentBox2, commentBox3;
-    ImageButton send1, send2, send3;
+    TextView tag_title, vent, question, positive, all, old, newest;
+    RelativeLayout filter, sort;
+    PostAdapter adapter;
+    Intent myIntent;
+    ImageView forum_view;
+    String tagText = " ";
+    Boolean filterActive = false;
+    Boolean sortActive = false;
+    Intent restart;
+    private DatabaseReference forumRef, posForumRef, ventForumRef, questionForumRef;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_main);
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+
         // Initialize variables
         back = findViewById(R.id.forum_back_icon);
         newPost = findViewById(R.id.new_message);
-
-        sort = findViewById(R.id.sort);
         filter = findViewById(R.id.filter);
+        sort = findViewById(R.id.sort);
 
-        comment1 = findViewById(R.id.comment_one);
-        comment2 = findViewById(R.id.comment_two);
-        comment3 = findViewById(R.id.comment_three);
+        forum_view = findViewById(R.id.filter_view);
+        tag_title = findViewById(R.id.tag_title);
+        vent = findViewById(R.id.forum_tag_three);
+        question = findViewById(R.id.forum_tag_two);
+        positive = findViewById(R.id.forum_tag);
+        all = findViewById(R.id.forum_tag_four);
+        old = findViewById(R.id.oldest_tag);
+        newest = findViewById(R.id.newest_tag);
 
-        commentBox1 = findViewById(R.id.comment_box_one);
-        commentBox2 = findViewById(R.id.comment_box_two);
-        commentBox3 = findViewById(R.id.comment_box_three);
+        forum_view.setVisibility(View.GONE);
+        tag_title.setVisibility(View.GONE);
+        vent.setVisibility(View.GONE);
+        question.setVisibility(View.GONE);
+        positive.setVisibility(View.GONE);
+        all.setVisibility(View.GONE);
+        old.setVisibility(View.GONE);
+        newest.setVisibility(View.GONE);
 
-        send1 = findViewById(R.id.send_one);
-        send2 = findViewById(R.id.send_two);
-        send3 = findViewById(R.id.send_three);
+        old.setBackground(getDrawable(R.drawable.grey_tag_background));
 
-        // Hide comment boxes and sends
-        commentBox1.setVisibility(View.GONE);
-        commentBox2.setVisibility(View.GONE);
-        commentBox3.setVisibility(View.GONE);
-        send1.setVisibility(View.GONE);
-        send2.setVisibility(View.GONE);
-        send3.setVisibility(View.GONE);
-
-        Intent myIntent = new Intent(ForumMain.this, HomeScreen.class);
+        myIntent = new Intent(ForumMain.this, HomeScreen.class);
         Intent postPage = new Intent(ForumMain.this, Forums.class);
+        restart = new Intent(ForumMain.this, ForumMain.class);
+
+        forumRef = FirebaseDatabase.getInstance().getReference().child("forum");
+        posForumRef = FirebaseDatabase.getInstance().getReference().child("positiveForum");
+        ventForumRef = FirebaseDatabase.getInstance().getReference().child("ventForum");
+        questionForumRef = FirebaseDatabase.getInstance().getReference().child("questionForum");
+
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+//                .setQuery(forumRef, Post.class)
+//                .build();
+//        adapter = new PostAdapter(options);
+
+        if (tagText.equals("positivity") && filterActive == true) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(posForumRef.orderByKey(), Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+            recyclerView.setAdapter(adapter);
+
+        } else if (tagText.equals("vent") && filterActive == true) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(ventForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+
+        } else if (tagText.equals("question") && filterActive == true) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(questionForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(forumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+            recyclerView.setAdapter(adapter);
+
+        }
 
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
             startActivity(myIntent);
+            finish();
         });
 
         // When new post is clicked
@@ -61,53 +132,205 @@ public class ForumMain extends AppCompatActivity {
             startActivity(postPage);
         });
 
-        // When sort is clicked
-        sort.setOnClickListener(v -> {
-
-        });
-
         // When filter is clicked
         filter.setOnClickListener(v -> {
-
+            tag_title.setText("Filter:");
+            if (filterActive == true) {
+                forum_view.setVisibility(View.GONE);
+                tag_title.setVisibility(View.GONE);
+                vent.setVisibility(View.GONE);
+                question.setVisibility(View.GONE);
+                positive.setVisibility(View.GONE);
+                all.setVisibility(View.GONE);
+                newest.setVisibility(View.GONE);
+                old.setVisibility(View.GONE);
+                filterActive = false;
+            } else {
+                newest.setVisibility(View.GONE);
+                old.setVisibility(View.GONE);
+                forum_view.setVisibility(View.VISIBLE);
+                tag_title.setVisibility(View.VISIBLE);
+                vent.setVisibility(View.VISIBLE);
+                question.setVisibility(View.VISIBLE);
+                positive.setVisibility(View.VISIBLE);
+                all.setVisibility(View.VISIBLE);
+                filterActive = true;
+                sortActive = false;
+            }
         });
 
-        // When a comment button is clicked
-        comment1.setOnClickListener(v -> {
-            commentBox1.setVisibility(View.VISIBLE);
-            send1.setVisibility(View.VISIBLE);
-            comment1.setVisibility(View.GONE);
+        sort.setOnClickListener(v -> {
+            tag_title.setText("Sort:");
+            if (sortActive == true) {
+                forum_view.setVisibility(View.GONE);
+                tag_title.setVisibility(View.GONE);
+                vent.setVisibility(View.GONE);
+                question.setVisibility(View.GONE);
+                positive.setVisibility(View.GONE);
+                all.setVisibility(View.GONE);
+                newest.setVisibility(View.GONE);
+                old.setVisibility(View.GONE);
+                sortActive = false;
+            } else {
+                forum_view.setVisibility(View.VISIBLE);
+                tag_title.setVisibility(View.VISIBLE);
+                newest.setVisibility(View.VISIBLE);
+                old.setVisibility(View.VISIBLE);
+                vent.setVisibility(View.GONE);
+                question.setVisibility(View.GONE);
+                positive.setVisibility(View.GONE);
+                all.setVisibility(View.GONE);
+                sortActive = true;
+                filterActive = false;
+            }
         });
 
-        comment2.setOnClickListener(v -> {
-            commentBox2.setVisibility(View.VISIBLE);
-            send2.setVisibility(View.VISIBLE);
-            comment2.setVisibility(View.GONE);
+        newest.setOnClickListener(v -> {
+            newest.setBackground(getDrawable(R.drawable.picked_image_background));
+            old.setBackground(getDrawable(R.drawable.grey_tag_background));
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            lm.setReverseLayout(false);
+            lm.setStackFromEnd(false);
+
+            recyclerView.setLayoutManager(lm);
         });
 
-        comment3.setOnClickListener(v -> {
-            commentBox3.setVisibility(View.VISIBLE);
-            send3.setVisibility(View.VISIBLE);
-            comment3.setVisibility(View.GONE);
+        old.setOnClickListener(v -> {
+            newest.setBackground(getDrawable(R.drawable.grey_tag_background));
+            old.setBackground(getDrawable(R.drawable.picked_image_background));
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            lm.setReverseLayout(true);
+            lm.setStackFromEnd(true);
+
+            recyclerView.setLayoutManager(lm);
         });
 
-        send1.setOnClickListener(v -> {
-            commentBox1.setVisibility(View.GONE);
-            send1.setVisibility(View.GONE);
-            comment1.setVisibility(View.VISIBLE);
+        vent.setOnClickListener(v -> {
+            tagText = "vent";
+            vent.setBackground(getDrawable(R.drawable.vent_forum_tag));
+            question.setBackground(getDrawable(R.drawable.grey_tag_background));
+            positive.setBackground(getDrawable(R.drawable.grey_tag_background));
+            all.setBackground(getDrawable(R.drawable.grey_tag_background));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(ventForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
         });
 
-        send2.setOnClickListener(v -> {
-            commentBox2.setVisibility(View.GONE);
-            send2.setVisibility(View.GONE);
-            comment2.setVisibility(View.VISIBLE);
+        question.setOnClickListener(v -> {
+            tagText = "question";
+            vent.setBackground(getDrawable(R.drawable.grey_tag_background));
+            question.setBackground(getDrawable(R.drawable.question_forum_tag));
+            positive.setBackground(getDrawable(R.drawable.grey_tag_background));
+            all.setBackground(getDrawable(R.drawable.grey_tag_background));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(questionForumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
         });
 
-        send3.setOnClickListener(v -> {
-            commentBox3.setVisibility(View.GONE);
-            send3.setVisibility(View.GONE);
-            comment3.setVisibility(View.VISIBLE);
+        positive.setOnClickListener(v -> {
+            tagText = "positivity";
+            vent.setBackground(getDrawable(R.drawable.grey_tag_background));
+            question.setBackground(getDrawable(R.drawable.grey_tag_background));
+            positive.setBackground(getDrawable(R.drawable.positive_forum_tag));
+            all.setBackground(getDrawable(R.drawable.grey_tag_background));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(posForumRef.orderByValue(), Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
         });
 
+        all.setOnClickListener(v -> {
+
+            vent.setBackground(getDrawable(R.drawable.grey_tag_background));
+            question.setBackground(getDrawable(R.drawable.grey_tag_background));
+            positive.setBackground(getDrawable(R.drawable.grey_tag_background));
+            all.setBackground(getDrawable(R.drawable.picked_image_background));
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
+                    .setQuery(forumRef, Post.class)
+                    .build();
+            adapter = new PostAdapter(options);
+
+            recyclerView.setAdapter(adapter);
+            adapter.stopListening();
+            adapter.startListening();
+        });
+
+    }
+
+    @Override
+    public  void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        adapter.stopListening();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        adapter.stopListening();
+        startActivity(myIntent);
+    }
+
+    private static class Chat {
+        public String name, tag, message;
+
+        public Chat() {}
+
+        public Chat(String name, String tag, String message) {
+            this.name = name;
+            this.tag = tag;
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getTag() {
+            return tag;
+        }
+
+        public void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
 }

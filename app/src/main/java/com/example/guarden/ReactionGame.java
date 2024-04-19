@@ -1,66 +1,111 @@
 package com.example.guarden;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import java.util.Random;
 
 public class ReactionGame extends AppCompatActivity {
 
-    private Button reactionButton, startButton;
-    private TextView textViewPrompt, textViewScore;
+    private RelativeLayout mainLayout;
+    private TextView textViewScore, instructions;
+    private Button startButton;
     private Handler handler = new Handler();
-    private ReactionGameLogic gameLogic = new ReactionGameLogic();
-
-    private boolean gameStarted = false;
+    private Runnable colorChangeRunnable;
+    private boolean readyForReaction = false;
+    private boolean gameIsActive = false;
+    private long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reaction_game);
 
-        reactionButton = findViewById(R.id.reactionButton);
-        textViewPrompt = findViewById(R.id.textViewPrompt);
+        mainLayout = findViewById(R.id.mainLayout);
         textViewScore = findViewById(R.id.textViewScore);
+        instructions = findViewById(R.id.instructions);
         startButton = findViewById(R.id.startButton);
         ImageView backIcon = findViewById(R.id.backIcon);
         backIcon.setOnClickListener(v -> finish());
 
         startButton.setOnClickListener(v -> {
-            if (!gameStarted) {
-                prepareGame();
-                gameStarted = true;
-                startButton.setVisibility(View.GONE);
-            }
+            startGame();
         });
 
-        reactionButton.setOnClickListener(v -> {
-            if (gameLogic.isWaitingForClick()) {
-                long reactionTime = gameLogic.stopGame();
-                textViewScore.setText("Your Time: " + reactionTime / 1000.0 + "s\nTap square to play again!");
-                reactionButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            } else {
-                textViewScore.setText("");
-                prepareGame();
+        mainLayout.setOnClickListener(v -> {
+            if (gameIsActive) {
+                if (!readyForReaction) {
+                    gameLostPrematurely();
+                } else {
+                    gameWon(SystemClock.elapsedRealtime());
+                }
             }
         });
     }
 
+    private void startGame() {
+        startButton.setVisibility(View.GONE);
+        instructions.setVisibility(View.GONE);
+        textViewScore.setVisibility(View.INVISIBLE);
+        mainLayout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
+        gameIsActive = true;
+        prepareGame();
+    }
+
+    private void gameWon(long reactionEndTime) {
+        long reactionTime = reactionEndTime - startTime;
+        textViewScore.setText(String.format("Reaction time: %.3f s", reactionTime / 1000.0));
+        textViewScore.setVisibility(View.VISIBLE);
+
+        // SharedPreferences to save best time logic
+        SharedPreferences gamePrefs = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+        long currentBestTime = gamePrefs.getLong("ReactionGameBestTime", Long.MAX_VALUE);
+        if (reactionTime < currentBestTime) {
+            SharedPreferences.Editor editor = gamePrefs.edit();
+            editor.putLong("ReactionGameBestTime", reactionTime);
+            editor.apply();
+        }
+
+        endGame();
+    }
+
+    private void gameLostPrematurely() {
+        handler.removeCallbacks(colorChangeRunnable);
+        gameLost();
+    }
+
+    private void gameLost() {
+        textViewScore.setText("You lose! Try again.");
+        textViewScore.setVisibility(View.VISIBLE);
+        endGame();
+    }
+
+    private void endGame() {
+        mainLayout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
+        startButton.setText("Play Again");
+        startButton.setVisibility(View.VISIBLE);
+        readyForReaction = false;
+        gameIsActive = false;
+    }
+
     private void prepareGame() {
-        textViewPrompt.setVisibility(View.INVISIBLE);
-        reactionButton.setEnabled(false);
-        handler.postDelayed(new Runnable() {
+        colorChangeRunnable = new Runnable() {
             @Override
             public void run() {
-                reactionButton.setEnabled(true);
-                textViewPrompt.setVisibility(View.VISIBLE); // Make the text visible here
-                reactionButton.setBackgroundColor(gameLogic.randomColor());
-                gameLogic.startGame();
+                mainLayout.setBackgroundColor(ContextCompat.getColor(ReactionGame.this, android.R.color.holo_blue_bright));
+                startTime = SystemClock.elapsedRealtime();
+                readyForReaction = true;
             }
-        }, new Random().nextInt(4000) + 1000); // Random delay between 1 and 5 seconds
+        };
+        handler.postDelayed(colorChangeRunnable, new Random().nextInt(4000) + 1000);
     }
 }
