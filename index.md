@@ -1,8 +1,8 @@
 # BreatheEasy
 
 ## Why BreatheEasy?
-The Meditation app's main goal is to help users with their mental health by providing them with an easy-to-use resource in states of heightened emotion.
-It provides several options that target different approaches for dealing with negative feelings like anxiety and panic.
+In today's over-demanding and fast-paced world, it is easy to feel overwhelmed and depressed at times. What if you had a way to escape? Welcome to BreatheEasy.
+BreatheEasy's main goal is to help users with their mental health by providing several options for dealing with negative feelings, like anxiety and stress. From engaging mini-games to calming breathing exercises, each feature is designed to empower you towards better mental health. It's the 24/7 immediate support you need the most.
 
 ## A Glance Into What BreatheEasy Offers
 ![Demo Video](comingsoon.jpeg)
