@@ -65,6 +65,7 @@ public class EditProfile extends AppCompatActivity {
     private Uri imageUri;
     static String key;
     static ArrayList<Pose> getCustomPoses;
+    Intent myIntent;
 
     ImageButton back, editImage;
 
@@ -82,7 +83,7 @@ public class EditProfile extends AppCompatActivity {
         Button editButton = findViewById(R.id.editbtn);
         editImage = findViewById(R.id.edit_image);
         back = findViewById(R.id.backIcon);
-        Intent myIntent = new Intent(this, HomeScreen.class);
+        myIntent = new Intent(this, HomeScreen.class);
         Intent restartIntent = new Intent(this, Login.class);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -255,6 +256,11 @@ public class EditProfile extends AppCompatActivity {
                 Toast.makeText(EditProfile.this, "Please FILL all fields", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(myIntent);
     }
 
     // Password and Email check from Joe in Create Account class

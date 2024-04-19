@@ -1,5 +1,6 @@
 package com.example.guarden;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -40,8 +41,10 @@ public class Forums extends AppCompatActivity {
     Button post;
     ImageView profileImage;
     ImageView image1, image2, image3, image4, image5, image6;
-    TextView vent, positive, question, userName, date;
+    TextView vent, positive, question, userName;
     Intent myIntent;
+    SharedPreferences orderPrefs;
+    int prefOrderNumber;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,6 +72,15 @@ public class Forums extends AppCompatActivity {
         positive.setBackground(getDrawable(R.drawable.grey_tag_background));
         image1.setBackground(getDrawable(R.drawable.picked_image_background));
         image = R.drawable.cow;
+
+        orderPrefs = getSharedPreferences("TestWOrderNumber", MODE_PRIVATE);
+        prefOrderNumber = orderPrefs.getInt("TestWNUMBER", 10000);
+
+//        SharedPreferences gamePrefs = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+//        int currentBestLevel = gamePrefs.getInt("MemoryGameBestScore", 0);
+//        SharedPreferences.Editor editor = gamePrefs.edit();
+//        editor.putInt("MemoryGameBestScore", difficultyLevel - 1);
+//        editor.apply();
 
         // Edit user name
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
@@ -198,7 +210,7 @@ public class Forums extends AppCompatActivity {
                 } else {
                     if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) {
                         String uniqueKey = userRef.push().getKey();
-                        Chat newChat = new Chat(name, tag, message, image, tagBackground);
+                        Chat newChat = new Chat(name, tag, message, image, tagBackground, prefOrderNumber);
                         forumRef.child(uniqueKey).setValue(newChat)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(Forums.this, "Post Created", Toast.LENGTH_SHORT).show())
@@ -211,6 +223,16 @@ public class Forums extends AppCompatActivity {
                         } else {
                             qRef.child(uniqueKey).setValue(newChat);
                         }
+
+
+//        SharedPreferences.Editor editor = gamePrefs.edit();
+//        editor.putInt("MemoryGameBestScore", difficultyLevel - 1);
+//        editor.apply();
+                        prefOrderNumber++;
+                        SharedPreferences.Editor editor = orderPrefs.edit();
+                        editor.putInt("TestWNUMBER", prefOrderNumber);
+                        editor.apply();
+
                     }
                     startActivity(myIntent);
                     finish();
@@ -258,16 +280,17 @@ public class Forums extends AppCompatActivity {
     private static class Chat {
         public String name, tag, message;
         public int image;
-        public int tagBackground;
+        public int tagBackground, orderNumber;
 
         public Chat() {}
 
-        public Chat(String name, String tag, String message, int image, int tagBackground) {
+        public Chat(String name, String tag, String message, int image, int tagBackground, int orderNumber) {
             this.name = name;
             this.tag = tag;
             this.message = message;
             this.image = image;
             this.tagBackground = tagBackground;
+            this.orderNumber = orderNumber;
         }
     }
 
