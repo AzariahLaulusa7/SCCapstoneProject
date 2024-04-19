@@ -1,7 +1,7 @@
 # BreatheEasy
 
 ## Why BreatheEasy?
-In today's over-demanding and fast-paced world, it is easy to feel overwhelmed and depressed at times. What if you had a way to escape? Welcome to BreatheEasy.
+In today's over-demanding and fast-paced world, it is easy to feel overwhelmed and depressed at times. What if you had a way to escape? Welcome to BreatheEasy.\
 BreatheEasy's main goal is to help users with their mental health by providing several options for dealing with negative feelings, like anxiety and stress. From engaging mini-games to calming breathing exercises, each feature is designed to empower you towards better mental health. It's the 24/7 immediate support you need the most.
 
 ## A Glance Into What BreatheEasy Offers
