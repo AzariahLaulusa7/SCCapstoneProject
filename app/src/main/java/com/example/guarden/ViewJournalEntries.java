@@ -56,11 +56,14 @@ public class ViewJournalEntries extends AppCompatActivity {
         ArrayList<JournalEntry> entries = new ArrayList<JournalEntry>();
 
         ArrayList<String> data = readFromInternalStorageLineByLine(getApplicationContext(), "journals.csv");
-
+        int i=0;
         for (String line : data) {
-            JournalEntry entry = new JournalEntry();
-            entry.setFromString(line);
-            entries.add(entry);
+            if(i%2 ==0){
+                JournalEntry entry = new JournalEntry();
+                entry.setFromString(line);
+                entries.add(entry);
+            }
+            i++;
         }
 
 
