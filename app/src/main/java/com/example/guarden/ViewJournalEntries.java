@@ -56,13 +56,15 @@ public class ViewJournalEntries extends AppCompatActivity {
         ArrayList<JournalEntry> entries = new ArrayList<JournalEntry>();
 
         ArrayList<String> data = readFromInternalStorageLineByLine(getApplicationContext(), "journals.csv");
-
+        int i=0; //For some reason there is a blank line in the CSV file, this is a patch
         for (String line : data) {
-            JournalEntry entry = new JournalEntry();
-            entry.setFromString(line);
-            entries.add(entry);
+            if(i%2 ==0){
+                JournalEntry entry = new JournalEntry();
+                entry.setFromString(line);
+                entries.add(entry);
+            }
+            i++;
         }
-
 
         add = (Button) findViewById(R.id.newEntry);
         back = (ImageButton) findViewById(R.id.journalBack);
