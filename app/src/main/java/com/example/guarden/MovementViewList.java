@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class MovementViewList extends AppCompatActivity {
     Button add;
     ImageButton back;
+    Intent goBack;
     static MovementAdapter movementAdapter;
 
 
@@ -32,7 +33,7 @@ public class MovementViewList extends AppCompatActivity {
         back = (ImageButton) findViewById(R.id.move_back);
         RecyclerView recycler = findViewById(R.id.recycler);
         Intent addNewMove = new Intent(this, MovementNewCustom.class);
-        Intent goBack = new Intent(this, MoveMain.class);
+        goBack = new Intent(this, MoveMain.class);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recycler.setLayoutManager(linearLayoutManager);
         movementAdapter = new MovementAdapter(this, MoveMain.poseList);
@@ -42,6 +43,7 @@ public class MovementViewList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(addNewMove);
+                finish();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,11 @@ public class MovementViewList extends AppCompatActivity {
                 startActivity(goBack);
             }
         });
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(goBack);
     }
 
 }

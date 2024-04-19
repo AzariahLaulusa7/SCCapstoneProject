@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import java.io.Serializable;
 
-public class Post implements Serializable {
+public class Post {
 
     String name;
     String tag;
@@ -61,4 +61,5 @@ public class Post implements Serializable {
     public void setTagBackground(int tagBackground) {
         this.tagBackground = tagBackground;
     }
+
 }

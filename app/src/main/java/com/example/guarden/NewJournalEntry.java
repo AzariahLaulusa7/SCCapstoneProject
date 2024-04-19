@@ -5,8 +5,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 
 import android.content.Context;
 
@@ -56,14 +58,20 @@ public class NewJournalEntry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_new_journal_entry);
-
         back = findViewById(R.id.BackToEntries);
         done = findViewById(R.id.nextPage);
 
         journalName = findViewById(R.id.journalEntryName);
         journalContent = findViewById(R.id.journalEntryContent);
 
-        back.setOnClickListener(v -> finish());
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Home = new Intent(NewJournalEntry.this, HomeScreen.class);
+                startActivity(Home);
+                finish();
+            }
+        });
         done.setOnClickListener(v -> {
             String name = journalName.getText().toString().trim();
             String content = journalContent.getText().toString().trim();

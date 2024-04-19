@@ -100,29 +100,6 @@
         app:layout_constraintTop_toBottomOf="@+id/Notifications" />
 
     <TextView
-        android:id="@+id/AdditionalSettings"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Additional\nSettings"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
-
-    <ImageView
-        android:id="@+id/blackBar6"
-        android:layout_width="0dp"
-        android:layout_height="11dp"
-        android:src="@drawable/rectangle_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AdditionalSettings" />
-
-    <TextView
         android:id="@+id/About"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -131,7 +108,50 @@
         android:text="About"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
+
+    <ImageView
+        android:id="@+id/blackBar5"
+        android:layout_width="0dp"
+        android:layout_height="11dp"
+        android:src="@drawable/rectangle_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/About" />
+
+    <TextView
+        android:id="@+id/PrivacyPolicy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Privacy Policy"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blackBar5" />
+
+    <ImageView
+        android:id="@+id/blackBar6"
+        android:layout_width="0dp"
+        android:layout_height="11dp"
+        android:src="@drawable/rectangle_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PrivacyPolicy" />
+
+    <TextView
+        android:id="@+id/TermsOfUse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:text="Terms of use"
+        android:textAlignment="center"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar6" />
@@ -143,7 +163,7 @@
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/About" />
+        app:layout_constraintTop_toBottomOf="@+id/TermsOfUse" />
 
     <TextView
         android:id="@+id/Logout"
@@ -197,15 +217,6 @@
         app:layout_constraintTop_toTopOf="@+id/SettingsText"
         app:layout_constraintBottom_toBottomOf="@+id/SettingsText" />
 
-    <ImageButton
-        android:id="@+id/Arrows"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="#00000000"
-        android:src="@drawable/baseline_keyboard_double_arrow_right_24"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar6"
-        app:layout_constraintEnd_toEndOf="@+id/AdditionalSettings"
-        app:layout_constraintTop_toTopOf="@+id/AdditionalSettings" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

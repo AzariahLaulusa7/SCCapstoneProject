@@ -69,45 +69,148 @@
                 android:padding="5dp">
 
                 <RelativeLayout
-                    android:layout_width="190dp"
+                    android:id="@+id/filter"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:background="@drawable/forum_top_buttons">
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/move_button">
 
                     <TextView
-                        android:id="@+id/filter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:contentDescription="filter"
-                        android:drawableStart="@drawable/settings"
-                        android:drawablePadding="10dp"
                         android:fontFamily="sans-serif"
                         android:text="Filter"
-                        android:textColor="@color/black"
-                        android:textSize="35sp" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
                 </RelativeLayout>
+
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/sort"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:background="@drawable/forum_top_buttons">
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/move_button">
 
                     <TextView
-                        android:id="@+id/sort"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:contentDescription="sort"
-                        android:drawableStart="@drawable/sort"
-                        android:drawablePadding="10dp"
                         android:fontFamily="sans-serif"
                         android:text="Sort"
-                        android:textColor="@color/black"
-                        android:textSize="35sp" />
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
                 </RelativeLayout>
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/filter_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:background="@drawable/profile_bubble"/>
+
+                <TextView
+                    android:id="@+id/tag_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:text="Filter:"
+                    android:drawablePadding="10dp"/>
+
+                <TextView
+                    android:id="@+id/forum_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Positivity"
+                    android:background="@drawable/positive_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_alignParentLeft="true"/>
+
+                <TextView
+                    android:id="@+id/oldest_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Oldest-Newest"
+                    android:background="@drawable/picked_image_background"
+                    android:layout_below="@id/tag_title"
+                    android:layout_alignParentLeft="true"/>
+
+                <TextView
+                    android:id="@+id/newest_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/oldest_tag"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/picked_image_background"
+                    android:padding="10dp"
+                    android:text="Newest-Oldest"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/forum_tag_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/question_forum_tag"
+                    android:padding="10dp"
+                    android:text="Question"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/forum_tag_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Vent"
+                    android:background="@drawable/vent_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag_two"/>
+
+                <TextView
+                    android:id="@+id/forum_tag_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="All"
+                    android:background="@drawable/picked_image_background"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag_three"/>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"

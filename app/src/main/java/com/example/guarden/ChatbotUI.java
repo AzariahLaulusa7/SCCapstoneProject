@@ -2,6 +2,7 @@ package com.example.guarden;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,15 +27,26 @@ public class ChatbotUI extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatbot_ui);
 
-        back = findViewById(R.id.Back);
+        back = findViewById(R.id.Back_home_chatbot);
         send = findViewById(R.id.send_chat);
-        Intent goBack = new Intent(ChatbotUI.this, CrisisLines.class);
-
-        back.setOnClickListener(v -> {
-            startActivity(goBack);
-        });
 
         ArrayList<Message> messages = new ArrayList<Message>();
+        recycler = findViewById(R.id.recyclerViews);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MessageListAdapter(messages, this);
+        recycler.setAdapter(adapter);
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Home = new Intent(ChatbotUI.this, CrisisLines.class);
+                startActivity(Home);
+                finish();
+            }
+        });
+
+
 
 
         send.setOnClickListener(v -> {
@@ -51,10 +63,7 @@ public class ChatbotUI extends AppCompatActivity{
 
         });
 
-        recycler = findViewById(R.id.recyclerViews);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageListAdapter(messages, this);
-        recycler.setAdapter(adapter);
+
 
     }
 
