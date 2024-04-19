@@ -29,25 +29,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <EditText
-        android:id="@+id/journalEntryName"
-        android:layout_width="373dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="148dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="New Journal Entry"
-        app:layout_constraintBottom_toTopOf="@+id/journalEntryContent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/journalEntryContent"
-        android:layout_width="362dp"
-        android:layout_height="514dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="358dp"
+        android:layout_height="421dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Your Thoughts Here..."
@@ -56,4 +43,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/journalEntryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="New Journal Entry"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/journalEntryContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.707" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

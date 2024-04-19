@@ -79,8 +79,8 @@ public class NewJournalEntry extends AppCompatActivity {
 
             appendToInternalStorage(getApplicationContext(), "journals.csv", entry.getString() + "\n");
 
-            Intent home = new Intent(this, HomeScreen.class);
-            startActivity(home);
+            Intent back = new Intent(this, ViewJournalEntries.class);
+            startActivity(back);
         });
     }
 }
