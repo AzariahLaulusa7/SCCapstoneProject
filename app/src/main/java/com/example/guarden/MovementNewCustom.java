@@ -48,7 +48,7 @@ public class MovementNewCustom extends AppCompatActivity {
             public void onClick(View v) {
                 String name = editTextExerciseName.getText().toString().trim();
                 String description = editTextExerciseDescription.getText().toString().trim();
-                String category = categorySelect.getSelectedItem().toString();
+                String category = categorySelect.getSelectedItem().toString().toLowerCase();
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(MovementNewCustom.this, "Please add a name", Toast.LENGTH_SHORT).show();
                     return;
