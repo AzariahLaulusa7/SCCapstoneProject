@@ -28,7 +28,7 @@ public class MovementNewCustom extends AppCompatActivity {
     private String category;
     private DatabaseReference databaseReference;
     static String key;
-    Intent goBack;
+    Intent goBack, main;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement_add_custom);
@@ -39,6 +39,7 @@ public class MovementNewCustom extends AppCompatActivity {
         cancel = findViewById(R.id.cancel);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         goBack = new Intent(this, MovementViewList.class);
+        main = new Intent(this, MoveMain.class);
 
         if(SaveUser.getUserName(MovementNewCustom.this).length() != 0)
             key = SaveUser.getUserName(MovementNewCustom.this);
@@ -61,6 +62,7 @@ public class MovementNewCustom extends AppCompatActivity {
                             .addOnFailureListener(e ->
                                     Toast.makeText(MovementNewCustom.this, "Failed to create pose" + e.getMessage(), Toast.LENGTH_SHORT).show());
                     finish();
+                    startActivity(main);
                 } else {
                     Toast.makeText(MovementNewCustom.this, "Failed to create pose", Toast.LENGTH_SHORT).show();
                 }
