@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class ChartsActivity extends Activity {
@@ -31,36 +32,39 @@ public class ChartsActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_state_of_mind);
-        ImageView backIcon = findViewById(R.id.backIcon);
 
-        moodValues = new int[7];
-        loadMoodData();
+        moodValues = new int[7]; // Ensure this is initialized before any use
+        Arrays.fill(moodValues, -1); // Optional: Initialize with a default value
 
         moodGraphView = findViewById(R.id.mood_graph_view);
-        moodGraphView.setMoodValues(moodValues);
-        sharedPreferences = this.getSharedPreferences("DailyChallenges", Context.MODE_PRIVATE);
-
         gameChallengeIconEmpty = findViewById(R.id.gameChallengeIconEmpty);
         gameChallengeIconCheck = findViewById(R.id.gameChallengeIconCheck);
         breatheChallengeIconCheck = findViewById(R.id.breatheChallengeIcon);
         breatheChallengeIconEmpty = findViewById(R.id.breatheChallengeIconEmpty);
 
+        sharedPreferences = this.getSharedPreferences("DailyChallenges", Context.MODE_PRIVATE);
+        loadMoodData();
+
+        if (moodGraphView != null) {
+            moodGraphView.setMoodValues(moodValues);
+        } else {
+            throw new RuntimeException("MoodGraphView not found.");
+        }
 
         updateGameChallengeIcon();
         setupMidnightAlarm();
 
-        // Set up mood buttons
         setupMoodButton(R.id.sad_face_button, 0);
         setupMoodButton(R.id.ok_face_button, 1);
         setupMoodButton(R.id.happy_face_button, 2);
 
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        ImageView backIcon = findViewById(R.id.backIcon);
+        backIcon.setOnClickListener(v -> finish());
+
+        resetMoodDataIfNecessary();
     }
+
+
 
     private void setupMoodButton(int buttonId, final int mood) {
         ImageButton button = findViewById(buttonId);
@@ -82,6 +86,20 @@ public class ChartsActivity extends Activity {
         }
         editor.apply();
     }
+    private void resetMoodDataIfNecessary() {
+        Calendar now = Calendar.getInstance();
+        int dayOfWeek = now.get(Calendar.DAY_OF_WEEK);
+        int hourOfDay = now.get(Calendar.HOUR_OF_DAY);
+
+        // Check if it's Sunday and past midnight but within a small buffer (e.g., 1 hour to avoid edge cases)
+        if (dayOfWeek == Calendar.SUNDAY && hourOfDay == 0) {
+            Arrays.fill(moodValues, -1);  // Reset all mood data
+            saveMoodData();  // Save the reset state to SharedPreferences
+            moodGraphView.setMoodValues(moodValues);  // Update the graph
+            moodGraphView.invalidate();  // Redraw the graph
+        }
+    }
+
 
     private void loadMoodData() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -93,6 +111,7 @@ public class ChartsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        resetMoodDataIfNecessary();
         updateGameChallengeIcon();
     }
 
@@ -121,17 +140,19 @@ public class ChartsActivity extends Activity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
         if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            calendar.add(Calendar.WEEK_OF_YEAR, 1);  // Ensure this is going forward, not backward
         }
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
     }
+
+
 }
 
