@@ -40,7 +40,6 @@ public class Settings extends AppCompatActivity {
     androidx.appcompat.widget.SwitchCompat notifications;
     boolean notifButton;
     private DatabaseReference userRef;
-    SeekBar sound_bar;
     public Settings() {
     }
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class Settings extends AppCompatActivity {
         //initialize buttons
         dark_mode = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.Dark_Mode_Switch);
         notifications = (androidx.appcompat.widget.SwitchCompat) findViewById(R.id.NotificationSwitch);
-        sound_bar = (SeekBar) findViewById(R.id.seekBar);
         log_out = (TextView) findViewById((R.id.Logout));
         back_button = (ImageButton) findViewById(R.id.Back_Button);
         aboutText = findViewById(R.id.About);
@@ -62,10 +60,6 @@ public class Settings extends AppCompatActivity {
 
         //initialize sp
         prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
-
-        //get sp for sound_bar
-        int newProgress = prefs.getInt(PROGRESS_KEY, 0);
-        sound_bar.setProgress(newProgress);
 
         //get sp for dark_mode
         boolean darkModeButton = prefs.getBoolean(DARK_MODE_KEY, false);
@@ -107,25 +101,6 @@ public class Settings extends AppCompatActivity {
                 editor.putBoolean(NOTIF_KEY, false);
             }
             editor.apply();
-        });
-
-        sound_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                SharedPreferences.Editor editor  = prefs.edit();
-                editor.putInt(PROGRESS_KEY, progress);
-                editor.apply();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
         });
 
         log_out.setOnClickListener(new View.OnClickListener() {

@@ -94,43 +94,41 @@
         app:layout_constraintVertical_bias="0.582" />
 
     <ImageButton
-        android:id="@+id/Call"
-        android:layout_width="138dp"
-        android:layout_height="80dp"
-        android:background="@drawable/call_button"
-        android:onClick="Call"
-        android:src="@drawable/baseline_phone_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Settings"
-        app:layout_constraintStart_toEndOf="@+id/Profile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
         android:id="@+id/Profile"
-        android:layout_width="130dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@drawable/right_left_button"
         android:onClick="Profile"
         android:src="@drawable/baseline_person_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Settings"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@id/Call"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
+        android:id="@+id/Call"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@drawable/call_button"
+        android:onClick="Call"
+        android:src="@drawable/baseline_phone_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Settings"
+        app:layout_constraintStart_toEndOf="@id/Profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
         android:id="@+id/Settings"
-        android:layout_width="130dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@drawable/right_left_button"
         android:onClick="Settings"
         android:src="@drawable/baseline_settings_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/Call"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
