@@ -102,6 +102,7 @@ public class MemoryGame extends Activity {
             updateBestScore();
             gameIsActive = false;
             playAgainButton.setVisibility(View.VISIBLE);
+            markChallengeAsCompleted();
         }
     }
 
@@ -117,6 +118,12 @@ public class MemoryGame extends Activity {
         sequenceIndex = 0;
         generateSequence(difficultyLevel);
         flashSequence();
+    }
+    private void markChallengeAsCompleted() {
+        SharedPreferences sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("MemoryGameCompleted", true);
+        editor.apply();
     }
 
     private void generateSequence(int length) {
