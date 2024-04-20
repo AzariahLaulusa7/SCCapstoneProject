@@ -30,7 +30,7 @@ public class Movement extends AppCompatActivity {
     ImageView pose;
     Intent myIntent;
     private static ArrayList<Pose> poseList;
-    private int poseCounter, listCounter, poseMax;
+    private int poseCounter, listCounter, tempTracker, whileLoopStuck;
     private int firstPoseIndex;
     private DatabaseReference databaseReference;
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,16 @@ public class Movement extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         myIntent = new Intent(this, MoveMain.class);
         poseCounter=0;
-        poseMax = 0;
+        tempTracker = 0;
         listCounter = 0;
+        whileLoopStuck = 0;
+        while (poseCounter < poseList.size()) {
+            if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
+                listCounter++;
+            }
+            poseCounter++;
+        }
+        poseCounter = 0;
         while (poseCounter < poseList.size()) {
             if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
                 pose.setImageResource(poseList.get(poseCounter).getImageRes());
@@ -67,7 +75,7 @@ public class Movement extends AppCompatActivity {
         }
         poseCounter++;
         timer.setVisibility(INVISIBLE);
-        if (poseCounter > poseList.size() - 1) {
+        if (poseCounter > poseList.size()) {
             name.setText("No Poses Activated");
             start.setVisibility(View.GONE);
             next.setVisibility(View.GONE);
@@ -96,17 +104,32 @@ public class Movement extends AppCompatActivity {
             public void onClick(View v) {
                 boolean foundValidPose = false;
                 while (!foundValidPose) {
-                    if (poseCounter >= poseList.size() - 1) {
-                        poseCounter = firstPoseIndex;
-                        poseMax = listCounter;
-                    }
-                    if (poseList.get(poseCounter).getLike() == 2 && poseList.get(poseCounter).getCategory().equalsIgnoreCase(mode) && poseMax == poseCounter) {
+                    if (whileLoopStuck > 777) {
                         name.setText("No Poses Activated");
                         start.setVisibility(View.GONE);
                         next.setVisibility(View.GONE);
                         thumbsDown.setVisibility(View.GONE);
                         thumbsUp.setVisibility(View.GONE);
                         pose.setVisibility(View.GONE);
+                        SaveUser.setThumbsDown(Movement.this, false);
+                        break;
+                    }
+                    if (poseCounter >= poseList.size()) {
+                        poseCounter = firstPoseIndex;
+                    }
+                    if (SaveUser.getThumbsDown(Movement.this) == true) {
+                        listCounter--;
+                        Toast.makeText(Movement.this, "Counter: **"+poseCounter+"**", Toast.LENGTH_LONG).show();
+                        SaveUser.setThumbsDown(Movement.this, false);
+                    }
+                    if (poseList.get(poseCounter).getLike() == 2 && poseList.get(poseCounter).getCategory().equalsIgnoreCase(mode) && listCounter < 0) {
+                        name.setText("No Poses Activated");
+                        start.setVisibility(View.GONE);
+                        next.setVisibility(View.GONE);
+                        thumbsDown.setVisibility(View.GONE);
+                        thumbsUp.setVisibility(View.GONE);
+                        pose.setVisibility(View.GONE);
+                        SaveUser.setThumbsDown(Movement.this, false);
                         break;
                     }
                     if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equalsIgnoreCase(mode)) {
@@ -114,33 +137,41 @@ public class Movement extends AppCompatActivity {
                         name.setText(poseList.get(poseCounter).getName());
                         setThumbs(poseList.get(poseCounter).getLike());
                         start.setVisibility(View.VISIBLE);
+                        tempTracker = poseCounter;
                         foundValidPose = true;
-                        listCounter++;
                     }
                     poseCounter++;
                     if (poseCounter >= poseList.size()) {
                         poseCounter = firstPoseIndex;
-                        poseMax = listCounter;
                     }
+                    whileLoopStuck++;
                 }
             }
         });
         thumbsUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               changeLike(poseList.get(poseCounter-1).getLike(),1);
+                int temp = poseCounter;
+                poseCounter = tempTracker+1;
+                changeLike(poseList.get(poseCounter-1).getLike(),1);
+                SaveUser.setThumbsDown(Movement.this, false);
+                poseCounter = temp;
             }
         });
         thumbsDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int temp = poseCounter;
+                poseCounter = tempTracker+1;
                 changeLike(poseList.get(poseCounter-1).getLike(),2);
+                SaveUser.setThumbsDown(Movement.this, true);
+                poseCounter = temp;
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SaveUser.setThumbsDown(Movement.this, false);
                 startActivity(myIntent);
                 finish();
             }
