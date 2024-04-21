@@ -15,13 +15,15 @@
         android:src="@drawable/baseline_arrow_back_ios_24"
         android:contentDescription="Back Icon"
         android:background="?attr/selectableItemBackground"
-        android:padding="10dp" />
+        android:padding="10dp"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reaction Time Game"
+        android:textColor="@color/white"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"/>
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:text="Wait for the screen to change color, then tap anywhere!"
         android:textSize="24sp"
+        android:textColor="@color/white"
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/title"
@@ -42,9 +45,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Game"
+        android:textSize="20dp"
+        android:height="60dp"
+        android:width="200dp"
         app:backgroundTint="@null"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:textColor="@color/white"
         android:background="@color/colorAccent"
+        android:foreground="@null"
         android:layout_centerInParent="true"/>
 
     <TextView
