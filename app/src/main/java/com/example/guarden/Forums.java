@@ -42,7 +42,7 @@ public class Forums extends AppCompatActivity {
     ImageView profileImage;
     ImageView image1, image2, image3, image4, image5, image6;
     TextView vent, positive, question, userName;
-    Intent myIntent;
+    Intent myIntent, home;
     SharedPreferences orderPrefs;
     int prefOrderNumber;
 
@@ -108,6 +108,7 @@ public class Forums extends AppCompatActivity {
         forumRef = FirebaseDatabase.getInstance().getReference("forum");
 
         myIntent = new Intent(Forums.this, ForumMain.class);
+        home = new Intent(Forums.this, HomeScreen.class);
 
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
@@ -223,18 +224,8 @@ public class Forums extends AppCompatActivity {
                         } else {
                             qRef.child(uniqueKey).setValue(newChat);
                         }
-
-
-//        SharedPreferences.Editor editor = gamePrefs.edit();
-//        editor.putInt("MemoryGameBestScore", difficultyLevel - 1);
-//        editor.apply();
-                        prefOrderNumber++;
-                        SharedPreferences.Editor editor = orderPrefs.edit();
-                        editor.putInt("TestWNUMBER", prefOrderNumber);
-                        editor.apply();
-
                     }
-                    startActivity(myIntent);
+                    startActivity(home);
                     finish();
                 }
             }  else {
@@ -253,7 +244,6 @@ public class Forums extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        startActivity(myIntent);
     }
 
     private static class User {
