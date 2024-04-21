@@ -189,8 +189,10 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
-                    if (user != null && user.firstName != null)
+                    if (user != null && user.firstName != null) {
                         helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
+                        SaveUser.setName(HomeScreen.this, user.firstName);
+                    }
             }
 
             @Override

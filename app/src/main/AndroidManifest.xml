@@ -48,6 +48,10 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".DetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".CreateAccount"
             android:exported="true"
             android:screenOrientation="portrait" />
