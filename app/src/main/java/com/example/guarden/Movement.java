@@ -87,7 +87,7 @@ public class Movement extends AppCompatActivity {
             timer.setVisibility(VISIBLE);
             start.setVisibility(INVISIBLE);
             next.setVisibility(INVISIBLE);
-            new CountDownTimer(4 * 1000, 1000) {
+            new CountDownTimer(16 * 1000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     timer.setText("" + millisUntilFinished / 1000);
