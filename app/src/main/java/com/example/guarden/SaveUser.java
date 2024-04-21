@@ -6,6 +6,8 @@ import android.preference.PreferenceManager;
 
 public class SaveUser {
     static final String PREF_USER_NAME= "username";
+
+    static final String PREF_NAME = "nametag";
     static final String PREF_THUMBS = "laulusa_thumb";
 
     static SharedPreferences getSharedPreferences(Context ctx) {
@@ -22,6 +24,18 @@ public class SaveUser {
     public static String getUserName(Context ctx)
     {
         return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
+    }
+
+    public static void setName(Context ctx, String userName)
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(PREF_NAME, userName);
+        editor.commit();
+    }
+
+    public static String getName(Context ctx)
+    {
+        return getSharedPreferences(ctx).getString(PREF_NAME, "");
     }
 
     public static void setThumbsDown(Context ctx, boolean thumbs)
