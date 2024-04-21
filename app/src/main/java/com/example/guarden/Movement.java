@@ -119,7 +119,7 @@ public class Movement extends AppCompatActivity {
                     }
                     if (SaveUser.getThumbsDown(Movement.this) == true) {
                         listCounter--;
-                        Toast.makeText(Movement.this, "Counter: **"+poseCounter+"**", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(Movement.this, "Counter: **"+poseCounter+"**", Toast.LENGTH_LONG).show();
                         SaveUser.setThumbsDown(Movement.this, false);
                     }
                     if (poseList.get(poseCounter).getLike() == 2 && poseList.get(poseCounter).getCategory().equalsIgnoreCase(mode) && listCounter < 0) {
