@@ -16,7 +16,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="880dp"
-        android:background="@drawable/background_light"
+        android:background="@drawable/background_image"
         android:alpha="1" />
 
     <ImageView
