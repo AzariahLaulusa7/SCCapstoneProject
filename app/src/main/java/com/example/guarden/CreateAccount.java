@@ -145,6 +145,7 @@ public class CreateAccount extends AppCompatActivity {
                     userRef.setValue(newUser)
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
+                                initializeUserScores(email.replace(".", ","));
                                 if (imageUri != null) {
                                     StorageReference filePath = storageRef.child("users").child(email.replace(".", ",")).child("profileImage");
                                     filePath.putFile(imageUri)
@@ -161,6 +162,12 @@ public class CreateAccount extends AppCompatActivity {
             });
         });
     };
+
+    private void initializeUserScores(String emailKey) {
+        DatabaseReference userScoresRef = databaseReference.child("users").child(emailKey).child("userScores");
+        UserScores initialScores = new UserScores(0, 0, 10000); // Initial scores set to 0
+        userScoresRef.setValue(initialScores);
+    }
 
     public void addDefaultPosesToList(String email){
         Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
@@ -212,6 +219,18 @@ public class CreateAccount extends AppCompatActivity {
             this.firstName = firstName;
             this.lastName = lastName;
             this.customPoses = customPoses;
+            initializeUserScores(email.replace(".", ","));
+        }
+    }
+    public class UserScores {
+        public int memoryGame;
+        public int balloonGame;
+        public long reactionGame;
+
+        public UserScores(int memoryGame, int balloonGame, long reactionGame) {
+            this.memoryGame = memoryGame;
+            this.balloonGame = balloonGame;
+            this.reactionGame = reactionGame;
         }
     }
 }
