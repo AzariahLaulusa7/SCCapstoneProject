@@ -22,11 +22,9 @@ public class BalloonGame extends Activity {
 
     private int currentScore = 0;
     private int bestScore = 0;
-    private SharedPreferences preferences;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference userScoresRef;
     private TextView txtCurrentScore;
-    private TextView txtBestScore;
     private TextView txtTimer;
     private ImageView imageBalloon;
     private TextView txtGameOver;
