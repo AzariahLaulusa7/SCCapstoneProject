@@ -165,7 +165,7 @@ public class CreateAccount extends AppCompatActivity {
 
     private void initializeUserScores(String emailKey) {
         DatabaseReference userScoresRef = databaseReference.child("users").child(emailKey).child("userScores");
-        UserScores initialScores = new UserScores(0, 0, 0); // Initial scores set to 0
+        UserScores initialScores = new UserScores(0, 0, 10000); // Initial scores set to 0
         userScoresRef.setValue(initialScores);
     }
 

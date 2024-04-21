@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,17 +17,16 @@ import com.google.firebase.database.ValueEventListener;
 public class LeaderBoard extends AppCompatActivity {
     private TextView memoryGameScore, balloonGameScore, reactionGameScore;
     private TextView globalMemoryGameScore, globalBalloonGameScore, globalReactionGameScore;
-    private DatabaseReference usersRef, globalScoresRef;
-    private FirebaseAuth firebaseAuth;
+    private DatabaseReference usersRef;
+    private int globalMemoryBest = 0, globalBalloonBest = 0;
+    private long globalReactionBest = Long.MAX_VALUE;  // Assuming lower scores are better for reaction times
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard);
 
-        firebaseAuth = FirebaseAuth.getInstance();
         usersRef = FirebaseDatabase.getInstance().getReference("users");
-        globalScoresRef = FirebaseDatabase.getInstance().getReference("globalScores");
 
         memoryGameScore = findViewById(R.id.memoryGameScore);
         balloonGameScore = findViewById(R.id.balloonGameScore);
@@ -45,10 +42,9 @@ public class LeaderBoard extends AppCompatActivity {
     }
 
     private void loadUserScores() {
-        FirebaseUser currentUser = firebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-            DatabaseReference userScoresRef = usersRef.child(userId).child("userScores");
+        String username = SaveUser.getUserName(this);
+        if (username != null && !username.isEmpty()) {
+            DatabaseReference userScoresRef = usersRef.child(username).child("userScores");
             userScoresRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -64,27 +60,41 @@ public class LeaderBoard extends AppCompatActivity {
                 }
             });
         } else {
-            // You might want to handle this condition, e.g., prompt the user to log in
-            Log.e("LeaderBoard", "User is not logged in.");
+            Log.e("LeaderBoard", "Invalid username. User might not be logged in or username not set.");
         }
     }
 
     private void updateScoreViews(Integer memoryScore, Integer balloonScore, Long reactionScore) {
         memoryGameScore.setText("Memory Game Best Score: " + (memoryScore != null ? memoryScore : "N/A"));
         balloonGameScore.setText("Balloon Game Best Score: " + (balloonScore != null ? balloonScore : "N/A"));
-        reactionGameScore.setText("Reaction Game Best Time: " + (reactionScore != null ? reactionScore + "s" : "N/A"));
+        reactionGameScore.setText("Reaction Game Best Time: " + (reactionScore != null ? reactionScore + "ms" : "N/A"));
     }
 
     private void loadGlobalScores() {
-        globalScoresRef.addValueEventListener(new ValueEventListener() {
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Integer memoryGlobal = dataSnapshot.child("memoryGame").getValue(Integer.class);
-                Integer balloonGlobal = dataSnapshot.child("balloonGame").getValue(Integer.class);
-                Long reactionGlobal = dataSnapshot.child("reactionGame").getValue(Long.class);
-                globalMemoryGameScore.setText("Global Memory Game High Score: " + (memoryGlobal != null ? memoryGlobal : "N/A"));
-                globalBalloonGameScore.setText("Global Balloon Game High Score: " + (balloonGlobal != null ? balloonGlobal : "N/A"));
-                globalReactionGameScore.setText("Global Reaction Game Best Time: " + (reactionGlobal != null ? reactionGlobal + "s" : "N/A"));
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DataSnapshot scoresSnapshot = snapshot.child("userScores");
+                    if (scoresSnapshot.exists()) {
+                        Integer memoryGame = scoresSnapshot.child("memoryGame").getValue(Integer.class);
+                        Integer balloonGame = scoresSnapshot.child("balloonGame").getValue(Integer.class);
+                        Long reactionGame = scoresSnapshot.child("reactionGame").getValue(Long.class);
+
+                        if (memoryGame != null && memoryGame > globalMemoryBest) {
+                            globalMemoryBest = memoryGame;
+                        }
+                        if (balloonGame != null && balloonGame > globalBalloonBest) {
+                            globalBalloonBest = balloonGame;
+                        }
+                        if (reactionGame != null && reactionGame < globalReactionBest) {
+                            globalReactionBest = reactionGame;
+                        }
+                    }
+                }
+                globalMemoryGameScore.setText("Global Memory Game High Score: " + globalMemoryBest);
+                globalBalloonGameScore.setText("Global Balloon Game High Score: " + globalBalloonBest);
+                globalReactionGameScore.setText("Global Reaction Game Best Time: " + globalReactionBest + "ms");
             }
 
             @Override

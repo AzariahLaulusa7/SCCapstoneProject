@@ -39,7 +39,7 @@
         android:id="@+id/reactionGameScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reaction Game Best Score: 0"
+        android:text="Reaction Game Best Score: N/A"
         android:gravity="center"
         android:layout_marginTop="16dp" />
 
@@ -72,7 +72,7 @@
         android:id="@+id/globalReactionGameScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Global Reaction Game High Score: 0"
+        android:text="Global Reaction Game High Score: N/A"
         android:gravity="center"
         android:layout_marginTop="16dp" />
 

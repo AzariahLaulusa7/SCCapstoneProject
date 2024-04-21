@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,8 +12,11 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class BalloonGame extends Activity {
 
@@ -38,9 +42,6 @@ public class BalloonGame extends Activity {
 
         initializeViews();
 
-        preferences = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
-        bestScore = preferences.getInt("BEST_SCORE", 0);
-        txtBestScore.setText("Best: " + bestScore);
 
         imageBalloon.setOnClickListener(v -> {
             if (isGameActive) {
@@ -58,15 +59,12 @@ public class BalloonGame extends Activity {
 
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
 
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if (currentUser != null) {
-            userScoresRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid()).child("userScores").child("balloonGame");
-        }
+        userScoresRef = FirebaseDatabase.getInstance().getReference("users").child(SaveUser.getUserName(BalloonGame.this)).child("userScores").child("balloonGame");
+
     }
 
     private void initializeViews() {
         txtCurrentScore = findViewById(R.id.txtCurrentScore);
-        txtBestScore = findViewById(R.id.txtBestScore);
         txtTimer = findViewById(R.id.txtTimer);
         imageBalloon = findViewById(R.id.imageBalloon);
         txtGameOver = findViewById(R.id.txtGameOver);
@@ -102,16 +100,24 @@ public class BalloonGame extends Activity {
         imageBalloon.setEnabled(false);
         isGameActive = false;
 
-        if (currentScore > bestScore) {
-            bestScore = currentScore;
-            txtBestScore.setText("Best: " + bestScore);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("BEST_SCORE", bestScore);
-            editor.apply();
 
-            if (userScoresRef != null) {
-                userScoresRef.setValue(bestScore);
-            }
+        if (userScoresRef != null) {
+            userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Integer dbScore = dataSnapshot.getValue(Integer.class);
+                    if (dbScore == null || currentScore > dbScore) {
+                        userScoresRef.setValue(currentScore);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("Firebase", "Failed to read value for game score update.", databaseError.toException());
+                }
+
+            });
         }
     }
 }
+
+

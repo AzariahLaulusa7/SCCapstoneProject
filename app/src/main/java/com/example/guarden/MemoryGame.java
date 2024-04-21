@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -12,10 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class MemoryGame extends Activity {
 
@@ -30,6 +37,8 @@ public class MemoryGame extends Activity {
     private TextView textViewFeedback;
     private Button startButton, playAgainButton;
     private SharedPreferences sharedPreferences;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference userScoresRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,9 @@ public class MemoryGame extends Activity {
         startButton = findViewById(R.id.startGameButton);
         playAgainButton = findViewById(R.id.playAgainButton);
         sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        userScoresRef = FirebaseDatabase.getInstance().getReference("users").child(SaveUser.getUserName(MemoryGame.this)).child("userScores").child("memoryGame");
 
         ImageView backButton = findViewById(R.id.backIcon);
         backButton.setOnClickListener(v -> finish());
@@ -107,6 +119,7 @@ public class MemoryGame extends Activity {
     }
 
     private void startGame() {
+        difficultyLevel = 1;
         sequenceIndex = 0;
         gameIsActive = true;
         generateSequence(difficultyLevel);
@@ -175,16 +188,22 @@ public class MemoryGame extends Activity {
     }
 
     private void updateBestScore() {
-        SharedPreferences gamePrefs = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
-        int currentBestLevel = gamePrefs.getInt("MemoryGameBestScore", 0);
+        if (userScoresRef != null) {
+            userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Integer dbScore = dataSnapshot.getValue(Integer.class);
+                    if (dbScore == null || (difficultyLevel - 1) > dbScore) {
+                        userScoresRef.setValue((difficultyLevel - 1));
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("Firebase", "Failed to read value for game score update.", databaseError.toException());
+                }
 
-        if (difficultyLevel - 1 > currentBestLevel) {
-            SharedPreferences.Editor editor = gamePrefs.edit();
-            editor.putInt("MemoryGameBestScore", difficultyLevel - 1);
-            editor.apply();
+            });
         }
-
-        difficultyLevel = 1;
         disableButtons();
     }
 
