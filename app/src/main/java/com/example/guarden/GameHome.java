@@ -43,7 +43,7 @@ public class GameHome extends Activity {
         buttonMemory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the Coloring game activity
+                // Start the memory game activity
                 Intent intent = new Intent(GameHome.this, MemoryGame.class);
                 startActivity(intent);
             }
@@ -51,7 +51,7 @@ public class GameHome extends Activity {
         buttonLeaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the Coloring game activity
+                // Start the leaderboard activity
                 Intent intent = new Intent(GameHome.this, LeaderBoard.class);
                 startActivity(intent);
             }

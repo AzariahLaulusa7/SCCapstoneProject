@@ -35,7 +35,7 @@ public class LeaderBoard extends AppCompatActivity {
         globalBalloonGameScore = findViewById(R.id.globalBalloonGameScore);
         globalReactionGameScore = findViewById(R.id.globalReactionGameScore);
 
-        findViewById(R.id.backButton).setOnClickListener(v -> finish());
+        findViewById(R.id.backIcon).setOnClickListener(v -> finish());
 
         loadUserScores();
         loadGlobalScores();
