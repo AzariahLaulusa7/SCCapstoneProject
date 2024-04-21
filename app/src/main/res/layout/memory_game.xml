@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background_image">
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -37,6 +38,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="Start Game"
+        style="@style/Widget.AppCompat.Button.Borderless"
         app:backgroundTint="@null"
         android:textColor="@color/white"
         android:background="@color/colorAccent"
@@ -48,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="Memory Game"
         android:textSize="30sp"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
         android:layout_marginBottom="32dp"/>
@@ -58,6 +61,7 @@
         android:text="After watching the sequence of flashing squares, repeat the order by tapping the correct squares."
         android:textSize="18sp"
         android:gravity="center"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:paddingTop="60dp"
         android:layout_marginBottom="32dp"/>
@@ -82,5 +86,6 @@
         android:src="@drawable/baseline_arrow_back_ios_24"
         android:contentDescription="Back Icon"
         android:background="?attr/selectableItemBackground"
-        android:padding="10dp" />
+        android:padding="10dp"
+        app:tint="@color/white" />
 </RelativeLayout>
