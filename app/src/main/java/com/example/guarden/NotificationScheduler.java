@@ -231,7 +231,7 @@ public class NotificationScheduler {
 
         long initialTriggerTime = calendar.getTimeInMillis();
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTriggerTime, 2*60*60000, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTriggerTime, 24*60*60000, pendingIntent);
     }
    @SuppressLint("ScheduleExactAlarm")
     public void scheduleNotification() {
