@@ -107,13 +107,13 @@ public class Settings extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(DARK_MODE_KEY, isChecked);
             LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(this, R.drawable.background_image);
-            BitmapDrawable secondDrawable = (BitmapDrawable) layerDrawable.findDrawableByLayerId(R.id.background_dark);
+            BitmapDrawable secondDrawable = (BitmapDrawable) layerDrawable.findDrawableByLayerId(R.id.background_light);
             View s = findViewById(R.id.settings);
             if(isChecked) {
-                secondDrawable.setAlpha(255);
+                secondDrawable.setAlpha(0);
                 s.setBackground(layerDrawable);
             } else {
-                secondDrawable.setAlpha(0);
+                secondDrawable.setAlpha(255);
                 s.setBackground(layerDrawable);
             }
             editor.apply();

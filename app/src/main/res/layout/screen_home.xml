@@ -137,16 +137,32 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Hello User..."
+        android:fontFamily="@font/alata"
         android:textColor="@color/white"
-        android:textSize="34sp"
+        android:textSize="30sp"
+        android:text="Hello"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.137" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="320dp"
+        android:fontFamily="@font/alata"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
