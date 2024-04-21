@@ -179,7 +179,6 @@
         <ImageView
             android:id="@+id/gameChallengeIconEmpty"
             android:layout_width="24dp"
-            android:background=""
             android:layout_height="24dp"
             android:src="@drawable/baseline_empty_box_24"
             android:visibility="visible"/>
