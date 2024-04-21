@@ -79,47 +79,12 @@ public class ForumMain extends AppCompatActivity {
         ventForumRef = FirebaseDatabase.getInstance().getReference().child("ventForum");
         questionForumRef = FirebaseDatabase.getInstance().getReference().child("questionForum");
 
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-//                .setQuery(forumRef, Post.class)
-//                .build();
-//        adapter = new PostAdapter(options);
-
-        if (tagText.equals("positivity") && filterActive == true) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(posForumRef.orderByKey(), Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-            recyclerView.setAdapter(adapter);
-
-        } else if (tagText.equals("vent") && filterActive == true) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(ventForumRef, Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-
-            recyclerView.setAdapter(adapter);
-
-        } else if (tagText.equals("question") && filterActive == true) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(questionForumRef, Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-
-            recyclerView.setAdapter(adapter);
-
-        } else {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(forumRef, Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-            recyclerView.setAdapter(adapter);
-
-        }
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        FirebaseRecyclerOptions<Post> startOptions = new FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(forumRef, Post.class)
+                .build();
+        adapter = new PostAdapter(startOptions);
+        recyclerView.setAdapter(adapter);
 
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {

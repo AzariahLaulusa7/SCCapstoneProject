@@ -35,18 +35,15 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> {
         } catch (Exception e) {
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
-                //intent.putExtra("model", model);
-                intent.putExtra("latitude", model.getName());
-                intent.putExtra("longitude", model.getMessage());
-                intent.putExtra("pic", model.getImage());
-                intent.putExtra("postKey", model.getKey());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+            //intent.putExtra("model", model);
+            intent.putExtra("latitude", model.getName());
+            intent.putExtra("longitude", model.getMessage());
+            intent.putExtra("pic", model.getImage());
+            intent.putExtra("postKey", model.getKey());
 
-                holder.itemView.getContext().startActivity(intent);
-            }
+            holder.itemView.getContext().startActivity(intent);
         });
     }
 
