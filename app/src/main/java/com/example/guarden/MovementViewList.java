@@ -30,7 +30,7 @@ public class MovementViewList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement_view_list);
         add = (Button) findViewById(R.id.add);
-        back = (ImageButton) findViewById(R.id.move_back);
+        back = (ImageButton) findViewById(R.id.backButton);
         RecyclerView recycler = findViewById(R.id.recycler);
         Intent addNewMove = new Intent(this, MovementNewCustom.class);
         goBack = new Intent(this, MoveMain.class);

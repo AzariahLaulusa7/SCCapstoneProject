@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +34,7 @@ public class MoveMain extends AppCompatActivity {
         setContentView(R.layout.move_main);
         yoga = findViewById(R.id.yoga);
         exercise = findViewById(R.id.exercise);
-        back = findViewById(R.id.move_back);
+        back = findViewById(R.id.backButton);
         viewAll = findViewById(R.id.custom);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Intent myIntent = new Intent(this, Movement.class);

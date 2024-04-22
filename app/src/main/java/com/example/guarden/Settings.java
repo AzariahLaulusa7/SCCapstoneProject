@@ -5,12 +5,7 @@ import static android.Manifest.permission.POST_NOTIFICATIONS;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.content.SharedPreferences;
@@ -18,18 +13,13 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.constraintlayout.helper.widget.Layer;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +38,7 @@ public class Settings extends AppCompatActivity {
     TextView log_out;
     TextView aboutText, privacyPolicyText, termsOfUseText;
 
-    ImageButton back_button;
+    ImageView back_button;
     SharedPreferences prefs;
     androidx.appcompat.widget.SwitchCompat dark_mode;
     androidx.appcompat.widget.SwitchCompat notifications;
@@ -68,7 +58,7 @@ public class Settings extends AppCompatActivity {
         dark_mode = (SwitchCompat) findViewById(R.id.Dark_Mode_Switch);
         notifications = (SwitchCompat) findViewById(R.id.NotificationSwitch);
         log_out = (TextView) findViewById((R.id.Logout));
-        back_button = (ImageButton) findViewById(R.id.Back_Button);
+        back_button = (ImageView) findViewById(R.id.backButton);
         aboutText = findViewById(R.id.About);
         privacyPolicyText = findViewById(R.id.PrivacyPolicy);
         termsOfUseText = findViewById(R.id.TermsOfUse);

@@ -43,7 +43,7 @@ public class Movement extends AppCompatActivity {
         name = findViewById(R.id.pose_name);
         pose = findViewById(R.id.pose);
         next = findViewById(R.id.next);
-        back = findViewById(R.id.movement_back);
+        back = findViewById(R.id.backButton);
         thumbsUp = findViewById(R.id.thumbs_up);
         thumbsDown = findViewById(R.id.thumbs_down);
         thumbsUp.setImageResource(R.drawable.baseline_thumb_up_off_alt_24);
