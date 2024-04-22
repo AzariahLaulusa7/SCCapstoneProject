@@ -12,63 +12,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Back button-->
+            <ImageButton
+                android:id="@+id/comment_back_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/back_button"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="?attr/homeAsUpIndicator" />
+
+            <!--Delete button-->
+            <TextView
+                android:id="@+id/delete_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:contentDescription="delete"
+                android:textColor="#FF0000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:text="DELETE"/>
+
+            <!--Title-->
+            <TextView
+                android:id="@+id/title_forum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/comment_back_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif"
+                android:layout_marginBottom="40dp"
+                android:text="Comments" />
+
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/firstFrag"
+            android:layout_below="@+id/top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/subFrag"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <!--Back button-->
-                <ImageButton
-                    android:id="@+id/comment_back_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/back_button"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="15dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="?attr/homeAsUpIndicator" />
-
-                <!--Delete button-->
-                <TextView
-                    android:id="@+id/delete_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:contentDescription="delete"
-                    android:textColor="#FF0000"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="15dp"
-                    android:text="DELETE"/>
-
-                <!--Title-->
-                <TextView
-                    android:id="@+id/title_forum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/comment_back_icon"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:fontFamily="sans-serif"
-                    android:layout_marginBottom="40dp"
-                    android:text="Comments" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_bubble">
 
@@ -107,8 +110,8 @@
                 <!--Edit button-->
                 <ImageView
                     android:id="@+id/edit"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_below="@id/comment_id"
                     android:layout_toRightOf="@id/comment_text"
                     android:padding="10dp"
@@ -132,12 +135,6 @@
                     android:textColorHint="@color/black"
                     android:textSize="30sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_above="@id/comment_id"
-                    android:background="#4f9de4" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -145,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
                 <!--Filter view-->
@@ -235,8 +232,9 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="vertical"
                 android:layout_marginBottom="5dp">
 
@@ -268,8 +266,7 @@
                 android:id="@+id/comment_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/comment_box"
-                android:paddingTop="20dp"/>
+                android:layout_above="@id/comment_box" />
 
             <!--Comment text input layout-->
             <LinearLayout
