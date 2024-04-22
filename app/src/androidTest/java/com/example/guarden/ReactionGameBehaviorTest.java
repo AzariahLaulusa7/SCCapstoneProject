@@ -51,17 +51,19 @@ public class ReactionGameBehaviorTest {
 
     // Test winning game simulation
     @Test
-    public void testGameWon() {
-        // Start the game
+    public void testReactionTime() {
         onView(withId(R.id.startButton)).perform(click());
-        activityRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activityRule.getActivity().readyForReaction = true;
-                activityRule.getActivity().startTime = System.currentTimeMillis();
-            }
-        });
+
+        // Wait for 6 seconds artificially
+        try {
+            Thread.sleep(6000);  // Wait for 6 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         onView(withId(R.id.mainLayout)).perform(click());
         onView(withId(R.id.textViewScore)).check(matches(isDisplayed()));
     }
+
+
 }

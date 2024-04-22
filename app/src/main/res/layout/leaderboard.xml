@@ -12,6 +12,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!--back button-->
         <ImageView
             android:id="@+id/backIcon"
             android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
             android:padding="10dp"
             app:tint="@color/white" />
 
+        <!--your best scores-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,6 +43,7 @@
             app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white">
 
+            <!--memory game best score-->
             <TextView
                 android:id="@+id/memoryGameScore"
                 android:layout_width="match_parent"
@@ -60,6 +63,7 @@
             app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white">
 
+            <!--ballon game best score-->
             <TextView
                 android:id="@+id/balloonGameScore"
                 android:layout_width="match_parent"
@@ -79,6 +83,7 @@
             app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white">
 
+            <!--reaction game best score-->
             <TextView
                 android:id="@+id/reactionGameScore"
                 android:layout_width="match_parent"
@@ -90,6 +95,7 @@
                 android:padding="16dp" />
         </com.google.android.material.card.MaterialCardView>
 
+        <!--global best scores-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,6 +114,7 @@
             app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white">
 
+            <!--global memory game score-->
             <TextView
                 android:id="@+id/globalMemoryGameScore"
                 android:layout_width="match_parent"
@@ -127,6 +134,7 @@
             app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white">
 
+            <!--global ballon game score-->
             <TextView
                 android:id="@+id/globalBalloonGameScore"
                 android:layout_width="match_parent"
@@ -146,6 +154,7 @@
             app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white">
 
+            <!--global reaction game score-->
             <TextView
                 android:id="@+id/globalReactionGameScore"
                 android:layout_width="match_parent"

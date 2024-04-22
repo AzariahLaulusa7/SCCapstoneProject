@@ -5,17 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background_image"
     tools:context=".EditProfile">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1100dp"
-            android:background="@drawable/background_image"
-            android:alpha="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <!--back button-->
                 <ImageButton
                     android:id="@+id/post_back"
                     android:layout_width="wrap_content"
@@ -37,6 +33,7 @@
                     android:background="@android:color/transparent"
                     app:srcCompat="?attr/homeAsUpIndicator" />
 
+                <!--post title-->
                 <TextView
                     android:id="@+id/post_title"
                     android:layout_width="wrap_content"
@@ -60,6 +57,7 @@
                 android:background="@drawable/profile_bubble"
                 android:padding="20dp">
 
+                <!--post username-->
                 <TextView
                     android:id="@+id/post_user_name"
                     android:layout_width="wrap_content"
@@ -72,6 +70,7 @@
                     android:text="RandomUser"
                     android:paddingBottom="20dp"/>
 
+                <!--user icon 1-->
                 <ImageView
                     android:id="@+id/image1"
                     android:layout_width="100dp"
@@ -86,6 +85,7 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/cow" />
 
+                <!--user icon 2-->
                 <ImageView
                     android:id="@+id/image2"
                     android:layout_width="100dp"
@@ -100,6 +100,7 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/wolf" />
 
+                <!--user icon 3-->
                 <ImageView
                     android:id="@+id/image3"
                     android:layout_width="100dp"
@@ -113,6 +114,7 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/pig" />
 
+                <!--user icon 4-->
                 <ImageView
                     android:id="@+id/image4"
                     android:layout_width="100dp"
@@ -126,6 +128,7 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/koala" />
 
+                <!--user icon 5-->
                 <ImageView
                     android:id="@+id/image5"
                     android:layout_width="100dp"
@@ -139,6 +142,7 @@
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/hippo" />
 
+                <!--user icon 6-->
                 <ImageView
                     android:id="@+id/image6"
                     android:layout_width="100dp"
@@ -167,6 +171,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <!--post content-->
                 <EditText
                     android:id="@+id/post_description"
                     android:layout_width="match_parent"
@@ -198,6 +203,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
+                <!--post tag-->
                 <TextView
                     android:id="@+id/tag_title"
                     android:layout_width="match_parent"
@@ -212,6 +218,7 @@
                     android:text="Labels"
                     android:drawablePadding="10dp"/>
 
+                <!--positivity tag-->
                 <TextView
                     android:id="@+id/forum_tag"
                     android:layout_width="wrap_content"
@@ -224,6 +231,7 @@
                     android:layout_below="@id/tag_title"
                     android:layout_alignParentLeft="true"/>
 
+                <!--question tag-->
                 <TextView
                     android:id="@+id/forum_tag_two"
                     android:layout_width="wrap_content"
@@ -237,6 +245,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
+                <!--vent tag-->
                 <TextView
                     android:id="@+id/forum_tag_three"
                     android:layout_width="wrap_content"
@@ -260,6 +269,7 @@
                 android:layout_marginTop="30dp"
                 android:padding="10dp">
 
+                <!--post button-->
                 <Button
                     android:id="@+id/post_button"
                     android:layout_width="300dp"

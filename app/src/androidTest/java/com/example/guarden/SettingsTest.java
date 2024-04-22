@@ -53,7 +53,7 @@ public class SettingsTest {
     // Test back button
     @Test
     public void testNavigationFromBackButton() {
-        onView(withId(R.id.Back_Button)).perform(click());
+        onView(withId(R.id.backButton)).perform(click());
     }
 }
 

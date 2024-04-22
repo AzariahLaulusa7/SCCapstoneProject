@@ -19,7 +19,7 @@ public class MovementTest {
     // Test back button
     @Test
     public void testBackButtonNavigatesHome() {
-        onView(withId(R.id.movement_back)).perform(click());
+        onView(withId(R.id.backButton)).perform(click());
     }
 }
 

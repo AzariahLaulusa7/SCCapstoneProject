@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_image">
 
+    <!--back button-->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="40dp"
@@ -22,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
+    <!--games title-->
     <TextView
         android:id="@+id/headerTitle"
         android:layout_width="wrap_content"
@@ -40,6 +42,7 @@
         android:orientation="vertical"
         android:padding="25dp">
 
+        <!--reaction game layout-->
         <LinearLayout
             android:id="@+id/buttonReaction"
             android:layout_width="match_parent"
@@ -53,6 +56,7 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!--timer icon-->
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -61,6 +65,7 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
+            <!--reaction game test-->
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -70,6 +75,7 @@
                 android:gravity="center" />
         </LinearLayout>
 
+        <!--balloon tap layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -83,6 +89,7 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!--click icon-->
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -91,6 +98,7 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
+            <!--balloon tap text-->
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -100,6 +108,7 @@
                 android:gravity="center" />
         </LinearLayout>
 
+        <!--memory test layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -113,6 +122,7 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!--robot icon-->
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -121,6 +131,7 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
+            <!--memory test text-->
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -130,6 +141,7 @@
                 android:gravity="center" />
         </LinearLayout>
 
+        <!--leaderboard layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -143,6 +155,7 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!--charts icon-->
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -151,6 +164,7 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
+            <!--leaderboard text-->
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

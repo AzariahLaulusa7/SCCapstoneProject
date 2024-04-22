@@ -8,20 +8,21 @@ import java.io.Serializable;
 public class Post {
 
     String name;
-    String tag, key;
+    String tag, key, user;
     String message;
     int image;
     int tagBackground;
 
     public Post() {}
 
-    public Post(String name, String message, String tag, int image, int tagBackground, String key) {
+    public Post(String name, String message, String tag, int image, int tagBackground, String key, String user) {
         this.name = name;
         this.message = message;
         this.tag = tag;
         this.image = image;
         this.tagBackground = tagBackground;
         this.key = key;
+        this.user = user;
     }
 
     public String getName() {
@@ -70,5 +71,13 @@ public class Post {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

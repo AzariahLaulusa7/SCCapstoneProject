@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_image">
 
+    <!--Back button-->
     <ImageView
         android:id="@+id/backIcon"
         android:layout_width="wrap_content"
@@ -15,6 +16,7 @@
         android:background="?attr/selectableItemBackground"
         android:padding="10dp" />
 
+    <!--Title-->
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
@@ -27,6 +29,7 @@
         android:padding="16dp"
         android:layout_marginTop="16dp"/>
 
+    <!--Holds all therapist information-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/therapistRecyclerView"
         android:layout_width="match_parent"

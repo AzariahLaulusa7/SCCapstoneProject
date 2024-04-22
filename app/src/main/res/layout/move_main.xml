@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_image">
 
+    <!--back button-->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="40dp"
@@ -23,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
+    <!--exercise button-->
     <Button
         android:id="@+id/exercise"
         android:layout_width="wrap_content"
@@ -39,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.5" />
 
+    <!--yoga button-->
     <Button
         android:id="@+id/yoga"
         android:layout_width="wrap_content"
@@ -56,6 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/exercise"
         app:layout_constraintVertical_bias="0.5" />
 
+    <!--move title-->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -71,6 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--view all workouts button-->
     <Button
         android:id="@+id/custom"
         android:layout_width="207dp"

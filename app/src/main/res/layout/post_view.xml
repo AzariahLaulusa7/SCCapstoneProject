@@ -5,13 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/profile_bubble">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/profile_bubble"
+        android:layout_marginBottom="10dp">
 
+        <!--profile pic-->
         <ImageView
             android:id="@+id/user_image"
             android:layout_width="100dp"
@@ -20,6 +22,7 @@
             android:padding="10dp"
             app:srcCompat="@drawable/user_blue_circle_128"/>
 
+        <!--comment button-->
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -28,6 +31,7 @@
             android:padding="10dp"
             app:srcCompat="@drawable/comment_tap"/>
 
+        <!--username-->
         <TextView
             android:id="@+id/user_id"
             android:layout_width="wrap_content"
@@ -38,6 +42,7 @@
             android:textColor="@color/black"
             android:textSize="35sp"/>
 
+        <!--background-->
         <ImageView
             android:id="@+id/tag_background"
             android:layout_width="100dp"
@@ -46,6 +51,7 @@
             android:layout_toRightOf="@id/user_image"
             app:srcCompat="@drawable/positive_forum_tag"/>
 
+        <!--forum tag-->
         <TextView
             android:id="@+id/forum_tag"
             android:layout_width="wrap_content"
@@ -57,6 +63,7 @@
             android:layout_below="@+id/user_id"
             android:layout_toRightOf="@id/user_image"/>
 
+        <!--post content-->
         <TextView
             android:id="@+id/post_text"
             android:layout_width="wrap_content"
@@ -66,18 +73,6 @@
             android:textSize="25sp"
             android:text="I had a great day today!"
             android:padding="5dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_above="@id/user_id"
-            android:background="#4f9de4" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_below="@id/post_text"
-            android:background="#4f9de4" />
 
     </RelativeLayout>
 </RelativeLayout>

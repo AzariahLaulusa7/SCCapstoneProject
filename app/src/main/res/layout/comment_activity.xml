@@ -12,47 +12,70 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Back button-->
+            <ImageButton
+                android:id="@+id/comment_back_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/back_button"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="?attr/homeAsUpIndicator" />
+
+            <!--Delete button-->
+            <TextView
+                android:id="@+id/delete_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:contentDescription="delete"
+                android:textColor="#FF0000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:text="DELETE"/>
+
+            <!--Title-->
+            <TextView
+                android:id="@+id/title_forum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/comment_back_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif"
+                android:layout_marginBottom="40dp"
+                android:text="Comments" />
+
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/firstFrag"
+            android:layout_below="@+id/top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/subFrag"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:id="@+id/comment_back_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/back_button"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="15dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="?attr/homeAsUpIndicator" />
-
-                <TextView
-                    android:id="@+id/title_forum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/white"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif"
-                    android:layout_marginTop="80dp"
-                    android:text="Comments" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_bubble">
 
+                <!--Profile pic-->
                 <ImageView
                     android:id="@+id/comment_image"
                     android:layout_width="100dp"
@@ -61,6 +84,7 @@
                     android:padding="10dp"
                     app:srcCompat="@drawable/user_blue_circle_128"/>
 
+                <!--Commenter name-->
                 <TextView
                     android:id="@+id/comment_id"
                     android:layout_width="wrap_content"
@@ -71,6 +95,7 @@
                     android:textColor="@color/black"
                     android:textSize="35sp"/>
 
+                <!--Comment-->
                 <TextView
                     android:id="@+id/comment_text"
                     android:layout_width="wrap_content"
@@ -82,13 +107,151 @@
                     android:text="I had a great day today!"
                     android:padding="5dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_above="@id/comment_id"
-                    android:background="#4f9de4" />
+                <!--Edit button-->
+                <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/comment_id"
+                    android:layout_toRightOf="@id/comment_text"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/edit_pen"/>
+
+                <!--Edit comment-->
+                <EditText
+                    android:id="@+id/comment_text_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/comment_id"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toRightOf="@id/comment_image"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:text="I had a great day today!"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="30sp" />
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tag_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <!--Filter view-->
+                <ImageView
+                    android:id="@+id/filter_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:background="@drawable/profile_bubble"/>
+
+                <!--Tag title-->
+                <TextView
+                    android:id="@+id/tag_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:text="Choose a new tag?"
+                    android:drawablePadding="10dp"/>
+
+                <!--forum tag-->
+                <TextView
+                    android:id="@+id/forum_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Positivity"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/positive_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_alignParentLeft="true"/>
+
+                <!--Question tag-->
+                <TextView
+                    android:id="@+id/forum_tag_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/question_forum_tag"
+                    android:padding="10dp"
+                    android:text="Question"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <!--Vent tag-->
+                <TextView
+                    android:id="@+id/forum_tag_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Vent"
+                    android:background="@drawable/vent_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag_two"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
+
+                <!--Send button-->
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/custom_button"
+                    android:fontFamily="sans-serif"
+                    android:text="SEND NEW POST"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:backgroundTint="@null" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp">
+
+                <!--Send button-->
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="sans-serif"
+                    android:text="CANCEL"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -98,13 +261,14 @@
             android:orientation="vertical"
             android:layout_below="@id/firstFrag">
 
+            <!--Holds all of the comments-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comment_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/comment_box"
-                android:paddingTop="20dp"/>
+                android:layout_above="@id/comment_box" />
 
+            <!--Comment text input layout-->
             <LinearLayout
                 android:id="@+id/comment_box"
                 android:layout_above="@id/comment_button_frag"
@@ -113,6 +277,7 @@
                 android:background="@color/white"
                 android:padding="10dp">
 
+                <!--Comment text input-->
                 <EditText
                     android:id="@+id/comment_description"
                     android:layout_width="match_parent"
@@ -132,6 +297,7 @@
 
             </LinearLayout>
 
+            <!--Send comment button layout-->
             <RelativeLayout
                 android:id="@+id/comment_button_frag"
                 android:layout_width="match_parent"
@@ -139,6 +305,7 @@
                 android:orientation="vertical"
                 android:layout_alignParentBottom="true">
 
+                <!--Send comment button-->
                 <Button
                     android:id="@+id/comment_button"
                     android:layout_width="match_parent"

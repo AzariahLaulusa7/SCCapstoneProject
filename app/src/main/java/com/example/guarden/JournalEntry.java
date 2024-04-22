@@ -16,21 +16,6 @@ public class JournalEntry {
         this.entryContent = entryContent;
     }
 
-    public void setFromString(String csvString) {
-        String[] parts = csvString.split("\\|", 2);
-        if (parts.length == 2) {
-            entryName = parts[0].trim();
-            entryContent = parts[1].trim();
-        } else {
-            entryName = "New Journal Entry";
-            entryContent = "Content not available.";
-        }
-    }
-
-    public String getString() {
-        return entryName + "|" + entryContent;
-    }
-
     public void setEntryName(String name){
         entryName = name;
     }

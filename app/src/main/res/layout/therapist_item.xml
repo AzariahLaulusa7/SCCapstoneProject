@@ -7,6 +7,7 @@
     android:layout_marginBottom="18dp"
     android:background="@drawable/therapist_item_background">
 
+    <!--name-->
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
@@ -14,24 +15,28 @@
         android:textSize="18sp"
         android:textStyle="bold"/>
 
+    <!--specialty-->
     <TextView
         android:id="@+id/tvSpecialty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"/>
 
+    <!--address-->
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"/>
 
+    <!--phone number-->
     <TextView
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"/>
 
+    <!--email-->
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"

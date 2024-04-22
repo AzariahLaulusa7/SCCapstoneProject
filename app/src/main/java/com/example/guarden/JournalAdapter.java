@@ -38,6 +38,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         holder.title.setText(entry.getName());
         holder.content.setText(entry.getContent());
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
     }
 
     @Override
