@@ -211,7 +211,7 @@ public class Forums extends AppCompatActivity {
                 } else {
                     if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) {
                         String uniqueKey = userRef.push().getKey();
-                        Chat newChat = new Chat(name, tag, message, image, tagBackground, uniqueKey);
+                        Chat newChat = new Chat(name, tag, message, image, tagBackground, uniqueKey, SaveUser.getUserName(Forums.this));
                         forumRef.child(uniqueKey).setValue(newChat)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(Forums.this, "Post Created", Toast.LENGTH_SHORT).show())
@@ -268,19 +268,20 @@ public class Forums extends AppCompatActivity {
     }
 
     private static class Chat {
-        public String name, tag, message, key;
+        public String name, tag, message, key, user;
         public int image;
         public int tagBackground, orderNumber;
 
         public Chat() {}
 
-        public Chat(String name, String tag, String message, int image, int tagBackground, String key) {
+        public Chat(String name, String tag, String message, int image, int tagBackground, String key, String user) {
             this.name = name;
             this.tag = tag;
             this.message = message;
             this.image = image;
             this.tagBackground = tagBackground;
             this.key = key;
+            this.user = user;
         }
     }
 
