@@ -52,20 +52,16 @@ public class ReactionGameBehaviorTest {
     // Test winning game simulation
     @Test
     public void testReactionTime() {
-        // Click 'start game' button
         onView(withId(R.id.startButton)).perform(click());
 
-        // Wait for 6 seconds artificially (use Thread.sleep here for simplicity)
+        // Wait for 6 seconds artificially
         try {
             Thread.sleep(6000);  // Wait for 6 seconds
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        // Click on the main layout to record end time and calculate reaction time
         onView(withId(R.id.mainLayout)).perform(click());
-
-        // Check the TextView shows
         onView(withId(R.id.textViewScore)).check(matches(isDisplayed()));
     }
 
