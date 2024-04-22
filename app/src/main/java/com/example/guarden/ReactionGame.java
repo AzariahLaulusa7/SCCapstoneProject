@@ -83,7 +83,7 @@ public class ReactionGame extends AppCompatActivity {
             userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Integer dbScore = dataSnapshot.getValue(Integer.class);
+                    Long dbScore = dataSnapshot.getValue(Long.class);
                     if (dbScore == null || reactionTime < dbScore) {
                         userScoresRef.setValue(reactionTime);
                     }
