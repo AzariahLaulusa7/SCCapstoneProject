@@ -261,32 +261,38 @@ public class NotificationScheduler {
                 case "games":
                     description = contents2[rnd];
                     name = titles2[rnd];
+                    break;
                 case "journal":
                     description = contents3[rnd];
                     name = titles3[rnd];
+                    break;
                 case "breath":
                     description = contents5[rnd];
                     name = titles5[rnd];
+                    break;
                 case "move":
                     description = contents6[rnd];
                     name = titles6[rnd];
+                    break;
                 case "forums":
                     description = contents7[rnd];
                     name = titles7[rnd];
+                    break;
                 default:
                     description = contents1[rnd];
                     name = titles1[rnd];
+                    break;
             }
 
 
             // Calculate the trigger time (one minute from now in EST)
             Calendar twoHourAfterRV = Calendar.getInstance(TimeZone.getDefault());
-            twoHourAfterRV.add(Calendar.HOUR, 2);
+            twoHourAfterRV.add(Calendar.HOUR, 6);
             long triggerTime = twoHourAfterRV.getTimeInMillis();
 
             // Schedule the alarm
-            long windowStartTime = triggerTime - (10 * 60000); // 30 seconds before triggerTime
-            long windowEndTime = triggerTime + (10 * 60000); // 30 seconds after triggerTime
+            long windowStartTime = triggerTime - (10 * 60000); // 10 minutes before triggerTime
+            long windowEndTime = triggerTime + (10 * 60000); // 310 minutes after triggerTime
             alarmManager.setWindow(AlarmManager.RTC_WAKEUP, windowStartTime, windowEndTime, pendingIntent);
 
         }
@@ -307,24 +313,31 @@ public class NotificationScheduler {
             case "basic":
                 description = contents1[rnd];
                 name = titles1[rnd];
+                break;
             case "games":
                 description = contents2[rnd];
                 name = titles2[rnd];
+                break;
             case "journal":
                 description = contents3[rnd];
                 name = titles3[rnd];
+                break;
             case "breath":
                 description = contents5[rnd];
                 name = titles5[rnd];
+                break;
             case "move":
                 description = contents6[rnd];
                 name = titles6[rnd];
+                break;
             case "forums":
                 description = contents7[rnd];
                 name = titles7[rnd];
+                break;
             default:
                 description = contents1[rnd];
                 name = titles1[rnd];
+                break;
         }
     }
 }
