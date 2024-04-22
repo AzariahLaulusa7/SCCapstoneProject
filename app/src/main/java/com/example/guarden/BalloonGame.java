@@ -38,7 +38,7 @@ public class BalloonGame extends Activity {
 
         initializeViews();
 
-
+        //increases score when baloon is tapped
         imageBalloon.setOnClickListener(v -> {
             if (isGameActive) {
                 currentScore++;
@@ -48,6 +48,7 @@ public class BalloonGame extends Activity {
 
         btnPlayAgain.setOnClickListener(v -> startGame());
 
+        //starts the game when start button is clicked
         startButton.setOnClickListener(v -> {
             startGame();
             v.setVisibility(View.GONE);
@@ -68,6 +69,7 @@ public class BalloonGame extends Activity {
         startButton = findViewById(R.id.startButton);
     }
 
+    //Resets game when started and begins countdown
     private void startGame() {
         currentScore = 0;
         txtCurrentScore.setText("Score: " + currentScore);
@@ -89,6 +91,7 @@ public class BalloonGame extends Activity {
         }.start();
     }
 
+    //Shows and hides appropriate elements when game finishes
     private void gameFinished() {
         txtTimer.setText("TIME REMAINING\n0 SECONDS");
         txtGameOver.setVisibility(View.VISIBLE);
@@ -96,7 +99,7 @@ public class BalloonGame extends Activity {
         imageBalloon.setEnabled(false);
         isGameActive = false;
 
-
+        //Updates high score
         if (userScoresRef != null) {
             userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

@@ -27,7 +27,7 @@ public class MoveMain extends AppCompatActivity {
     ImageButton back;
     Intent myIntent2;
     private DatabaseReference databaseReference;
-    static ArrayList<Pose> poseList = new ArrayList<Pose>();
+    static ArrayList<Pose> poseList = new ArrayList<Pose>(); //Used to store all poses obtained from the db
     static String key;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +41,13 @@ public class MoveMain extends AppCompatActivity {
         myIntent2 = new Intent(this, HomeScreen.class);
         Intent viewMoveList = new Intent(this, MovementViewList.class);
 
+        //Sets mode to yoga if selected
         yoga.setOnClickListener(v -> {
             myIntent.putExtra("mode","yoga");
             startActivity(myIntent);
         });
 
+        //Sets mood to exercise if selected
         exercise.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -56,6 +58,7 @@ public class MoveMain extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        //Checks if user is logged in and adds custom poses to poseList if so
         if(SaveUser.getUserName(MoveMain.this).length() != 0)
             key = SaveUser.getUserName(MoveMain.this);
         if(key == null) {

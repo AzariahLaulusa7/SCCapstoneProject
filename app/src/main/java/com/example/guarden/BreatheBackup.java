@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-
+//This class is not used
 public class BreatheBackup extends AppCompatActivity {
     Button startBreathing;
     ImageView drop;
