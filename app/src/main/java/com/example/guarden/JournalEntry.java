@@ -1,4 +1,4 @@
-package com.example.guarden;//This class impliments the journal entry object
+package com.example.guarden;//This class implements the journal entry object
 
 public class JournalEntry {
     private String entryName;

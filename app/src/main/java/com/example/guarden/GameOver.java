@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+//This class is not used
 public class GameOver extends AppCompatActivity {
 
     TextView tvPoints;

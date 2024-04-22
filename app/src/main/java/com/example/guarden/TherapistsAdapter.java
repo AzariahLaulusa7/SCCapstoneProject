@@ -9,9 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+//Adapter class that is associated with the therapist list. Combines ViewHolder and adapter into one class
 public class TherapistsAdapter extends RecyclerView.Adapter<TherapistsAdapter.ViewHolder> {
 
-    private List<Therapist> therapists;
+    private List<Therapist> therapists; //Creates array list to hold therapists
     private Context context;
 
     public TherapistsAdapter(List<Therapist> therapists, Context context) {
@@ -28,6 +29,7 @@ public class TherapistsAdapter extends RecyclerView.Adapter<TherapistsAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //Gets therapist from list and sets each attribute
         Therapist therapist = therapists.get(position);
         holder.tvName.setText(therapist.getName());
         holder.tvSpecialty.setText(therapist.getSpecialty());
@@ -40,7 +42,7 @@ public class TherapistsAdapter extends RecyclerView.Adapter<TherapistsAdapter.Vi
     public int getItemCount() {
         return therapists.size();
     }
-
+    //ViewHolder class that sets each card in the therapist list
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvName, tvSpecialty, tvAddress, tvPhone, tvEmail;
 

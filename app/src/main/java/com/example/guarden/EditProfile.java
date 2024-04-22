@@ -134,7 +134,7 @@ public class EditProfile extends AppCompatActivity {
             activityLauncher.launch(gallery);
 
         });
-
+        //Checks if user is logged in
         if(SaveUser.getUserName(EditProfile.this).length() != 0)
             key = SaveUser.getUserName(EditProfile.this);
         if(key == null) {
@@ -144,7 +144,7 @@ public class EditProfile extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
-                    if (user != null) {
+                    if (user != null) { //Sets text to current user credentials
                         firstNameEditText.setText(user.firstName);
                         lastNameEditText.setText(user.lastName);
                         usernameEditText.setText(user.email);
@@ -156,10 +156,11 @@ public class EditProfile extends AppCompatActivity {
 
                     storageRef = storage.getReference();
                     imageRef = storageRef.child("/users/" + key);
-
+                    //Adds the profile image selected by the user
                     imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         if (uri != null) {
                             String imageUrl = uri.toString();
+                            //Resizes image to 150x150 pixels
                             Picasso.get().load(imageUrl).resize(150, 150).into(profileImage);
                         }
                     });
@@ -176,6 +177,7 @@ public class EditProfile extends AppCompatActivity {
 
         // Update data if requirements are met
         editButton.setOnClickListener(v -> {
+            //Grabs user inputted text from input fields
             final String email = usernameEditText.getText().toString().trim();
             final String password = passwordEditText.getText().toString().trim();
             final String firstName = firstNameEditText.getText().toString().trim();
@@ -196,6 +198,7 @@ public class EditProfile extends AppCompatActivity {
                 }
 
                 User updatedUser = new User(email, password, firstName, lastName, getCustomPoses);
+                //Creates user in database if one does not currently exist
                 if (key == " ") {
                     key = email.replace(".",",");
                     userRef.child(email.replace(".",",")).setValue(updatedUser)
@@ -212,6 +215,7 @@ public class EditProfile extends AppCompatActivity {
                     addDefaultPosesToList(key);
                     finish();
                     startActivity(restartIntent);
+                    //Updates user information in database if one is currently logged in
                 } else if (!key.equals(email.replace(".",","))) {
                     if (imageUri != null) {
                         key = email.replace(".",",");
@@ -264,7 +268,7 @@ public class EditProfile extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    // Password and Email check from Joe in Create Account class
+    // Password and Email check from Joe in CreateAccount class
     private boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -289,7 +293,7 @@ public class EditProfile extends AppCompatActivity {
         return false;  // Return false if either digit or uppercase letter is not found
     }
 
-    // Poses from Adrian
+    //Poses from Adrian
     public void addDefaultPosesToList(String email){
         Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
         userRef.child(email).child("customPoses").child("Lunge").setValue(lunge);
@@ -308,6 +312,7 @@ public class EditProfile extends AppCompatActivity {
     private static class User {
         public String email, password, firstName, lastName, image;
         private ArrayList<Pose> customPoses;
+        //Various user constructors for different circumstances
 
         public User() {}
 
