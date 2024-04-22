@@ -29,9 +29,9 @@ public class ReactionGame extends AppCompatActivity {
     private Button startButton;
     private Handler handler = new Handler();
     private Runnable colorChangeRunnable;
-    private boolean readyForReaction = false;
+    boolean readyForReaction = false;
     private boolean gameIsActive = false;
-    private long startTime;
+    long startTime;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference userScoresRef;
 
