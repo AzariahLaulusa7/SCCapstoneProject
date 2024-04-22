@@ -34,18 +34,35 @@
                     android:background="@android:color/transparent"
                     app:srcCompat="?attr/homeAsUpIndicator" />
 
+                <!--Delete button-->
+                <TextView
+                    android:id="@+id/delete_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:contentDescription="delete"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:padding="15dp"
+                    android:text="DELETE"/>
+
                 <!--Title-->
                 <TextView
                     android:id="@+id/title_forum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/comment_back_icon"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/white"
                     android:textSize="35sp"
                     android:textStyle="bold"
+                    android:textColor="@color/white"
                     android:fontFamily="sans-serif"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginBottom="40dp"
                     android:text="Comments" />
 
             </RelativeLayout>
@@ -87,6 +104,34 @@
                     android:text="I had a great day today!"
                     android:padding="5dp" />
 
+                <!--Edit button-->
+                <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/comment_id"
+                    android:layout_toRightOf="@id/comment_text"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/edit_pen"/>
+
+                <!--Edit comment-->
+                <EditText
+                    android:id="@+id/comment_text_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/comment_id"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toRightOf="@id/comment_image"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    android:text="I had a great day today!"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="30sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
@@ -94,6 +139,121 @@
                     android:background="#4f9de4" />
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tag_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <!--Filter view-->
+                <ImageView
+                    android:id="@+id/filter_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:background="@drawable/profile_bubble"/>
+
+                <!--Tag title-->
+                <TextView
+                    android:id="@+id/tag_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+                    android:text="Choose a new tag?"
+                    android:drawablePadding="10dp"/>
+
+                <!--forum tag-->
+                <TextView
+                    android:id="@+id/forum_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Positivity"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/positive_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_alignParentLeft="true"/>
+
+                <!--Question tag-->
+                <TextView
+                    android:id="@+id/forum_tag_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/question_forum_tag"
+                    android:padding="10dp"
+                    android:text="Question"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <!--Vent tag-->
+                <TextView
+                    android:id="@+id/forum_tag_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="Vent"
+                    android:background="@drawable/vent_forum_tag"
+                    android:layout_below="@id/tag_title"
+                    android:layout_toRightOf="@id/forum_tag_two"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
+
+                <!--Send button-->
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/custom_button"
+                    android:fontFamily="sans-serif"
+                    android:text="SEND NEW POST"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:backgroundTint="@null" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp">
+
+                <!--Send button-->
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="sans-serif"
+                    android:text="CANCEL"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
