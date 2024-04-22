@@ -240,6 +240,13 @@ public class DetailActivity extends AppCompatActivity {
                                 Toast.makeText(DetailActivity.this, "Post Updated", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e ->
                                 Toast.makeText(DetailActivity.this, "Failed To Update Post", Toast.LENGTH_SHORT).show());
+                if (tag.equals("positivity")) {
+                    posRef.child(postKey).removeValue();
+                } else if (tag.equals("vent")) {
+                    ventRef.child(postKey).removeValue();
+                } else {
+                    qRef.child(postKey).removeValue();
+                }
                 if (tagText.equals("positivity")) {
                     posRef.child(postKey).setValue(newChat);
                 } else if (tagText.equals("vent")) {
