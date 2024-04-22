@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_image">
 
-
+    <!--Start breathing text-->
     <Button
         android:id="@+id/start_breathing"
         android:layout_width="wrap_content"
@@ -23,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Back button-->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="40dp"
@@ -50,6 +51,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
+        <!--Heart icon-->
         <ImageView
             android:id="@+id/heart"
             android:layout_width="150dp"
@@ -58,6 +60,7 @@
             android:contentDescription="@string/breathe_heart"
             app:srcCompat="@drawable/heart" />
 
+        <!--Breathe circle-->
         <ImageView
             android:id="@+id/circle"
             android:layout_width="wrap_content"
@@ -67,6 +70,7 @@
             android:contentDescription="@string/breathe_circle"
             app:srcCompat="@drawable/start_circle" />
 
+        <!--Breathe in text-->
         <TextView
             android:id="@+id/breathe_in"
             android:layout_width="wrap_content"
@@ -77,6 +81,7 @@
             android:textColor="#112A46"
             android:textSize="45sp" />
 
+        <!--Breathe out text-->
         <TextView
             android:id="@+id/breathe_out"
             android:layout_width="wrap_content"
@@ -87,6 +92,7 @@
             android:textColor="#112A46"
             android:textSize="45sp" />
 
+        <!--Hold text-->
         <TextView
             android:id="@+id/hold"
             android:layout_width="wrap_content"
@@ -97,6 +103,7 @@
             android:textColor="#112A46"
             android:textSize="45sp" />
 
+        <!--Through nose text-->
         <TextView
             android:id="@+id/nose"
             android:layout_width="wrap_content"
@@ -108,6 +115,7 @@
             android:textColor="#112A46"
             android:textSize="30sp" />
 
+        <!--Through mouth text-->
         <TextView
             android:id="@+id/mouth"
             android:layout_width="wrap_content"

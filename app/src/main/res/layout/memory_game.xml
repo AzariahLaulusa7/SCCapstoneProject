@@ -6,6 +6,7 @@
     android:padding="16dp"
     android:background="@drawable/background_image">
 
+    <!--Holds buttons-->
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="500dp"
@@ -19,6 +20,7 @@
         android:layout_margin="16dp">
     </GridLayout>
 
+    <!--feedback text-->
     <TextView
         android:id="@+id/feedbackText"
         android:layout_width="wrap_content"
@@ -30,6 +32,7 @@
         android:layout_marginBottom="150dp"
         android:text="" />
 
+    <!--start game button-->
     <Button
         android:id="@+id/startGameButton"
         android:layout_width="wrap_content"
@@ -44,6 +47,7 @@
         android:background="@color/colorAccent"
         android:padding="10dp" />
 
+    <!--memory game title-->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -54,6 +58,8 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
         android:layout_marginBottom="32dp"/>
+
+    <!--directions-->
     <TextView
         android:id="@+id/directions"
         android:layout_width="wrap_content"
@@ -66,6 +72,7 @@
         android:paddingTop="60dp"
         android:layout_marginBottom="32dp"/>
 
+    <!--play again button-->
     <Button
         android:id="@+id/playAgainButton"
         android:layout_width="wrap_content"
@@ -77,6 +84,7 @@
         android:padding="10dp"
         android:visibility="gone"/>
 
+    <!--back button-->
     <ImageView
         android:id="@+id/backIcon"
         android:layout_width="wrap_content"

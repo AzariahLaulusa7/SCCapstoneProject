@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!--Back button-->
     <ImageView
         android:id="@+id/back_icon"
         android:layout_width="wrap_content"
@@ -16,6 +17,7 @@
         android:src="@drawable/baseline_arrow_back_ios_24"
         app:tint="@color/black" />
 
+    <!--Crisis lines-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +28,7 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <!--Suicide lifeline-->
     <Button
         android:id="@+id/button_suicide_crisis"
         android:layout_width="match_parent"
@@ -36,6 +39,7 @@
         android:fontFamily="@font/alata"
         android:backgroundTint="#EB2113"/>
 
+    <!--911-->
     <Button
         android:id="@+id/button_emergency_services"
         android:layout_width="match_parent"
@@ -46,6 +50,7 @@
         android:fontFamily="@font/alata"
         android:backgroundTint="#EB2113"/>
 
+    <!--crisis text line-->
     <Button
         android:id="@+id/button_crisis_text_line"
         android:layout_width="match_parent"
@@ -56,6 +61,7 @@
         android:fontFamily="@font/alata"
         android:backgroundTint="#EB2113"/>
 
+    <!--view therapists-->
     <Button
         android:id="@+id/button_view_therapists"
         android:layout_width="match_parent"
@@ -66,6 +72,7 @@
         android:fontFamily="@font/alata"
         android:backgroundTint="@color/light_black"/>
 
+    <!--go to chatbot-->
     <Button
         android:id="@+id/button_chatbot"
         android:layout_width="match_parent"

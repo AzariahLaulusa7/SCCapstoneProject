@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <!--Back button-->
                 <ImageButton
                     android:id="@+id/backButton"
                     android:layout_width="40dp"
@@ -40,6 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.05" />
 
+                <!--Forum title-->
                 <TextView
                     android:id="@+id/title_forum"
                     android:layout_width="wrap_content"
@@ -53,6 +55,7 @@
                     android:layout_marginTop="80dp"
                     android:text="@string/forum_title" />
 
+                <!--New message button-->
                 <ImageButton
                     android:id="@+id/new_message"
                     android:layout_width="wrap_content"
@@ -74,6 +77,7 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
+                <!--Filter-->
                 <RelativeLayout
                     android:id="@+id/filter"
                     android:layout_width="180dp"
@@ -94,6 +98,7 @@
                         android:textSize="30sp" />
                 </RelativeLayout>
 
+                <!--Sort-->
                 <RelativeLayout
                     android:id="@+id/sort"
                     android:layout_width="180dp"
@@ -122,12 +127,14 @@
                 android:layout_marginBottom="5dp"
                 android:orientation="vertical">
 
+                <!--Filter view-->
                 <ImageView
                     android:id="@+id/filter_view"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:background="@drawable/profile_bubble"/>
 
+                <!--Tag title-->
                 <TextView
                     android:id="@+id/tag_title"
                     android:layout_width="match_parent"
@@ -140,6 +147,7 @@
                     android:text="Filter:"
                     android:drawablePadding="10dp"/>
 
+                <!--forum tag-->
                 <TextView
                     android:id="@+id/forum_tag"
                     android:layout_width="wrap_content"
@@ -152,6 +160,7 @@
                     android:layout_below="@id/tag_title"
                     android:layout_alignParentLeft="true"/>
 
+                <!--oldest to newest tag-->
                 <TextView
                     android:id="@+id/oldest_tag"
                     android:layout_width="wrap_content"
@@ -164,6 +173,7 @@
                     android:layout_below="@id/tag_title"
                     android:layout_alignParentLeft="true"/>
 
+                <!--newest to oldest tag-->
                 <TextView
                     android:id="@+id/newest_tag"
                     android:layout_width="wrap_content"
@@ -177,6 +187,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
+                <!--Question tag-->
                 <TextView
                     android:id="@+id/forum_tag_two"
                     android:layout_width="wrap_content"
@@ -190,6 +201,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
+                <!--Vent tag-->
                 <TextView
                     android:id="@+id/forum_tag_three"
                     android:layout_width="wrap_content"
@@ -203,6 +215,7 @@
                     android:layout_below="@id/tag_title"
                     android:layout_toRightOf="@id/forum_tag_two"/>
 
+                <!--All tag-->
                 <TextView
                     android:id="@+id/forum_tag_four"
                     android:layout_width="wrap_content"
@@ -218,6 +231,7 @@
 
             </RelativeLayout>
 
+            <!--Holds all posts-->
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

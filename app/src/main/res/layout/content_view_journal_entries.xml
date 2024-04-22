@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_image">
 
+    <!--Holds all journal entries-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/journalRecycler"
         android:layout_width="413dp"
@@ -14,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Back button-->
     <ImageButton
         android:id="@+id/journalBack"
         android:layout_width="wrap_content"
@@ -23,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator" />
 
+    <!--Add new entry button-->
     <Button
         android:id="@+id/newEntry"
         android:layout_width="wrap_content"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_image">
 
-
+    <!--thumbs up-->
     <ImageButton
         android:id="@+id/thumbs_up"
         android:layout_width="wrap_content"
@@ -23,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--thumbs down-->
     <ImageButton
         android:id="@+id/thumbs_down"
         android:layout_width="wrap_content"
@@ -39,6 +40,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_thumb_down_off_alt_24" />
 
+    <!--picture of pose-->
     <ImageView
         android:id="@+id/pose"
         android:layout_width="281dp"
@@ -50,6 +52,7 @@
         app:layout_constraintVertical_bias="0.303"
         app:srcCompat="@drawable/pose1" />
 
+    <!--start-->
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
@@ -64,6 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timer" />
 
+    <!--back button-->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="40dp"
@@ -81,6 +85,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
+    <!--timer-->
     <TextView
         android:id="@+id/timer"
         android:layout_width="wrap_content"
@@ -94,6 +99,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--pose name-->
     <TextView
         android:id="@+id/pose_name"
         android:layout_width="wrap_content"
@@ -109,6 +115,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--next button-->
     <Button
         android:id="@+id/next"
         android:layout_width="wrap_content"

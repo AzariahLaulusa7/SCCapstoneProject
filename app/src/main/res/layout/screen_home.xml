@@ -9,7 +9,7 @@
     android:background="@drawable/background_image"
     tools:context=".HomeScreen">
 
-
+    <!--move icon-->
     <ImageButton
         android:id="@+id/Move"
         android:layout_width="60dp"
@@ -24,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.42" />
 
+    <!--journal icon-->
     <ImageButton
         android:id="@+id/Journal"
         android:layout_width="60dp"
@@ -38,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.42" />
 
+    <!--state of mind icon-->
     <ImageButton
         android:id="@+id/charts"
         android:layout_width="60dp"
@@ -52,6 +54,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.42" />
 
+    <!--games icon-->
     <ImageButton
         android:id="@+id/Games"
         android:layout_width="60dp"
@@ -66,6 +69,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.582" />
 
+    <!--breathe icon-->
     <ImageButton
         android:id="@+id/Breath"
         android:layout_width="60dp"
@@ -80,6 +84,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.582" />
 
+    <!--forums icon-->
     <ImageButton
         android:id="@+id/Forums"
         android:layout_width="60dp"
@@ -94,6 +99,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.582" />
 
+    <!--profile icon-->
     <ImageButton
         android:id="@+id/Profile"
         android:layout_width="0dp"
@@ -107,6 +113,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <!--call icon-->
     <ImageButton
         android:id="@+id/Call"
         android:layout_width="0dp"
@@ -120,6 +127,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <!--settings icon-->
     <ImageButton
         android:id="@+id/Settings"
         android:layout_width="0dp"
@@ -133,6 +141,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <!--greeting-->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -148,6 +157,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.137" />
 
+    <!--daily quote-->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
