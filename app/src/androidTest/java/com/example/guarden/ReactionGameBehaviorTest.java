@@ -24,34 +24,39 @@ public class ReactionGameBehaviorTest {
     @Rule
     public ActivityTestRule<ReactionGame> activityRule = new ActivityTestRule<>(ReactionGame.class);
 
-    // Test initial state of game
     @Test
     public void testInitialConditions() {
+        // Ensure the start button is displayed initially
         onView(withId(R.id.startButton)).check(matches(isDisplayed()));
+        // Check that the score and instructions are not visible
         onView(withId(R.id.textViewScore)).check(matches(not(isDisplayed())));
         onView(withId(R.id.instructions)).check(matches(isDisplayed()));
     }
 
-    // Test score (time) and instructions are no longer visible after starting game
     @Test
     public void testStartGame() {
+        // Click on the start button to begin the game
         onView(withId(R.id.startButton)).perform(click());
+        // Check that the score and instructions views are gone
         onView(withId(R.id.textViewScore)).check(matches(not(isDisplayed())));
         onView(withId(R.id.instructions)).check(matches(not(isDisplayed())));
     }
 
-    // Test for early click
     @Test
     public void testGameLostPrematurely() {
+        // Start the game
         onView(withId(R.id.startButton)).perform(click());
+        // Click the main layout prematurely
         onView(withId(R.id.mainLayout)).perform(click());
+        // Check if the text view updates to the lose message
         onView(withId(R.id.textViewScore)).check(matches(withText("You lose! Try again.")));
     }
 
-    // Test for end of game
     @Test
     public void testGameWon() {
+        // Start the game
         onView(withId(R.id.startButton)).perform(click());
+        // Mock the handler delay to simulate game ready for reaction
         activityRule.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -59,7 +64,9 @@ public class ReactionGameBehaviorTest {
                 activityRule.getActivity().startTime = System.currentTimeMillis();
             }
         });
+        // Click the main layout to win the game
         onView(withId(R.id.mainLayout)).perform(click());
+        // Check if the score is displayed correctly
         onView(withId(R.id.textViewScore)).check(matches(isDisplayed()));
     }
 }
