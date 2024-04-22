@@ -25,8 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class ViewJournalEntries extends AppCompatActivity {
+public class ViewJournalEntries extends AppCompatActivity implements RecyclerViewInterface{
     Button add;
     ImageButton back;
     static JournalAdapter JournalAdapter;
@@ -37,27 +38,6 @@ public class ViewJournalEntries extends AppCompatActivity {
 
     static ArrayList<JournalEntry> entries = new ArrayList<JournalEntry>();
 
-    public ArrayList<String> readFromInternalStorageLineByLine(Context context, String fileName) {
-        ArrayList<String> data = new ArrayList<String>();
-        try {
-            FileInputStream fis = context.openFileInput(fileName);
-            InputStreamReader inputStreamReader = new InputStreamReader(fis);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                data.add(line);
-            }
-            fis.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return data;
-    }
-
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_view_journal_entries);
@@ -66,11 +46,12 @@ public class ViewJournalEntries extends AppCompatActivity {
         add = (Button) findViewById(R.id.newEntry);
         back = (ImageButton) findViewById(R.id.journalBack);
         RecyclerView recycler = findViewById(R.id.journalRecycler);
+
         Intent addNewEntry = new Intent(this, NewJournalEntry.class);
         Intent goBack = new Intent(this, HomeScreen.class);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recycler.setLayoutManager(linearLayoutManager);
-        JournalAdapter = new JournalAdapter(this, entries);
+        JournalAdapter = new JournalAdapter(this, entries, this);
         recycler.setAdapter(JournalAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -91,6 +72,9 @@ public class ViewJournalEntries extends AppCompatActivity {
                         JournalEntry entry = new JournalEntry(tempName, tempContent);
                         entries.add(entry);
                     }
+
+                    // Reverse the entries list
+
                     if (ViewJournalEntries.JournalAdapter != null) {
                         ViewJournalEntries.JournalAdapter.notifyDataSetChanged();
                     }
@@ -116,5 +100,19 @@ public class ViewJournalEntries extends AppCompatActivity {
                 startActivity(goBack);
             }
         });
+
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        //this code is activated when a journal entry is selected from the list
+        Intent edit = new Intent(this, editJournalEntry.class);
+
+        edit.putExtra("TITLE", entries.get(position).getName());
+        edit.putExtra("CONTENT", entries.get(position).getContent());
+
+        startActivity(edit);
+
     }
 }
