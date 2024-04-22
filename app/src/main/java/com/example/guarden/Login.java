@@ -108,6 +108,8 @@ public class Login extends AppCompatActivity {
 
     private static class User {
         public ArrayList<Pose> poseList;
+
+        public ArrayList<JournalEntry> journalEntries;
         public String email, password, firstName, lastName, image;
 
         public User() {}
@@ -119,13 +121,14 @@ public class Login extends AppCompatActivity {
             this.lastName = lastName;
         }
 
-        public User(String email, String password, String firstName, String lastName, String image, ArrayList<Pose> poseList) {
+        public User(String email, String password, String firstName, String lastName, String image, ArrayList<Pose> poseList, ArrayList<JournalEntry> journalEntries) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
             this.image = image;
             this.poseList = poseList;
+            this.journalEntries = journalEntries;
         }
     }
 }
