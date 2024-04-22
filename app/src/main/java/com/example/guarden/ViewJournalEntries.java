@@ -50,6 +50,8 @@ public class ViewJournalEntries extends AppCompatActivity {
         return data;
     }
 
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_view_journal_entries);

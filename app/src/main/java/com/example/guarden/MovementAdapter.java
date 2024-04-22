@@ -81,15 +81,6 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
             name = itemView.findViewById(R.id.name);
             category = itemView.findViewById(R.id.category);
             sw = itemView.findViewById(R.id.switch1);
-            /*sw.setOnClickListener(new View.OnClickListener(){
-                int position = getAdapterPosition();
-                Pose pose = poseArrayList.get(position);
-                @Override
-                public void onClick(View v) {
-                    databaseReference.child("users").child(HomeScreen.key).child("customPoses")
-                            .child("Sit Up").child("like").setValue(1);
-                }
-            });*/
         }
     }
 }

@@ -18,6 +18,8 @@ public class ChatbotBrain {
         responses.add("Engage in activities that promote creativity and self-expression, such as painting, writing, or playing music, to nourish your soul and uplift your spirits.");
         responses.add("Practice gratitude by focusing on the things you're thankful for in your life, which can shift your perspective and enhance feelings of happiness and contentment.");
         responses.add("Seek professional support if you're struggling with your mental health, as therapy or counseling can provide valuable guidance and assistance in managing your emotions and improving your overall well-being.");
+        responses.add("I am glad you're doing well today! Tell me more!");
+        responses.add("That is good to hear!");
 
     }
 
