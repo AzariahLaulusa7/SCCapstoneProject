@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+//ViewHolder class associated with PostAdapter
 public class PostViewHolder  extends RecyclerView.ViewHolder {
 
     ImageView imageView, tagBackgroundView;

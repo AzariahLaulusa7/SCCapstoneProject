@@ -29,6 +29,7 @@ public class ReactionGame extends AppCompatActivity {
     private Button startButton;
     private Handler handler = new Handler();
     private Runnable colorChangeRunnable;
+    //Initializes booleans that handle game flow
     boolean readyForReaction = false;
     private boolean gameIsActive = false;
     long startTime;
@@ -38,8 +39,8 @@ public class ReactionGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Initializes layout and buttons
         setContentView(R.layout.reaction_game);
-
         mainLayout = findViewById(R.id.mainLayout);
         textViewScore = findViewById(R.id.textViewScore);
         instructions = findViewById(R.id.instructions);
@@ -57,9 +58,9 @@ public class ReactionGame extends AppCompatActivity {
         mainLayout.setOnClickListener(v -> {
             if (gameIsActive) {
                 if (!readyForReaction) {
-                    gameLostPrematurely();
+                    gameLostPrematurely(); //Ends game if user taps before screen changes
                 } else {
-                    gameWon(SystemClock.elapsedRealtime());
+                    gameWon(SystemClock.elapsedRealtime()); //Initiates win once the user taps the screen
                 }
             }
         });
@@ -75,16 +76,17 @@ public class ReactionGame extends AppCompatActivity {
     }
 
     private void gameWon(long reactionEndTime) {
+        //Calculates and displays reaction time
         long reactionTime = reactionEndTime - startTime;
         textViewScore.setText(String.format("Reaction time: %.3f s", reactionTime / 1000.0));
         textViewScore.setVisibility(View.VISIBLE);
-
+        //Updates the user's score
         if (userScoresRef != null) {
             userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Integer dbScore = dataSnapshot.getValue(Integer.class);
-                    if (dbScore == null || reactionTime < dbScore) {
+                    if (dbScore == null || reactionTime < dbScore) { //Saves to database if the score is a high score
                         userScoresRef.setValue(reactionTime);
                     }
                 }
@@ -99,17 +101,20 @@ public class ReactionGame extends AppCompatActivity {
         endGame();
     }
 
+    //Handles tap before screen changes color
     private void gameLostPrematurely() {
         handler.removeCallbacks(colorChangeRunnable);
         gameLost();
     }
 
+    //Ends game after user taps prematurely
     private void gameLost() {
         textViewScore.setText("You lose! Try again.");
         textViewScore.setVisibility(View.VISIBLE);
         endGame();
     }
 
+    //Resets game after completion
     private void endGame() {
         mainLayout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white));
         startButton.setText("Play Again");
@@ -118,15 +123,16 @@ public class ReactionGame extends AppCompatActivity {
         gameIsActive = false;
     }
 
+    //Main game code
     private void prepareGame() {
         colorChangeRunnable = new Runnable() {
             @Override
             public void run() {
-                mainLayout.setBackgroundColor(ContextCompat.getColor(ReactionGame.this, android.R.color.holo_blue_bright));
-                startTime = SystemClock.elapsedRealtime();
+                mainLayout.setBackgroundColor(ContextCompat.getColor(ReactionGame.this, android.R.color.holo_blue_bright)); //Changes screen color
+                startTime = SystemClock.elapsedRealtime(); //Gets device time to use in calculating reaction time
                 readyForReaction = true;
             }
         };
-        handler.postDelayed(colorChangeRunnable, new Random().nextInt(4000) + 1000);
+        handler.postDelayed(colorChangeRunnable, new Random().nextInt(4000) + 1000); //Adds a random delay
     }
 }

@@ -30,6 +30,7 @@ public class MovementNewCustom extends AppCompatActivity {
     static String key;
     Intent goBack, main;
     protected void onCreate(Bundle savedInstanceState) {
+        //Initializes buttons on this screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement_add_custom);
         editTextExerciseName = findViewById(R.id.editTextExerciseName);
@@ -40,7 +41,7 @@ public class MovementNewCustom extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         goBack = new Intent(this, MovementViewList.class);
         main = new Intent(this, MoveMain.class);
-
+        //Gets user name if there is one
         if(SaveUser.getUserName(MovementNewCustom.this).length() != 0)
             key = SaveUser.getUserName(MovementNewCustom.this);
 
@@ -50,12 +51,13 @@ public class MovementNewCustom extends AppCompatActivity {
                 String name = editTextExerciseName.getText().toString().trim();
                 String description = editTextExerciseDescription.getText().toString().trim();
                 String category = categorySelect.getSelectedItem().toString().toLowerCase();
+                //Checks that a name is entered
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(MovementNewCustom.this, "Please add a name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Pose pose = new Pose(category,name,0,description,0);
-                if (key != null) {
+                Pose pose = new Pose(category,name,0,description,0); //Creates a new pose
+                if (key != null) { //Saves the pose to the database
                     databaseReference.child("users").child(key).child("customPoses").child(name).setValue(pose)
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(MovementNewCustom.this, "Pose Created", Toast.LENGTH_SHORT).show())
