@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+//Class to handle commenting under posts in the forum
 public class DetailActivity extends AppCompatActivity {
 
     ImageButton back;
@@ -43,7 +43,7 @@ public class DetailActivity extends AppCompatActivity {
         commentbutton = findViewById(R.id.comment_button);
         comment = findViewById(R.id.comment_description);
         intent = new Intent(this, ForumMain.class);
-
+        //Finds the database reference for each relevant object
         userRef = FirebaseDatabase.getInstance().getReference("users");
         commentRef = FirebaseDatabase.getInstance().getReference("comment");
         commentPostRef = FirebaseDatabase.getInstance().getReference("comment");
@@ -59,19 +59,19 @@ public class DetailActivity extends AppCompatActivity {
         int chosenImage = -1;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if(extras == null) {
+            if(extras == null) { //Checks to see if post has values for name, message, key, and image
                 chosenName = null;
                 chosenMessage = null;
                 postKey = null;
                 chosenImage = -1;
-            } else {
+            } else { //Assigns post name, message, image, and key
                 chosenName = extras.getString("latitude");
                 chosenMessage = extras.getString("longitude");
                 chosenImage = extras.getInt("pic");
                 postKey = extras.getString("postKey");
             }
         }
-
+        //Finds correct post associated with the comment
         if (postKey != null) {
             commentRef = commentRef.child(postKey);
             commentPostRef = commentPostRef.child(postKey);
@@ -84,7 +84,7 @@ public class DetailActivity extends AppCompatActivity {
             message.setText(chosenMessage);
             image.setImageResource(chosenImage);
         }
-
+        //Sets up list view
         recyclerViewComment.setLayoutManager(new LinearLayoutManager(this));
         FirebaseRecyclerOptions<Comment> options = new FirebaseRecyclerOptions.Builder<Comment>()
                 .setQuery(commentRef, Comment.class)
@@ -95,16 +95,17 @@ public class DetailActivity extends AppCompatActivity {
         lm.setReverseLayout(true);
         lm.setStackFromEnd(true);
         recyclerViewComment.setLayoutManager(lm);
-
+        //Adds comment when comment button is pressed
         commentbutton.setOnClickListener(v -> {
+            //Gets user inputted text
             final String message = comment.getText().toString().trim();
-
+            //Checks to make sure comment exists
             if (!TextUtils.isEmpty(message)) {
                 adapterComment.stopListening();
                 String uniqueKey = userRef.push().getKey();
                 Comment newChat = new Comment(message, SaveUser.getName(DetailActivity.this)+": ");
                 if (uniqueKey != null && commentPostRef != null) {
-                    commentPostRef.child(uniqueKey).setValue(newChat)
+                    commentPostRef.child(uniqueKey).setValue(newChat)//Adds comment to database
                             .addOnSuccessListener(aVoid ->
                                     Toast.makeText(this, "Comment Created", Toast.LENGTH_SHORT).show())
                             .addOnFailureListener(e ->

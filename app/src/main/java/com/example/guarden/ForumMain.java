@@ -102,7 +102,7 @@ public class ForumMain extends AppCompatActivity {
         // When filter is clicked
         filter.setOnClickListener(v -> {
             tag_title.setText("Filter:");
-            if (filterActive == true) {
+            if (filterActive == true) { //Hides all appropriate buttons after filter button is clicked
                 forum_view.setVisibility(View.GONE);
                 tag_title.setVisibility(View.GONE);
                 vent.setVisibility(View.GONE);
@@ -112,7 +112,7 @@ public class ForumMain extends AppCompatActivity {
                 newest.setVisibility(View.GONE);
                 old.setVisibility(View.GONE);
                 filterActive = false;
-            } else {
+            } else { //Shows all appropriate buttons after filter button is clicked
                 newest.setVisibility(View.GONE);
                 old.setVisibility(View.GONE);
                 forum_view.setVisibility(View.VISIBLE);
@@ -125,10 +125,10 @@ public class ForumMain extends AppCompatActivity {
                 sortActive = false;
             }
         });
-
+        //When sort is clicked
         sort.setOnClickListener(v -> {
             tag_title.setText("Sort:");
-            if (sortActive == true) {
+            if (sortActive == true) { //Hides all appropriate buttons after sort button is clicked
                 forum_view.setVisibility(View.GONE);
                 tag_title.setVisibility(View.GONE);
                 vent.setVisibility(View.GONE);
@@ -138,7 +138,7 @@ public class ForumMain extends AppCompatActivity {
                 newest.setVisibility(View.GONE);
                 old.setVisibility(View.GONE);
                 sortActive = false;
-            } else {
+            } else { //Shows all appropriate buttons after sort button is clicked
                 forum_view.setVisibility(View.VISIBLE);
                 tag_title.setVisibility(View.VISIBLE);
                 newest.setVisibility(View.VISIBLE);
@@ -151,7 +151,7 @@ public class ForumMain extends AppCompatActivity {
                 filterActive = false;
             }
         });
-
+        //Sets layout to sort-by-newest
         newest.setOnClickListener(v -> {
             newest.setBackground(getDrawable(R.drawable.picked_image_background));
             old.setBackground(getDrawable(R.drawable.grey_tag_background));
@@ -162,7 +162,7 @@ public class ForumMain extends AppCompatActivity {
 
             recyclerView.setLayoutManager(lm);
         });
-
+        //Sets layout to sort-by-oldest
         old.setOnClickListener(v -> {
             newest.setBackground(getDrawable(R.drawable.grey_tag_background));
             old.setBackground(getDrawable(R.drawable.picked_image_background));
@@ -174,6 +174,7 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setLayoutManager(lm);
         });
 
+        //Filters post by tag:vent
         vent.setOnClickListener(v -> {
             tagText = "vent";
             vent.setBackground(getDrawable(R.drawable.vent_forum_tag));
@@ -201,6 +202,7 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setLayoutManager(lm);
         });
 
+        //Filters posts by tag:question
         question.setOnClickListener(v -> {
             tagText = "question";
             vent.setBackground(getDrawable(R.drawable.grey_tag_background));
@@ -227,6 +229,7 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setLayoutManager(lm);
         });
 
+        //Filters posts by tag:positivity
         positive.setOnClickListener(v -> {
             tagText = "positivity";
             vent.setBackground(getDrawable(R.drawable.grey_tag_background));
@@ -252,7 +255,7 @@ public class ForumMain extends AppCompatActivity {
             }
             recyclerView.setLayoutManager(lm);
         });
-
+        //Removes filters
         all.setOnClickListener(v -> {
 
             vent.setBackground(getDrawable(R.drawable.grey_tag_background));
