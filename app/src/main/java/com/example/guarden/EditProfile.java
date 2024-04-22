@@ -250,6 +250,7 @@ public class EditProfile extends AppCompatActivity {
                                         Toast.makeText(EditProfile.this, "Failed To Save Image", Toast.LENGTH_SHORT).show());
                     }
                     addDefaultPosesToList(SaveUser.getUserName(EditProfile.this));
+                    startActivity(myIntent);
                     finish();
                 }
             } else {
