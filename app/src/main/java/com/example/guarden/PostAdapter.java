@@ -34,6 +34,17 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> {
             holder.tagBackgroundView.setImageResource(model.getTagBackground());
         } catch (Exception e) {
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+            //intent.putExtra("model", model);
+            intent.putExtra("latitude", model.getName());
+            intent.putExtra("longitude", model.getMessage());
+            intent.putExtra("pic", model.getImage());
+            intent.putExtra("postKey", model.getKey());
+
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
 

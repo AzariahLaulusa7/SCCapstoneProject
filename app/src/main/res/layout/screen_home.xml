@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_light"
+    android:background="@drawable/background_image"
     tools:context=".HomeScreen">
 
 
@@ -94,43 +95,41 @@
         app:layout_constraintVertical_bias="0.582" />
 
     <ImageButton
-        android:id="@+id/Call"
-        android:layout_width="138dp"
-        android:layout_height="80dp"
-        android:background="@drawable/call_button"
-        android:onClick="Call"
-        android:src="@drawable/baseline_phone_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Settings"
-        app:layout_constraintStart_toEndOf="@+id/Profile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
         android:id="@+id/Profile"
-        android:layout_width="130dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@drawable/right_left_button"
         android:onClick="Profile"
         android:src="@drawable/baseline_person_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Settings"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@id/Call"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
+        android:id="@+id/Call"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@drawable/call_button"
+        android:onClick="Call"
+        android:src="@drawable/baseline_phone_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Settings"
+        app:layout_constraintStart_toEndOf="@id/Profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
         android:id="@+id/Settings"
-        android:layout_width="130dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@drawable/right_left_button"
         android:onClick="Settings"
         android:src="@drawable/baseline_settings_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/Call"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -138,16 +137,32 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Hello User..."
+        android:fontFamily="@font/alata"
         android:textColor="@color/white"
-        android:textSize="34sp"
+        android:textSize="30sp"
+        android:text="Hello"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.137" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="320dp"
+        android:fontFamily="@font/alata"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

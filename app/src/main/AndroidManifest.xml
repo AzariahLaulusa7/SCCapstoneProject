@@ -26,6 +26,15 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:targetApi="34"
         tools:ignore="ExtraText">
+        <receiver android:name=".MidnightResetReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
         <receiver
             android:name=".NotificationReceiver"
             android:enabled="true"
@@ -36,6 +45,10 @@
             android:exported="false" />
         <activity
             android:name=".Login"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

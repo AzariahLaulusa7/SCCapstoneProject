@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_light"
+    android:id="@+id/settings"
+    android:background="@drawable/background_image"
     tools:context=".Settings">
 
     <ImageView
@@ -29,21 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Sound"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Sound"
-        android:textAlignment="viewStart"
-        android:paddingStart="85dp"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar1" />
-
     <ImageView
         android:id="@+id/blackBar2"
         android:layout_width="0dp"
@@ -51,7 +37,7 @@
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Sound" />
+        app:layout_constraintTop_toBottomOf="@+id/Dark" />
 
     <TextView
         android:id="@+id/Dark"
@@ -62,10 +48,10 @@
         android:text="Dark mode"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar3"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar2" />
+        app:layout_constraintTop_toBottomOf="@+id/blackBar1" />
 
     <ImageView
         android:id="@+id/blackBar3"
@@ -74,7 +60,7 @@
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Dark" />
+        app:layout_constraintTop_toBottomOf="@+id/Notifications" />
 
     <TextView
         android:id="@+id/Notifications"
@@ -85,7 +71,7 @@
         android:text="Notifications"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar4"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar3" />
@@ -177,17 +163,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar7" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:max="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Sound"
-        app:layout_constraintBottom_toBottomOf="@+id/Sound"
-        android:paddingEnd="50dp"
-        />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/Dark_Mode_Switch"

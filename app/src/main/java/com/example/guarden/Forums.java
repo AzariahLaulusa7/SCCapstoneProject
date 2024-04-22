@@ -42,7 +42,7 @@ public class Forums extends AppCompatActivity {
     ImageView profileImage;
     ImageView image1, image2, image3, image4, image5, image6;
     TextView vent, positive, question, userName;
-    Intent myIntent;
+    Intent myIntent, home;
     SharedPreferences orderPrefs;
     int prefOrderNumber;
 
@@ -108,6 +108,7 @@ public class Forums extends AppCompatActivity {
         forumRef = FirebaseDatabase.getInstance().getReference("forum");
 
         myIntent = new Intent(Forums.this, ForumMain.class);
+        home = new Intent(Forums.this, HomeScreen.class);
 
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
@@ -210,7 +211,7 @@ public class Forums extends AppCompatActivity {
                 } else {
                     if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) {
                         String uniqueKey = userRef.push().getKey();
-                        Chat newChat = new Chat(name, tag, message, image, tagBackground, prefOrderNumber);
+                        Chat newChat = new Chat(name, tag, message, image, tagBackground, uniqueKey);
                         forumRef.child(uniqueKey).setValue(newChat)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(Forums.this, "Post Created", Toast.LENGTH_SHORT).show())
@@ -223,18 +224,8 @@ public class Forums extends AppCompatActivity {
                         } else {
                             qRef.child(uniqueKey).setValue(newChat);
                         }
-
-
-//        SharedPreferences.Editor editor = gamePrefs.edit();
-//        editor.putInt("MemoryGameBestScore", difficultyLevel - 1);
-//        editor.apply();
-                        prefOrderNumber++;
-                        SharedPreferences.Editor editor = orderPrefs.edit();
-                        editor.putInt("TestWNUMBER", prefOrderNumber);
-                        editor.apply();
-
                     }
-                    startActivity(myIntent);
+                    startActivity(home);
                     finish();
                 }
             }  else {
@@ -253,7 +244,6 @@ public class Forums extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        startActivity(myIntent);
     }
 
     private static class User {
@@ -278,19 +268,19 @@ public class Forums extends AppCompatActivity {
     }
 
     private static class Chat {
-        public String name, tag, message;
+        public String name, tag, message, key;
         public int image;
         public int tagBackground, orderNumber;
 
         public Chat() {}
 
-        public Chat(String name, String tag, String message, int image, int tagBackground, int orderNumber) {
+        public Chat(String name, String tag, String message, int image, int tagBackground, String key) {
             this.name = name;
             this.tag = tag;
             this.message = message;
             this.image = image;
             this.tagBackground = tagBackground;
-            this.orderNumber = orderNumber;
+            this.key = key;
         }
     }
 

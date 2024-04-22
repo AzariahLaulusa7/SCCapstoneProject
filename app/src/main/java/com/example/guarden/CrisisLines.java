@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 public class CrisisLines extends AppCompatActivity {
@@ -11,7 +12,7 @@ public class CrisisLines extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crisis_lines);
-        Button backIcon = findViewById(R.id.back_icon);
+        ImageView backIcon = findViewById(R.id.back_icon);
         backIcon.setOnClickListener(v -> {
             Intent back = new Intent(CrisisLines.this, HomeScreen.class);
             startActivity(back);

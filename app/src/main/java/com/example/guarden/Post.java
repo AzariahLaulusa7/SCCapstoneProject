@@ -7,19 +7,20 @@ import java.io.Serializable;
 public class Post {
 
     String name;
-    String tag;
+    String tag, key;
     String message;
     int image;
     int tagBackground;
 
     public Post() {}
 
-    public Post(String name, String message, String tag, int image, int tagBackground) {
+    public Post(String name, String message, String tag, int image, int tagBackground, String key) {
         this.name = name;
         this.message = message;
         this.tag = tag;
         this.image = image;
         this.tagBackground = tagBackground;
+        this.key = key;
     }
 
     public String getName() {
@@ -62,4 +63,11 @@ public class Post {
         this.tagBackground = tagBackground;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 }

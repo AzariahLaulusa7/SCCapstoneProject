@@ -1,22 +1,25 @@
 package com.example.guarden;
 
 public class Message {
-    private String user;
+
+    public static final int LayoutOne = 0;
+    public static final int LayoutTwo = 1;
+    private int viewType;
     private String message;
 
     public Message(){
-        this.user = "user";
+        this.viewType = LayoutOne;
         this.message = "message";
     }
 
-    public Message(String user, String message){
-        this.user = user;
+    public Message(int viewType, String message){
+        this.viewType = viewType;
         this.message = message;
     }
 
     //Getters
-    public String getUser(){
-        return user;
+    public int getViewType(){
+        return viewType;
     }
 
     public String getMessage(){
@@ -25,8 +28,8 @@ public class Message {
 
     //Setters
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
     }
 
     public void setMessage(String message) {
