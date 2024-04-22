@@ -8,6 +8,7 @@
     android:background="@drawable/background_image"
     tools:context=".Settings">
 
+    <!--Divider under title-->
     <ImageView
         android:id="@+id/blackBar1"
         android:layout_width="0dp"
@@ -17,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SettingsText" />
 
+    <!--Setting title-->
     <TextView
         android:id="@+id/SettingsText"
         android:layout_width="0dp"
@@ -31,6 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Divider under dark mode-->
     <ImageView
         android:id="@+id/blackBar2"
         android:layout_width="0dp"
@@ -40,6 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Dark" />
 
+    <!--Dark mode-->
     <TextView
         android:id="@+id/Dark"
         android:layout_width="0dp"
@@ -55,15 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar1" />
 
-    <ImageView
-        android:id="@+id/blackBar3"
-        android:layout_width="0dp"
-        android:layout_height="11dp"
-        android:src="@drawable/rectangle_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Notifications" />
-
+    <!--Notifications-->
     <TextView
         android:id="@+id/Notifications"
         android:layout_width="0dp"
@@ -77,8 +73,9 @@
         app:layout_constraintBottom_toTopOf="@+id/blackBar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar3" />
+        app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
 
+    <!--Bar under notifications-->
     <ImageView
         android:id="@+id/blackBar4"
         android:layout_width="0dp"
@@ -88,6 +85,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Notifications" />
 
+    <!--About-->
     <TextView
         android:id="@+id/About"
         android:layout_width="0dp"
@@ -102,6 +100,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
 
+    <!--Bar under about-->
     <ImageView
         android:id="@+id/blackBar5"
         android:layout_width="0dp"
@@ -111,6 +110,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/About" />
 
+    <!--privacy policy-->
     <TextView
         android:id="@+id/PrivacyPolicy"
         android:layout_width="0dp"
@@ -125,6 +125,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar5" />
 
+    <!--bar under privacy policy-->
     <ImageView
         android:id="@+id/blackBar6"
         android:layout_width="0dp"
@@ -134,6 +135,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PrivacyPolicy" />
 
+    <!--terms of use-->
     <TextView
         android:id="@+id/TermsOfUse"
         android:layout_width="0dp"
@@ -148,6 +150,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar6" />
 
+    <!--Bar under terms of use-->
     <ImageView
         android:id="@+id/blackBar7"
         android:layout_width="0dp"
@@ -157,6 +160,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TermsOfUse" />
 
+    <!--logout button-->
     <TextView
         android:id="@+id/Logout"
         android:layout_width="0dp"
@@ -171,6 +175,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar7" />
 
+    <!--dark mode switch-->
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/Dark_Mode_Switch"
         android:layout_width="wrap_content"
@@ -181,6 +186,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Dark" />
 
+    <!--notifications switch-->
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/NotificationSwitch"
         android:layout_width="wrap_content"
@@ -190,6 +196,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Notifications" />
 
+    <!--back button-->
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="wrap_content"

@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!--Back button-->
             <ImageButton
                 android:id="@+id/backIcon"
                 android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
                 android:background="@android:color/transparent"
                 app:srcCompat="?attr/homeAsUpIndicator" />
 
+            <!--Profile title-->
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -55,6 +57,7 @@
             android:background="@drawable/profile_bubble"
             android:padding="20dp">
 
+            <!--Profile picture-->
             <ImageView
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
@@ -67,6 +70,7 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/edit_profile_image" />
 
+            <!--Edit profile picture-->
             <ImageButton
                 android:id="@+id/edit_image"
                 android:layout_width="48dp"
@@ -90,6 +94,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <!--First name-->
             <EditText
                 android:id="@+id/firstname"
                 android:layout_width="match_parent"
@@ -118,6 +123,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <!--Last Name-->
             <EditText
                 android:id="@+id/lastname"
                 android:layout_width="match_parent"
@@ -146,6 +152,7 @@
             android:background="@drawable/profile_bubble"
             android:padding="10dp">
 
+            <!--Email-->
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -174,6 +181,7 @@
             android:background="@drawable/profile_bubble"
             android:padding="10dp">
 
+            <!--Password-->
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
@@ -202,6 +210,7 @@
             android:layout_marginTop="30dp"
             android:padding="10dp">
 
+            <!--Update button-->
             <Button
                 android:id="@+id/editbtn"
                 android:layout_width="300dp"

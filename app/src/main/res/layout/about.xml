@@ -6,6 +6,7 @@
     android:paddingHorizontal="10dp"
     android:background="@drawable/background_image">
 
+    <!--Back button-->
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -22,12 +23,14 @@
         android:layout_below="@id/backButton"
         android:paddingHorizontal="10dp">
 
+    <!--Contains the different sections in About-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".AboutActivity">
 
+        <!--Title-->
         <TextView
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
@@ -37,6 +40,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"/>
 
+        <!--Version-->
         <TextView
             android:id="@+id/app_version"
             android:layout_width="wrap_content"
@@ -45,6 +49,7 @@
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
+        <!--Mission statement-->
         <TextView
             android:id="@+id/mission_statement"
             android:layout_width="wrap_content"
@@ -53,6 +58,7 @@
             android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
+        <!--Key features-->
         <TextView
             android:id="@+id/features"
             android:layout_width="wrap_content"
@@ -61,6 +67,7 @@
             android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
+        <!--Contact us-->
         <TextView
             android:id="@+id/contact_info"
             android:layout_width="wrap_content"
@@ -69,6 +76,7 @@
             android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
+        <!--Final thoughts-->
         <TextView
             android:id="@+id/note_to_users"
             android:layout_width="wrap_content"

@@ -22,6 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <!--Back button-->
                 <ImageButton
                     android:id="@+id/comment_back_icon"
                     android:layout_width="wrap_content"
@@ -33,6 +34,7 @@
                     android:background="@android:color/transparent"
                     app:srcCompat="?attr/homeAsUpIndicator" />
 
+                <!--Title-->
                 <TextView
                     android:id="@+id/title_forum"
                     android:layout_width="wrap_content"
@@ -53,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_bubble">
 
+                <!--Profile pic-->
                 <ImageView
                     android:id="@+id/comment_image"
                     android:layout_width="100dp"
@@ -61,6 +64,7 @@
                     android:padding="10dp"
                     app:srcCompat="@drawable/user_blue_circle_128"/>
 
+                <!--Commenter name-->
                 <TextView
                     android:id="@+id/comment_id"
                     android:layout_width="wrap_content"
@@ -71,6 +75,7 @@
                     android:textColor="@color/black"
                     android:textSize="35sp"/>
 
+                <!--Comment-->
                 <TextView
                     android:id="@+id/comment_text"
                     android:layout_width="wrap_content"
@@ -98,6 +103,7 @@
             android:orientation="vertical"
             android:layout_below="@id/firstFrag">
 
+            <!--Holds all of the comments-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comment_recyclerview"
                 android:layout_width="match_parent"
@@ -105,6 +111,7 @@
                 android:layout_above="@id/comment_box"
                 android:paddingTop="20dp"/>
 
+            <!--Comment text input layout-->
             <LinearLayout
                 android:id="@+id/comment_box"
                 android:layout_above="@id/comment_button_frag"
@@ -113,6 +120,7 @@
                 android:background="@color/white"
                 android:padding="10dp">
 
+                <!--Comment text input-->
                 <EditText
                     android:id="@+id/comment_description"
                     android:layout_width="match_parent"
@@ -132,6 +140,7 @@
 
             </LinearLayout>
 
+            <!--Send comment button layout-->
             <RelativeLayout
                 android:id="@+id/comment_button_frag"
                 android:layout_width="match_parent"
@@ -139,6 +148,7 @@
                 android:orientation="vertical"
                 android:layout_alignParentBottom="true">
 
+                <!--Send comment button-->
                 <Button
                     android:id="@+id/comment_button"
                     android:layout_width="match_parent"
