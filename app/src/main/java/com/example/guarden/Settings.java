@@ -40,7 +40,7 @@ public class Settings extends AppCompatActivity {
     public static final String ALARM_KEY = "alarm";
     private static final int NOTIF_REQUEST_CODE = 123;
     private static final String PROGRESS_KEY =  "progress";
-    private static final String DARK_MODE_KEY = "dark_mode";
+    public static final String DARK_MODE_KEY = "dark_mode";
     public static final String NOTIF_KEY = "notif";
     private LayerDrawable layerDrawable;
     private boolean darkModeButton;
