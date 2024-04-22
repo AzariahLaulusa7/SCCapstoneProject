@@ -1,9 +1,9 @@
 package com.example.guarden;
-
+//Creates a message object for use with the chatbot
 public class Message {
 
-    public static final int LayoutOne = 0;
-    public static final int LayoutTwo = 1;
+    public static final int LayoutOne = 0;//User messages
+    public static final int LayoutTwo = 1;//Chatbot messages
     private int viewType;
     private String message;
 

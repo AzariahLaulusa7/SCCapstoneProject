@@ -29,6 +29,7 @@ public class MemoryGame extends Activity {
     private GridLayout gridLayout;
     private List<Integer> buttonIds = new ArrayList<>();
     private List<Integer> sequence = new ArrayList<>();
+    //Sets game defaults
     private int sequenceIndex = 0;
     private int difficultyLevel = 1;
     private Handler handler = new Handler();
@@ -44,7 +45,7 @@ public class MemoryGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memory_game);
-
+        //Initializes game elements
         gridLayout = findViewById(R.id.gridLayout);
         textViewFeedback = findViewById(R.id.feedbackText);
         startButton = findViewById(R.id.startGameButton);
@@ -58,12 +59,12 @@ public class MemoryGame extends Activity {
         backButton.setOnClickListener(v -> finish());
 
         initializeButtons();
-
+        //Starts game
         startButton.setOnClickListener(v -> {
             startGame();
             startButton.setVisibility(View.GONE);
         });
-
+        //Restarts game
         playAgainButton.setOnClickListener(v -> {
             startGame();
             playAgainButton.setVisibility(View.GONE);
@@ -78,11 +79,11 @@ public class MemoryGame extends Activity {
             button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_background));
             button.setText("");
             button.setEnabled(false);
-
+            //Creates game grid
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 0;
             params.height = 0;
-            params.rowSpec = GridLayout.spec(i / 3, 1, 1f);
+            params.rowSpec = GridLayout.spec(i / 3, 1, 1f); //Creates evenly spaced 3x3 grid
             params.columnSpec = GridLayout.spec(i % 3, 1, 1f);
             button.setLayoutParams(params);
 
@@ -92,7 +93,7 @@ public class MemoryGame extends Activity {
                 button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_flash));
                 new Handler().postDelayed(() -> {
                     button.setBackground(ContextCompat.getDrawable(this, R.drawable.button_background));
-                }, 250);
+                }, 250); //Adds delay to flashes
 
             });
         }
@@ -132,6 +133,7 @@ public class MemoryGame extends Activity {
         generateSequence(difficultyLevel);
         flashSequence();
     }
+    //Uses shared preferences to save whether or not user has completed the memory game, for state of mind graph page
     private void markChallengeAsCompleted() {
         SharedPreferences sharedPreferences = getSharedPreferences("DailyChallenges", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -139,6 +141,7 @@ public class MemoryGame extends Activity {
         editor.apply();
     }
 
+    //Generates a list of random buttons from the grid, with a given size
     private void generateSequence(int length) {
         Collections.shuffle(buttonIds);
         sequence.clear();
@@ -147,17 +150,18 @@ public class MemoryGame extends Activity {
         }
     }
 
+    //Handles the sequence of flashing buttons the user has to recreate
     private void flashSequence() {
         disableButtons();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (sequenceIndex < sequence.size()) {
+                if (sequenceIndex < sequence.size()) { //If sequence has buttons remaining
                     Button button = findViewById(sequence.get(sequenceIndex));
                     flashButton(button);
                     sequenceIndex++;
                     handler.postDelayed(this, 1000);
-                } else {
+                } else { //Ensures the user cannot tap buttons before sequence has finished
                     sequenceIndex = 0;
                     enableButtons();
                 }
@@ -165,6 +169,7 @@ public class MemoryGame extends Activity {
         }, 1000);
     }
 
+    //Swaps appearance of buttons when they are flashed
     private void flashButton(Button button) {
         Drawable originalDrawable = button.getBackground();
         Drawable flashDrawable = ContextCompat.getDrawable(this, android.R.drawable.btn_default);
@@ -173,6 +178,7 @@ public class MemoryGame extends Activity {
         handler.postDelayed(() -> button.setBackground(originalDrawable), 500);
     }
 
+    //Allows the user to press buttons
     private void enableButtons() {
         for (int id : buttonIds) {
             Button button = findViewById(id);
@@ -180,6 +186,7 @@ public class MemoryGame extends Activity {
         }
     }
 
+    //Prevents the user from pressing buttons
     private void disableButtons() {
         for (int id : buttonIds) {
             Button button = findViewById(id);
@@ -187,14 +194,15 @@ public class MemoryGame extends Activity {
         }
     }
 
+    //Updates db high score if user exceeds current high score
     private void updateBestScore() {
         if (userScoresRef != null) {
             userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Integer dbScore = dataSnapshot.getValue(Integer.class);
-                    if (dbScore == null || (difficultyLevel - 1) > dbScore) {
-                        userScoresRef.setValue((difficultyLevel - 1));
+                    if (dbScore == null || (difficultyLevel - 1) > dbScore) { //Compares user score to high score in db
+                        userScoresRef.setValue((difficultyLevel - 1)); //Sets db high score to current user score
                     }
                 }
                 @Override
@@ -207,6 +215,7 @@ public class MemoryGame extends Activity {
         disableButtons();
     }
 
+    //Flashes the button green if correctly tapped or red if incorrectly tapped
     private void showFeedbackForAShortTime(String feedback, boolean isCorrect) {
         textViewFeedback.setText(feedback);
         if (isCorrect) {

@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.List;
-
+//Loads information from therapist JSON file
 public class JSONHelper {
-
+    //Gets data from JSON
     public static String loadJSONFromAsset(Context context, String fileName) {
         String json = null;
         try {
@@ -25,7 +25,7 @@ public class JSONHelper {
         }
         return json;
     }
-
+    //Creates therapist array list and adds each therapist as a Therapist object
     public static List<Therapist> loadTherapistsFromJson(Context context, String fileName) {
         String json = loadJSONFromAsset(context, fileName);
         if (json == null) return null;

@@ -93,7 +93,7 @@ public class Forums extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if (user != null && user.firstName != null)
-                    userName.setText(user.firstName.toUpperCase());
+                    userName.setText(user.firstName.toUpperCase()); //Gets name of user associated with a post
             }
 
             @Override
@@ -101,7 +101,7 @@ public class Forums extends AppCompatActivity {
                 // Handle onCancelled
             }
         });
-
+        //Gets paths for the sections of the db associated with each forum tag
         posRef = FirebaseDatabase.getInstance().getReference("positiveForum");
         qRef = FirebaseDatabase.getInstance().getReference("questionForum");
         ventRef = FirebaseDatabase.getInstance().getReference("ventForum");
@@ -115,6 +115,7 @@ public class Forums extends AppCompatActivity {
             startActivity(myIntent);
         });
 
+        //Handles button appearances when vent is pressed
         vent.setOnClickListener(v -> {
             tagText = "vent";
             tagBackground = R.drawable.vent_forum_tag;
@@ -123,6 +124,7 @@ public class Forums extends AppCompatActivity {
             positive.setBackground(getDrawable(R.drawable.grey_tag_background));
         });
 
+        //Handles button appearances when question is pressed
         question.setOnClickListener(v -> {
             tagText = "question";
             tagBackground = R.drawable.question_forum_tag;
@@ -131,6 +133,7 @@ public class Forums extends AppCompatActivity {
             positive.setBackground(getDrawable(R.drawable.grey_tag_background));
         });
 
+        //Handles button appearances when positive is pressed
         positive.setOnClickListener(v -> {
             tagText = "positivity";
             tagBackground = R.drawable.positive_forum_tag;
@@ -139,6 +142,7 @@ public class Forums extends AppCompatActivity {
             positive.setBackground(getDrawable(R.drawable.positive_forum_tag));
         });
 
+        //Listeners for each possible profile image
         image1.setOnClickListener(v -> {
             image = R.drawable.cow;
             image1.setBackground(getDrawable(R.drawable.picked_image_background));
@@ -200,19 +204,21 @@ public class Forums extends AppCompatActivity {
         });
 
         post.setOnClickListener(v -> {
+            //Gets user information associated with a new post
             final String name = userName.getText().toString().trim();
             final String tag = tagText.trim();
             final String message = postMessage.getText().toString().trim();
             //final String background = tagBackground.toString().trim();
-
+            //Checks to see if post is empty
             if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(tag) && !TextUtils.isEmpty(message)) {
+                //Checks if user is logged in
                 if (key.equals(" ") || key.isEmpty() || userName.getText().equals("GUEST")) {
                     Toast.makeText(Forums.this, "You NEED an account to post.", Toast.LENGTH_LONG).show();
                 } else {
-                    if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) {
+                    if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) { //No tag
                         String uniqueKey = userRef.push().getKey();
                         Chat newChat = new Chat(name, tag, message, image, tagBackground, uniqueKey);
-                        forumRef.child(uniqueKey).setValue(newChat)
+                        forumRef.child(uniqueKey).setValue(newChat) //Adds new chat to database
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(Forums.this, "Post Created", Toast.LENGTH_SHORT).show())
                                 .addOnFailureListener(e ->
