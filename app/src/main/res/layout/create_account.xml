@@ -11,13 +11,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="880dp"
-        android:background="@drawable/background_image"
-        android:alpha="1" />
+    tools:context=".MainActivity"
+    android:background="@drawable/background_image">
 
     <ImageView
         android:id="@+id/backIcon"

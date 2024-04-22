@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -33,6 +34,7 @@ public class Apptivity extends Application implements Application.ActivityLifecy
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, Bundle savedInstanceState) {
+
     }
 
     //every time an activity is started, increase count. sets isAppClosed to false if app is reopend.

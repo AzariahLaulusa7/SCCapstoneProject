@@ -25,7 +25,8 @@ import java.util.Comparator;
 public class ForumMain extends AppCompatActivity {
 
     // Variables
-    ImageButton back, newPost;
+    ImageButton newPost;
+    ImageView back;
     TextView tag_title, vent, question, positive, all, old, newest;
     RelativeLayout filter, sort;
     PostAdapter adapter;
@@ -45,7 +46,7 @@ public class ForumMain extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
         // Initialize variables
-        back = findViewById(R.id.forum_back_icon);
+        back = findViewById(R.id.backButton);
         newPost = findViewById(R.id.new_message);
         filter = findViewById(R.id.filter);
         sort = findViewById(R.id.sort);

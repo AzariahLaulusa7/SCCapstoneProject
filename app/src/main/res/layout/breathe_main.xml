@@ -1,56 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_image"
-        android:alpha="1" />
-
-    <ImageButton
-        android:id="@+id/breathe_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:minWidth="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
 
     <Button
         android:id="@+id/start_breathing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="552dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/fondness_eapae"
         android:text="@string/circle_start"
         android:textColor="#112A46"
-        android:fontFamily="@font/fondness_eapae"
         android:textSize="30sp"
-        android:background="@drawable/custom_button"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/round_button"
+        android:onClick="Move"
+        android:paddingLeft="8dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/heart"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerInParent="true"
-            app:srcCompat="@drawable/heart"
-            android:contentDescription="@string/breathe_heart" />
+            android:contentDescription="@string/breathe_heart"
+            app:srcCompat="@drawable/heart" />
 
         <ImageView
             android:id="@+id/circle"
@@ -58,8 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:alpha="0.7"
-            app:srcCompat="@drawable/start_circle"
-            android:contentDescription="@string/breathe_circle" />
+            android:contentDescription="@string/breathe_circle"
+            app:srcCompat="@drawable/start_circle" />
 
         <TextView
             android:id="@+id/breathe_in"

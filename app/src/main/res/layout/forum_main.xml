@@ -5,17 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_image">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1008dp"
-            android:background="@drawable/background_image"
-            android:alpha="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,15 +24,21 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/forum_back_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/back_button"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="15dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="?attr/homeAsUpIndicator" />
+                    android:id="@+id/backButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/round_button"
+                    android:onClick="Move"
+                    android:paddingLeft="8dp"
+                    android:src="@drawable/baseline_arrow_back_ios_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.05" />
 
                 <TextView
                     android:id="@+id/title_forum"
@@ -54,11 +57,14 @@
                     android:id="@+id/new_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="add_meesage"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/round_button"
+                    android:contentDescription="add_meesage"
                     android:padding="15dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/paper"/>
+                    app:srcCompat="@drawable/paper" />
 
             </RelativeLayout>
 

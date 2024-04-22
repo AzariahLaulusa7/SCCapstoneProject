@@ -46,7 +46,7 @@ public class BreatheMain extends AppCompatActivity {
         start = findViewById(R.id.start_breathing);
         circle = findViewById(R.id.circle);
         heart = findViewById(R.id.heart);
-        back = findViewById(R.id.breathe_back);
+        back = (ImageButton) findViewById(R.id.backButton);
         breatheInText = findViewById(R.id.breathe_in);
         breatheOutText = findViewById(R.id.breathe_out);
         holdText = findViewById(R.id.hold);
