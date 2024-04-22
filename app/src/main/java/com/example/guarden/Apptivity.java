@@ -2,10 +2,15 @@ package com.example.guarden;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import static com.example.guarden.Settings.DARK_MODE_KEY;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;

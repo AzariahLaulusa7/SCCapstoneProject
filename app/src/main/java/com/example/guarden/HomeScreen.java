@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -161,6 +163,15 @@ public class HomeScreen extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(this, R.drawable.background_image);
+        BitmapDrawable secondDrawable = (BitmapDrawable) layerDrawable.findDrawableByLayerId(R.id.background_light);
+        SharedPreferences sp = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        boolean isDarkModeEnabled = sp.getBoolean(Settings.DARK_MODE_KEY, false);
+        if(isDarkModeEnabled) {
+            secondDrawable.setAlpha(0);
+        } else {
+            secondDrawable.setAlpha(255);
+        }
         setContentView(R.layout.screen_home);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         move = (ImageButton) findViewById(R.id.Move);
