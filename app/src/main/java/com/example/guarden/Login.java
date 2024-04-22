@@ -108,6 +108,7 @@ public class Login extends AppCompatActivity {
 
     private static class User {
         public ArrayList<Pose> poseList;
+        //public ArrayList<JournalEntry> entries;
         public String email, password, firstName, lastName, image;
 
         public User() {}
@@ -129,3 +130,6 @@ public class Login extends AppCompatActivity {
         }
     }
 }
+
+
+
