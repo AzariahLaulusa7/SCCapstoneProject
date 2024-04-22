@@ -33,6 +33,7 @@ public class ForumMain extends AppCompatActivity {
     ImageView forum_view;
     String tagText = " ";
     Boolean filterActive = false;
+    Boolean oldActive = false;
     Boolean sortActive = false;
     Intent restart;
     private DatabaseReference forumRef, posForumRef, ventForumRef, questionForumRef;
@@ -153,6 +154,7 @@ public class ForumMain extends AppCompatActivity {
         newest.setOnClickListener(v -> {
             newest.setBackground(getDrawable(R.drawable.picked_image_background));
             old.setBackground(getDrawable(R.drawable.grey_tag_background));
+            oldActive = false;
             LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
             lm.setReverseLayout(false);
             lm.setStackFromEnd(false);
@@ -163,6 +165,7 @@ public class ForumMain extends AppCompatActivity {
         old.setOnClickListener(v -> {
             newest.setBackground(getDrawable(R.drawable.grey_tag_background));
             old.setBackground(getDrawable(R.drawable.picked_image_background));
+            oldActive = true;
             LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
             lm.setReverseLayout(true);
             lm.setStackFromEnd(true);
@@ -185,6 +188,16 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
+
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
         });
 
         question.setOnClickListener(v -> {
@@ -201,6 +214,16 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
+
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
         });
 
         positive.setOnClickListener(v -> {
@@ -217,6 +240,16 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
+
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
         });
 
         all.setOnClickListener(v -> {
@@ -235,6 +268,16 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
+
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
         });
 
     }

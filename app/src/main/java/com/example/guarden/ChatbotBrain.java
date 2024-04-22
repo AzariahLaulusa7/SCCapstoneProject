@@ -31,6 +31,7 @@ public class ChatbotBrain {
             "Feeling lonely or isolated from time to time is a common experience, but if it becomes chronic or overwhelming, it can have negative effects on your mental and physical health. Loneliness can be caused by various factors, such as social isolation, lack of close relationships, or major life changes like moving to a new city or starting a new job. If you're feeling lonely, it's important to take steps to connect with others and build supportive relationships. This might include joining social groups, volunteering in your community, or reaching out to friends or family members for support. Remember, it's okay to ask for help when you need it, and there are people who care about you and want to support you."
             "I am glad you're doing well today! Tell me more!",
             "That is good to hear!"
+
     };
     public static String getResponse(String userInput) {
         // Preprocess user input and responses
