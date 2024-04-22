@@ -23,12 +23,12 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DetailActivity extends AppCompatActivity {
 
     ImageButton back;
-    TextView name, message, delete;
+    TextView name, message, delete, tagTitle;
     EditText comment, editPost;
-    ImageView image, editButton;
+    ImageView image, editButton, filterView;
     String tagText = "";
     int tagTextBackground = -1;
-    Intent intent;
+    Intent intent, home;
     CommentAdapter adapterComment;
     Button commentbutton, sendButton, cancelButton;
     TextView vent, positive, question;
@@ -58,7 +58,10 @@ public class DetailActivity extends AppCompatActivity {
         positive = findViewById(R.id.forum_tag);
         tagBox = findViewById(R.id.tag_box);
         cancelButton = findViewById(R.id.cancel);
+        filterView = findViewById(R.id.filter_view);
+        tagTitle = findViewById(R.id.tag_title);
         intent = new Intent(this, ForumMain.class);
+        home = new Intent(this, HomeScreen.class);
 
         userRef = FirebaseDatabase.getInstance().getReference("users");
         commentRef = FirebaseDatabase.getInstance().getReference("comment");
@@ -79,6 +82,9 @@ public class DetailActivity extends AppCompatActivity {
         sendButton.setVisibility(View.GONE);
         editPost.setVisibility(View.GONE);
         tagBox.setVisibility(View.GONE);
+        filterView.setVisibility(View.GONE);
+        tagTitle.setVisibility(View.GONE);
+
 
         back.setOnClickListener(v -> {
             startActivity(intent);
@@ -171,6 +177,8 @@ public class DetailActivity extends AppCompatActivity {
             editButton.setVisibility(View.GONE);
             tagBox.setVisibility(View.VISIBLE);
             cancelButton.setVisibility(View.VISIBLE);
+            filterView.setVisibility(View.VISIBLE);
+            tagTitle.setVisibility(View.VISIBLE);
         });
 
         cancelButton.setOnClickListener(v -> {
@@ -180,6 +188,8 @@ public class DetailActivity extends AppCompatActivity {
             tagBox.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);
             cancelButton.setVisibility(View.GONE);
+            filterView.setVisibility(View.GONE);
+            tagTitle.setVisibility(View.GONE);
             editPost.setText(chosenMessage);
             if (tag.equals("positivity")) {
                 vent.setBackground(getDrawable(R.drawable.grey_tag_background));
@@ -227,9 +237,9 @@ public class DetailActivity extends AppCompatActivity {
                 Chat newChat = new Chat(chosenName, tagText, newMessage, chosenImage, tagTextBackground, postKey, SaveUser.getUserName(DetailActivity.this));
                 forumRef.child(postKey).setValue(newChat)
                         .addOnSuccessListener(aVoid ->
-                                Toast.makeText(DetailActivity.this, "Post Created", Toast.LENGTH_SHORT).show())
+                                Toast.makeText(DetailActivity.this, "Post Updated", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e ->
-                                Toast.makeText(DetailActivity.this, "Failed To Create Post", Toast.LENGTH_SHORT).show());
+                                Toast.makeText(DetailActivity.this, "Failed To Update Post", Toast.LENGTH_SHORT).show());
                 if (tagText.equals("positivity")) {
                     posRef.child(postKey).setValue(newChat);
                 } else if (tagText.equals("vent")) {
@@ -237,16 +247,16 @@ public class DetailActivity extends AppCompatActivity {
                 } else {
                     qRef.child(postKey).setValue(newChat);
                 }
-                startActivity(intent);
                 finish();
+                startActivity(home);
             } else if (!TextUtils.isEmpty(newMessage)) {
                 adapterComment.stopListening();
                 Chat newChat = new Chat(chosenName, tag, newMessage, chosenImage, tagBackground, postKey, SaveUser.getUserName(DetailActivity.this));
                 forumRef.child(postKey).setValue(newChat)
                         .addOnSuccessListener(aVoid ->
-                                Toast.makeText(DetailActivity.this, "Post Created", Toast.LENGTH_SHORT).show())
+                                Toast.makeText(DetailActivity.this, "Post Updated", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e ->
-                                Toast.makeText(DetailActivity.this, "Failed To Create Post", Toast.LENGTH_SHORT).show());
+                                Toast.makeText(DetailActivity.this, "Failed To Update Post", Toast.LENGTH_SHORT).show());
                 if (tag.equals("positivity")) {
                     posRef.child(postKey).setValue(newChat);
                 } else if (tag.equals("vent")) {
@@ -254,8 +264,8 @@ public class DetailActivity extends AppCompatActivity {
                 } else {
                     qRef.child(postKey).setValue(newChat);
                 }
-                startActivity(intent);
                 finish();
+                startActivity(home);
             } else {
                 Toast.makeText(DetailActivity.this, "Please enter a post", Toast.LENGTH_SHORT).show();
             }
@@ -271,8 +281,8 @@ public class DetailActivity extends AppCompatActivity {
             } else {
                 qRef.child(postKey).removeValue();
             }
-            startActivity(intent);
             finish();
+            startActivity(intent);
         });
 
         commentbutton.setOnClickListener(v -> {
