@@ -72,6 +72,10 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".editJournalEntry"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".GameOver"
             android:exported="true"
             android:screenOrientation="portrait" />
