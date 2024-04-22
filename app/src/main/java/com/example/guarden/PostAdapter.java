@@ -13,7 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-
+//Adapter class that works with MovementViewList to create a recycler view for the list of all posts
+//Creates ViewHolder objects as needed to display posts
 public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> {
 
     public PostAdapter(

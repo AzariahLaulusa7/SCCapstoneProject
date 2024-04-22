@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+//Creates settings tab
 public class Settings extends AppCompatActivity {
     public static final String ALARM_KEY = "alarm";
     private static final int NOTIF_REQUEST_CODE = 123;

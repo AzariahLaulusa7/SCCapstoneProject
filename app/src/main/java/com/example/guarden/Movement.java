@@ -55,13 +55,15 @@ public class Movement extends AppCompatActivity {
         tempTracker = 0;
         listCounter = 0;
         whileLoopStuck = 0;
+        //Increments to the next pose as long as one exists
         while (poseCounter < poseList.size()) {
             if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
                 listCounter++;
             }
             poseCounter++;
         }
-        poseCounter = 0;
+        poseCounter = 0; //Resets list when the end is reached
+        //Continues cycling through poses after reset
         while (poseCounter < poseList.size()) {
             if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equals(mode)) {
                 pose.setImageResource(poseList.get(poseCounter).getImageRes());
@@ -75,6 +77,7 @@ public class Movement extends AppCompatActivity {
         }
         poseCounter++;
         timer.setVisibility(INVISIBLE);
+        //Displays text if no poses are available
         if (poseCounter > poseList.size()) {
             name.setText("No Poses Activated");
             start.setVisibility(View.GONE);
@@ -83,6 +86,7 @@ public class Movement extends AppCompatActivity {
             thumbsUp.setVisibility(View.GONE);
             pose.setVisibility(View.GONE);
         }
+        //Starts timer for exercise
         start.setOnClickListener(v -> {
             timer.setVisibility(VISIBLE);
             start.setVisibility(INVISIBLE);
@@ -99,6 +103,8 @@ public class Movement extends AppCompatActivity {
                 }
             }.start();
         });
+
+        //Makes sure the app doesn't crash if something goes wrong with the looping
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +128,7 @@ public class Movement extends AppCompatActivity {
                         //Toast.makeText(Movement.this, "Counter: **"+poseCounter+"**", Toast.LENGTH_LONG).show();
                         SaveUser.setThumbsDown(Movement.this, false);
                     }
+                    //Removes icons from screen if no poses are displayed
                     if (poseList.get(poseCounter).getLike() == 2 && poseList.get(poseCounter).getCategory().equalsIgnoreCase(mode) && listCounter < 0) {
                         name.setText("No Poses Activated");
                         start.setVisibility(View.GONE);
@@ -132,6 +139,7 @@ public class Movement extends AppCompatActivity {
                         SaveUser.setThumbsDown(Movement.this, false);
                         break;
                     }
+                    //Sets image, name, and thumbs for the appropriate pose
                     if ((poseList.get(poseCounter).getLike() == 0 || poseList.get(poseCounter).getLike() == 1) && poseList.get(poseCounter).getCategory().equalsIgnoreCase(mode)) {
                         pose.setImageResource(poseList.get(poseCounter).getImageRes());
                         name.setText(poseList.get(poseCounter).getName());
@@ -148,6 +156,7 @@ public class Movement extends AppCompatActivity {
                 }
             }
         });
+        //Sets thumb icons and saves like status when the user likes a pose
         thumbsUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +167,7 @@ public class Movement extends AppCompatActivity {
                 poseCounter = temp;
             }
         });
+        //Sets thumb icons and saves like status when the user dislikes a pose
         thumbsDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,59 +193,62 @@ public class Movement extends AppCompatActivity {
         startActivity(myIntent);
     }
 
+    //Takes each button press case and changes the appropriate like value
     public void changeLike(int oldRating, int click){
-        if(oldRating==0&&click==1) {
+        if(oldRating==0&&click==1) { //Rating is "neutral"; like is pressed
             setThumbs(1);
             poseList.get(poseCounter-1).setLike(1);
             databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(1);
             return;
         }
-        if(oldRating==0&&click==2) {
+        if(oldRating==0&&click==2) { //Rating is "neutral"; dislike is pressed
             setThumbs(2);
             poseList.get(poseCounter-1).setLike(2);
             databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(2);
             return;
         }
-        if(oldRating==1&&click==1) {
+        if(oldRating==1&&click==1) { //Rating is "liked"; like is pressed
             setThumbs(0);
             poseList.get(poseCounter-1).setLike(0);
             databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(0);
             return;
         }
-        if(oldRating==1&&click==2) {
+        if(oldRating==1&&click==2) { //Rating is "liked"; dislike is pressed
             setThumbs(2);
             poseList.get(poseCounter-1).setLike(2);
             databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(2);
             return;
         }
-        if(oldRating==2&&click==2) {
+        if(oldRating==2&&click==2) { //Rating is "disliked"; dislike is pressed
             setThumbs(0);
             poseList.get(poseCounter-1).setLike(0);
             databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(0);
             return;
         }
-        if(oldRating==2&&click==1) {
+        if(oldRating==2&&click==1) { //Rating is "disliked"; like is pressed
             setThumbs(1);
             poseList.get(poseCounter-1).setLike(1);
             databaseReference.child("users").child(SaveUser.getUserName(Movement.this)).child("customPoses")
                     .child(poseList.get(poseCounter-1).getName()).child("like").setValue(1);
         }
     }
+
+    //Sets the appropriate thumb icons to be enabled and disabled
     public void setThumbs(int rating){
-        if(rating==0){
+        if(rating==0){ //Neutral
             thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
             thumbsUp.setImageResource(R.drawable.baseline_thumb_up_off_alt_24);
         }
-        if(rating==1){
+        if(rating==1){ //Like
             thumbsDown.setImageResource(R.drawable.baseline_thumb_down_off_alt_24);
             thumbsUp.setImageResource(R.drawable.baseline_thumb_up_alt_24);
         }
-        if(rating==2){
+        if(rating==2){ //Dislike
             thumbsDown.setImageResource(R.drawable.baseline_thumb_down_alt_24);
             thumbsUp.setImageResource(R.drawable.baseline_thumb_up_off_alt_24);
         }

@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-
+//Adapter class that works with ChatbotAdapter.ViewHolder to create a recycler view for the list of all chatbot messages
 public class ChatbotAdapter extends RecyclerView.Adapter<ChatbotAdapter.ViewHolder> {
     private final Context context;
     private final ArrayList<String> messages;

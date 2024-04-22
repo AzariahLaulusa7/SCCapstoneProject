@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-
+//Adapter class that works with CommentViewHolder to create a recycler view for the list of all comments
 public class CommentAdapter extends FirebaseRecyclerAdapter<Comment, CommentViewHolder> {
 
     public CommentAdapter(

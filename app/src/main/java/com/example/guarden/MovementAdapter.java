@@ -15,6 +15,8 @@
 
         import java.util.ArrayList;
 
+        //Adapter class that works with MovementViewList to create a recycler view for the list of all poses
+        //Creates ViewHolder objects as needed to display poses
 public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHolder> {
     private final Context context;
     private final ArrayList<Pose> poseArrayList;
@@ -39,11 +41,13 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MovementAdapter.ViewHolder holder, int position) {
+        //Gets information about a pose in the list
         Pose pose = poseArrayList.get(position);
         holder.name.setText(pose.getName());
         holder.category.setText(pose.getCategory());
         holder.thumbnail.setImageResource(pose.getImageRes());
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        //Sets toggles based on like status
         if(pose.getLike()==2)
             holder.sw.setChecked(false);
         else
@@ -70,6 +74,7 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         return poseArrayList.size();
     }
 
+    //Applies the layout for the movement list card
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView thumbnail;
         private final TextView name;

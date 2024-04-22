@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import java.io.Serializable;
 
+//Establishes the post item for use in the forum
 public class Post {
 
     String name;

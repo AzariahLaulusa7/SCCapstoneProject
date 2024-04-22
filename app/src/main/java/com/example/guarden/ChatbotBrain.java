@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChatbotBrain {
-  
+  //Holds the list of possible responses
   private static final String[] RESPONSES = {
             "It's completely normal to feel anxious sometimes. When we're faced with challenging situations, our bodies react by releasing stress hormones, which can cause symptoms like increased heart rate, sweating, or racing thoughts. These physical and emotional responses are our body's way of preparing us to deal with threats or dangers. However, if you're feeling overwhelmed by anxiety, it's important to take steps to manage it. This might include practicing relaxation techniques, such as deep breathing or meditation, talking to a therapist or counselor, or finding healthy ways to cope with stress. Remember, you're not alone, and there are people who can help you feel better.",
             "Depression is a serious mental health condition that can affect your thoughts, feelings, and behavior. It's more than just feeling sad or down—it can make it difficult to enjoy life, maintain relationships, or perform daily tasks. Depression can be caused by a combination of genetic, biological, environmental, and psychological factors. It's not something you can just snap out of, and it's not a sign of weakness. If you're experiencing symptoms of depression, such as persistent sadness, loss of interest in activities, changes in appetite or sleep patterns, or feelings of worthlessness or hopelessness, it's important to seek help from a mental health professional. Treatment options may include therapy, medication, lifestyle changes, or a combination of these.",
@@ -58,10 +58,6 @@ public class ChatbotBrain {
     private static String preprocessText(String text) {
         // Convert text to lowercase and remove punctuation
         text = text.toLowerCase().replaceAll("[^a-zA-Z ]", "");
-
-        // Remove stopwords (optional)
-        // Implement a method to remove common stopwords if needed
-
         return text;
     }
 

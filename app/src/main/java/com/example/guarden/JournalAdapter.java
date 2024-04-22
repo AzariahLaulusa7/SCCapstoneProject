@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-
+//Adapter class that works with JournalAdapter.ViewHolder to create a recycler view for the list of all journals
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder> {
     private final Context context;
     private final ArrayList<JournalEntry> entries;

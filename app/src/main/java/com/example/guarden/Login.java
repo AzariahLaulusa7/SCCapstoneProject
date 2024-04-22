@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        //Initializes each element on the screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         Button loginbtn = findViewById(R.id.loginbtn);
@@ -42,8 +42,7 @@ public class Login extends AppCompatActivity {
 
         stayIntent = new Intent(Login.this, Login.class);
 
-        //setListeners();
-
+        //Takes the user straight to the home screen if the skip login button is selected
         tvSkip.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -58,18 +57,21 @@ public class Login extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Gets user inputted text from email and password fields
                 String enteredEmail = emailEditText.getText().toString().trim();
                 String enteredPassword = passwordEditText.getText().toString().trim();
 
+                //Ensures that login fields are not empty
                 if (TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)) {
                     Toast.makeText(Login.this, "Email and password must not be empty", Toast.LENGTH_SHORT).show();
                     return; // Exit the OnClickListener if fields are empty
                 }
-
+                //Replaces period with comma in the email for correct parsing of information
                 emailKey = enteredEmail.replace(".", ",");
 
                 databaseReference.child(emailKey).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
+                    //Logs in the user
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null && user.password.equals(enteredPassword)) {
@@ -91,6 +93,7 @@ public class Login extends AppCompatActivity {
                 });
             }
         });
+        //Sets the user to the account creation screen if Create Account button is selected
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +109,7 @@ public class Login extends AppCompatActivity {
         startActivity(stayIntent);
     }
 
+    //User class with various constructors
     private static class User {
         public ArrayList<Pose> poseList;
         //public ArrayList<JournalEntry> entries;

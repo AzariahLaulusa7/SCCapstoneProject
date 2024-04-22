@@ -3,7 +3,7 @@ package com.example.guarden;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
+//This class is not used
 public class Explosion {
     Bitmap explosion[] = new Bitmap[3];
     int explosionFrame = 0;

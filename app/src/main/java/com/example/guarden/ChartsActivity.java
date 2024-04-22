@@ -43,10 +43,10 @@ public class ChartsActivity extends Activity {
         breatheChallengeIconEmpty = findViewById(R.id.breatheChallengeIconEmpty);
 
         sharedPreferences = this.getSharedPreferences("DailyChallenges", Context.MODE_PRIVATE);
-        loadMoodData();
+        loadMoodData(); //Loads challenge completion
 
         if (moodGraphView != null) {
-            moodGraphView.setMoodValues(moodValues);
+            moodGraphView.setMoodValues(moodValues); //Sets values on mood graph
         } else {
             throw new RuntimeException("MoodGraphView not found.");
         }
@@ -64,8 +64,6 @@ public class ChartsActivity extends Activity {
         resetMoodDataIfNecessary();
     }
 
-
-
     private void setupMoodButton(int buttonId, final int mood) {
         ImageButton button = findViewById(buttonId);
         button.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +77,7 @@ public class ChartsActivity extends Activity {
         });
     }
 
+    //Stores inputted mood in saved preferences
     private void saveMoodData() {
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit();
         for (int i = 0; i < moodValues.length; i++) {

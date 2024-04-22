@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+//ViewHolder Class associated with CommentAdapter class
 public class CommentViewHolder  extends RecyclerView.ViewHolder {
 
     TextView messageView, nameView;

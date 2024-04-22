@@ -42,7 +42,7 @@ public class HomeScreen extends AppCompatActivity {
     private static final String PREF_QUOTE = "quote_pref";
     private static final String KEY_QUOTE = "quote";
     private static final String KEY_LAST_UPDATE_TIME = "last_update_time";
-
+    //List of quotes that can be displayed on the home screen
     private String[] meditationQuotes = {
             "Meditation is the tongue of the soul and the language of our spirit. - Jeremy Taylor",
             "Quiet the mind, and the soul will speak. - Ma Jaya Sati Bhagavati",
@@ -145,6 +145,7 @@ public class HomeScreen extends AppCompatActivity {
 
     private static final int NOTIF_REQUEST_CODE = 123;
     private SharedPreferences prefs;
+    //Initializes each button on the home screen
     ImageButton journal;
     ImageButton games;
     ImageButton breath;
@@ -166,7 +167,7 @@ public class HomeScreen extends AppCompatActivity {
         LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(this, R.drawable.background_image);
         BitmapDrawable secondDrawable = (BitmapDrawable) layerDrawable.findDrawableByLayerId(R.id.background_light);
         SharedPreferences sp = getSharedPreferences("app_prefs", MODE_PRIVATE);
-        boolean isDarkModeEnabled = sp.getBoolean(Settings.DARK_MODE_KEY, false);
+        boolean isDarkModeEnabled = sp.getBoolean(Settings.DARK_MODE_KEY, false);//Sets theme to dark if enabled
         if(isDarkModeEnabled) {
             secondDrawable.setAlpha(0);
         } else {
@@ -189,12 +190,13 @@ public class HomeScreen extends AppCompatActivity {
         updateQuoteIfNeeded();
         displayQuote();
         scheduleAlarm();
+        //Checks to see if user is logged in, if so, starts home screen activity
         if(SaveUser.getUserName(HomeScreen.this).length() == 0 && !Login.skipFlag)
         {
             Intent intent = new Intent(HomeScreen.this, Login.class);
             startActivity(intent);
         }
-
+        //If user is not logged in, sets user's name to "Guest" and adds default poses to pose list
         if (Login.skipFlag) {
             if (SaveUser.getUserName(HomeScreen.this).length() == 0) {
                 String uniqueKey = userRef.push().getKey();
@@ -207,7 +209,7 @@ public class HomeScreen extends AppCompatActivity {
                 SaveUser.setUserName(HomeScreen.this, uniqueKey);
             }
         }
-
+        //Handles navigation to movement page
         move.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 NotificationScheduler.setRecentView("move");
@@ -217,7 +219,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
-
+        //Handles navigation to breathe page
         breath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,6 +229,7 @@ public class HomeScreen extends AppCompatActivity {
                 finish();
             }});
 
+        //Handles navigation to tracking page
         charts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,7 +237,8 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-          
+
+        //Handles navigation to settings page
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -244,7 +248,8 @@ public class HomeScreen extends AppCompatActivity {
                 finish();
             }
         });
-      
+
+        //Handles navigation to profile page
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -254,6 +259,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        //Handles navigation to journal page
         journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -266,6 +272,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        //Handles navigation to games page
         games.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,6 +283,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        //Handles navigation to forum page
         forums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -287,6 +295,7 @@ public class HomeScreen extends AppCompatActivity {
         });
 
 
+        //Handles navigation to phone page
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -307,7 +316,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
                     if (user != null && user.firstName != null) {
-                        helloText.setText("Hello " + user.firstName.toUpperCase() + "!");
+                        helloText.setText("Hello " + user.firstName.toUpperCase() + "!"); //Sets greeting text
                         SaveUser.setName(HomeScreen.this, user.firstName);
                     }
             }
@@ -319,6 +328,7 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
+    //Adds default poses for guest users
     public void addDefaultPosesToList(String email){
         Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
         userRef.child(email).child("customPoses").child("Lunge").setValue(lunge);
@@ -355,12 +365,14 @@ public class HomeScreen extends AppCompatActivity {
             this.customPoses = customPoses;
         }
     }
+
+    //Requests permission to send the user notifications if it has not been granted
     public void checkNotifPermission() {
         if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, NOTIF_REQUEST_CODE);
             Settings s = new Settings();
             s.notifButton = prefs.getBoolean(Settings.NOTIF_KEY, true);
-        } else {
+        } else { //If granted, enable app notifications
             prefs.edit().putBoolean("notif_enabled", true).apply();
             NotificationScheduler ns = new NotificationScheduler(this);
             ns.scheduleRepeatNotif();
@@ -375,12 +387,13 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
+    //Returns a random quote from the meditationQuotes array to display on the home page
     private String getRandomQuote() {
         Random random = new Random();
         int index = random.nextInt(meditationQuotes.length);
         return meditationQuotes[index];
     }
-    void updateQuoteIfNeeded() {
+    void updateQuoteIfNeeded() { //Updates quote every 24 hours
         SharedPreferences prefs = getSharedPreferences(PREF_QUOTE, MODE_PRIVATE);
         long lastUpdateTime = prefs.getLong(KEY_LAST_UPDATE_TIME, 0);
         long currentTime = System.currentTimeMillis();
@@ -396,6 +409,7 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
+    //Sets textview to the quote text
     void displayQuote() {
         SharedPreferences prefs = getSharedPreferences(PREF_QUOTE, MODE_PRIVATE);
         String randomQuote = prefs.getString(KEY_QUOTE, "");
@@ -416,6 +430,7 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
+    //Identifies when midnight is to reset quotes and daily challenges
     private long getMidnight() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
