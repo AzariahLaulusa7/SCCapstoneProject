@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.widget.Button;
 import android.widget.ImageView;
 
-
+//Class for the crisis line screen under the phone call tab
 public class CrisisLines extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,23 +17,22 @@ public class CrisisLines extends AppCompatActivity {
             Intent back = new Intent(CrisisLines.this, HomeScreen.class);
             startActivity(back);
         });
-
         Button suicideCrisisButton = findViewById(R.id.button_suicide_crisis);
         Button emergencyServicesButton = findViewById(R.id.button_emergency_services);
         Button crisisTextLineButton = findViewById(R.id.button_crisis_text_line);
         Button viewTherapistsButton = findViewById(R.id.button_view_therapists);
         Button viewChatbot = findViewById(R.id.button_chatbot);
 
+        //Navigates to therapist list
         viewTherapistsButton.setOnClickListener(v -> {
             Intent intent = new Intent(CrisisLines.this, TherapistsActivity.class);
             startActivity(intent);
         });
-
+        //Navigates to chatbot list
         viewChatbot.setOnClickListener(v -> {
             Intent chatbot = new Intent(CrisisLines.this, ChatbotUI.class);
             startActivity(chatbot);
         });
-
 
         suicideCrisisButton.setOnClickListener(v -> {
             // Intent to dial Suicide & Crisis Lifeline number

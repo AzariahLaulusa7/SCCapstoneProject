@@ -3,7 +3,7 @@ package com.example.guarden;
 import android.graphics.drawable.Drawable;
 
 import java.io.Serializable;
-
+//Creates a comment object for use in the forum
 public class Comment {
 
     String message, name;

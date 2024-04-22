@@ -17,8 +17,8 @@ import java.util.List;
 
 import static com.example.guarden.Message.LayoutOne;
 import static com.example.guarden.Message.LayoutTwo;
+//Creates main chatbot view
 public class ChatbotUI extends AppCompatActivity{
-
 
     Button send;
     Button back;
@@ -41,6 +41,7 @@ public class ChatbotUI extends AppCompatActivity{
                 "is an emergency, please contact Emergency Services (dial 911) or the National suicide"+
                 "prevention hotline (dial 988). Now, how are you doing today?");
         messages.add(welcomeMessage);
+        //Uses recycler to display chatbot messages
         recycler = findViewById(R.id.recyclerViews);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         messageListAdapter = new MessageListAdapter(messages, this);
@@ -60,17 +61,19 @@ public class ChatbotUI extends AppCompatActivity{
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Sends user input to chatbot and gets response
                 EditText editText = findViewById(R.id.messageInput);
                 String content = editText.getText().toString();
                 String queryResult = chatbot.getResponse(content);
 
+                //Creates a message for both the user and chatbot's statements
                 Message prompt = new Message(LayoutOne, content);
                 Message response = new Message(LayoutTwo, queryResult);
 
+                //Displays both messages on the screen, then clears input field
                 messages.add(prompt);
                 messages.add(response);
                 messageListAdapter.notifyDataSetChanged();
-                // Optionally, clear the input field after sending the message
                 editText.getText().clear();
             }
         });
