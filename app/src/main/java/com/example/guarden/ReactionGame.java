@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,13 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
@@ -29,11 +21,9 @@ public class ReactionGame extends AppCompatActivity {
     private Button startButton;
     private Handler handler = new Handler();
     private Runnable colorChangeRunnable;
-    private boolean readyForReaction = false;
+    boolean readyForReaction = false;
     private boolean gameIsActive = false;
-    private long startTime;
-    private FirebaseAuth firebaseAuth;
-    private DatabaseReference userScoresRef;
+    long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +35,6 @@ public class ReactionGame extends AppCompatActivity {
         instructions = findViewById(R.id.instructions);
         startButton = findViewById(R.id.startButton);
         ImageView backIcon = findViewById(R.id.backIcon);
-        firebaseAuth = FirebaseAuth.getInstance();
-        userScoresRef = FirebaseDatabase.getInstance().getReference("users").child(SaveUser.getUserName(ReactionGame.this)).child("userScores").child("reactionGame");
-
         backIcon.setOnClickListener(v -> finish());
 
         startButton.setOnClickListener(v -> {
@@ -79,21 +66,13 @@ public class ReactionGame extends AppCompatActivity {
         textViewScore.setText(String.format("Reaction time: %.3f s", reactionTime / 1000.0));
         textViewScore.setVisibility(View.VISIBLE);
 
-        if (userScoresRef != null) {
-            userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Integer dbScore = dataSnapshot.getValue(Integer.class);
-                    if (dbScore == null || reactionTime < dbScore) {
-                        userScoresRef.setValue(reactionTime);
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w("Firebase", "Failed to read value for game score update.", databaseError.toException());
-                }
-
-            });
+        // SharedPreferences to save best time logic
+        SharedPreferences gamePrefs = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
+        long currentBestTime = gamePrefs.getLong("ReactionGameBestTime", Long.MAX_VALUE);
+        if (reactionTime < currentBestTime) {
+            SharedPreferences.Editor editor = gamePrefs.edit();
+            editor.putLong("ReactionGameBestTime", reactionTime);
+            editor.apply();
         }
 
         endGame();

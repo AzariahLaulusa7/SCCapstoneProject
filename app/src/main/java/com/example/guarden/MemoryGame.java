@@ -28,11 +28,11 @@ public class MemoryGame extends Activity {
 
     private GridLayout gridLayout;
     private List<Integer> buttonIds = new ArrayList<>();
-    private List<Integer> sequence = new ArrayList<>();
+    List<Integer> sequence = new ArrayList<>();
     private int sequenceIndex = 0;
     private int difficultyLevel = 1;
     private Handler handler = new Handler();
-    private boolean gameIsActive = false;
+    boolean gameIsActive = false;
 
     private TextView textViewFeedback;
     private Button startButton, playAgainButton;
@@ -173,7 +173,7 @@ public class MemoryGame extends Activity {
         handler.postDelayed(() -> button.setBackground(originalDrawable), 500);
     }
 
-    private void enableButtons() {
+    void enableButtons() {
         for (int id : buttonIds) {
             Button button = findViewById(id);
             button.setEnabled(true);
