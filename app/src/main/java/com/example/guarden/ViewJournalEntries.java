@@ -31,6 +31,12 @@ public class ViewJournalEntries extends AppCompatActivity {
     ImageButton back;
     static JournalAdapter JournalAdapter;
 
+    private DatabaseReference databaseReference;
+
+    static String key;
+
+    static ArrayList<JournalEntry> entries = new ArrayList<JournalEntry>();
+
     public ArrayList<String> readFromInternalStorageLineByLine(Context context, String fileName) {
         ArrayList<String> data = new ArrayList<String>();
         try {
@@ -55,20 +61,7 @@ public class ViewJournalEntries extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_view_journal_entries);
-        ArrayList<JournalEntry> entries = new ArrayList<JournalEntry>();
 
-        ArrayList<String> data = readFromInternalStorageLineByLine(getApplicationContext(), "journals.csv");
-
-        int i=0; //For some reason there is a blank line in the CSV file, this is a patch
-
-        for (String line : data) {
-            if(i%2 ==0){
-                JournalEntry entry = new JournalEntry();
-                entry.setFromString(line);
-                entries.add(entry);
-            }
-            i++;
-        }
 
         add = (Button) findViewById(R.id.newEntry);
         back = (ImageButton) findViewById(R.id.journalBack);
@@ -79,6 +72,37 @@ public class ViewJournalEntries extends AppCompatActivity {
         recycler.setLayoutManager(linearLayoutManager);
         JournalAdapter = new JournalAdapter(this, entries);
         recycler.setAdapter(JournalAdapter);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        if(SaveUser.getUserName(ViewJournalEntries.this).length() != 0)
+            key = SaveUser.getUserName(ViewJournalEntries.this);
+        if(key == null) {
+            key = " ";
+        } else {
+            databaseReference.child("users").child(key).child("journalEntries").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    entries.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String tempName = snapshot.child("name").getValue(String.class);
+                        String tempContent = snapshot.child("content").getValue(String.class);
+
+                        JournalEntry entry = new JournalEntry(tempName, tempContent);
+                        entries.add(entry);
+                    }
+                    if (ViewJournalEntries.JournalAdapter != null) {
+                        ViewJournalEntries.JournalAdapter.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.d("DatabaseError", error.getMessage());
+                }
+            });
+        }
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
