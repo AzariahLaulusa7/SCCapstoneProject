@@ -14,6 +14,9 @@
         android:layout_height="63dp"
         android:layout_marginStart="16dp"
         android:text="Delete"
+        android:textColor="@color/white"
+        android:background="@drawable/move_button"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,6 +28,9 @@
         android:layout_width="96dp"
         android:layout_height="59dp"
         android:text="Done"
+        android:textColor="@color/white"
+        android:background="@drawable/move_button"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.925"
@@ -33,37 +39,38 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <!--Journal entry content-->
+
+    <!--Journal entry name-->
+
     <EditText
         android:id="@+id/editJournalContent"
-        android:layout_width="358dp"
-        android:layout_height="421dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="363dp"
+        android:layout_height="448dp"
+        android:layout_marginBottom="24dp"
+        android:background="#b5ffffff"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:textColorHint="#000000"
-        android:background="#b5ffffff"
         android:paddingLeft="5dp"
+        android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--Journal entry name-->
     <EditText
         android:id="@+id/editJournalName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="354dp"
+        android:layout_height="41dp"
+        android:background="@drawable/gradient"
         android:ems="10"
+        android:inputType="text"
         android:paddingLeft="5dp"
         android:textColorHint="#000000"
-        android:inputType="text"
-        android:background="@drawable/gradient"
         app:layout_constraintBottom_toTopOf="@+id/editJournalContent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.707" />
+        app:layout_constraintVertical_bias="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
