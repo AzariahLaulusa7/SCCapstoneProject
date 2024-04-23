@@ -5,19 +5,19 @@
       <entry key="App">
         <State />
       </entry>
-      <entry key="testAddDefaultPosesToList()">
+      <entry key="ChatbotBrainTest">
         <State />
       </entry>
-      <entry key="testGetMidnight()">
+      <entry key="testCreateWordVector()">
         <State />
       </entry>
       <entry key="testGetRandomQuote()">
         <State />
       </entry>
-      <entry key="testParameterizedConstructor()">
+      <entry key="testGetResponse()">
         <State />
       </entry>
-      <entry key="testUpdateQuoteIfNeeded()">
+      <entry key="testParameterizedConstructor()">
         <State />
       </entry>
     </value>

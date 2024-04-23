@@ -55,13 +55,13 @@ public class ChatbotBrain {
         return bestResponse;
     }
 
-    private static String preprocessText(String text) {
+    static String preprocessText(String text) {
         // Convert text to lowercase and remove punctuation
         text = text.toLowerCase().replaceAll("[^a-zA-Z ]", "");
         return text;
     }
 
-    private static double cosineSimilarity(String str1, String str2) {
+    static double cosineSimilarity(String str1, String str2) {
         // Calculate cosine similarity between two strings
         Map<String, Integer> vector1 = createWordVector(str1);
         Map<String, Integer> vector2 = createWordVector(str2);
@@ -95,7 +95,7 @@ public class ChatbotBrain {
     }
 
     // Create a word vector for a given string
-    private static Map<String, Integer> createWordVector(String str) {
+    static Map<String, Integer> createWordVector(String str) {
         Map<String, Integer> wordVector = new HashMap<>();
         String[] words = str.split("\\s+");
         for (String word : words) {
