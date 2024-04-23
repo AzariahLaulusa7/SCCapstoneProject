@@ -79,6 +79,7 @@ public class ChatbotUI extends AppCompatActivity{
                 messages.add(prompt);
                 messages.add(response);
                 messageListAdapter.notifyDataSetChanged();
+                recycler.smoothScrollToPosition(messages.size()-1);
                 editText.getText().clear();
             }
         });
