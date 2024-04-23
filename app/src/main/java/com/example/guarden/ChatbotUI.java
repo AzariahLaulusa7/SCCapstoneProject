@@ -18,7 +18,7 @@ import java.util.List;
 
 import static com.example.guarden.Message.LayoutOne;
 import static com.example.guarden.Message.LayoutTwo;
-//Creates main chatbot view
+//This class creates main chatbot view
 public class ChatbotUI extends AppCompatActivity{
 
 
@@ -30,19 +30,23 @@ public class ChatbotUI extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatbot_ui);
-
+        //Back and send buttons
         back = findViewById(R.id.Back_home_chatbot);
         send = findViewById(R.id.send_chat);
 
+        //Initalizing chatbot
         ChatbotBrain chatbot = new ChatbotBrain();
 
+        //This array will contain the messages that make up the conversation
         ArrayList<Message> messages = new ArrayList<Message>();
 
+        //Generic opening message and input prompt.
         Message welcomeMessage = new Message(LayoutTwo,"Hi there! My name is Rosie. I am a "+
                 "mental health chatbot. I can help with basic therapist services. Remember, if this "+
                 "is an emergency, please contact Emergency Services (dial 911) or the National suicide"+
                 "prevention hotline (dial 988). Now, how are you doing today?");
         messages.add(welcomeMessage);
+
         //Uses recycler to display chatbot messages
         recycler = findViewById(R.id.recyclerViews);
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -50,6 +54,7 @@ public class ChatbotUI extends AppCompatActivity{
         recycler.setAdapter(messageListAdapter);
 
 
+        //Back button, goes back to Crisislines screen.
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +64,7 @@ public class ChatbotUI extends AppCompatActivity{
             }
         });
 
-
+        //When the user hits the send button, the program reads user input and passes it to the ChatbotBrain class for a response.
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +81,8 @@ public class ChatbotUI extends AppCompatActivity{
                 messages.add(prompt);
                 messages.add(response);
                 messageListAdapter.notifyDataSetChanged();
-                recycler.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
+                recycler.smoothScrollToPosition(messages.size()-1);
+
                 // Optionally, clear the input field after sending the message
 
                 editText.getText().clear();

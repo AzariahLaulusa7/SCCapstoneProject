@@ -3,13 +3,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,6 +16,8 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     private final RecyclerViewInterface recyclerViewInterface;
     private final ArrayList<JournalEntry> entries;
     private DatabaseReference databaseReference;
+
+    //Constructor and data
     public JournalAdapter(Context context, ArrayList<JournalEntry> entries, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.entries = entries;
@@ -29,13 +27,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     @NonNull
     @Override
     public JournalAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Creates view of each individual journal in the list
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.journal_card, parent, false);
-
         return new ViewHolder(view, recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //Assembles the array of entries
         JournalEntry entry = entries.get(position);
         holder.title.setText(entry.getName());
         holder.content.setText(entry.getContent());
@@ -46,13 +45,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     @Override
     public int getItemCount() {
         return entries.size();
-    }
+    } //Gets number of entries
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView content;
 
         public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
+            //Creates the recyclerview scrollable list of journal entries.
             super(itemView);
             title = itemView.findViewById(R.id.journal_title);
             content = itemView.findViewById(R.id.journal_content);

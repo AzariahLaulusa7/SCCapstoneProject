@@ -5,27 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.content.Context;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ViewJournalEntries extends AppCompatActivity implements RecyclerViewInterface{
 
@@ -40,15 +29,18 @@ public class ViewJournalEntries extends AppCompatActivity implements RecyclerVie
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //reference XML
         setContentView(R.layout.content_view_journal_entries);
 
-
+        //Init buttons, intents, recycler, adapter, layout manager, and reference database
         add = (ImageButton) findViewById(R.id.addEntry);
         back = (ImageButton) findViewById(R.id.journalBack);
+
         RecyclerView recycler = findViewById(R.id.journalRecycler);
 
         Intent addNewEntry = new Intent(this, NewJournalEntry.class);
         Intent goBack = new Intent(this, HomeScreen.class);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recycler.setLayoutManager(linearLayoutManager);
         JournalAdapter = new JournalAdapter(this, entries, this);
@@ -56,12 +48,16 @@ public class ViewJournalEntries extends AppCompatActivity implements RecyclerVie
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        //Checking if the user is logged in
         if(SaveUser.getUserName(ViewJournalEntries.this).length() != 0)
             key = SaveUser.getUserName(ViewJournalEntries.this);
         if(key == null) {
             key = " ";
         } else {
+            //Referencing the database
             databaseReference.child("users").child(key).child("journalEntries").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                //Updating the recycler view when new journals are added.
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     entries.clear();
@@ -80,6 +76,7 @@ public class ViewJournalEntries extends AppCompatActivity implements RecyclerVie
                     }
                 }
 
+                //Error message
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     Log.d("DatabaseError", error.getMessage());
@@ -88,6 +85,7 @@ public class ViewJournalEntries extends AppCompatActivity implements RecyclerVie
         }
 
 
+        //add and back buttons
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

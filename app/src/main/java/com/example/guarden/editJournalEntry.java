@@ -1,5 +1,5 @@
 package com.example.guarden;
-
+//This class allows the user to edit or delete the journal entry.
 import android.content.Intent;
 import android.os.Bundle;
 
