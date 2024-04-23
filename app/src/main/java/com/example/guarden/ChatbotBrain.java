@@ -1,11 +1,14 @@
 package com.example.guarden;
 
-import java.util.ArrayList;
-import java.util.Random;
+
 import java.util.HashMap;
 import java.util.Map;
 
+//This class impliments a rules based chatbot.
+//The chatbot takes in a user input as a string and returns a response as a string.
+//The bot uses cosine similarity to find the response string that is most similar to the input string.
 public class ChatbotBrain {
+
   //Holds the list of possible responses
   private static final String[] RESPONSES = {
             "It's completely normal to feel anxious sometimes. When we're faced with challenging situations, our bodies react by releasing stress hormones, which can cause symptoms like increased heart rate, sweating, or racing thoughts. These physical and emotional responses are our body's way of preparing us to deal with threats or dangers. However, if you're feeling overwhelmed by anxiety, it's important to take steps to manage it. This might include practicing relaxation techniques, such as deep breathing or meditation, talking to a therapist or counselor, or finding healthy ways to cope with stress. Remember, you're not alone, and there are people who can help you feel better.",
@@ -33,6 +36,7 @@ public class ChatbotBrain {
             "That is good to hear!"
 
     };
+
     public static String getResponse(String userInput) {
         // Preprocess user input and responses
         userInput = preprocessText(userInput);
@@ -51,8 +55,14 @@ public class ChatbotBrain {
                 bestResponse = RESPONSES[i];
             }
         }
-
-        return bestResponse;
+        if(maxSimilarity == 0){
+            //If maxSimilarity is 0, the user input has no terms that match the responses.
+            //If this is the case, the chatbot returns the following to prompt the user for different input.
+            return "I don't understand, can you try asking me that in a different way?";
+        }
+        else{
+            return bestResponse;
+        }
     }
 
     static String preprocessText(String text) {
@@ -61,6 +71,7 @@ public class ChatbotBrain {
         return text;
     }
 
+    //This method compares the word vectors to each other to find the cosine similarity
     static double cosineSimilarity(String str1, String str2) {
         // Calculate cosine similarity between two strings
         Map<String, Integer> vector1 = createWordVector(str1);
