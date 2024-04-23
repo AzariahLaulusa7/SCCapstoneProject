@@ -68,14 +68,16 @@
         app:layout_constraintTop_toBottomOf="@+id/timer" />
 
     <!--back button-->
+
+    <!--timer-->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_button"
         android:onClick="Move"
         android:paddingLeft="8dp"
@@ -83,9 +85,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.027" />
 
-    <!--timer-->
     <TextView
         android:id="@+id/timer"
         android:layout_width="wrap_content"

@@ -21,7 +21,7 @@ import static com.example.guarden.Message.LayoutTwo;
 public class ChatbotUI extends AppCompatActivity{
 
     Button send;
-    Button back;
+    ImageButton back;
     RecyclerView recycler;
     MessageListAdapter messageListAdapter;
 
