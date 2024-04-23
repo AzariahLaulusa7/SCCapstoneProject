@@ -38,8 +38,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="55dp"
-            android:layout_height="64dp"
+            android:layout_width="34dp"
+            android:layout_height="26dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/paper"
             tools:layout_editor_absoluteY="4dp" />

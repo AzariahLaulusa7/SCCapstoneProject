@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ViewJournalEntries extends AppCompatActivity implements RecyclerViewInterface{
-    Button add;
-    ImageButton back;
+
+    ImageButton add, back;
     static JournalAdapter JournalAdapter;
 
     private DatabaseReference databaseReference;
@@ -43,7 +43,7 @@ public class ViewJournalEntries extends AppCompatActivity implements RecyclerVie
         setContentView(R.layout.content_view_journal_entries);
 
 
-        add = (Button) findViewById(R.id.newEntry);
+        add = (ImageButton) findViewById(R.id.addEntry);
         back = (ImageButton) findViewById(R.id.journalBack);
         RecyclerView recycler = findViewById(R.id.journalRecycler);
 

@@ -7,15 +7,19 @@
     android:background="@drawable/background_image">
 
     <!--Holds all journal entries-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/journalRecycler"
-        android:layout_width="413dp"
-        android:layout_height="545dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!--Back button-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/journalRecycler"
+        android:layout_width="375dp"
+        android:layout_height="597dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.774" />
+
     <ImageButton
         android:id="@+id/journalBack"
         android:layout_width="wrap_content"
@@ -26,15 +30,12 @@
         app:srcCompat="?attr/homeAsUpIndicator" />
 
     <!--Add new entry button-->
-    <Button
-        android:id="@+id/newEntry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add new"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <ImageButton
+        android:id="@+id/addEntry"
+        android:layout_width="51dp"
+        android:layout_height="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journalRecycler"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/round_add_circle_outline_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
