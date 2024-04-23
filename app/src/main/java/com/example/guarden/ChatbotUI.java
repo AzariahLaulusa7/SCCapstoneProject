@@ -1,5 +1,6 @@
 package com.example.guarden;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ import static com.example.guarden.Message.LayoutTwo;
 public class ChatbotUI extends AppCompatActivity{
 
 
+    private static android.content.Context Context;
     Button send;
     Button back;
     RecyclerView recycler;
@@ -70,6 +72,7 @@ public class ChatbotUI extends AppCompatActivity{
                 messages.add(prompt);
                 messages.add(response);
                 messageListAdapter.notifyDataSetChanged();
+                recycler.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
                 // Optionally, clear the input field after sending the message
                 editText.getText().clear();
             }
