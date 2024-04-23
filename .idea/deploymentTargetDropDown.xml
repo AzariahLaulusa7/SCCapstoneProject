@@ -5,6 +5,21 @@
       <entry key="App">
         <State />
       </entry>
+      <entry key="testAddDefaultPosesToList()">
+        <State />
+      </entry>
+      <entry key="testGetMidnight()">
+        <State />
+      </entry>
+      <entry key="testGetRandomQuote()">
+        <State />
+      </entry>
+      <entry key="testParameterizedConstructor()">
+        <State />
+      </entry>
+      <entry key="testUpdateQuoteIfNeeded()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
