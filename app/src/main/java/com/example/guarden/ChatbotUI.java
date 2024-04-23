@@ -1,5 +1,6 @@
 package com.example.guarden;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import static com.example.guarden.Message.LayoutOne;
 import static com.example.guarden.Message.LayoutTwo;
 //Creates main chatbot view
 public class ChatbotUI extends AppCompatActivity{
+
 
     Button send;
     ImageButton back;
@@ -74,6 +76,9 @@ public class ChatbotUI extends AppCompatActivity{
                 messages.add(prompt);
                 messages.add(response);
                 messageListAdapter.notifyDataSetChanged();
+                recycler.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
+                // Optionally, clear the input field after sending the message
+
                 editText.getText().clear();
             }
         });
