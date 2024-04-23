@@ -20,6 +20,9 @@
       <entry key="testParameterizedConstructor()">
         <State />
       </entry>
+      <entry key="JournalEntryTest">
+        <State />
+      </entry>
     </value>
   </component>
 </project>

@@ -33,7 +33,9 @@ public class ChatbotBrain {
             "Feeling sad or down from time to time is a normal part of life, but if it becomes overwhelming or persistent, it may be a sign of depression. Depression is a common mental health condition that can affect your thoughts, feelings, and behavior, and it can have a significant impact on your quality of life. If you're experiencing symptoms of depression, such as persistent sadness, loss of interest in activities, changes in appetite or sleep patterns, or feelings of worthlessness or hopelessness, it's important to seek help from a mental health professional. Treatment options may include therapy, medication, lifestyle changes, or a combination of these.",
             "Feeling lonely or isolated from time to time is a common experience, but if it becomes chronic or overwhelming, it can have negative effects on your mental and physical health. Loneliness can be caused by various factors, such as social isolation, lack of close relationships, or major life changes like moving to a new city or starting a new job. If you're feeling lonely, it's important to take steps to connect with others and build supportive relationships. This might include joining social groups, volunteering in your community, or reaching out to friends or family members for support. Remember, it's okay to ask for help when you need it, and there are people who care about you and want to support you.",
             "I am glad you're doing well today! Tell me more!",
-            "That is good to hear!"
+            "That is good to hear!",
+            "Goodbye!",
+            "You're welcome, and thank you!"
 
     };
 
@@ -53,6 +55,10 @@ public class ChatbotBrain {
             if (similarity > maxSimilarity) {
                 maxSimilarity = similarity;
                 bestResponse = RESPONSES[i];
+            }
+
+            if(maxSimilarity == 0){
+                return "I don't understand, can you try rewording your question?";
             }
         }
         if(maxSimilarity == 0){
