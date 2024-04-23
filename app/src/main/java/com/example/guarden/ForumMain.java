@@ -25,7 +25,8 @@ import java.util.Comparator;
 public class ForumMain extends AppCompatActivity {
 
     // Variables
-    ImageButton back, newPost;
+    ImageButton newPost;
+    ImageView back;
     TextView tag_title, vent, question, positive, all, old, newest;
     RelativeLayout filter, sort;
     PostAdapter adapter;
@@ -33,6 +34,7 @@ public class ForumMain extends AppCompatActivity {
     ImageView forum_view;
     String tagText = " ";
     Boolean filterActive = false;
+    Boolean oldActive = false;
     Boolean sortActive = false;
     Intent restart;
     private DatabaseReference forumRef, posForumRef, ventForumRef, questionForumRef;
@@ -45,7 +47,7 @@ public class ForumMain extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
         // Initialize variables
-        back = findViewById(R.id.forum_back_icon);
+        back = findViewById(R.id.backButton);
         newPost = findViewById(R.id.new_message);
         filter = findViewById(R.id.filter);
         sort = findViewById(R.id.sort);
@@ -79,47 +81,12 @@ public class ForumMain extends AppCompatActivity {
         ventForumRef = FirebaseDatabase.getInstance().getReference().child("ventForum");
         questionForumRef = FirebaseDatabase.getInstance().getReference().child("questionForum");
 
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-//                .setQuery(forumRef, Post.class)
-//                .build();
-//        adapter = new PostAdapter(options);
-
-        if (tagText.equals("positivity") && filterActive == true) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(posForumRef.orderByKey(), Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-            recyclerView.setAdapter(adapter);
-
-        } else if (tagText.equals("vent") && filterActive == true) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(ventForumRef, Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-
-            recyclerView.setAdapter(adapter);
-
-        } else if (tagText.equals("question") && filterActive == true) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(questionForumRef, Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-
-            recyclerView.setAdapter(adapter);
-
-        } else {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Post> options = new FirebaseRecyclerOptions.Builder<Post>()
-                    .setQuery(forumRef, Post.class)
-                    .build();
-            adapter = new PostAdapter(options);
-            recyclerView.setAdapter(adapter);
-
-        }
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        FirebaseRecyclerOptions<Post> startOptions = new FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(forumRef, Post.class)
+                .build();
+        adapter = new PostAdapter(startOptions);
+        recyclerView.setAdapter(adapter);
 
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
@@ -135,7 +102,7 @@ public class ForumMain extends AppCompatActivity {
         // When filter is clicked
         filter.setOnClickListener(v -> {
             tag_title.setText("Filter:");
-            if (filterActive == true) {
+            if (filterActive == true) { //Hides all appropriate buttons after filter button is clicked
                 forum_view.setVisibility(View.GONE);
                 tag_title.setVisibility(View.GONE);
                 vent.setVisibility(View.GONE);
@@ -145,7 +112,7 @@ public class ForumMain extends AppCompatActivity {
                 newest.setVisibility(View.GONE);
                 old.setVisibility(View.GONE);
                 filterActive = false;
-            } else {
+            } else { //Shows all appropriate buttons after filter button is clicked
                 newest.setVisibility(View.GONE);
                 old.setVisibility(View.GONE);
                 forum_view.setVisibility(View.VISIBLE);
@@ -158,10 +125,10 @@ public class ForumMain extends AppCompatActivity {
                 sortActive = false;
             }
         });
-
+        //When sort is clicked
         sort.setOnClickListener(v -> {
             tag_title.setText("Sort:");
-            if (sortActive == true) {
+            if (sortActive == true) { //Hides all appropriate buttons after sort button is clicked
                 forum_view.setVisibility(View.GONE);
                 tag_title.setVisibility(View.GONE);
                 vent.setVisibility(View.GONE);
@@ -171,7 +138,7 @@ public class ForumMain extends AppCompatActivity {
                 newest.setVisibility(View.GONE);
                 old.setVisibility(View.GONE);
                 sortActive = false;
-            } else {
+            } else { //Shows all appropriate buttons after sort button is clicked
                 forum_view.setVisibility(View.VISIBLE);
                 tag_title.setVisibility(View.VISIBLE);
                 newest.setVisibility(View.VISIBLE);
@@ -184,20 +151,22 @@ public class ForumMain extends AppCompatActivity {
                 filterActive = false;
             }
         });
-
+        //Sets layout to sort-by-newest
         newest.setOnClickListener(v -> {
             newest.setBackground(getDrawable(R.drawable.picked_image_background));
             old.setBackground(getDrawable(R.drawable.grey_tag_background));
+            oldActive = false;
             LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
             lm.setReverseLayout(false);
             lm.setStackFromEnd(false);
 
             recyclerView.setLayoutManager(lm);
         });
-
+        //Sets layout to sort-by-oldest
         old.setOnClickListener(v -> {
             newest.setBackground(getDrawable(R.drawable.grey_tag_background));
             old.setBackground(getDrawable(R.drawable.picked_image_background));
+            oldActive = true;
             LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
             lm.setReverseLayout(true);
             lm.setStackFromEnd(true);
@@ -205,6 +174,7 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setLayoutManager(lm);
         });
 
+        //Filters post by tag:vent
         vent.setOnClickListener(v -> {
             tagText = "vent";
             vent.setBackground(getDrawable(R.drawable.vent_forum_tag));
@@ -220,8 +190,19 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
+
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
         });
 
+        //Filters posts by tag:question
         question.setOnClickListener(v -> {
             tagText = "question";
             vent.setBackground(getDrawable(R.drawable.grey_tag_background));
@@ -236,8 +217,19 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
+
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
         });
 
+        //Filters posts by tag:positivity
         positive.setOnClickListener(v -> {
             tagText = "positivity";
             vent.setBackground(getDrawable(R.drawable.grey_tag_background));
@@ -252,8 +244,18 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
-        });
 
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
+        });
+        //Removes filters
         all.setOnClickListener(v -> {
 
             vent.setBackground(getDrawable(R.drawable.grey_tag_background));
@@ -270,6 +272,16 @@ public class ForumMain extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             adapter.stopListening();
             adapter.startListening();
+
+            LinearLayoutManager lm = new LinearLayoutManager(ForumMain.this);
+            if (oldActive) {
+                lm.setReverseLayout(true);
+                lm.setStackFromEnd(true);
+            } else {
+                lm.setReverseLayout(false);
+                lm.setStackFromEnd(false);
+            }
+            recyclerView.setLayoutManager(lm);
         });
 
     }

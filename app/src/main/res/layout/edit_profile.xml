@@ -5,17 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditProfile">
+    tools:context=".EditProfile"
+    android:background="@drawable/background_image">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1008dp"
-        android:background="@drawable/background_light"
-        android:alpha="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,17 +21,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!--Back button-->
             <ImageButton
                 android:id="@+id/backIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/back_button"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                android:padding="15dp"
-                android:background="@android:color/transparent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_button"
+                android:onClick="Move"
+                android:paddingLeft="0dp"
+                android:src="@drawable/baseline_arrow_back_ios_24"
                 app:srcCompat="?attr/homeAsUpIndicator" />
 
+            <!--Profile title-->
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -60,6 +60,7 @@
             android:background="@drawable/profile_bubble"
             android:padding="20dp">
 
+            <!--Profile picture-->
             <ImageView
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
@@ -72,6 +73,7 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/edit_profile_image" />
 
+            <!--Edit profile picture-->
             <ImageButton
                 android:id="@+id/edit_image"
                 android:layout_width="48dp"
@@ -95,6 +97,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <!--First name-->
             <EditText
                 android:id="@+id/firstname"
                 android:layout_width="match_parent"
@@ -123,6 +126,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <!--Last Name-->
             <EditText
                 android:id="@+id/lastname"
                 android:layout_width="match_parent"
@@ -151,6 +155,7 @@
             android:background="@drawable/profile_bubble"
             android:padding="10dp">
 
+            <!--Email-->
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -179,6 +184,7 @@
             android:background="@drawable/profile_bubble"
             android:padding="10dp">
 
+            <!--Password-->
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
@@ -207,6 +213,7 @@
             android:layout_marginTop="30dp"
             android:padding="10dp">
 
+            <!--Update button-->
             <Button
                 android:id="@+id/editbtn"
                 android:layout_width="300dp"

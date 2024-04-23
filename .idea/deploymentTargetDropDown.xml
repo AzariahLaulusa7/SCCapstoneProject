@@ -5,6 +5,24 @@
       <entry key="App">
         <State />
       </entry>
+      <entry key="ChatbotBrainTest">
+        <State />
+      </entry>
+      <entry key="testCreateWordVector()">
+        <State />
+      </entry>
+      <entry key="testGetRandomQuote()">
+        <State />
+      </entry>
+      <entry key="testGetResponse()">
+        <State />
+      </entry>
+      <entry key="testParameterizedConstructor()">
+        <State />
+      </entry>
+      <entry key="JournalEntryTest">
+        <State />
+      </entry>
     </value>
   </component>
 </project>

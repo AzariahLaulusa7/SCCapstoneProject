@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,25 +27,27 @@ public class MoveMain extends AppCompatActivity {
     ImageButton back;
     Intent myIntent2;
     private DatabaseReference databaseReference;
-    static ArrayList<Pose> poseList = new ArrayList<Pose>();
+    static ArrayList<Pose> poseList = new ArrayList<Pose>(); //Used to store all poses obtained from the db
     static String key;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.move_main);
         yoga = findViewById(R.id.yoga);
         exercise = findViewById(R.id.exercise);
-        back = findViewById(R.id.move_back);
+        back = findViewById(R.id.backButton);
         viewAll = findViewById(R.id.custom);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Intent myIntent = new Intent(this, Movement.class);
         myIntent2 = new Intent(this, HomeScreen.class);
         Intent viewMoveList = new Intent(this, MovementViewList.class);
 
+        //Sets mode to yoga if selected
         yoga.setOnClickListener(v -> {
             myIntent.putExtra("mode","yoga");
             startActivity(myIntent);
         });
 
+        //Sets mood to exercise if selected
         exercise.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -55,6 +58,7 @@ public class MoveMain extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        //Checks if user is logged in and adds custom poses to poseList if so
         if(SaveUser.getUserName(MoveMain.this).length() != 0)
             key = SaveUser.getUserName(MoveMain.this);
         if(key == null) {

@@ -4,24 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_image"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <!--Back button-->
     <Button
         android:id="@+id/BackToEntries"
         android:layout_width="103dp"
         android:layout_height="63dp"
         android:layout_marginStart="16dp"
         android:text="Back"
+        android:textColor="@color/white"
+        android:background="@drawable/move_button"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+    <!--Save entry-->
     <Button
         android:id="@+id/nextPage"
         android:layout_width="96dp"
         android:layout_height="59dp"
         android:text="Done"
+        android:textColor="@color/white"
+        android:background="@drawable/move_button"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.925"
@@ -29,31 +38,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <EditText
-        android:id="@+id/journalEntryName"
-        android:layout_width="373dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="148dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="New Journal Entry"
-        app:layout_constraintBottom_toTopOf="@+id/journalEntryContent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
+    <!--Journal entry content-->
     <EditText
         android:id="@+id/journalEntryContent"
-        android:layout_width="362dp"
-        android:layout_height="514dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="340dp"
+        android:layout_height="471dp"
+        android:layout_marginBottom="28dp"
+        android:background="#b5ffffff"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Your Thoughts Here..."
         android:inputType="textMultiLine"
+        android:paddingLeft="5dp"
+        android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <!--Journal entry name-->
+    <EditText
+        android:id="@+id/journalEntryName"
+        android:layout_width="340dp"
+        android:layout_height="28dp"
+        android:background="@drawable/gradient"
+        android:ems="10"
+        android:hint="New Journal Entry"
+        android:inputType="text"
+        android:paddingLeft="5dp"
+        android:textColorHint="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/journalEntryContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

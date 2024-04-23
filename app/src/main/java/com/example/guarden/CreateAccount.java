@@ -49,7 +49,7 @@ public class CreateAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
-
+        //initializes all buttons and text views for the create account screen
         image = findViewById(R.id.add_profile_image);
         usernameEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
@@ -104,13 +104,14 @@ public class CreateAccount extends AppCompatActivity {
         });
 
         signUpButton.setOnClickListener(v -> {
+            //grabs text from user inputted fields
             final String email = usernameEditText.getText().toString().trim();
             final String password = passwordEditText.getText().toString().trim();
             String confirmPassword = confirmPasswordEditText.getText().toString().trim();
             final String firstName = firstNameEditText.getText().toString().trim();
             final String lastName = lastNameEditText.getText().toString().trim();
             ArrayList<Pose> customPoses = new ArrayList<Pose>();
-
+            //Checks to make sure all fields are filled
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
                     || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
                 Toast.makeText(CreateAccount.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
@@ -134,7 +135,7 @@ public class CreateAccount extends AppCompatActivity {
                 Toast.makeText(CreateAccount.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 return;
             }
-
+            //Adds new user to database
             DatabaseReference userRef = databaseReference.child("users").child(email.replace(".", ","));
             userRef.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful() && task.getResult().exists()) {
@@ -145,6 +146,7 @@ public class CreateAccount extends AppCompatActivity {
                     userRef.setValue(newUser)
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(CreateAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
+                                initializeUserScores(email.replace(".", ","));
                                 if (imageUri != null) {
                                     StorageReference filePath = storageRef.child("users").child(email.replace(".", ",")).child("profileImage");
                                     filePath.putFile(imageUri)
@@ -162,6 +164,14 @@ public class CreateAccount extends AppCompatActivity {
         });
     };
 
+    //Sets all game scores to zero for a new account
+    private void initializeUserScores(String emailKey) {
+        DatabaseReference userScoresRef = databaseReference.child("users").child(emailKey).child("userScores");
+        UserScores initialScores = new UserScores(0, 0, 10000); // Initial scores set to 0
+        userScoresRef.setValue(initialScores);
+    }
+
+    //Adds default poses to pose list for a new account
     public void addDefaultPosesToList(String email){
         Pose lunge = new Pose("yoga","Lunge",R.drawable.pose1,"", 0);
         databaseReference.child("users").child(email).child("customPoses").child("Lunge").setValue(lunge);
@@ -177,10 +187,12 @@ public class CreateAccount extends AppCompatActivity {
         databaseReference.child("users").child(email).child("customPoses").child("Squat").setValue(squat);
     }
 
+    //Email checking method
     private boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    //Password checking method
     private boolean isValidPassword(String password) {
         if (TextUtils.isEmpty(password) || password.length() < 7) {
             return false;
@@ -201,6 +213,7 @@ public class CreateAccount extends AppCompatActivity {
         return false;  // Return false if either digit or uppercase letter is not found
     }
 
+    //User classes and constructors
     public class User {
         private final ArrayList<Pose> customPoses;
         public String email, password, firstName, lastName;
@@ -212,6 +225,20 @@ public class CreateAccount extends AppCompatActivity {
             this.firstName = firstName;
             this.lastName = lastName;
             this.customPoses = customPoses;
+            initializeUserScores(email.replace(".", ","));
+        }
+    }
+
+    //Class to handle user scores for minigames
+    public class UserScores {
+        public int memoryGame;
+        public int balloonGame;
+        public long reactionGame;
+
+        public UserScores(int memoryGame, int balloonGame, long reactionGame) {
+            this.memoryGame = memoryGame;
+            this.balloonGame = balloonGame;
+            this.reactionGame = reactionGame;
         }
     }
 }

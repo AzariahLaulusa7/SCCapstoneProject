@@ -13,7 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-
+//Adapter class that works with MovementViewList to create a recycler view for the list of all posts
+//Creates ViewHolder objects as needed to display posts
 public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> {
 
     public PostAdapter(
@@ -34,6 +35,20 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostViewHolder> {
             holder.tagBackgroundView.setImageResource(model.getTagBackground());
         } catch (Exception e) {
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+            //intent.putExtra("model", model);
+            intent.putExtra("name", model.getName());
+            intent.putExtra("message", model.getMessage());
+            intent.putExtra("pic", model.getImage());
+            intent.putExtra("postKey", model.getKey());
+            intent.putExtra("user", model.getUser());
+            intent.putExtra("tag", model.getTag());
+            intent.putExtra("tag_background", model.getTagBackground());
+
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
 

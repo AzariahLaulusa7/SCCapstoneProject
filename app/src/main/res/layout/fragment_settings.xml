@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_light"
+    android:id="@+id/settings"
+    android:background="@drawable/background_image"
     tools:context=".Settings">
 
+    <!--Divider under title-->
     <ImageView
         android:id="@+id/blackBar1"
         android:layout_width="0dp"
@@ -16,34 +18,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SettingsText" />
 
+    <!--Setting title-->
     <TextView
         android:id="@+id/SettingsText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Settings"
-        android:textAlignment="center"
+        android:fontFamily="@font/alata"
+        android:textColor="@color/black"
+        android:text="SETTINGS"
+        android:gravity="center"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Sound"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Sound"
-        android:textAlignment="viewStart"
-        android:paddingStart="85dp"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar1" />
-
+    <!--Divider under dark mode-->
     <ImageView
         android:id="@+id/blackBar2"
         android:layout_width="0dp"
@@ -51,45 +41,41 @@
         android:src="@drawable/rectangle_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Sound" />
+        app:layout_constraintTop_toBottomOf="@+id/Dark" />
 
+    <!--Dark mode-->
     <TextView
         android:id="@+id/Dark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Dark mode"
+        android:text="DARK MODE"
         android:textAlignment="center"
+        android:fontFamily="@font/alata"
+        android:textColor="@color/black"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar3"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar2" />
+        app:layout_constraintTop_toBottomOf="@+id/blackBar1" />
 
-    <ImageView
-        android:id="@+id/blackBar3"
-        android:layout_width="0dp"
-        android:layout_height="11dp"
-        android:src="@drawable/rectangle_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Dark" />
-
+    <!--Notifications-->
     <TextView
         android:id="@+id/Notifications"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Notifications"
+        android:fontFamily="@font/alata"
+        android:textColor="@color/black"
+        android:text="NOTIFICATIONS"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/blackBar4"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blackBar3" />
+        app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
 
+    <!--Bar under notifications-->
     <ImageView
         android:id="@+id/blackBar4"
         android:layout_width="0dp"
@@ -99,19 +85,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Notifications" />
 
+    <!--About-->
     <TextView
         android:id="@+id/About"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="About"
+        android:fontFamily="@font/alata"
+        android:textColor="@color/black"
+        android:text="ABOUT"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar4" />
 
+    <!--Bar under about-->
     <ImageView
         android:id="@+id/blackBar5"
         android:layout_width="0dp"
@@ -121,19 +110,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/About" />
 
+    <!--privacy policy-->
     <TextView
         android:id="@+id/PrivacyPolicy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Privacy Policy"
+        android:fontFamily="@font/alata"
+        android:textColor="@color/black"
+        android:text="PRIVACY POLICY"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar5" />
 
+    <!--bar under privacy policy-->
     <ImageView
         android:id="@+id/blackBar6"
         android:layout_width="0dp"
@@ -143,19 +135,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PrivacyPolicy" />
 
+    <!--terms of use-->
     <TextView
         android:id="@+id/TermsOfUse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Terms of use"
+        android:fontFamily="@font/alata"
+        android:textColor="@color/black"
+        android:text="TERMS OF USE"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar6" />
 
+    <!--Bar under terms of use-->
     <ImageView
         android:id="@+id/blackBar7"
         android:layout_width="0dp"
@@ -165,30 +160,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TermsOfUse" />
 
+    <!--logout button-->
     <TextView
         android:id="@+id/Logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_white"
-        android:fontFamily="@font/bowlby_one_sc"
-        android:text="Logout"
+        android:fontFamily="@font/alata"
+        android:textColor="@color/black"
+        android:text="LOGOUT"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blackBar7" />
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:max="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Sound"
-        app:layout_constraintBottom_toBottomOf="@+id/Sound"
-        android:paddingEnd="50dp"
-        />
-
+    <!--dark mode switch-->
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/Dark_Mode_Switch"
         android:layout_width="wrap_content"
@@ -199,6 +186,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Dark" />
 
+    <!--notifications switch-->
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/NotificationSwitch"
         android:layout_width="wrap_content"
@@ -208,15 +196,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Notifications" />
 
-    <ImageButton
-        android:id="@+id/Back_Button"
+    <!--back button-->
+    <ImageView
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="18dp"
+        android:padding="10dp"
         android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toTopOf="@+id/blackBar1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SettingsText"
-        app:layout_constraintBottom_toBottomOf="@+id/SettingsText" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

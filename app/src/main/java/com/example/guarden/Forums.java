@@ -42,7 +42,7 @@ public class Forums extends AppCompatActivity {
     ImageView profileImage;
     ImageView image1, image2, image3, image4, image5, image6;
     TextView vent, positive, question, userName;
-    Intent myIntent;
+    Intent myIntent, home;
     SharedPreferences orderPrefs;
     int prefOrderNumber;
 
@@ -93,7 +93,7 @@ public class Forums extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if (user != null && user.firstName != null)
-                    userName.setText(user.firstName.toUpperCase());
+                    userName.setText(user.firstName.toUpperCase()); //Gets name of user associated with a post
             }
 
             @Override
@@ -101,19 +101,21 @@ public class Forums extends AppCompatActivity {
                 // Handle onCancelled
             }
         });
-
+        //Gets paths for the sections of the db associated with each forum tag
         posRef = FirebaseDatabase.getInstance().getReference("positiveForum");
         qRef = FirebaseDatabase.getInstance().getReference("questionForum");
         ventRef = FirebaseDatabase.getInstance().getReference("ventForum");
         forumRef = FirebaseDatabase.getInstance().getReference("forum");
 
         myIntent = new Intent(Forums.this, ForumMain.class);
+        home = new Intent(Forums.this, HomeScreen.class);
 
         // When back button is pressed, go to previous screen -> home
         back.setOnClickListener(v -> {
             startActivity(myIntent);
         });
 
+        //Handles button appearances when vent is pressed
         vent.setOnClickListener(v -> {
             tagText = "vent";
             tagBackground = R.drawable.vent_forum_tag;
@@ -122,6 +124,7 @@ public class Forums extends AppCompatActivity {
             positive.setBackground(getDrawable(R.drawable.grey_tag_background));
         });
 
+        //Handles button appearances when question is pressed
         question.setOnClickListener(v -> {
             tagText = "question";
             tagBackground = R.drawable.question_forum_tag;
@@ -130,6 +133,7 @@ public class Forums extends AppCompatActivity {
             positive.setBackground(getDrawable(R.drawable.grey_tag_background));
         });
 
+        //Handles button appearances when positive is pressed
         positive.setOnClickListener(v -> {
             tagText = "positivity";
             tagBackground = R.drawable.positive_forum_tag;
@@ -138,6 +142,7 @@ public class Forums extends AppCompatActivity {
             positive.setBackground(getDrawable(R.drawable.positive_forum_tag));
         });
 
+        //Listeners for each possible profile image
         image1.setOnClickListener(v -> {
             image = R.drawable.cow;
             image1.setBackground(getDrawable(R.drawable.picked_image_background));
@@ -199,18 +204,20 @@ public class Forums extends AppCompatActivity {
         });
 
         post.setOnClickListener(v -> {
+            //Gets user information associated with a new post
             final String name = userName.getText().toString().trim();
             final String tag = tagText.trim();
             final String message = postMessage.getText().toString().trim();
             //final String background = tagBackground.toString().trim();
-
+            //Checks to see if post is empty
             if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(tag) && !TextUtils.isEmpty(message)) {
+                //Checks if user is logged in
                 if (key.equals(" ") || key.isEmpty() || userName.getText().equals("GUEST")) {
                     Toast.makeText(Forums.this, "You NEED an account to post.", Toast.LENGTH_LONG).show();
                 } else {
-                    if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) {
+                    if (!TextUtils.isEmpty(tagText) && !TextUtils.isEmpty(message)) { //No tag
                         String uniqueKey = userRef.push().getKey();
-                        Chat newChat = new Chat(name, tag, message, image, tagBackground, prefOrderNumber);
+                        Chat newChat = new Chat(name, tag, message, image, tagBackground, uniqueKey, SaveUser.getUserName(Forums.this));
                         forumRef.child(uniqueKey).setValue(newChat)
                                 .addOnSuccessListener(aVoid ->
                                         Toast.makeText(Forums.this, "Post Created", Toast.LENGTH_SHORT).show())
@@ -223,18 +230,8 @@ public class Forums extends AppCompatActivity {
                         } else {
                             qRef.child(uniqueKey).setValue(newChat);
                         }
-
-
-//        SharedPreferences.Editor editor = gamePrefs.edit();
-//        editor.putInt("MemoryGameBestScore", difficultyLevel - 1);
-//        editor.apply();
-                        prefOrderNumber++;
-                        SharedPreferences.Editor editor = orderPrefs.edit();
-                        editor.putInt("TestWNUMBER", prefOrderNumber);
-                        editor.apply();
-
                     }
-                    startActivity(myIntent);
+                    startActivity(home);
                     finish();
                 }
             }  else {
@@ -253,7 +250,6 @@ public class Forums extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        startActivity(myIntent);
     }
 
     private static class User {
@@ -278,19 +274,20 @@ public class Forums extends AppCompatActivity {
     }
 
     private static class Chat {
-        public String name, tag, message;
+        public String name, tag, message, key, user;
         public int image;
         public int tagBackground, orderNumber;
 
         public Chat() {}
 
-        public Chat(String name, String tag, String message, int image, int tagBackground, int orderNumber) {
+        public Chat(String name, String tag, String message, int image, int tagBackground, String key, String user) {
             this.name = name;
             this.tag = tag;
             this.message = message;
             this.image = image;
             this.tagBackground = tagBackground;
-            this.orderNumber = orderNumber;
+            this.key = key;
+            this.user = user;
         }
     }
 

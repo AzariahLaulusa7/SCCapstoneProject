@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 
 import java.util.Random;
 
+//This class is not used
 public class BugsAndStones {
     Bitmap badObj[] = new Bitmap[4];
     int badObjFrame = 0;

@@ -19,7 +19,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+//This class is not used
 public class GameView extends View {
 
     Bitmap background, ground, plant;

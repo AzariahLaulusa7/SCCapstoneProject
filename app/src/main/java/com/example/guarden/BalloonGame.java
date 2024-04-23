@@ -1,22 +1,28 @@
 package com.example.guarden;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class BalloonGame extends Activity {
 
     private int currentScore = 0;
     private int bestScore = 0;
-    private SharedPreferences preferences;
-
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference userScoresRef;
     private TextView txtCurrentScore;
-    private TextView txtBestScore;
     private TextView txtTimer;
     private ImageView imageBalloon;
     private TextView txtGameOver;
@@ -28,39 +34,34 @@ public class BalloonGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.balloon_game);
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        // Initialize all the view components
         initializeViews();
 
-        // Setup shared preferences
-        preferences = getSharedPreferences("GAME_DATA", MODE_PRIVATE);
-        bestScore = preferences.getInt("BEST_SCORE", 0);
-        txtBestScore.setText("Best: " + bestScore);
-
-        // Listener for the balloon image click
+        //increases score when baloon is tapped
         imageBalloon.setOnClickListener(v -> {
-            if (isGameActive) { // Only increase score if the game is active
+            if (isGameActive) {
                 currentScore++;
                 txtCurrentScore.setText("Score: " + currentScore);
             }
         });
 
-        // Listener for the Play Again button click
         btnPlayAgain.setOnClickListener(v -> startGame());
 
-        // Listener for the Start Game button click
+        //starts the game when start button is clicked
         startButton.setOnClickListener(v -> {
             startGame();
             v.setVisibility(View.GONE);
         });
 
-        // Listener for the back button click
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
+
+        userScoresRef = FirebaseDatabase.getInstance().getReference("users").child(SaveUser.getUserName(BalloonGame.this)).child("userScores").child("balloonGame");
+
     }
 
     private void initializeViews() {
         txtCurrentScore = findViewById(R.id.txtCurrentScore);
-        txtBestScore = findViewById(R.id.txtBestScore);
         txtTimer = findViewById(R.id.txtTimer);
         imageBalloon = findViewById(R.id.imageBalloon);
         txtGameOver = findViewById(R.id.txtGameOver);
@@ -68,6 +69,7 @@ public class BalloonGame extends Activity {
         startButton = findViewById(R.id.startButton);
     }
 
+    //Resets game when started and begins countdown
     private void startGame() {
         currentScore = 0;
         txtCurrentScore.setText("Score: " + currentScore);
@@ -75,7 +77,7 @@ public class BalloonGame extends Activity {
         btnPlayAgain.setVisibility(View.GONE);
         startButton.setVisibility(View.GONE);
         imageBalloon.setEnabled(true);
-        isGameActive = true; // Mark game as active
+        isGameActive = true;
 
         new CountDownTimer(10000, 1000) {
 
@@ -89,6 +91,7 @@ public class BalloonGame extends Activity {
         }.start();
     }
 
+    //Shows and hides appropriate elements when game finishes
     private void gameFinished() {
         txtTimer.setText("TIME REMAINING\n0 SECONDS");
         txtGameOver.setVisibility(View.VISIBLE);
@@ -96,12 +99,24 @@ public class BalloonGame extends Activity {
         imageBalloon.setEnabled(false);
         isGameActive = false;
 
-        if(currentScore > bestScore) {
-            bestScore = currentScore;
-            txtBestScore.setText("Best: " + bestScore);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("BEST_SCORE", bestScore);
-            editor.apply();
+        //Updates high score
+        if (userScoresRef != null) {
+            userScoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Integer dbScore = dataSnapshot.getValue(Integer.class);
+                    if (dbScore == null || currentScore > dbScore) {
+                        userScoresRef.setValue(currentScore);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("Firebase", "Failed to read value for game score update.", databaseError.toException());
+                }
+
+            });
         }
     }
 }
+
+

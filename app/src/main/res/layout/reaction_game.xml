@@ -3,49 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image">
 
+    <!--back button-->
     <ImageView
         android:id="@+id/backIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/baseline_arrow_back_ios_24"
-        android:contentDescription="Back Icon"
-        android:background="?attr/selectableItemBackground"
-        android:padding="10dp" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_button"
+        android:onClick="Move"
+        android:paddingLeft="8dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"/>
 
+    <!--reaction game title-->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reaction Time Game"
+        android:textColor="@color/white"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"/>
 
+    <!--instructions-->
     <TextView
         android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wait for the screen to change color, then tap anywhere!"
         android:textSize="24sp"
+        android:textColor="@color/white"
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/title"
         android:layout_marginTop="20dp"/>
 
+    <!--start button-->
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Game"
+        android:textSize="20dp"
+        android:height="60dp"
+        android:width="200dp"
         app:backgroundTint="@null"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:textColor="@color/white"
         android:background="@color/colorAccent"
+        android:foreground="@null"
         android:layout_centerInParent="true"/>
 
+    <!--view score text-->
     <TextView
         android:id="@+id/textViewScore"
         android:layout_width="wrap_content"

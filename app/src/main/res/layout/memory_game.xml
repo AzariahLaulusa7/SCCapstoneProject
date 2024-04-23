@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background_image">
 
+    <!--Holds buttons-->
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="500dp"
@@ -18,6 +20,7 @@
         android:layout_margin="16dp">
     </GridLayout>
 
+    <!--feedback text-->
     <TextView
         android:id="@+id/feedbackText"
         android:layout_width="wrap_content"
@@ -29,6 +32,7 @@
         android:layout_marginBottom="150dp"
         android:text="" />
 
+    <!--start game button-->
     <Button
         android:id="@+id/startGameButton"
         android:layout_width="wrap_content"
@@ -37,20 +41,25 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="Start Game"
+        style="@style/Widget.AppCompat.Button.Borderless"
         app:backgroundTint="@null"
         android:textColor="@color/white"
         android:background="@color/colorAccent"
         android:padding="10dp" />
 
+    <!--memory game title-->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Memory Game"
         android:textSize="30sp"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
         android:layout_marginBottom="32dp"/>
+
+    <!--directions-->
     <TextView
         android:id="@+id/directions"
         android:layout_width="wrap_content"
@@ -58,10 +67,12 @@
         android:text="After watching the sequence of flashing squares, repeat the order by tapping the correct squares."
         android:textSize="18sp"
         android:gravity="center"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:paddingTop="60dp"
         android:layout_marginBottom="32dp"/>
 
+    <!--play again button-->
     <Button
         android:id="@+id/playAgainButton"
         android:layout_width="wrap_content"
@@ -73,14 +84,21 @@
         android:padding="10dp"
         android:visibility="gone"/>
 
+    <!--back button-->
     <ImageView
         android:id="@+id/backIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_button"
+        android:onClick="Move"
+        android:paddingLeft="2dp"
         android:src="@drawable/baseline_arrow_back_ios_24"
         android:contentDescription="Back Icon"
-        android:background="?attr/selectableItemBackground"
-        android:padding="10dp" />
+
+        android:padding="10dp"/>
+
 </RelativeLayout>

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import static com.example.guarden.Message.LayoutOne;
 import static com.example.guarden.Message.LayoutTwo;
-
+//Adapter class that creates a recycler view for the list of all messages
 public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<Message> messages;
@@ -59,7 +59,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int getItemCount() {
         return messages.size();
     }
-
+    //Layout for user messages
     static class LayoutOneViewHolder extends RecyclerView.ViewHolder {
         TextView message;
 
@@ -73,6 +73,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    //Layout for chatbot messages
     static class LayoutTwoViewHolder extends RecyclerView.ViewHolder {
         TextView message;
 

@@ -2,49 +2,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_image">
 
-    <ImageView
+    <!--back button-->
+    <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:src="@drawable/baseline_arrow_back_ios_24" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/round_button"
+        android:onClick="Move"
+        android:paddingLeft="8dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
+    <!--games title-->
     <TextView
         android:id="@+id/headerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Games"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:textSize="40sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/headerTitle"
         android:orientation="vertical"
-        android:padding="25dp"
-        android:layout_centerInParent="true">
+        android:padding="25dp">
 
+        <!--reaction game layout-->
         <LinearLayout
             android:id="@+id/buttonReaction"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
             android:clickable="true"
             android:focusable="true"
-            android:background="@color/white">
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-
+            <!--timer icon-->
             <ImageView
-                android:id="@+id/imageReaction"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
@@ -52,30 +65,32 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
+            <!--reaction game test-->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:text="Reaction Test"
-                android:textSize="40sp"
+                android:textSize="32sp"
                 android:gravity="center" />
         </LinearLayout>
 
+        <!--balloon tap layout-->
         <LinearLayout
-            android:id="@+id/buttonBalloons"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="25dp"
-            android:background="@color/white">
+            android:id="@+id/buttonBalloons"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-
+            <!--click icon-->
             <ImageView
-                android:id="@+id/balloonsicon"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
@@ -83,74 +98,80 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
+            <!--balloon tap text-->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:text="Balloon Tap"
-                android:textSize="40sp"
+                android:textSize="32sp"
                 android:gravity="center" />
         </LinearLayout>
 
+        <!--memory test layout-->
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:id="@+id/buttonMemory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:background="@color/white"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:padding="16dp">
 
-
+            <!--robot icon-->
             <ImageView
-                android:id="@+id/memoryicon"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:adjustViewBounds="true"
+                android:src="@drawable/baseline_smart_toy_24"
                 android:scaleType="fitCenter"
-                android:src="@drawable/baseline_smart_toy_24" />
+                android:adjustViewBounds="true" />
 
+            <!--memory test text-->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
+                android:layout_weight="3"
                 android:text="Memory Test"
-                android:textSize="40sp" />
+                android:textSize="32sp"
+                android:gravity="center" />
         </LinearLayout>
+
+        <!--leaderboard layout-->
         <LinearLayout
-            android:id="@+id/buttonLeaderboard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:background="@color/white"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/buttonLeaderboard"
+            android:background="@drawable/button_background"
             android:clickable="true"
             android:focusable="true"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="16dp">
 
-
+            <!--charts icon-->
             <ImageView
-                android:id="@+id/leaderboardicon"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:adjustViewBounds="true"
+                android:src="@drawable/baseline_leaderboard_24"
                 android:scaleType="fitCenter"
-                android:src="@drawable/baseline_leaderboard_24" />
+                android:adjustViewBounds="true" />
 
+            <!--leaderboard text-->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
+                android:layout_weight="3"
                 android:text="Leaderboard"
-                android:textSize="40sp" />
+                android:textSize="32sp"
+                android:gravity="center" />
         </LinearLayout>
 
     </LinearLayout>

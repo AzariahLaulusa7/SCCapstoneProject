@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background_image">
 
+    <!--Title-->
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
@@ -11,20 +13,27 @@
         android:text="State of Mind"
         android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:layout_alignParentTop="true"/>
+
+    <!--Back button-->
+
+    <!--Graph Background-->
 
     <ImageView
         android:id="@+id/backIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-5dp"
-        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/round_button"
         android:contentDescription="Back Icon"
-        android:background="?attr/selectableItemBackground"
-        android:padding="10dp" />
+        android:padding="5dp"
+        android:src="@drawable/baseline_arrow_back_ios_24" />
 
     <View
         android:id="@+id/graph_background"
@@ -35,6 +44,7 @@
         android:layout_marginTop="36dp"
         android:layout_alignParentTop="true"/>
 
+    <!--Layout for day labels-->
     <LinearLayout
         android:id="@+id/day_labels"
         android:layout_width="match_parent"
@@ -43,65 +53,88 @@
         android:layout_below="@id/graph_background"
         android:gravity="center">
 
-        <!-- Days of the week labels -->
+        <!--Sunday-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:paddingStart="22dp"
             android:text="S" />
+
+        <!--Monday-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingStart="22dp"
+            android:textColor="@color/white"
             android:text="M" />
+
+        <!--Tuesday-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingStart="22dp"
+            android:textColor="@color/white"
             android:text="T" />
+
+        <!--Wednesday-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingStart="22dp"
+            android:textColor="@color/white"
             android:text="W" />
+
+        <!--Thursday-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:paddingStart="22dp"
             android:text="T" />
+
+        <!--Friday-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:paddingStart="22dp"
             android:text="F" />
+
+        <!--Saturday-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:paddingStart="22dp"
             android:text="S" />
     </LinearLayout>
 
+    <!--Choose mood title-->
     <TextView
         android:id="@+id/choosemoodtxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="How are you feeling today?"
+        android:textColor="@color/white"
         android:textSize="26sp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:layout_below="@+id/day_labels"
         android:layout_marginTop="45dp"/>
 
+    <!--Directions-->
     <TextView
         android:id="@+id/choosemoodprompttxt"
         android:layout_width="wrap_content"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:text="Tap an icon below to log mood for the day."
         android:textSize="12sp"
@@ -118,18 +151,21 @@
         android:layout_below="@id/choosemoodprompttxt"
         android:gravity="center">
 
+        <!--Sad face-->
         <ImageButton
             android:id="@+id/sad_face_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_mood_bad_24" />
 
+        <!--OK face-->
         <ImageButton
             android:id="@+id/ok_face_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_face_24" />
 
+        <!--Happy face-->
         <ImageButton
             android:id="@+id/happy_face_button"
             android:layout_width="wrap_content"
@@ -137,23 +173,31 @@
             android:src="@drawable/baseline_mood_24" />
     </LinearLayout>
 
+    <!--Graph background-->
+
+    <!--Daily challenges title-->
     <com.example.guarden.MoodGraphView
         android:id="@+id/mood_graph_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignTop="@id/graph_background"
-        android:layout_alignBottom="@id/graph_background"/>
+        android:layout_alignBottom="@id/graph_background"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Daily Challenges"
+        android:textColor="@color/white"
         android:textSize="26sp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:layout_below="@+id/mood_buttons"
         android:layout_marginTop="45dp"/>
 
+    <!--Layout for game challenge section-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -163,6 +207,7 @@
         android:layout_below="@id/mood_buttons"
         android:layout_marginTop="100dp">
 
+        <!--empty box -->
         <ImageView
             android:id="@+id/gameChallengeIconEmpty"
             android:layout_width="24dp"
@@ -170,6 +215,7 @@
             android:src="@drawable/baseline_empty_box_24"
             android:visibility="visible"/>
 
+        <!--checked box-->
         <ImageView
             android:id="@+id/gameChallengeIconCheck"
             android:layout_width="24dp"
@@ -177,13 +223,16 @@
             android:src="@drawable/baseline_check_box_24"
             android:visibility="gone"/>
 
+        <!--complete game challenge-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Complete Memory Game"
             android:paddingStart="8dp"/>
     </LinearLayout>
 
+    <!--Layout for breathe challenge-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -192,6 +241,7 @@
         android:layout_below="@id/mood_buttons"
         android:layout_marginTop="140dp">
 
+        <!--empty box-->
         <ImageView
             android:id="@+id/breatheChallengeIconEmpty"
             android:layout_width="24dp"
@@ -199,6 +249,7 @@
             android:src="@drawable/baseline_empty_box_24"
             android:visibility="visible"/>
 
+        <!--checked box-->
         <ImageView
             android:id="@+id/breatheChallengeIcon"
             android:layout_width="24dp"
@@ -206,9 +257,11 @@
             android:src="@drawable/baseline_check_box_24"
             android:visibility="gone"/>
 
+        <!--complete breathe challenge-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Perform the Breathe Activity"
             android:paddingStart="8dp"/>
     </LinearLayout>

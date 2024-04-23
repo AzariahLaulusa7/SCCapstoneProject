@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-
+//This class is not used
 public class MainActivity extends AppCompatActivity {
 
     @Override

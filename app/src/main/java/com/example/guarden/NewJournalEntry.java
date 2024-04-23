@@ -5,12 +5,14 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,45 +26,24 @@ public class NewJournalEntry extends AppCompatActivity {
     public Button back, done;
     private EditText journalName, journalContent;
 
-    public void appendToInternalStorage(Context context, String fileName, String data) {
-        try {
-            // Check if the file exists, if not, create it
-            File file = new File(context.getFilesDir(), fileName);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+    private DatabaseReference databaseReference;
 
-            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_APPEND);
-            fos.write(data.getBytes());
-            fos.write("\n".getBytes()); // Add a newline character after each entry if desired
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void writeToInternalStorage(Context context, String fileName, String data) {
-        try {
-            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-            fos.write(data.getBytes());
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    static String key;
 
-    public boolean doesFileExist(Context context, String fileName) {
-        File file = new File(context.getFilesDir(), fileName);
-        return file.exists();
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_new_journal_entry);
         back = findViewById(R.id.BackToEntries);
         done = findViewById(R.id.nextPage);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         journalName = findViewById(R.id.journalEntryName);
         journalContent = findViewById(R.id.journalEntryContent);
+
+        if(SaveUser.getUserName(NewJournalEntry.this).length() != 0)
+            key = SaveUser.getUserName(NewJournalEntry.this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +58,25 @@ public class NewJournalEntry extends AppCompatActivity {
             String content = journalContent.getText().toString().trim();
             JournalEntry entry = new JournalEntry(name, content);
 
-            appendToInternalStorage(getApplicationContext(), "journals.csv", entry.getString() + "\n");
+            ;
+            if (TextUtils.isEmpty(name)) {
+                Toast.makeText(NewJournalEntry.this, "Please add a title", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            Intent home = new Intent(this, HomeScreen.class);
-            startActivity(home);
+            if (key != null) {
+                databaseReference.child("users").child(key).child("journalEntries").child(name).setValue(entry)
+                        .addOnSuccessListener(aVoid ->
+                                Toast.makeText(NewJournalEntry.this, "Journal Created", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e ->
+                                Toast.makeText(NewJournalEntry.this, "Failed to create journal" + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+            } else {
+                Toast.makeText(NewJournalEntry.this, "Failed to create journal", Toast.LENGTH_SHORT).show();
+            }
+
+            Intent back = new Intent(this, ViewJournalEntries.class);
+            startActivity(back);
         });
     }
 }

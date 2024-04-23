@@ -25,17 +25,18 @@ public class MovementViewList extends AppCompatActivity {
     Intent goBack;
     static MovementAdapter movementAdapter;
 
-
+    //ViewHolder class associated with MovementAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movement_view_list);
         add = (Button) findViewById(R.id.add);
-        back = (ImageButton) findViewById(R.id.move_back);
+        back = (ImageButton) findViewById(R.id.backButton);
         RecyclerView recycler = findViewById(R.id.recycler);
         Intent addNewMove = new Intent(this, MovementNewCustom.class);
         goBack = new Intent(this, MoveMain.class);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recycler.setLayoutManager(linearLayoutManager);
+        //Creates a new adapter and links it to the recycler
         movementAdapter = new MovementAdapter(this, MoveMain.poseList);
         recycler.setAdapter(movementAdapter);
 

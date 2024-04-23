@@ -3,32 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_light"
-        android:alpha="1" />
 
+    <!--holds all exercises-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
-        android:layout_width="413dp"
-        android:layout_height="545dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="419dp"
+        android:layout_height="538dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--back button-->
+
+    <!--add button-->
     <ImageButton
-        android:id="@+id/move_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/back_button"
-        android:background="@android:color/transparent"
-        android:padding="15dp"
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/round_button"
+        android:onClick="Move"
+        android:paddingLeft="8dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <Button
         android:id="@+id/add"

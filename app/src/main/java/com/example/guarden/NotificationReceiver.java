@@ -40,7 +40,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         }
         Calendar currentTime = Calendar.getInstance();
         Calendar targetTime = Calendar.getInstance();
-        targetTime.set(Calendar.HOUR_OF_DAY, 17); // 2:00 PM
+        targetTime.set(Calendar.HOUR_OF_DAY, 14); // 2:00 PM
         targetTime.set(Calendar.MINUTE, 0);
         targetTime.set(Calendar.SECOND, 0);
         targetTime.set(Calendar.MILLISECOND, 0);
