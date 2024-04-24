@@ -21,7 +21,8 @@ Because those who struggle with mental health often feel alienated or misunderst
 When mental health conditions become severe, it is appropriate to consult professionals. BreatheEasy makes it easy to contact professional counselors and emergency services with the Crisis Line feature. Prominently displayed is the ability to call for help via 911 (Emergency services), 988 (Suicide and Crisis Lifeline), and the Crisis Text Line with this feature. BreatheEasy also provides contact information for local mental health professionals and instant access to a chatbot therapist for non-emergency service. The Crisis Line feature makes sure every user has access to the help they need. 
 
 ## A Glance Into What BreatheEasy Offers
-![Demo Video](comingsoon.jpeg)
+[![Demo Video](homepage.png)](https://www.youtube.com/watch?v=Zb0jhlbSF3o)
+
 
 ## Begin Your Journey to Peace of Mind 
 How to install BreatheEasy on your Android device:
